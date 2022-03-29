@@ -1,0 +1,25 @@
+{
+  "name": "@kaleido-io/firefly-sdk-nodejs",
+  "version": "1.0.0",
+  "description": "Client SDK for Hyperledger FireFly",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaleido-io/firefly-sdk-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaleido-io/firefly-sdk-nodejs/issues"
+  },
+  "homepage": "https://github.com/kaleido-io/firefly-sdk-nodejs#readme",
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
