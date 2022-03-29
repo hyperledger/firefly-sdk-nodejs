@@ -7,7 +7,10 @@
   "scripts": {
     "build": "tsc",
     "prepublish": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"lib/*.ts\"",
+    "lint:fix": "eslint \"lib/*.ts\" --fix",
+    "format": "prettier --write \"lib/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,10 @@
   },
   "homepage": "https://github.com/kaleido-io/firefly-sdk-nodejs#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "eslint": "^8.12.0",
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "^2.6.1",
     "typescript": "^4.6.3"
   }
 }
