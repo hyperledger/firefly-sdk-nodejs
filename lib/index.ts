@@ -16,12 +16,12 @@ import {
   FireFlyMessageInput,
   FireFlySendOptions,
   FireFlyTokenPool,
-  FireFlyTokenPoolType,
   FireFlyTokensTransferInput,
   FireFlyTokenTransfer,
   FireFlyDataRef,
   FireFlyCreateOptions,
   FireFlyGetOptions,
+  FireFlyTokenPoolInput,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -204,13 +204,12 @@ export class FireFly {
   }
 
   async createTokenPool(
-    name: string,
-    type: FireFlyTokenPoolType,
+    pool: FireFlyTokenPoolInput,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenPool> {
     const response = await this.http.post<FireFlyTokenPool>(
       '/tokens/pools',
-      { name, type },
+      pool,
       mapConfig(options),
     );
     return response.data;

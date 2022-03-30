@@ -216,11 +216,14 @@ export enum FireFlyTokenPoolType {
   NONFUNGIBLE = 'nonfungible',
 }
 
-export interface FireFlyTokenPool {
-  id: string;
-  type: string;
-  namespace: string;
+export interface FireFlyTokenPoolInput {
   name: string;
+  type: FireFlyTokenPoolType;
+}
+
+export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
+  id: string;
+  namespace: string;
   protocolId: string;
 }
 
