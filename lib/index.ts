@@ -22,6 +22,7 @@ import {
   FireFlyCreateOptions,
   FireFlyGetOptions,
   FireFlyTokenPoolInput,
+  FireFlyWebSocketOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -263,27 +264,38 @@ export class FireFly {
     return response.data;
   }
 
-  listen(subscriptions: string | string[], callback: FireFlyWebSocketCallback): FireFlyWebSocket {
-    return new FireFlyWebSocket(
-      {
-        host: this.options.websocket.host,
-        namespace: this.options.namespace,
-        username: this.options.username,
-        password: this.options.password,
-        subscriptions: Array.isArray(subscriptions) ? subscriptions : [subscriptions],
-        ephemeral: false,
-        autoack: false,
-        reconnectDelay: this.options.websocket.reconnectDelay,
-        heartbeatInterval: this.options.websocket.heartbeatInterval,
-      },
-      (socket, event) => {
-        this.queue = this.queue.finally(() => {
-          callback(socket, event);
-        });
-        this.queue.finally(() => {
-          socket.ack(event);
-        });
-      },
-    );
+  listen(
+    subscriptions: string | string[] | FireFlySubscriptionInput,
+    callback: FireFlyWebSocketCallback,
+  ): FireFlyWebSocket {
+    const options: FireFlyWebSocketOptions = {
+      host: this.options.websocket.host,
+      namespace: this.options.namespace,
+      username: this.options.username,
+      password: this.options.password,
+      subscriptions: [],
+      autoack: false,
+      reconnectDelay: this.options.websocket.reconnectDelay,
+      heartbeatInterval: this.options.websocket.heartbeatInterval,
+    };
+
+    const handler: FireFlyWebSocketCallback = (socket, event) => {
+      this.queue = this.queue.finally(() => {
+        callback(socket, event);
+      });
+      this.queue.finally(() => {
+        socket.ack(event);
+      });
+    };
+
+    if (Array.isArray(subscriptions)) {
+      options.subscriptions = subscriptions;
+    } else if (typeof subscriptions === 'string') {
+      options.subscriptions = [subscriptions];
+    } else {
+      options.ephemeral = subscriptions;
+    }
+
+    return new FireFlyWebSocket(options, handler);
   }
 }

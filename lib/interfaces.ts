@@ -49,7 +49,7 @@ export interface FireFlyWebSocketOptions {
   subscriptions: string[];
   username?: string;
   password?: string;
-  ephemeral: boolean;
+  ephemeral?: FireFlySubscriptionInput;
   autoack: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
@@ -62,11 +62,6 @@ export interface FireFlyOrganization {
   name: string;
   identity: string;
   registered: true;
-}
-
-export interface FireFlyMember {
-  identity: string;
-  node?: string;
 }
 
 export interface FireFlyNode {
@@ -207,6 +202,11 @@ export interface FireFlyMessageInput extends Partial<FireFlyMessageBase> {
     members?: FireFlyMember[];
   };
   data: Partial<FireFlyData>[];
+}
+
+export interface FireFlyMember {
+  identity: string;
+  node?: string;
 }
 
 // Token Pools

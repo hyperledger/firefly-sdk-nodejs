@@ -1,7 +1,16 @@
 import { IncomingMessage } from 'http';
 import { Transform } from 'stream';
 import * as WebSocket from 'ws';
-import { FireFlyEvent, FireFlyWebSocketOptions } from './interfaces';
+import { FireFlyEvent, FireFlySubscriptionInput, FireFlyWebSocketOptions } from './interfaces';
+
+function buildEphemeralQueryParams(sub: FireFlySubscriptionInput) {
+  const params = new URLSearchParams();
+  params.append('ephemeral', 'true');
+  if (sub.filter?.events !== undefined) {
+    params.append('filter.events', sub.filter.events);
+  }
+  return params.toString();
+}
 
 export interface FireFlyWebSocketCallback {
   (socket: FireFlyWebSocket, data: FireFlyEvent): void;
@@ -31,9 +40,10 @@ export class FireFlyWebSocket {
     }
 
     let url = `${this.options.host}/ws`;
-    if (this.options.ephemeral) {
-      url += '?ephemeral';
+    if (this.options.ephemeral !== undefined) {
+      url += '?' + buildEphemeralQueryParams(this.options.ephemeral);
     }
+
     const auth =
       this.options.username && this.options.password
         ? `${this.options.username}:${this.options.password}`
@@ -43,6 +53,7 @@ export class FireFlyWebSocket {
       handshakeTimeout: this.options.heartbeatInterval,
     }));
     this.closed = false;
+
     socket
       .on('open', () => {
         if (this.disconnectDetected) {
