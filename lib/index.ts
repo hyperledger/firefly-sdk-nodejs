@@ -264,23 +264,15 @@ export class FireFly {
     return response.data;
   }
 
-  listen(
-    subscriptions: string | string[] | null,
-    callback: FireFlyWebSocketCallback,
-  ): FireFlyWebSocket {
+  listen(subscriptions: string | string[], callback: FireFlyWebSocketCallback): FireFlyWebSocket {
     return new FireFlyWebSocket(
       {
         host: this.options.websocket.host,
         namespace: this.options.namespace,
         username: this.options.username,
         password: this.options.password,
-        subscriptions:
-          subscriptions === null
-            ? []
-            : Array.isArray(subscriptions)
-            ? subscriptions
-            : [subscriptions],
-        ephemeral: subscriptions === null,
+        subscriptions: Array.isArray(subscriptions) ? subscriptions : [subscriptions],
+        ephemeral: false,
         autoack: false,
         reconnectDelay: this.options.websocket.reconnectDelay,
         heartbeatInterval: this.options.websocket.heartbeatInterval,
