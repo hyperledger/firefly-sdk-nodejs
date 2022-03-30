@@ -20,6 +20,7 @@ import {
   FireFlyTokensTransferInput,
   FireFlyTokenTransfer,
   FireFlyDataRef,
+  FireFlyRequestOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -155,8 +156,13 @@ export class FireFly {
     return response.data;
   }
 
-  async sendBroadcast(message: FireFlyMessageInput): Promise<FireFlyMessage> {
-    const response = await this.http.post<FireFlyMessage>('/messages/broadcast', message);
+  async sendBroadcast(
+    message: FireFlyMessageInput,
+    options?: FireFlyRequestOptions,
+  ): Promise<FireFlyMessage> {
+    const response = await this.http.post<FireFlyMessage>('/messages/broadcast', message, {
+      params: options,
+    });
     return response.data;
   }
 
@@ -169,8 +175,18 @@ export class FireFly {
     return response.data;
   }
 
-  async createTokenPool(name: string, type: FireFlyTokenPoolType): Promise<FireFlyTokenPool> {
-    const response = await this.http.post<FireFlyTokenPool>('/tokens/pools', { name, type });
+  async createTokenPool(
+    name: string,
+    type: FireFlyTokenPoolType,
+    options?: FireFlyRequestOptions,
+  ): Promise<FireFlyTokenPool> {
+    const response = await this.http.post<FireFlyTokenPool>(
+      '/tokens/pools',
+      { name, type },
+      {
+        params: options,
+      },
+    );
     return response.data;
   }
 
@@ -181,18 +197,30 @@ export class FireFly {
     return response.status === 404 ? undefined : response.data;
   }
 
-  async mintTokens(transfer: FireFlyTokensTransferInput) {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/mint', transfer);
+  async mintTokens(transfer: FireFlyTokensTransferInput, options?: FireFlyRequestOptions) {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/mint', transfer, {
+      params: options,
+    });
     return response.data;
   }
 
-  async transferTokens(transfer: FireFlyTokensTransferInput): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/transfers', transfer);
+  async transferTokens(
+    transfer: FireFlyTokensTransferInput,
+    options?: FireFlyRequestOptions,
+  ): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/transfers', transfer, {
+      params: options,
+    });
     return response.data;
   }
 
-  async burnTokens(transfer: FireFlyTokensTransferInput): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/burn', transfer);
+  async burnTokens(
+    transfer: FireFlyTokensTransferInput,
+    options?: FireFlyRequestOptions,
+  ): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/burn', transfer, {
+      params: options,
+    });
     return response.data;
   }
 
