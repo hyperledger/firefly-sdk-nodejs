@@ -1,4 +1,5 @@
 // General
+
 export interface FireFlyRequestOptions {
   confirm?: boolean;
 }
@@ -153,6 +154,10 @@ export interface FireFlyDataRef {
 }
 
 // Messages
+
+export interface FireFlySendOptions extends FireFlyRequestOptions {
+  requestReply?: boolean;
+}
 
 export interface FireFlyMessageBase {
   header: {

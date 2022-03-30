@@ -1,3 +1,4 @@
+import { Stream } from 'stream';
 import axios, { AxiosInstance } from 'axios';
 import {
   FireFlyFilter,
@@ -10,11 +11,24 @@ import {
   FireFlyStatus,
   FireFlySubscription,
   FireFlySubscriptionInput,
+  FireFlyData,
+  FireFlyMessage,
+  FireFlyMessageInput,
+  FireFlySendOptions,
+  FireFlyTokenPool,
+  FireFlyTokenPoolType,
+  FireFlyTokensTransferInput,
+  FireFlyTokenTransfer,
+  FireFlyDataRef,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
 function isDefined<T>(obj: T | undefined | null): obj is T {
   return obj !== undefined && obj !== null;
+}
+
+function isSuccess(status: number) {
+  return status >= 200 && status < 300;
 }
 
 export class InvalidDatatypeError extends Error {}
@@ -61,7 +75,7 @@ export class FireFly {
 
   async getDatatype(ref: FireFlyDatatypeRef): Promise<FireFlyDatatype | undefined> {
     const response = await this.http.get<FireFlyDatatype>(`/datatypes/${ref.name}/${ref.version}`, {
-      validateStatus: (status) => status === 404 || (status >= 200 && status < 300),
+      validateStatus: (status) => status === 404 || isSuccess(status),
     });
     return response.status === 404 ? undefined : response.data;
   }
@@ -77,9 +91,8 @@ export class FireFly {
       validator: options?.validator ?? 'json',
       value: schema,
     };
-    const response = await this.http.post<FireFlyDatatype>('/datatypes', {
+    const response = await this.http.post<FireFlyDatatype>('/datatypes', body, {
       params: options,
-      data: body,
     });
     return response.data;
   }
@@ -116,6 +129,76 @@ export class FireFly {
 
   async deleteSubscription(subId: string) {
     await this.http.delete(`/subscriptions/${subId}`);
+  }
+
+  async getData(id: string): Promise<FireFlyData> {
+    const response = await this.http.get<FireFlyData>(`/data/${id}`);
+    return response.data;
+  }
+
+  async getDataBlob(id: string): Promise<Stream> {
+    const response = await this.http.get<Stream>(`/data/${id}/blob`, {
+      responseType: 'stream',
+    });
+    return response.data;
+  }
+
+  async createDataBlob(formData: FormData, headers: any): Promise<FireFlyDataRef> {
+    const response = await this.http.post<FireFlyDataRef>('/data', formData, {
+      headers,
+    });
+    return response.data;
+  }
+
+  async getMessage(id: string): Promise<FireFlyMessage> {
+    const response = await this.http.get<FireFlyMessage>(`/messages/${id}`);
+    return response.data;
+  }
+
+  async sendBroadcast(message: FireFlyMessageInput): Promise<FireFlyMessage> {
+    const response = await this.http.post<FireFlyMessage>('/messages/broadcast', message);
+    return response.data;
+  }
+
+  async sendPrivateMessage(
+    message: FireFlyMessageInput,
+    options?: FireFlySendOptions,
+  ): Promise<FireFlyMessage> {
+    const url = options?.requestReply ? 'requestreply' : 'private';
+    const response = await this.http.post<FireFlyMessage>(url, message);
+    return response.data;
+  }
+
+  async createTokenPool(name: string, type: FireFlyTokenPoolType): Promise<FireFlyTokenPool> {
+    const response = await this.http.post<FireFlyTokenPool>('/tokens/pools', { name, type });
+    return response.data;
+  }
+
+  async getTokenPool(nameOrId: string): Promise<FireFlyTokenPool | undefined> {
+    const response = await this.http.get<FireFlyTokenPool>(`/tokens/pools/${nameOrId}`, {
+      validateStatus: (status) => status === 404 || isSuccess(status),
+    });
+    return response.status === 404 ? undefined : response.data;
+  }
+
+  async mintTokens(transfer: FireFlyTokensTransferInput) {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/mint', transfer);
+    return response.data;
+  }
+
+  async transferTokens(transfer: FireFlyTokensTransferInput): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/transfers', transfer);
+    return response.data;
+  }
+
+  async burnTokens(transfer: FireFlyTokensTransferInput): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/burn', transfer);
+    return response.data;
+  }
+
+  async getTokenTransfer(id: string): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.get<FireFlyTokenTransfer>(`/tokens/transfers/${id}`);
+    return response.data;
   }
 
   listen(subName: string, callback: FireFlyWebSocketCallback): FireFlyWebSocket {
