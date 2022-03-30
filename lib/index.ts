@@ -229,14 +229,24 @@ export class FireFly {
     return response.data;
   }
 
-  listen(subName: string, callback: FireFlyWebSocketCallback): FireFlyWebSocket {
+  listen(
+    subscriptions: string | string[] | null,
+    callback: FireFlyWebSocketCallback,
+  ): FireFlyWebSocket {
     return new FireFlyWebSocket(
       {
         host: this.options.websocket.host,
         namespace: this.options.namespace,
-        subscriptionName: subName,
         username: this.options.username,
         password: this.options.password,
+        subscriptions:
+          subscriptions === null
+            ? []
+            : Array.isArray(subscriptions)
+            ? subscriptions
+            : [subscriptions],
+        ephemeral: subscriptions === null,
+        autoack: false,
         reconnectDelay: this.options.websocket.reconnectDelay,
         heartbeatInterval: this.options.websocket.heartbeatInterval,
       },

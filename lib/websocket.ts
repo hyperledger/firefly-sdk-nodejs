@@ -30,11 +30,15 @@ export class FireFlyWebSocket {
       delete this.reconnectTimer;
     }
 
+    let url = `${this.options.host}/ws`;
+    if (this.options.ephemeral) {
+      url += '?ephemeral';
+    }
     const auth =
       this.options.username && this.options.password
         ? `${this.options.username}:${this.options.password}`
         : undefined;
-    const socket = (this.socket = new WebSocket(`${this.options.host}/ws`, {
+    const socket = (this.socket = new WebSocket(url, {
       auth,
       handshakeTimeout: this.options.heartbeatInterval,
     }));
@@ -48,17 +52,17 @@ export class FireFlyWebSocket {
           console.log('Connected');
         }
         this.schedulePing();
-        socket.send(
-          JSON.stringify({
-            type: 'start',
-            autoack: false,
-            namespace: this.options.namespace,
-            name: this.options.subscriptionName,
-          }),
-        );
-        console.log(
-          `Started listening on subscription ${this.options.namespace}:${this.options.subscriptionName}`,
-        );
+        for (const name of this.options.subscriptions) {
+          socket.send(
+            JSON.stringify({
+              type: 'start',
+              autoack: this.options.autoack,
+              namespace: this.options.namespace,
+              name,
+            }),
+          );
+          console.log(`Started listening on subscription ${this.options.namespace}:${name}`);
+        }
       })
       .on('error', (err) => {
         console.error('Error', err.stack);

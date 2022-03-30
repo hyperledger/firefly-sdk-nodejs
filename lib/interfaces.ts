@@ -37,9 +37,11 @@ export interface FireFlyOptions extends FireFlyOptionsInput {
 export interface FireFlyWebSocketOptions {
   host: string;
   namespace: string;
-  subscriptionName: string;
+  subscriptions: string[];
   username?: string;
   password?: string;
+  ephemeral: boolean;
+  autoack: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
 }
