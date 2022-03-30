@@ -1,6 +1,6 @@
 {
-  "name": "@kaleido-io/firefly-sdk-nodejs",
-  "version": "1.0.0",
+  "name": "@photic/firefly-sdk-nodejs",
+  "version": "0.0.1",
   "description": "Client SDK for Hyperledger FireFly",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
