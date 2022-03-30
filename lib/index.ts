@@ -5,16 +5,13 @@ import {
   FireFlyDatatypeCreate,
   FireFlyDatatypeOptions,
   FireFlyDatatypeRef,
+  FireFlyOptions,
+  FireFlyOptionsInput,
   FireFlyStatus,
   FireFlySubscription,
-  FireFlyOptions,
   FireFlySubscriptionInput,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
-
-const CREATE_TIMEOUT = 60000;
-const WS_RECONNECT_TIMEOUT = process.env.WS_RECONNECT_TIMEOUT || '5000';
-const WS_HEARTBEAT_INTERVAL = process.env.WS_HEARTBEAT_INTERVAL || '30000';
 
 function isDefined<T>(obj: T | undefined | null): obj is T {
   return obj !== undefined && obj !== null;
@@ -23,18 +20,29 @@ function isDefined<T>(obj: T | undefined | null): obj is T {
 export class InvalidDatatypeError extends Error {}
 
 export class FireFly {
-  readonly namespace: string;
+  private options: FireFlyOptions;
   private rootHttp: AxiosInstance;
   private http: AxiosInstance;
-  private reconnectDelay: number;
-  private heartbeatInterval: number;
 
-  constructor(private options: FireFlyOptions) {
-    this.namespace = options.namespace ?? 'default';
-    this.reconnectDelay = parseInt(WS_RECONNECT_TIMEOUT);
-    this.heartbeatInterval = parseInt(WS_HEARTBEAT_INTERVAL);
+  constructor(options: FireFlyOptionsInput) {
+    this.options = this.setDefaults(options);
     this.rootHttp = axios.create({ baseURL: `${options.host}/api/v1` });
-    this.http = axios.create({ baseURL: `${options.host}/api/v1/namespaces/${this.namespace}` });
+    this.http = axios.create({
+      baseURL: `${options.host}/api/v1/namespaces/${this.options.namespace}`,
+    });
+  }
+
+  private setDefaults(options: FireFlyOptionsInput): FireFlyOptions {
+    return {
+      ...options,
+      namespace: options.namespace ?? 'default',
+      websocket: {
+        ...options.websocket,
+        host: options.websocket?.host ?? options.host.replace('http', 'ws'),
+        reconnectDelay: options.websocket?.reconnectDelay ?? 5000,
+        heartbeatInterval: options.websocket?.heartbeatInterval ?? 30000,
+      },
+    };
   }
 
   async getStatus(): Promise<FireFlyStatus> {
@@ -72,7 +80,6 @@ export class FireFly {
     const response = await this.http.post<FireFlyDatatype>('/datatypes', {
       params: options,
       data: body,
-      timeout: CREATE_TIMEOUT,
     });
     return response.data;
   }
@@ -114,13 +121,13 @@ export class FireFly {
   listen(subName: string, callback: FireFlyWebSocketCallback): FireFlyWebSocket {
     return new FireFlyWebSocket(
       {
-        host: this.options.host.replace('http', 'ws'),
-        namespace: this.namespace,
+        host: this.options.websocket.host,
+        namespace: this.options.namespace,
         subscriptionName: subName,
         username: this.options.username,
         password: this.options.password,
-        reconnectDelay: this.reconnectDelay,
-        heartbeatInterval: this.heartbeatInterval,
+        reconnectDelay: this.options.websocket.reconnectDelay,
+        heartbeatInterval: this.options.websocket.heartbeatInterval,
       },
       callback,
     );

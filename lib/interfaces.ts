@@ -12,11 +12,25 @@ export interface FireFlyFilter {
   count?: number;
 }
 
-export interface FireFlyOptions {
+export interface FireFlyOptionsInput {
   host: string;
   namespace?: string;
   username?: string;
   password?: string;
+  websocket?: {
+    host?: string;
+    reconnectDelay?: number;
+    heartbeatInterval?: number;
+  };
+}
+
+export interface FireFlyOptions extends FireFlyOptionsInput {
+  namespace: string;
+  websocket: {
+    host: string;
+    reconnectDelay: number;
+    heartbeatInterval: number;
+  };
 }
 
 export interface FireFlyWebSocketOptions {
