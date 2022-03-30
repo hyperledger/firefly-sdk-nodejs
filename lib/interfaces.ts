@@ -1,7 +1,15 @@
+import { AxiosRequestConfig } from 'axios';
+
 // General
 
-export interface FireFlyRequestOptions {
+export interface FireFlyGetOptions {
+  confirm: undefined;
+  requestConfig?: AxiosRequestConfig;
+}
+
+export interface FireFlyCreateOptions {
   confirm?: boolean;
+  requestConfig?: AxiosRequestConfig;
 }
 
 export interface FireFlyFilter {
@@ -23,6 +31,7 @@ export interface FireFlyOptionsInput {
     reconnectDelay?: number;
     heartbeatInterval?: number;
   };
+  requestConfig?: AxiosRequestConfig;
 }
 
 export interface FireFlyOptions extends FireFlyOptionsInput {
@@ -114,7 +123,7 @@ export interface FireFlyDatatypeRef {
   version: string;
 }
 
-export interface FireFlyDatatypeOptions extends FireFlyRequestOptions {
+export interface FireFlyDatatypeOptions extends FireFlyCreateOptions {
   validator?: string;
 }
 
@@ -157,7 +166,7 @@ export interface FireFlyDataRef {
 
 // Messages
 
-export interface FireFlySendOptions extends FireFlyRequestOptions {
+export interface FireFlySendOptions extends FireFlyCreateOptions {
   requestReply?: boolean;
 }
 

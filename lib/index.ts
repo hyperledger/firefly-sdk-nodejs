@@ -1,5 +1,5 @@
 import { Stream } from 'stream';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import {
   FireFlyFilter,
   FireFlyDatatype,
@@ -20,7 +20,8 @@ import {
   FireFlyTokensTransferInput,
   FireFlyTokenTransfer,
   FireFlyDataRef,
-  FireFlyRequestOptions,
+  FireFlyCreateOptions,
+  FireFlyGetOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -30,6 +31,19 @@ function isDefined<T>(obj: T | undefined | null): obj is T {
 
 function isSuccess(status: number) {
   return status >= 200 && status < 300;
+}
+
+function mapConfig(
+  options: FireFlyGetOptions | FireFlyCreateOptions | undefined,
+  params?: any,
+): AxiosRequestConfig {
+  return {
+    ...options?.requestConfig,
+    params: {
+      ...params,
+      confirm: options?.confirm,
+    },
+  };
 }
 
 export class InvalidDatatypeError extends Error {}
@@ -42,8 +56,12 @@ export class FireFly {
 
   constructor(options: FireFlyOptionsInput) {
     this.options = this.setDefaults(options);
-    this.rootHttp = axios.create({ baseURL: `${options.host}/api/v1` });
+    this.rootHttp = axios.create({
+      ...options.requestConfig,
+      baseURL: `${options.host}/api/v1`,
+    });
     this.http = axios.create({
+      ...options.requestConfig,
       baseURL: `${options.host}/api/v1/namespaces/${this.options.namespace}`,
     });
   }
@@ -61,22 +79,28 @@ export class FireFly {
     };
   }
 
-  async getStatus(): Promise<FireFlyStatus> {
-    const response = await this.rootHttp.get<FireFlyStatus>('/status');
+  async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatus> {
+    const response = await this.rootHttp.get<FireFlyStatus>('/status', mapConfig(options));
     return response.data;
   }
 
   async getDatatypes(
     filter?: Partial<FireFlyDatatype> & FireFlyFilter,
+    options?: FireFlyGetOptions,
   ): Promise<FireFlyDatatype[]> {
-    const response = await this.http.get<FireFlyDatatype[]>('/datatypes', {
-      params: filter,
-    });
+    const response = await this.http.get<FireFlyDatatype[]>(
+      '/datatypes',
+      mapConfig(options, filter),
+    );
     return response.data;
   }
 
-  async getDatatype(ref: FireFlyDatatypeRef): Promise<FireFlyDatatype | undefined> {
+  async getDatatype(
+    ref: FireFlyDatatypeRef,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyDatatype | undefined> {
     const response = await this.http.get<FireFlyDatatype>(`/datatypes/${ref.name}/${ref.version}`, {
+      ...mapConfig(options),
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
     return response.status === 404 ? undefined : response.data;
@@ -93,9 +117,7 @@ export class FireFly {
       validator: options?.validator ?? 'json',
       value: schema,
     };
-    const response = await this.http.post<FireFlyDatatype>('/datatypes', body, {
-      params: options,
-    });
+    const response = await this.http.post<FireFlyDatatype>('/datatypes', body, mapConfig(options));
     return response.data;
   }
 
@@ -117,10 +139,12 @@ export class FireFly {
 
   async getSubscriptions(
     filter?: Partial<FireFlySubscription> & FireFlyFilter,
+    options?: FireFlyGetOptions,
   ): Promise<FireFlySubscription[]> {
-    const response = await this.http.get<FireFlySubscription[]>('/subscriptions', {
-      params: filter,
-    });
+    const response = await this.http.get<FireFlySubscription[]>(
+      '/subscriptions',
+      mapConfig(options, filter),
+    );
     return response.data;
   }
 
@@ -133,13 +157,14 @@ export class FireFly {
     await this.http.delete(`/subscriptions/${subId}`);
   }
 
-  async getData(id: string): Promise<FireFlyData> {
-    const response = await this.http.get<FireFlyData>(`/data/${id}`);
+  async getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyData> {
+    const response = await this.http.get<FireFlyData>(`/data/${id}`, mapConfig(options));
     return response.data;
   }
 
-  async getDataBlob(id: string): Promise<Stream> {
+  async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Stream> {
     const response = await this.http.get<Stream>(`/data/${id}/blob`, {
+      ...mapConfig(options),
       responseType: 'stream',
     });
     return response.data;
@@ -159,11 +184,13 @@ export class FireFly {
 
   async sendBroadcast(
     message: FireFlyMessageInput,
-    options?: FireFlyRequestOptions,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyMessage> {
-    const response = await this.http.post<FireFlyMessage>('/messages/broadcast', message, {
-      params: options,
-    });
+    const response = await this.http.post<FireFlyMessage>(
+      '/messages/broadcast',
+      message,
+      mapConfig(options),
+    );
     return response.data;
   }
 
@@ -172,21 +199,19 @@ export class FireFly {
     options?: FireFlySendOptions,
   ): Promise<FireFlyMessage> {
     const url = options?.requestReply ? 'requestreply' : 'private';
-    const response = await this.http.post<FireFlyMessage>(url, message);
+    const response = await this.http.post<FireFlyMessage>(url, message, mapConfig(options));
     return response.data;
   }
 
   async createTokenPool(
     name: string,
     type: FireFlyTokenPoolType,
-    options?: FireFlyRequestOptions,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenPool> {
     const response = await this.http.post<FireFlyTokenPool>(
       '/tokens/pools',
       { name, type },
-      {
-        params: options,
-      },
+      mapConfig(options),
     );
     return response.data;
   }
@@ -198,35 +223,44 @@ export class FireFly {
     return response.status === 404 ? undefined : response.data;
   }
 
-  async mintTokens(transfer: FireFlyTokensTransferInput, options?: FireFlyRequestOptions) {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/mint', transfer, {
-      params: options,
-    });
+  async mintTokens(transfer: FireFlyTokensTransferInput, options?: FireFlyCreateOptions) {
+    const response = await this.http.post<FireFlyTokenTransfer>(
+      '/tokens/mint',
+      transfer,
+      mapConfig(options),
+    );
     return response.data;
   }
 
   async transferTokens(
     transfer: FireFlyTokensTransferInput,
-    options?: FireFlyRequestOptions,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/transfers', transfer, {
-      params: options,
-    });
+    const response = await this.http.post<FireFlyTokenTransfer>(
+      '/tokens/transfers',
+      transfer,
+      mapConfig(options),
+    );
     return response.data;
   }
 
   async burnTokens(
     transfer: FireFlyTokensTransferInput,
-    options?: FireFlyRequestOptions,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>('/tokens/burn', transfer, {
-      params: options,
-    });
+    const response = await this.http.post<FireFlyTokenTransfer>(
+      '/tokens/burn',
+      transfer,
+      mapConfig(options),
+    );
     return response.data;
   }
 
-  async getTokenTransfer(id: string): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.get<FireFlyTokenTransfer>(`/tokens/transfers/${id}`);
+  async getTokenTransfer(id: string, options?: FireFlyGetOptions): Promise<FireFlyTokenTransfer> {
+    const response = await this.http.get<FireFlyTokenTransfer>(
+      `/tokens/transfers/${id}`,
+      mapConfig(options),
+    );
     return response.data;
   }
 
