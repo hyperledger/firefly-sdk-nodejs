@@ -1,6 +1,6 @@
 {
   "name": "@photic/firefly-sdk-nodejs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Client SDK for Hyperledger FireFly",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,14 +23,16 @@
   },
   "homepage": "https://github.com/kaleido-io/firefly-sdk-nodejs#readme",
   "devDependencies": {
+    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "eslint": "^8.12.0",
     "eslint-plugin-import": "^2.25.4",
     "prettier": "^2.6.1",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "ts-node": "^10.7.0"
+    "ws": "^8.5.0"
   }
 }

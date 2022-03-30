@@ -1,7 +1,7 @@
 import { FireFly } from '../..';
 
 async function main() {
-  const firefly = new FireFly('http://localhost:5000');
+  const firefly = new FireFly({ host: 'http://localhost:5000' });
   const datatypes = await firefly.getDatatypes();
   console.log(JSON.stringify(datatypes, null, 2));
 }

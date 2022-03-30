@@ -1,3 +1,4 @@
+// General
 export interface FireFlyRequestOptions {
   confirm?: boolean;
 }
@@ -10,6 +11,25 @@ export interface FireFlyFilter {
   limit?: number;
   count?: number;
 }
+
+export interface FireFlyOptions {
+  host: string;
+  namespace?: string;
+  username?: string;
+  password?: string;
+}
+
+export interface FireFlyWebSocketOptions {
+  host: string;
+  namespace: string;
+  subscriptionName: string;
+  username?: string;
+  password?: string;
+  reconnectDelay: number;
+  heartbeatInterval: number;
+}
+
+// Network
 
 export interface FireFlyOrganization {
   id: string;
@@ -34,24 +54,43 @@ export interface FireFlyStatus {
   node: FireFlyNode;
 }
 
+// Subscriptions
+
 export interface FireFlySubscriptionRef {
   id: string;
   name: string;
   namespace: string;
 }
 
-export interface FireFlySubscription {
-  namespace: string;
-  name: string;
-  transport: string;
+export interface FireFlySubscriptionInput {
+  name?: string;
+  transport?: string;
   filter?: {
     events?: string;
   };
   options?: {
     firstEvent?: string;
     readAhead?: number;
+    withData?: boolean;
   };
 }
+
+export interface FireFlySubscription extends FireFlySubscriptionInput {
+  id: string;
+  namespace: string;
+  updated: string;
+}
+
+export interface FireFlyEvent {
+  id: string;
+  type: string;
+  namespace: string;
+  reference: string;
+  subscription: FireFlySubscriptionRef;
+  message?: FireFlyMessage;
+}
+
+// Datatypes
 
 export interface FireFlyDatatypeRef {
   name: string;
@@ -75,6 +114,8 @@ export interface FireFlyDatatype extends FireFlyDatatypeCreate {
   namespace: string;
 }
 
+// Data
+
 export interface FireFlyDataInput {
   datatype?: FireFlyDatatypeRef;
   value: any;
@@ -91,6 +132,13 @@ export interface FireFlyBlob {
   size: number;
   name: string;
 }
+
+export interface FireFlyDataRef {
+  id: string;
+  hash: string;
+}
+
+// Messages
 
 export interface FireFlyMessageBase {
   header: {
@@ -131,19 +179,7 @@ export interface FireFlyMessageInput extends Partial<FireFlyMessageBase> {
   data: Partial<FireFlyData>[];
 }
 
-export interface FireFlyDataRef {
-  id: string;
-  hash: string;
-}
-
-export interface FireFlyEvent {
-  id: string;
-  type: string;
-  namespace: string;
-  reference: string;
-  subscription: FireFlySubscriptionRef;
-  message?: FireFlyMessage;
-}
+// Token Pools
 
 export enum FireFlyTokenPoolType {
   FUNGIBLE = 'fungible',
@@ -157,6 +193,8 @@ export interface FireFlyTokenPool {
   name: string;
   protocolId: string;
 }
+
+// Token Transfers
 
 export interface FireFlyTokenTransfer {
   type: string;
@@ -187,6 +225,8 @@ export interface FireFlyTokensTransferInput {
   message?: FireFlyMessageInput;
 }
 
+// Token Balances
+
 export interface FireFlyTokenBalance {
   pool: string;
   uri: string;
@@ -197,6 +237,8 @@ export interface FireFlyTokenBalance {
   updated: string;
   tokenIndex?: string;
 }
+
+// Operations
 
 export enum FireFlyOperationStatus {
   PENDING = 'Pending',
@@ -215,6 +257,8 @@ export interface FireFlyOperation {
   error?: string;
 }
 
+// Transactions
+
 export interface FireFlyTransaction {
   id: string;
   created: string;
@@ -227,36 +271,4 @@ export interface FireFlyTransaction {
     signer: string;
     type: string;
   };
-}
-
-export interface FireFlyOptions {
-  enabled: boolean;
-  host?: string;
-  uri?: string;
-  poolName?: string;
-  subscriptionName?: string;
-  username?: string;
-  password?: string;
-}
-
-export interface FireFlyWebSocketOptions {
-  host: string;
-  namespace: string;
-  subscriptionName: string;
-  username?: string;
-  password?: string;
-  reconnectDelay: number;
-  heartbeatInterval: number;
-}
-
-export interface FireFlyEventListener {
-  processEvent: (event: FireFlyEvent) => boolean | Promise<boolean>;
-}
-
-export interface MessageListener {
-  processMessage: (message: FireFlyMessage) => boolean | Promise<boolean>;
-}
-
-export interface MemberListener {
-  membersChanged: () => void | Promise<void>;
 }
