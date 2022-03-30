@@ -2,6 +2,15 @@ export interface FireFlyRequestOptions {
   confirm?: boolean;
 }
 
+export interface FireFlyFilter {
+  sort?: string;
+  ascending?: boolean;
+  descending?: boolean;
+  skip?: number;
+  limit?: number;
+  count?: number;
+}
+
 export interface FireFlyOrganization {
   id: string;
   name: string;

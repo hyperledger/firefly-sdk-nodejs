@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import {
+  FireFlyFilter,
   FireFlyDatatype,
   FireFlyDatatypeCreate,
   FireFlyDatatypeOptions,
@@ -29,8 +30,10 @@ export class FireFly {
     return response.data;
   }
 
-  async getDatatypes(): Promise<FireFlyDatatype[]> {
-    const response = await this.http.get<FireFlyDatatype[]>('/datatypes');
+  async getDatatypes(filter?: FireFlyDatatype & FireFlyFilter): Promise<FireFlyDatatype[]> {
+    const response = await this.http.get<FireFlyDatatype[]>('/datatypes', {
+      params: filter,
+    });
     return response.data;
   }
 
@@ -53,7 +56,7 @@ export class FireFly {
       value: schema,
     };
     const response = await this.http.post<FireFlyDatatype>('/datatypes', {
-      params: { confirm: true, ...options },
+      params: options,
       data: body,
       timeout: CREATE_TIMEOUT,
     });
@@ -72,7 +75,7 @@ export class FireFly {
       }
       return existing;
     }
-    const created = await this.createDatatype(ref, schema);
+    const created = await this.createDatatype(ref, schema, { confirm: true });
     return created;
   }
 }
