@@ -38,6 +38,7 @@ export class FireFly {
   private options: FireFlyOptions;
   private rootHttp: AxiosInstance;
   private http: AxiosInstance;
+  private queue = Promise.resolve();
 
   constructor(options: FireFlyOptionsInput) {
     this.options = this.setDefaults(options);
@@ -250,7 +251,14 @@ export class FireFly {
         reconnectDelay: this.options.websocket.reconnectDelay,
         heartbeatInterval: this.options.websocket.heartbeatInterval,
       },
-      callback,
+      (socket, event) => {
+        this.queue = this.queue.finally(() => {
+          callback(socket, event);
+        });
+        this.queue.finally(() => {
+          socket.ack(event);
+        });
+      },
     );
   }
 }
