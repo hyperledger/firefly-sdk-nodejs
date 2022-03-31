@@ -2,6 +2,12 @@
 
 FireFly SDK for Node.js
 
+## Installation
+
+```
+npm install @photic/firefly-sdk-nodejs
+```
+
 ## Usage
 
 ```
