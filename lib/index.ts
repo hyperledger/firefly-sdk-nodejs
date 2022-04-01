@@ -49,7 +49,7 @@ function mapConfig(
 
 export class InvalidDatatypeError extends Error {}
 
-export class FireFly {
+export default class FireFly {
   private options: FireFlyOptions;
   private rootHttp: AxiosInstance;
   private http: AxiosInstance;
