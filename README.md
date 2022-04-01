@@ -11,7 +11,7 @@ npm install @photic/firefly-sdk-nodejs
 ## Usage
 
 ```typescript
-import { FireFly } from '@photic/firefly-sdk-nodejs';
+import FireFly from '@photic/firefly-sdk-nodejs';
 
 const firefly = new FireFly({ host: 'http://localhost:5000' });
 await firefly.sendBroadcast({
