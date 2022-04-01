@@ -165,19 +165,17 @@ export interface FireFlySendOptions extends FireFlyCreateOptions {
   requestReply?: boolean;
 }
 
-export interface FireFlyMessageBase {
-  header: {
-    id: string;
-    type: string;
-    txtype: string;
-    author: string;
-    key: string;
-    cid?: string;
-    topics: string[];
-    tag?: string;
-    namespace: string;
-    created: string;
-  };
+export interface FireFlyMessageHeader {
+  id: string;
+  type: string;
+  txtype: string;
+  author: string;
+  key: string;
+  cid?: string;
+  topics: string[];
+  tag?: string;
+  namespace: string;
+  created: string;
 }
 
 export enum FireFlyMessageState {
@@ -188,14 +186,16 @@ export enum FireFlyMessageState {
   REJECTED = 'rejected',
 }
 
-export interface FireFlyMessage extends FireFlyMessageBase {
+export interface FireFlyMessage {
+  header: FireFlyMessageHeader;
   group: string;
   state: FireFlyMessageState;
   confirmed: string;
   data: FireFlyDataRef[];
 }
 
-export interface FireFlyMessageInput extends Partial<FireFlyMessageBase> {
+export interface FireFlyMessageInput {
+  header: Partial<FireFlyMessageHeader>;
   group?: {
     name?: string;
     ledger?: string;
