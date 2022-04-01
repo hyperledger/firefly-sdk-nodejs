@@ -299,3 +299,5 @@ export default class FireFly {
     return new FireFlyWebSocket(options, handler);
   }
 }
+
+export * from './interfaces';
