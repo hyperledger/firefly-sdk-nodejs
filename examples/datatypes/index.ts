@@ -1,4 +1,4 @@
-import { FireFly } from '../..';
+import FireFly from '../..';
 
 async function main() {
   const firefly = new FireFly({ host: 'http://localhost:5000' });

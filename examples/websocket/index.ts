@@ -1,4 +1,4 @@
-import { FireFly } from '../..';
+import FireFly from '../..';
 
 const SUB_NAME = 'test-sub';
 

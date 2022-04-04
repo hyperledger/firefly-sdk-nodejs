@@ -195,7 +195,7 @@ export interface FireFlyMessage {
 }
 
 export interface FireFlyMessageInput {
-  header: Partial<FireFlyMessageHeader>;
+  header?: Partial<FireFlyMessageHeader>;
   group?: {
     name?: string;
     ledger?: string;
