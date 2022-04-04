@@ -2,6 +2,7 @@ import { IncomingMessage } from 'http';
 import { Transform } from 'stream';
 import * as WebSocket from 'ws';
 import { FireFlyEvent, FireFlyEphemeralSubscription, FireFlyWebSocketOptions } from './interfaces';
+import Logger from './logger';
 
 function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
   const params = new URLSearchParams();
@@ -18,6 +19,8 @@ export interface FireFlyWebSocketCallback {
 }
 
 export class FireFlyWebSocket {
+  private readonly logger = new Logger(FireFlyWebSocket.name);
+
   private socket?: WebSocket;
   private closed = false;
   private pingTimer?: NodeJS.Timeout;
@@ -59,9 +62,9 @@ export class FireFlyWebSocket {
       .on('open', () => {
         if (this.disconnectDetected) {
           this.disconnectDetected = false;
-          console.log('Connection restored');
+          this.logger.log('Connection restored');
         } else {
-          console.log('Connected');
+          this.logger.log('Connected');
         }
         this.schedulePing();
         for (const name of this.options.subscriptions) {
@@ -73,22 +76,22 @@ export class FireFlyWebSocket {
               name,
             }),
           );
-          console.log(`Started listening on subscription ${this.options.namespace}:${name}`);
+          this.logger.log(`Started listening on subscription ${this.options.namespace}:${name}`);
         }
       })
       .on('error', (err) => {
-        console.error('Error', err.stack);
+        this.logger.error('Error', err.stack);
       })
       .on('close', () => {
         if (this.closed) {
-          console.log('Closed');
+          this.logger.log('Closed');
         } else {
           this.disconnectDetected = true;
           this.reconnect('Closed by peer');
         }
       })
       .on('pong', () => {
-        console.debug(`WS received pong`);
+        this.logger.debug(`WS received pong`);
         this.schedulePing();
       })
       .on('unexpected-response', (req, res: IncomingMessage) => {
@@ -129,7 +132,7 @@ export class FireFlyWebSocket {
       Math.ceil(this.options.heartbeatInterval * 1.5), // 50% grace period
     );
     this.pingTimer = setTimeout(() => {
-      console.debug(`WS sending ping`);
+      this.logger.debug(`WS sending ping`);
       this.socket?.ping('ping', true, (err) => {
         if (err) this.reconnect(err.message);
       });
@@ -139,7 +142,7 @@ export class FireFlyWebSocket {
   private reconnect(msg: string) {
     if (!this.reconnectTimer) {
       this.close();
-      console.error(`Websocket closed: ${msg}`);
+      this.logger.error(`Websocket closed: ${msg}`);
       this.reconnectTimer = setTimeout(() => this.connect(), this.options.reconnectDelay);
     }
   }
@@ -163,7 +166,7 @@ export class FireFlyWebSocket {
       try {
         this.socket.close();
       } catch (e: any) {
-        console.warn(`Failed to clean up websocket: ${e.message}`);
+        this.logger.warn(`Failed to clean up websocket: ${e.message}`);
       }
       this.socket = undefined;
     }
