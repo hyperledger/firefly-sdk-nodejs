@@ -1,11 +1,12 @@
 import { IncomingMessage } from 'http';
 import { Transform } from 'stream';
 import * as WebSocket from 'ws';
-import { FireFlyEvent, FireFlySubscriptionInput, FireFlyWebSocketOptions } from './interfaces';
+import { FireFlyEvent, FireFlyEphemeralSubscription, FireFlyWebSocketOptions } from './interfaces';
 
-function buildEphemeralQueryParams(sub: FireFlySubscriptionInput) {
+function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
   const params = new URLSearchParams();
   params.append('ephemeral', 'true');
+  params.append('namespace', sub.namespace);
   if (sub.filter?.events !== undefined) {
     params.append('filter.events', sub.filter.events);
   }

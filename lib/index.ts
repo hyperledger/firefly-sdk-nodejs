@@ -23,6 +23,7 @@ import {
   FireFlyGetOptions,
   FireFlyTokenPoolInput,
   FireFlyWebSocketOptions,
+  FireFlySubscriptionBase,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -265,7 +266,7 @@ export default class FireFly {
   }
 
   listen(
-    subscriptions: string | string[] | FireFlySubscriptionInput,
+    subscriptions: string | string[] | FireFlySubscriptionBase,
     callback: FireFlyWebSocketCallback,
   ): FireFlyWebSocket {
     const options: FireFlyWebSocketOptions = {
@@ -293,7 +294,7 @@ export default class FireFly {
     } else if (typeof subscriptions === 'string') {
       options.subscriptions = [subscriptions];
     } else {
-      options.ephemeral = subscriptions;
+      options.ephemeral = { ...subscriptions, namespace: this.options.namespace };
     }
 
     return new FireFlyWebSocket(options, handler);

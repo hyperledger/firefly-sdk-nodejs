@@ -49,7 +49,7 @@ export interface FireFlyWebSocketOptions {
   subscriptions: string[];
   username?: string;
   password?: string;
-  ephemeral?: FireFlySubscriptionInput;
+  ephemeral?: FireFlyEphemeralSubscription;
   autoack: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
@@ -83,9 +83,7 @@ export interface FireFlySubscriptionRef {
   namespace: string;
 }
 
-export interface FireFlySubscriptionInput {
-  name?: string;
-  transport?: string;
+export interface FireFlySubscriptionBase {
   filter?: {
     events?: string;
   };
@@ -94,6 +92,15 @@ export interface FireFlySubscriptionInput {
     readAhead?: number;
     withData?: boolean;
   };
+}
+
+export interface FireFlyEphemeralSubscription extends FireFlySubscriptionBase {
+  namespace: string;
+}
+
+export interface FireFlySubscriptionInput {
+  name?: string;
+  transport?: string;
 }
 
 export interface FireFlySubscription extends FireFlySubscriptionInput {
