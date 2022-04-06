@@ -68,6 +68,14 @@ export interface FireFlyNode {
   name: string;
 }
 
+export interface FireFlyVerifier {
+  hash: string;
+  identity: string;
+  namespace: string;
+  type: string;
+  value: string;
+}
+
 export interface FireFlyStatus {
   org: FireFlyOrganization;
   node: FireFlyNode;
@@ -222,8 +230,9 @@ export enum FireFlyTokenPoolType {
 }
 
 export interface FireFlyTokenPoolInput {
-  name: string;
   type: FireFlyTokenPoolType;
+  name: string;
+  symbol?: string;
 }
 
 export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
@@ -254,12 +263,13 @@ export interface FireFlyTokenTransfer {
   };
 }
 
-export interface FireFlyTokensTransferInput {
+export interface FireFlyTokenTransferInput {
   amount: number;
   to?: string;
   key?: string;
   from?: string;
   pool?: string;
+  tokenIndex?: string;
   message?: FireFlyMessageInput;
 }
 

@@ -17,7 +17,7 @@ import {
   FireFlyMessageInput,
   FireFlySendOptions,
   FireFlyTokenPool,
-  FireFlyTokensTransferInput,
+  FireFlyTokenTransferInput,
   FireFlyTokenTransfer,
   FireFlyDataRef,
   FireFlyCreateOptions,
@@ -26,6 +26,7 @@ import {
   FireFlyWebSocketOptions,
   FireFlySubscriptionBase,
   FireFlyOrganization,
+  FireFlyVerifier,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -91,6 +92,15 @@ export default class FireFly {
   async getOrganizations(options?: FireFlyGetOptions): Promise<FireFlyOrganization[]> {
     const response = await this.rootHttp.get<FireFlyOrganization[]>(
       '/network/organizations',
+      mapConfig(options),
+    );
+    return response.data;
+  }
+
+  async getVerifiers(namespace?: string, options?: FireFlyGetOptions): Promise<FireFlyVerifier[]> {
+    namespace = namespace ?? this.options.namespace;
+    const response = await this.rootHttp.get<FireFlyVerifier[]>(
+      `/namespaces/${namespace}/verifiers`,
       mapConfig(options),
     );
     return response.data;
@@ -236,6 +246,11 @@ export default class FireFly {
     return response.data;
   }
 
+  async getTokenPools(options?: FireFlyGetOptions): Promise<FireFlyTokenPool[]> {
+    const response = await this.http.get<FireFlyTokenPool[]>(`/tokens/pools`, mapConfig(options));
+    return response.data;
+  }
+
   async getTokenPool(nameOrId: string): Promise<FireFlyTokenPool | undefined> {
     const response = await this.http.get<FireFlyTokenPool>(`/tokens/pools/${nameOrId}`, {
       validateStatus: (status) => status === 404 || isSuccess(status),
@@ -243,7 +258,7 @@ export default class FireFly {
     return response.status === 404 ? undefined : response.data;
   }
 
-  async mintTokens(transfer: FireFlyTokensTransferInput, options?: FireFlyCreateOptions) {
+  async mintTokens(transfer: FireFlyTokenTransferInput, options?: FireFlyCreateOptions) {
     const response = await this.http.post<FireFlyTokenTransfer>(
       '/tokens/mint',
       transfer,
@@ -253,7 +268,7 @@ export default class FireFly {
   }
 
   async transferTokens(
-    transfer: FireFlyTokensTransferInput,
+    transfer: FireFlyTokenTransferInput,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransfer> {
     const response = await this.http.post<FireFlyTokenTransfer>(
@@ -265,7 +280,7 @@ export default class FireFly {
   }
 
   async burnTokens(
-    transfer: FireFlyTokensTransferInput,
+    transfer: FireFlyTokenTransferInput,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransfer> {
     const response = await this.http.post<FireFlyTokenTransfer>(
