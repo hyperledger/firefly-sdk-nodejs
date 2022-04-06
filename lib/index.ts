@@ -25,6 +25,7 @@ import {
   FireFlyTokenPoolInput,
   FireFlyWebSocketOptions,
   FireFlySubscriptionBase,
+  FireFlyOrganization,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -84,6 +85,14 @@ export default class FireFly {
 
   async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatus> {
     const response = await this.rootHttp.get<FireFlyStatus>('/status', mapConfig(options));
+    return response.data;
+  }
+
+  async getOrganizations(options?: FireFlyGetOptions): Promise<FireFlyOrganization[]> {
+    const response = await this.rootHttp.get<FireFlyOrganization[]>(
+      '/network/organizations',
+      mapConfig(options),
+    );
     return response.data;
   }
 
@@ -210,7 +219,7 @@ export default class FireFly {
     message: FireFlyMessageInput,
     options?: FireFlySendOptions,
   ): Promise<FireFlyMessage> {
-    const url = options?.requestReply ? 'requestreply' : 'private';
+    const url = options?.requestReply ? '/messages/requestreply' : '/messages/private';
     const response = await this.http.post<FireFlyMessage>(url, message, mapConfig(options));
     return response.data;
   }

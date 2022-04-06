@@ -60,14 +60,12 @@ export interface FireFlyWebSocketOptions {
 export interface FireFlyOrganization {
   id: string;
   name: string;
-  identity: string;
-  registered: true;
+  did: string;
 }
 
 export interface FireFlyNode {
-  name: string;
-  registered: boolean;
   id: string;
+  name: string;
 }
 
 export interface FireFlyStatus {
