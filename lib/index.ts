@@ -1,5 +1,6 @@
-import { Stream } from 'stream';
+import { Stream, Readable } from 'stream';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import * as FormData from 'form-data';
 import {
   FireFlyFilter,
   FireFlyDatatype,
@@ -172,9 +173,18 @@ export default class FireFly {
     return response.data;
   }
 
-  async createDataBlob(formData: FormData, headers: any): Promise<FireFlyDataRef> {
+  async uploadDataBlob(
+    blob: string | Buffer | Readable,
+    filename: string,
+  ): Promise<FireFlyDataRef> {
+    const formData = new FormData();
+    formData.append('autometa', 'true');
+    formData.append('file', blob, { filename });
     const response = await this.http.post<FireFlyDataRef>('/data', formData, {
-      headers,
+      headers: {
+        ...formData.getHeaders(),
+        'Content-Length': formData.getLengthSync(),
+      },
     });
     return response.data;
   }
