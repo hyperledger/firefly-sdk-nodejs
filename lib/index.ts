@@ -27,6 +27,7 @@ import {
   FireFlySubscriptionBase,
   FireFlyOrganization,
   FireFlyVerifier,
+  FireFlyTokenBalance,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -295,6 +296,17 @@ export default class FireFly {
     const response = await this.http.get<FireFlyTokenTransfer>(
       `/tokens/transfers/${id}`,
       mapConfig(options),
+    );
+    return response.data;
+  }
+
+  async getTokenBalances(
+    filter?: Partial<FireFlyTokenBalance> & FireFlyFilter,
+    options?: FireFlyGetOptions,
+  ) {
+    const response = await this.http.get<FireFlyTokenBalance[]>(
+      '/tokens/balances',
+      mapConfig(options, filter),
     );
     return response.data;
   }
