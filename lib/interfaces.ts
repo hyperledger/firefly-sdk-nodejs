@@ -207,6 +207,7 @@ export interface FireFlyMessage {
   state: FireFlyMessageState;
   confirmed: string;
   data: FireFlyDataRef[];
+  batch: string;
 }
 
 export interface FireFlyMessageInput {
@@ -222,6 +223,34 @@ export interface FireFlyMessageInput {
 export interface FireFlyMember {
   identity: string;
   node?: string;
+}
+
+export interface FireFlyMessageRef {
+  id: string;
+  hash: string;
+}
+
+export interface FireFlyBatch {
+  author: string;
+  confirmed: string;
+  created: string;
+  hash: string;
+  id: string;
+  key: string;
+  namespace: string;
+  tx: {
+    id: string;
+    type: string;
+  };
+  type: string;
+  manifest: {
+    messages: FireFlyMessageRef[];
+    data: FireFlyDataRef;
+  };
+}
+
+export interface FireFlyBatchFilter {
+  'tx.id': string;
 }
 
 // Token Pools
@@ -241,6 +270,7 @@ export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
   id: string;
   namespace: string;
   protocolId: string;
+  message: string;
   tx: {
     id: string;
     type: string;

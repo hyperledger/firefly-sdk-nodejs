@@ -28,6 +28,8 @@ import {
   FireFlyOrganization,
   FireFlyVerifier,
   FireFlyTokenBalance,
+  FireFlyBatch,
+  FireFlyBatchFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -206,6 +208,22 @@ export default class FireFly {
         'Content-Length': formData.getLengthSync(),
       },
     });
+    return response.data;
+  }
+
+  async getBatches(
+    filter?: Partial<FireFlyBatchFilter> & FireFlyFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyBatch[]> {
+    const response = await this.http.get<FireFlyBatch[]>(`/batches`, mapConfig(options, filter));
+    return response.data;
+  }
+
+  async getMessages(
+    filter?: Partial<FireFlyMessage> & FireFlyFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyMessage[]> {
+    const response = await this.http.get<FireFlyMessage[]>(`/messages`, mapConfig(options, filter));
     return response.data;
   }
 
