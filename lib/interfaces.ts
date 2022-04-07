@@ -121,7 +121,9 @@ export interface FireFlyEvent {
   namespace: string;
   reference: string;
   subscription: FireFlySubscriptionRef;
+  tx?: string;
   message?: FireFlyMessage;
+  transaction?: FireFlyTransaction;
 }
 
 // Datatypes
@@ -239,6 +241,10 @@ export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
   id: string;
   namespace: string;
   protocolId: string;
+  tx: {
+    id: string;
+    type: string;
+  };
 }
 
 // Token Transfers
@@ -309,14 +315,8 @@ export interface FireFlyOperation {
 
 export interface FireFlyTransaction {
   id: string;
+  namespace: string;
+  type: string;
   created: string;
-  hash: string;
-  protocolId: string;
-  status: FireFlyOperationStatus;
-  subject: {
-    namespace: string;
-    reference: string;
-    signer: string;
-    type: string;
-  };
+  blockchainIds: string[];
 }
