@@ -394,3 +394,17 @@ export interface FireFlyContractInterface {
   events: FireFlyContractEvent[];
   message?: string;
 }
+
+export interface FireFlyContractAPI {
+  name: string;
+  interface: {
+    name: string;
+    version: string;
+  };
+  location: any;
+  message?: string;
+  urls?: {
+    openapi: string;
+    ui: string;
+  };
+}

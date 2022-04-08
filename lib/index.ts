@@ -32,6 +32,7 @@ import {
   FireFlyBatchFilter,
   FireFlyContractGenerate,
   FireFlyContractInterface,
+  FireFlyContractAPI,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -344,6 +345,22 @@ export default class FireFly {
   async createContractInterface(ffi: FireFlyContractInterface): Promise<FireFlyContractInterface> {
     const response = await this.http.post<FireFlyContractInterface>('/contracts/interfaces', ffi);
     return response.data;
+  }
+
+  async createContractAPI(api: FireFlyContractAPI): Promise<FireFlyContractAPI> {
+    const response = await this.http.post<FireFlyContractAPI>('/apis', api);
+    return response.data;
+  }
+
+  async getContractAPI(
+    name: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractAPI | undefined> {
+    const response = await this.http.get<FireFlyContractAPI>(`/apis/${name}`, {
+      ...mapConfig(options),
+      validateStatus: (status) => status === 404 || isSuccess(status),
+    });
+    return response.status === 404 ? undefined : response.data;
   }
 
   listen(
