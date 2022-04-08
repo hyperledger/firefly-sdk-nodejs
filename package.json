@@ -1,6 +1,6 @@
 {
   "name": "@photic/firefly-sdk-nodejs",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Client SDK for Hyperledger FireFly",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
