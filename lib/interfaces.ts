@@ -350,3 +350,47 @@ export interface FireFlyTransaction {
   created: string;
   blockchainIds: string[];
 }
+
+// Contracts
+
+export interface FireFlyContractParam {
+  name: string;
+  schema: string;
+}
+
+export interface FireFlyContractMethod {
+  id: string;
+  contract: string;
+  name: string;
+  namespace: string;
+  pathname: string;
+  description?: string;
+  params: FireFlyContractParam[];
+  returns: FireFlyContractParam[];
+}
+
+export interface FireFlyContractEvent {
+  id: string;
+  contract: string;
+  name: string;
+  namespace: string;
+  pathname: string;
+  description?: string;
+  params: FireFlyContractParam[];
+}
+
+export interface FireFlyContractGenerate {
+  name: string;
+  version: string;
+  description?: string;
+  input: any;
+}
+
+export interface FireFlyContractInterface {
+  name: string;
+  version: string;
+  description?: string;
+  methods: FireFlyContractMethod[];
+  events: FireFlyContractEvent[];
+  message?: string;
+}

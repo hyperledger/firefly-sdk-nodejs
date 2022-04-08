@@ -30,6 +30,8 @@ import {
   FireFlyTokenBalance,
   FireFlyBatch,
   FireFlyBatchFilter,
+  FireFlyContractGenerate,
+  FireFlyContractInterface,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -321,11 +323,26 @@ export default class FireFly {
   async getTokenBalances(
     filter?: Partial<FireFlyTokenBalance> & FireFlyFilter,
     options?: FireFlyGetOptions,
-  ) {
+  ): Promise<FireFlyTokenBalance[]> {
     const response = await this.http.get<FireFlyTokenBalance[]>(
       '/tokens/balances',
       mapConfig(options, filter),
     );
+    return response.data;
+  }
+
+  async generateContractInterface(
+    request: FireFlyContractGenerate,
+  ): Promise<FireFlyContractInterface> {
+    const response = await this.http.post<FireFlyContractInterface>(
+      '/contracts/interfaces/generate',
+      request,
+    );
+    return response.data;
+  }
+
+  async createContractInterface(ffi: FireFlyContractInterface): Promise<FireFlyContractInterface> {
+    const response = await this.http.post<FireFlyContractInterface>('/contracts/interfaces', ffi);
     return response.data;
   }
 
