@@ -1,7 +1,7 @@
 # FireFly SDK
 
-[![stability-alpha](https://img.shields.io/badge/stability-alpha-f4d03f.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#alpha)
-[![FireFy Documentation](https://img.shields.io/static/v1?label=FireFly&message=documentation&color=informational)](https://hyperledger.github.io/firefly//)
+![version](https://img.shields.io/github/package-json/v/hyperledger/firefly-sdk-nodejs?label=firefly-sdk-nodejs)
+[![FireFly Documentation](https://img.shields.io/static/v1?label=FireFly&message=documentation&color=informational)](https://hyperledger.github.io/firefly//)
 
 ![Hyperledger FireFly](./images/hyperledger_firefly_logo.png)
 
