@@ -1,5 +1,5 @@
 {
-  "name": "@photic/firefly-sdk-nodejs",
+  "name": "@hyperledger/firefly-sdk",
   "version": "0.0.18",
   "description": "Client SDK for Hyperledger FireFly",
   "main": "dist/index.js",
