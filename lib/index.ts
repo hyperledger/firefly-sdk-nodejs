@@ -33,6 +33,7 @@ import {
   FireFlyContractGenerate,
   FireFlyContractInterface,
   FireFlyContractAPI,
+  FireFlyContractListener,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -347,8 +348,25 @@ export default class FireFly {
     return response.data;
   }
 
+  async getContractInterface(
+    id: string,
+    fetchchildren?: boolean,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractInterface | undefined> {
+    const response = await this.http.get<FireFlyContractInterface>(`/contracts/interfaces/${id}`, {
+      ...mapConfig(options, { fetchchildren }),
+      validateStatus: (status) => status === 404 || isSuccess(status),
+    });
+    return response.status === 404 ? undefined : response.data;
+  }
+
   async createContractAPI(api: FireFlyContractAPI): Promise<FireFlyContractAPI> {
     const response = await this.http.post<FireFlyContractAPI>('/apis', api);
+    return response.data;
+  }
+
+  async getContractAPIs(options?: FireFlyGetOptions): Promise<FireFlyContractAPI[]> {
+    const response = await this.http.get<FireFlyContractAPI[]>('/apis', mapConfig(options));
     return response.data;
   }
 
@@ -361,6 +379,24 @@ export default class FireFly {
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
     return response.status === 404 ? undefined : response.data;
+  }
+
+  async createContractListener(
+    listener: Partial<FireFlyContractListener>,
+  ): Promise<FireFlyContractListener> {
+    const response = await this.http.post<FireFlyContractListener>(
+      '/contracts/listeners',
+      listener,
+    );
+    return response.data;
+  }
+
+  async getContractListeners(options?: FireFlyGetOptions): Promise<FireFlyContractListener[]> {
+    const response = await this.http.get<FireFlyContractListener[]>(
+      '/contracts/listeners',
+      mapConfig(options),
+    );
+    return response.data;
   }
 
   listen(

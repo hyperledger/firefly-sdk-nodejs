@@ -398,8 +398,9 @@ export interface FireFlyContractInterface {
 export interface FireFlyContractAPI {
   name: string;
   interface: {
-    name: string;
-    version: string;
+    id?: string;
+    name?: string;
+    version?: string;
   };
   location: any;
   message?: string;
@@ -407,4 +408,20 @@ export interface FireFlyContractAPI {
     openapi: string;
     ui: string;
   };
+}
+
+export interface FireFlyContractListener {
+  id: string;
+  interface: {
+    id?: string;
+    name?: string;
+    version?: string;
+  };
+  namespace: string;
+  name: string;
+  protocolId: string;
+  location: any;
+  event: any;
+  eventPath?: string;
+  topic: string;
 }
