@@ -425,3 +425,8 @@ export interface FireFlyContractListener {
   eventPath?: string;
   topic: string;
 }
+
+export interface FireFlyContractListenerFilter {
+  interface?: string;
+  location?: any;
+}
