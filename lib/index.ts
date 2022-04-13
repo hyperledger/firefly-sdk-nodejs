@@ -348,6 +348,14 @@ export default class FireFly {
     return response.data;
   }
 
+  async getContractInterfaces(options?: FireFlyGetOptions): Promise<FireFlyContractInterface[]> {
+    const response = await this.http.get<FireFlyContractInterface[]>(
+      '/contracts/interfaces',
+      mapConfig(options),
+    );
+    return response.data;
+  }
+
   async getContractInterface(
     id: string,
     fetchchildren?: boolean,
