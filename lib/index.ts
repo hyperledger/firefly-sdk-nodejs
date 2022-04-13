@@ -35,6 +35,7 @@ import {
   FireFlyContractAPI,
   FireFlyContractListener,
   FireFlyContractListenerFilter,
+  FireFlyTransaction,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -433,6 +434,17 @@ export default class FireFly {
       listener,
     );
     return response.data;
+  }
+
+  async getTransaction(
+    id: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTransaction | undefined> {
+    const response = await this.http.get<FireFlyTransaction>(`/transactions/${id}`, {
+      ...mapConfig(options),
+      validateStatus: (status) => status === 404 || isSuccess(status),
+    });
+    return response.status === 404 ? undefined : response.data;
   }
 
   listen(
