@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaleido-io/firefly-sdk-nodejs.git"
+    "url": "git+https://github.com/hyperledger/firefly-sdk-nodejs.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/kaleido-io/firefly-sdk-nodejs/issues"
+    "url": "https://github.com/hyperledger/firefly-sdk-nodejs/issues"
   },
-  "homepage": "https://github.com/kaleido-io/firefly-sdk-nodejs#readme",
+  "homepage": "https://github.com/hyperledger/firefly-sdk-nodejs#readme",
   "devDependencies": {
     "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
