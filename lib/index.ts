@@ -34,6 +34,7 @@ import {
   FireFlyContractInterface,
   FireFlyContractAPI,
   FireFlyContractListener,
+  FireFlyContractListenerFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -399,10 +400,37 @@ export default class FireFly {
     return response.data;
   }
 
-  async getContractListeners(options?: FireFlyGetOptions): Promise<FireFlyContractListener[]> {
+  async getContractListeners(
+    filter?: FireFlyContractListenerFilter & FireFlyFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractListener[]> {
     const response = await this.http.get<FireFlyContractListener[]>(
       '/contracts/listeners',
+      mapConfig(options, filter),
+    );
+    return response.data;
+  }
+
+  async getContractAPIListeners(
+    apiName: string,
+    eventPath: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractListener[]> {
+    const response = await this.http.get<FireFlyContractListener[]>(
+      `/apis/${apiName}/listeners/${eventPath}`,
       mapConfig(options),
+    );
+    return response.data;
+  }
+
+  async createContractAPIListener(
+    apiName: string,
+    eventPath: string,
+    listener: Partial<FireFlyContractListener>,
+  ) {
+    const response = await this.http.post<FireFlyContractListener>(
+      `/apis/${apiName}/listeners/${eventPath}`,
+      listener,
     );
     return response.data;
   }
