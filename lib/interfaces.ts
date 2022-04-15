@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import { operations } from './schema';
 
 // General
 
@@ -57,29 +58,22 @@ export interface FireFlyWebSocketOptions {
 
 // Network
 
-export interface FireFlyOrganization {
-  id: string;
-  name: string;
-  did: string;
-}
+export type FireFlyOrganizationFilter = operations['getNetworkOrgs']['parameters']['query'];
+export type FireFlyNodeFilter = operations['getNetworkNodes']['parameters']['query'];
+export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['query'];
 
-export interface FireFlyNode {
-  id: string;
-  name: string;
-}
-
-export interface FireFlyVerifier {
-  hash: string;
-  identity: string;
-  namespace: string;
-  type: string;
-  value: string;
-}
-
-export interface FireFlyStatus {
-  org: FireFlyOrganization;
-  node: FireFlyNode;
-}
+export type FireFlyOrganizationResponse = Required<
+  operations['getNetworkOrg']['responses']['200']['content']['application/json']
+>;
+export type FireFlyNodeResponse = Required<
+  operations['getNetworkNode']['responses']['200']['content']['application/json']
+>;
+export type FireFlyVerifierResponse = Required<
+  operations['getVerifierByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyStatusResponse = Required<
+  operations['getStatus']['responses']['200']['content']['application/json']
+>;
 
 // Subscriptions
 
@@ -122,135 +116,49 @@ export interface FireFlyEvent {
   reference: string;
   subscription: FireFlySubscriptionRef;
   tx?: string;
-  message?: FireFlyMessage;
+  message?: FireFlyMessageResponse;
   transaction?: FireFlyTransaction;
 }
 
 // Datatypes
 
-export interface FireFlyDatatypeRef {
-  name: string;
-  version: string;
-}
+export type FireFlyDatatypeFilter = operations['getDatatypes']['parameters']['query'];
 
-export interface FireFlyDatatypeOptions extends FireFlyCreateOptions {
-  validator?: string;
-}
+export type FireFlyDatatypeRequest =
+  operations['postNewDatatype']['requestBody']['content']['application/json'];
 
-export interface FireFlyDatatypeCreate extends FireFlyDatatypeRef {
-  validator: string;
-  value: any;
-}
-
-export interface FireFlyDatatype extends FireFlyDatatypeCreate {
-  created: string;
-  hash: string;
-  id: string;
-  message: string;
-  namespace: string;
-}
+export type FireFlyDatatypeResponse =
+  operations['getDatatypeByName']['responses']['200']['content']['application/json'];
 
 // Data
 
-export interface FireFlyDataInput {
-  datatype?: FireFlyDatatypeRef;
-  value: any;
-}
+export type FireFlyDataFilter = operations['getData']['parameters']['query'];
 
-export interface FireFlyData extends FireFlyDataInput {
-  id: string;
-  created: string;
-  blob?: FireFlyBlob;
-}
+export type FireFlyDataRequest =
+  operations['postData']['requestBody']['content']['application/json'];
 
-export interface FireFlyBlob {
-  hash: string;
-  size: number;
-  name: string;
-}
-
-export interface FireFlyDataRef {
-  id: string;
-  hash: string;
-}
+export type FireFlyDataResponse =
+  operations['getDataByID']['responses']['200']['content']['application/json'];
 
 // Messages
 
+export type FireFlyMessageFilter = operations['getMsgs']['parameters']['query'];
+export type FireFlyBatchFilter = operations['getBatches']['parameters']['query'];
+
+export type FireFlyBroadcastMessageRequest =
+  operations['postNewMessageBroadcast']['requestBody']['content']['application/json'];
+export type FireFlyPrivateMessageRequest =
+  operations['postNewMessagePrivate']['requestBody']['content']['application/json'];
+
+export type FireFlyMessageResponse = Required<
+  operations['getMsgByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyBatchResponse = Required<
+  operations['getBatchByID']['responses']['200']['content']['application/json']
+>;
+
 export interface FireFlySendOptions extends FireFlyCreateOptions {
   requestReply?: boolean;
-}
-
-export interface FireFlyMessageHeader {
-  id: string;
-  type: string;
-  txtype: string;
-  author: string;
-  key: string;
-  cid?: string;
-  topics: string[];
-  tag?: string;
-  namespace: string;
-  created: string;
-}
-
-export enum FireFlyMessageState {
-  STAGED = 'staged',
-  READY = 'ready',
-  PENDING = 'pending',
-  CONFIRMED = 'confirmed',
-  REJECTED = 'rejected',
-}
-
-export interface FireFlyMessage {
-  header: FireFlyMessageHeader;
-  group: string;
-  state: FireFlyMessageState;
-  confirmed: string;
-  data: FireFlyDataRef[];
-  batch: string;
-}
-
-export interface FireFlyMessageInput {
-  header?: Partial<FireFlyMessageHeader>;
-  group?: {
-    name?: string;
-    ledger?: string;
-    members?: FireFlyMember[];
-  };
-  data: Partial<FireFlyData>[];
-}
-
-export interface FireFlyMember {
-  identity: string;
-  node?: string;
-}
-
-export interface FireFlyMessageRef {
-  id: string;
-  hash: string;
-}
-
-export interface FireFlyBatch {
-  author: string;
-  confirmed: string;
-  created: string;
-  hash: string;
-  id: string;
-  key: string;
-  namespace: string;
-  tx: {
-    id: string;
-    type: string;
-  };
-  type: string;
-  manifest: {
-    messages: FireFlyMessageRef[];
-    data: FireFlyDataRef;
-  };
-}
-
-export interface FireFlyBatchFilter {
-  'tx.id': string;
 }
 
 // Token Pools
@@ -299,15 +207,12 @@ export interface FireFlyTokenTransfer {
   };
 }
 
-export interface FireFlyTokenTransferInput {
-  amount: number;
-  to?: string;
-  key?: string;
-  from?: string;
-  pool?: string;
-  tokenIndex?: string;
-  message?: FireFlyMessageInput;
-}
+export type FireFlyTokenMintRequest =
+  operations['postTokenMint']['requestBody']['content']['application/json'];
+export type FireFlyTokenBurnRequest =
+  operations['postTokenBurn']['requestBody']['content']['application/json'];
+export type FireFlyTokenTransferRequest =
+  operations['postTokenTransfer']['requestBody']['content']['application/json'];
 
 // Token Balances
 
