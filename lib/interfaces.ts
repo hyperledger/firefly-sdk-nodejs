@@ -77,11 +77,17 @@ export type FireFlyStatusResponse = Required<
 
 // Subscriptions
 
-export interface FireFlySubscriptionRef {
-  id: string;
-  name: string;
-  namespace: string;
-}
+export type FireFlySubscriptionFilter = operations['getSubscriptions']['parameters']['query'];
+
+export type FireFlySubscriptionRequest =
+  operations['postNewSubscription']['requestBody']['content']['application/json'];
+
+export type FireFlySubscriptionResponse = Required<
+  operations['getSubscriptionByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyEventResponse = Required<
+  operations['getEventByID']['responses']['200']['content']['application/json']
+>;
 
 export interface FireFlySubscriptionBase {
   filter?: {
@@ -98,26 +104,26 @@ export interface FireFlyEphemeralSubscription extends FireFlySubscriptionBase {
   namespace: string;
 }
 
-export interface FireFlySubscriptionInput {
-  name?: string;
-  transport?: string;
-}
-
-export interface FireFlySubscription extends FireFlySubscriptionInput {
-  id: string;
-  namespace: string;
-  updated: string;
-}
-
-export interface FireFlyEvent {
-  id: string;
-  type: string;
-  namespace: string;
-  reference: string;
-  subscription: FireFlySubscriptionRef;
-  tx?: string;
+export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
+  blockchainEvent?: unknown;
+  contractAPI?: unknown;
+  contractInterface?: unknown;
+  datatype?: FireFlyDatatypeResponse;
+  identity?: unknown;
   message?: FireFlyMessageResponse;
-  transaction?: FireFlyTransaction;
+  namespaceDetails?: unknown;
+  tokenApproval?: unknown;
+  tokenPool?: FireFlyTokenPoolResponse;
+  tokenTransfer?: FireFlyTokenTransferResponse;
+  transaction?: FireFlyTransactionResponse;
+}
+
+export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
+  subscription: {
+    id: string;
+    name: string;
+    namespace: string;
+  };
 }
 
 // Datatypes
@@ -157,33 +163,19 @@ export type FireFlyBatchResponse = Required<
   operations['getBatchByID']['responses']['200']['content']['application/json']
 >;
 
-export interface FireFlySendOptions extends FireFlyCreateOptions {
+export interface FireFlyPrivateSendOptions extends FireFlyCreateOptions {
   requestReply?: boolean;
 }
 
 // Token Pools
 
-export enum FireFlyTokenPoolType {
-  FUNGIBLE = 'fungible',
-  NONFUNGIBLE = 'nonfungible',
-}
+export type FireFlyTokenPoolFilter = operations['getTokenPools']['parameters']['query'];
 
-export interface FireFlyTokenPoolInput {
-  type: FireFlyTokenPoolType;
-  name: string;
-  symbol?: string;
-}
+export type FireFlyTokenPoolRequest =
+  operations['postTokenPool']['requestBody']['content']['application/json'];
 
-export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
-  id: string;
-  namespace: string;
-  protocolId: string;
-  message: string;
-  tx: {
-    id: string;
-    type: string;
-  };
-}
+export type FireFlyTokenPoolResponse =
+  operations['getTokenPoolByNameOrID']['responses']['200']['content']['application/json'];
 
 // Token Transfers
 
@@ -206,32 +198,13 @@ export type FireFlyTokenBalanceResponse =
 
 // Operations
 
-export enum FireFlyOperationStatus {
-  PENDING = 'Pending',
-  SUCCEEDED = 'Succeeded',
-  FAILED = 'Failed',
-}
-
-export interface FireFlyOperation {
-  id: string;
-  namespace: string;
-  type: string;
-  tx: string;
-  created: string;
-  updated: string;
-  status: FireFlyOperationStatus;
-  error?: string;
-}
+export type FireFlyOperationResponse =
+  operations['getOpByID']['responses']['200']['content']['application/json'];
 
 // Transactions
 
-export interface FireFlyTransaction {
-  id: string;
-  namespace: string;
-  type: string;
-  created: string;
-  blockchainIds: string[];
-}
+export type FireFlyTransactionResponse =
+  operations['getTxnByID']['responses']['200']['content']['application/json'];
 
 // Contracts
 

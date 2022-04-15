@@ -6,13 +6,9 @@ import {
   FireFlyOptions,
   FireFlyOptionsInput,
   FireFlyStatusResponse,
-  FireFlySubscription,
-  FireFlySubscriptionInput,
-  FireFlySendOptions,
-  FireFlyTokenPool,
+  FireFlyPrivateSendOptions,
   FireFlyCreateOptions,
   FireFlyGetOptions,
-  FireFlyTokenPoolInput,
   FireFlyWebSocketOptions,
   FireFlySubscriptionBase,
   FireFlyBatchFilter,
@@ -21,7 +17,6 @@ import {
   FireFlyContractAPI,
   FireFlyContractListener,
   FireFlyContractListenerFilter,
-  FireFlyTransaction,
   FireFlyOrganizationResponse,
   FireFlyVerifierResponse,
   FireFlyOrganizationFilter,
@@ -43,6 +38,13 @@ import {
   FireFlyTokenTransferResponse,
   FireFlyTokenBalanceResponse,
   FireFlyTokenBalanceFilter,
+  FireFlySubscriptionFilter,
+  FireFlySubscriptionResponse,
+  FireFlySubscriptionRequest,
+  FireFlyTokenPoolRequest,
+  FireFlyTokenPoolResponse,
+  FireFlyTokenPoolFilter,
+  FireFlyTransactionResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -198,18 +200,20 @@ export default class FireFly {
   }
 
   async getSubscriptions(
-    filter?: Partial<FireFlySubscription> & FireFlyFilter,
+    filter?: FireFlySubscriptionFilter,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlySubscription[]> {
-    const response = await this.http.get<FireFlySubscription[]>(
+  ): Promise<FireFlySubscriptionResponse[]> {
+    const response = await this.http.get<FireFlySubscriptionResponse[]>(
       '/subscriptions',
       mapConfig(options, filter),
     );
     return response.data;
   }
 
-  async createOrUpdateSubscription(sub: FireFlySubscriptionInput): Promise<FireFlySubscription> {
-    const response = await this.http.put<FireFlySubscription>('/subscriptions', sub);
+  async createOrUpdateSubscription(
+    sub: FireFlySubscriptionRequest,
+  ): Promise<FireFlySubscriptionResponse> {
+    const response = await this.http.put<FireFlySubscriptionResponse>('/subscriptions', sub);
     return response.data;
   }
 
@@ -287,7 +291,7 @@ export default class FireFly {
 
   async sendPrivateMessage(
     message: FireFlyPrivateMessageRequest,
-    options?: FireFlySendOptions,
+    options?: FireFlyPrivateSendOptions,
   ): Promise<FireFlyMessageResponse> {
     const url = options?.requestReply ? '/messages/requestreply' : '/messages/private';
     const response = await this.http.post<FireFlyMessageResponse>(url, message, mapConfig(options));
@@ -295,10 +299,10 @@ export default class FireFly {
   }
 
   async createTokenPool(
-    pool: FireFlyTokenPoolInput,
+    pool: FireFlyTokenPoolRequest,
     options?: FireFlyCreateOptions,
-  ): Promise<FireFlyTokenPool> {
-    const response = await this.http.post<FireFlyTokenPool>(
+  ): Promise<FireFlyTokenPoolResponse> {
+    const response = await this.http.post<FireFlyTokenPoolResponse>(
       '/tokens/pools',
       pool,
       mapConfig(options),
@@ -306,13 +310,19 @@ export default class FireFly {
     return response.data;
   }
 
-  async getTokenPools(options?: FireFlyGetOptions): Promise<FireFlyTokenPool[]> {
-    const response = await this.http.get<FireFlyTokenPool[]>(`/tokens/pools`, mapConfig(options));
+  async getTokenPools(
+    filter?: FireFlyTokenPoolFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTokenPoolResponse[]> {
+    const response = await this.http.get<FireFlyTokenPoolResponse[]>(
+      `/tokens/pools`,
+      mapConfig(options, filter),
+    );
     return response.data;
   }
 
-  async getTokenPool(nameOrId: string): Promise<FireFlyTokenPool | undefined> {
-    const response = await this.http.get<FireFlyTokenPool>(`/tokens/pools/${nameOrId}`, {
+  async getTokenPool(nameOrId: string): Promise<FireFlyTokenPoolResponse | undefined> {
+    const response = await this.http.get<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, {
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
     return response.status === 404 ? undefined : response.data;
@@ -477,8 +487,8 @@ export default class FireFly {
   async getTransaction(
     id: string,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyTransaction | undefined> {
-    const response = await this.http.get<FireFlyTransaction>(`/transactions/${id}`, {
+  ): Promise<FireFlyTransactionResponse | undefined> {
+    const response = await this.http.get<FireFlyTransactionResponse>(`/transactions/${id}`, {
       ...mapConfig(options),
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
