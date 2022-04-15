@@ -13,15 +13,6 @@ export interface FireFlyCreateOptions {
   requestConfig?: AxiosRequestConfig;
 }
 
-export interface FireFlyFilter {
-  sort?: string;
-  ascending?: boolean;
-  descending?: boolean;
-  skip?: number;
-  limit?: number;
-  count?: number;
-}
-
 export interface FireFlyOptionsInput {
   host: string;
   namespace?: string;
@@ -143,8 +134,9 @@ export type FireFlyDataFilter = operations['getData']['parameters']['query'];
 export type FireFlyDataRequest =
   operations['postData']['requestBody']['content']['application/json'];
 
-export type FireFlyDataResponse =
-  operations['getDataByID']['responses']['200']['content']['application/json'];
+export type FireFlyDataResponse = Required<
+  operations['getDataByID']['responses']['200']['content']['application/json']
+>;
 
 // Messages
 
@@ -174,8 +166,9 @@ export type FireFlyTokenPoolFilter = operations['getTokenPools']['parameters']['
 export type FireFlyTokenPoolRequest =
   operations['postTokenPool']['requestBody']['content']['application/json'];
 
-export type FireFlyTokenPoolResponse =
-  operations['getTokenPoolByNameOrID']['responses']['200']['content']['application/json'];
+export type FireFlyTokenPoolResponse = Required<
+  operations['getTokenPoolByNameOrID']['responses']['200']['content']['application/json']
+>;
 
 // Token Transfers
 
@@ -186,25 +179,29 @@ export type FireFlyTokenBurnRequest =
 export type FireFlyTokenTransferRequest =
   operations['postTokenTransfer']['requestBody']['content']['application/json'];
 
-export type FireFlyTokenTransferResponse =
-  operations['getTokenTransferByID']['responses']['200']['content']['application/json'];
+export type FireFlyTokenTransferResponse = Required<
+  operations['getTokenTransferByID']['responses']['200']['content']['application/json']
+>;
 
 // Token Balances
 
 export type FireFlyTokenBalanceFilter = operations['getTokenBalances']['parameters']['query'];
 
-export type FireFlyTokenBalanceResponse =
-  operations['getTokenBalances']['responses']['200']['content']['application/json'];
+export type FireFlyTokenBalanceResponse = Required<
+  operations['getTokenBalances']['responses']['200']['content']['application/json']
+>;
 
 // Operations
 
-export type FireFlyOperationResponse =
-  operations['getOpByID']['responses']['200']['content']['application/json'];
+export type FireFlyOperationResponse = Required<
+  operations['getOpByID']['responses']['200']['content']['application/json']
+>;
 
 // Transactions
 
-export type FireFlyTransactionResponse =
-  operations['getTxnByID']['responses']['200']['content']['application/json'];
+export type FireFlyTransactionResponse = Required<
+  operations['getTxnByID']['responses']['200']['content']['application/json']
+>;
 
 // Contracts
 
@@ -265,23 +262,12 @@ export interface FireFlyContractAPI {
   };
 }
 
-export interface FireFlyContractListener {
-  id: string;
-  interface: {
-    id?: string;
-    name?: string;
-    version?: string;
-  };
-  namespace: string;
-  name: string;
-  protocolId: string;
-  location: any;
-  event: any;
-  eventPath?: string;
-  topic: string;
-}
+export type FireFlyContractListenerFilter =
+  operations['getContractListeners']['parameters']['query'];
 
-export interface FireFlyContractListenerFilter {
-  interface?: string;
-  location?: any;
-}
+export type FireFlyContractListenerRequest =
+  operations['postNewContractListener']['requestBody']['content']['application/json'];
+
+export type FireFlyContractListenerResponse = Required<
+  operations['getContractListenerByNameOrID']['responses']['200']['content']['application/json']
+>;

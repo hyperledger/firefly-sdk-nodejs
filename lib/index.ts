@@ -2,7 +2,6 @@ import { Stream, Readable } from 'stream';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import * as FormData from 'form-data';
 import {
-  FireFlyFilter,
   FireFlyOptions,
   FireFlyOptionsInput,
   FireFlyStatusResponse,
@@ -15,7 +14,6 @@ import {
   FireFlyContractGenerate,
   FireFlyContractInterface,
   FireFlyContractAPI,
-  FireFlyContractListener,
   FireFlyContractListenerFilter,
   FireFlyOrganizationResponse,
   FireFlyVerifierResponse,
@@ -45,6 +43,8 @@ import {
   FireFlyTokenPoolResponse,
   FireFlyTokenPoolFilter,
   FireFlyTransactionResponse,
+  FireFlyContractListenerRequest,
+  FireFlyContractListenerResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -440,9 +440,9 @@ export default class FireFly {
   }
 
   async createContractListener(
-    listener: Partial<FireFlyContractListener>,
-  ): Promise<FireFlyContractListener> {
-    const response = await this.http.post<FireFlyContractListener>(
+    listener: FireFlyContractListenerRequest,
+  ): Promise<FireFlyContractListenerResponse> {
+    const response = await this.http.post<FireFlyContractListenerResponse>(
       '/contracts/listeners',
       listener,
     );
@@ -450,10 +450,10 @@ export default class FireFly {
   }
 
   async getContractListeners(
-    filter?: FireFlyContractListenerFilter & FireFlyFilter,
+    filter?: FireFlyContractListenerFilter,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyContractListener[]> {
-    const response = await this.http.get<FireFlyContractListener[]>(
+  ): Promise<FireFlyContractListenerResponse[]> {
+    const response = await this.http.get<FireFlyContractListenerResponse[]>(
       '/contracts/listeners',
       mapConfig(options, filter),
     );
@@ -464,8 +464,8 @@ export default class FireFly {
     apiName: string,
     eventPath: string,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyContractListener[]> {
-    const response = await this.http.get<FireFlyContractListener[]>(
+  ): Promise<FireFlyContractListenerResponse[]> {
+    const response = await this.http.get<FireFlyContractListenerResponse[]>(
       `/apis/${apiName}/listeners/${eventPath}`,
       mapConfig(options),
     );
@@ -475,9 +475,9 @@ export default class FireFly {
   async createContractAPIListener(
     apiName: string,
     eventPath: string,
-    listener: Partial<FireFlyContractListener>,
+    listener: FireFlyContractListenerRequest,
   ) {
-    const response = await this.http.post<FireFlyContractListener>(
+    const response = await this.http.post<FireFlyContractListenerResponse>(
       `/apis/${apiName}/listeners/${eventPath}`,
       listener,
     );
