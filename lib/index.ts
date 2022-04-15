@@ -10,13 +10,11 @@ import {
   FireFlySubscriptionInput,
   FireFlySendOptions,
   FireFlyTokenPool,
-  FireFlyTokenTransfer,
   FireFlyCreateOptions,
   FireFlyGetOptions,
   FireFlyTokenPoolInput,
   FireFlyWebSocketOptions,
   FireFlySubscriptionBase,
-  FireFlyTokenBalance,
   FireFlyBatchFilter,
   FireFlyContractGenerate,
   FireFlyContractInterface,
@@ -42,6 +40,9 @@ import {
   FireFlyDatatypeRequest,
   FireFlyBatchResponse,
   FireFlyDataResponse,
+  FireFlyTokenTransferResponse,
+  FireFlyTokenBalanceResponse,
+  FireFlyTokenBalanceFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -318,7 +319,7 @@ export default class FireFly {
   }
 
   async mintTokens(transfer: FireFlyTokenMintRequest, options?: FireFlyCreateOptions) {
-    const response = await this.http.post<FireFlyTokenTransfer>(
+    const response = await this.http.post<FireFlyTokenTransferResponse>(
       '/tokens/mint',
       transfer,
       mapConfig(options),
@@ -329,8 +330,8 @@ export default class FireFly {
   async transferTokens(
     transfer: FireFlyTokenTransferRequest,
     options?: FireFlyCreateOptions,
-  ): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>(
+  ): Promise<FireFlyTokenTransferResponse> {
+    const response = await this.http.post<FireFlyTokenTransferResponse>(
       '/tokens/transfers',
       transfer,
       mapConfig(options),
@@ -341,8 +342,8 @@ export default class FireFly {
   async burnTokens(
     transfer: FireFlyTokenBurnRequest,
     options?: FireFlyCreateOptions,
-  ): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.post<FireFlyTokenTransfer>(
+  ): Promise<FireFlyTokenTransferResponse> {
+    const response = await this.http.post<FireFlyTokenTransferResponse>(
       '/tokens/burn',
       transfer,
       mapConfig(options),
@@ -350,8 +351,11 @@ export default class FireFly {
     return response.data;
   }
 
-  async getTokenTransfer(id: string, options?: FireFlyGetOptions): Promise<FireFlyTokenTransfer> {
-    const response = await this.http.get<FireFlyTokenTransfer>(
+  async getTokenTransfer(
+    id: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTokenTransferResponse> {
+    const response = await this.http.get<FireFlyTokenTransferResponse>(
       `/tokens/transfers/${id}`,
       mapConfig(options),
     );
@@ -359,10 +363,10 @@ export default class FireFly {
   }
 
   async getTokenBalances(
-    filter?: Partial<FireFlyTokenBalance> & FireFlyFilter,
+    filter?: FireFlyTokenBalanceFilter,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyTokenBalance[]> {
-    const response = await this.http.get<FireFlyTokenBalance[]>(
+  ): Promise<FireFlyTokenBalanceResponse> {
+    const response = await this.http.get<FireFlyTokenBalanceResponse>(
       '/tokens/balances',
       mapConfig(options, filter),
     );

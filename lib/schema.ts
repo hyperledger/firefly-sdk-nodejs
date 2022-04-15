@@ -154,7 +154,6 @@ export interface paths {
     /** Registers a new identity in the network */
     post: operations["postNewIdentity"];
   };
-  "/namespaces/{ns}/identities/{id}": {};
   "/namespaces/{ns}/identities/{iid}": {
     /** Gets an identity by its ID */
     get: operations["getIdentityByID"];

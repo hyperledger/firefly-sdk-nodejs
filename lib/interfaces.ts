@@ -187,26 +187,6 @@ export interface FireFlyTokenPool extends FireFlyTokenPoolInput {
 
 // Token Transfers
 
-export interface FireFlyTokenTransfer {
-  type: string;
-  namespace: string;
-  pool: string;
-  key: string;
-  from: string;
-  to: string;
-  tokenIndex: string;
-  uri: string;
-  amount: string;
-  localId: string;
-  protocolId: string;
-  message: string;
-  messageHash: string;
-  tx: {
-    id: string;
-    type: string;
-  };
-}
-
 export type FireFlyTokenMintRequest =
   operations['postTokenMint']['requestBody']['content']['application/json'];
 export type FireFlyTokenBurnRequest =
@@ -214,18 +194,15 @@ export type FireFlyTokenBurnRequest =
 export type FireFlyTokenTransferRequest =
   operations['postTokenTransfer']['requestBody']['content']['application/json'];
 
+export type FireFlyTokenTransferResponse =
+  operations['getTokenTransferByID']['responses']['200']['content']['application/json'];
+
 // Token Balances
 
-export interface FireFlyTokenBalance {
-  pool: string;
-  uri: string;
-  connector: string;
-  namespace: string;
-  key: string;
-  balance: string;
-  updated: string;
-  tokenIndex?: string;
-}
+export type FireFlyTokenBalanceFilter = operations['getTokenBalances']['parameters']['query'];
+
+export type FireFlyTokenBalanceResponse =
+  operations['getTokenBalances']['responses']['200']['content']['application/json'];
 
 // Operations
 
