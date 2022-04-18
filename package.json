@@ -1,6 +1,6 @@
 {
   "name": "@hyperledger/firefly-sdk",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "Client SDK for Hyperledger FireFly",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"lib/*.ts\"",
     "lint:fix": "eslint \"lib/*.ts\" --fix",
-    "format": "prettier --write \"lib/*.ts\" \"examples/**/*.ts\""
+    "format": "prettier --write \"lib/*.ts\" \"examples/**/*.ts\"",
+    "schema": "openapi-typescript ../firefly/docs/swagger/swagger.yaml --output lib/schema.ts"
   },
   "repository": {
     "type": "git",
@@ -26,8 +27,10 @@
   "devDependencies": {
     "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.19.0",
     "eslint": "^8.12.0",
     "eslint-plugin-import": "^2.25.4",
+    "openapi-typescript": "^5.2.0",
     "prettier": "^2.6.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.7.0",

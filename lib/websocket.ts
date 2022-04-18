@@ -1,7 +1,11 @@
 import { IncomingMessage } from 'http';
 import { Transform } from 'stream';
 import * as WebSocket from 'ws';
-import { FireFlyEvent, FireFlyEphemeralSubscription, FireFlyWebSocketOptions } from './interfaces';
+import {
+  FireFlyEphemeralSubscription,
+  FireFlyWebSocketOptions,
+  FireFlyEventDelivery,
+} from './interfaces';
 import Logger from './logger';
 
 function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
@@ -15,7 +19,7 @@ function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
 }
 
 export interface FireFlyWebSocketCallback {
-  (socket: FireFlyWebSocket, data: FireFlyEvent): void;
+  (socket: FireFlyWebSocket, data: FireFlyEventDelivery): void;
 }
 
 export class FireFlyWebSocket {
@@ -109,7 +113,7 @@ export class FireFlyWebSocket {
         );
       })
       .on('message', (data: string) => {
-        const event: FireFlyEvent = JSON.parse(data);
+        const event: FireFlyEventDelivery = JSON.parse(data);
         this.callback(this, event);
       });
   }
@@ -147,7 +151,7 @@ export class FireFlyWebSocket {
     }
   }
 
-  ack(event: FireFlyEvent) {
+  ack(event: FireFlyEventDelivery) {
     if (this.socket !== undefined && event.id !== undefined) {
       this.socket.send(
         JSON.stringify({

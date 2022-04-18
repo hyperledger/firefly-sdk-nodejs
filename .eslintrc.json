@@ -20,7 +20,8 @@
     "node": true
   },
   "ignorePatterns": [
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "lib/schema.ts"
   ],
   "rules": {
     "@typescript-eslint/interface-name-prefix": "off",
