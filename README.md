@@ -24,6 +24,16 @@ await firefly.sendBroadcast({
 });
 ```
 
+## Generated schemas
+
+The types for FireFly requests and responses are generated from the OpenAPI schema for FireFly. If you have
+the `firefly` repository cloned in a folder parallel to this one, you can run the following to re-generate
+the TypeScript interfaces from the latest FireFly definitions:
+
+```bash
+npm run schema
+```
+
 ## Git repositories
 
 There are multiple Git repos making up the Hyperledger FireFly project. Some others

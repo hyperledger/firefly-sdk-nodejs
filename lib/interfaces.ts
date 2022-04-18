@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { operations } from './schema';
 
 /**
- * The types in this file are aliased from request/response body types that
+ * Most types in this file are aliased from request/response body types that
  * are generated from the OpenAPI specification for FireFly.
  *
  * Because the spec doesn't accurately reflect "required" fields, currently

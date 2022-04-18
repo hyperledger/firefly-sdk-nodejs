@@ -5266,6 +5266,8 @@ export interface operations {
             tag?: string;
             /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
             topics?: string[];
+            /** @description The type of transaction used to order/deliver this message */
+            txtype?: string;
             /**
              * @description The type of the message
              * @enum {string}
@@ -5564,6 +5566,8 @@ export interface operations {
             tag?: string;
             /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
             topics?: string[];
+            /** @description The type of transaction used to order/deliver this message */
+            txtype?: string;
             /**
              * @description The type of the message
              * @enum {string}
@@ -5771,6 +5775,8 @@ export interface operations {
             tag?: string;
             /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
             topics?: string[];
+            /** @description The type of transaction used to order/deliver this message */
+            txtype?: string;
             /**
              * @description The type of the message
              * @enum {string}
@@ -7279,6 +7285,8 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The type of transaction used to order/deliver this message */
+              txtype?: string;
               /**
                * @description The type of the message
                * @enum {string}
@@ -7557,6 +7565,8 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The type of transaction used to order/deliver this message */
+              txtype?: string;
               /**
                * @description The type of the message
                * @enum {string}
@@ -8299,6 +8309,8 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The type of transaction used to order/deliver this message */
+              txtype?: string;
               /**
                * @description The type of the message
                * @enum {string}
