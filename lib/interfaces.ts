@@ -1,6 +1,16 @@
 import { AxiosRequestConfig } from 'axios';
 import { operations } from './schema';
 
+/**
+ * The types in this file are aliased from request/response body types that
+ * are generated from the OpenAPI specification for FireFly.
+ *
+ * Because the spec doesn't accurately reflect "required" fields, currently
+ * all request types below mark every field as optional, and response types
+ * mark every field as being set. This is not completely accurate, but should
+ * be close enough for most use cases.
+ */
+
 // General
 
 export interface FireFlyGetOptions {
@@ -191,13 +201,11 @@ export type FireFlyTokenBalanceResponse = Required<
   operations['getTokenBalances']['responses']['200']['content']['application/json']
 >;
 
-// Operations
+// Operations + Transactions
 
 export type FireFlyOperationResponse = Required<
   operations['getOpByID']['responses']['200']['content']['application/json']
 >;
-
-// Transactions
 
 export type FireFlyTransactionResponse = Required<
   operations['getTxnByID']['responses']['200']['content']['application/json']
@@ -205,69 +213,24 @@ export type FireFlyTransactionResponse = Required<
 
 // Contracts
 
-export interface FireFlyContractParam {
-  name: string;
-  schema: string;
-}
-
-export interface FireFlyContractMethod {
-  id: string;
-  contract: string;
-  name: string;
-  namespace: string;
-  pathname: string;
-  description?: string;
-  params: FireFlyContractParam[];
-  returns: FireFlyContractParam[];
-}
-
-export interface FireFlyContractEvent {
-  id: string;
-  contract: string;
-  name: string;
-  namespace: string;
-  pathname: string;
-  description?: string;
-  params: FireFlyContractParam[];
-}
-
-export interface FireFlyContractGenerate {
-  name: string;
-  version: string;
-  description?: string;
-  input: any;
-}
-
-export interface FireFlyContractInterface {
-  name: string;
-  version: string;
-  description?: string;
-  methods: FireFlyContractMethod[];
-  events: FireFlyContractEvent[];
-  message?: string;
-}
-
-export interface FireFlyContractAPI {
-  name: string;
-  interface: {
-    id?: string;
-    name?: string;
-    version?: string;
-  };
-  location: any;
-  message?: string;
-  urls?: {
-    openapi: string;
-    ui: string;
-  };
-}
-
 export type FireFlyContractListenerFilter =
   operations['getContractListeners']['parameters']['query'];
 
+export type FireFlyContractGenerateRequest =
+  operations['postGenerateContractInterface']['requestBody']['content']['application/json'];
+export type FireFlyContractInterfaceRequest =
+  operations['postNewContractInterface']['requestBody']['content']['application/json'];
+export type FireFlyContractAPIRequest =
+  operations['postNewContractAPI']['requestBody']['content']['application/json'];
 export type FireFlyContractListenerRequest =
   operations['postNewContractListener']['requestBody']['content']['application/json'];
 
+export type FireFlyContractInterfaceResponse = Required<
+  operations['getContractInterface']['responses']['200']['content']['application/json']
+>;
+export type FireFlyContractAPIResponse = Required<
+  operations['getContractAPIByName']['responses']['200']['content']['application/json']
+>;
 export type FireFlyContractListenerResponse = Required<
   operations['getContractListenerByNameOrID']['responses']['200']['content']['application/json']
 >;

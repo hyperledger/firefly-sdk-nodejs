@@ -11,9 +11,6 @@ import {
   FireFlyWebSocketOptions,
   FireFlySubscriptionBase,
   FireFlyBatchFilter,
-  FireFlyContractGenerate,
-  FireFlyContractInterface,
-  FireFlyContractAPI,
   FireFlyContractListenerFilter,
   FireFlyOrganizationResponse,
   FireFlyVerifierResponse,
@@ -45,6 +42,11 @@ import {
   FireFlyTransactionResponse,
   FireFlyContractListenerRequest,
   FireFlyContractListenerResponse,
+  FireFlyContractInterfaceRequest,
+  FireFlyContractInterfaceResponse,
+  FireFlyContractGenerateRequest,
+  FireFlyContractAPIRequest,
+  FireFlyContractAPIResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
@@ -384,22 +386,29 @@ export default class FireFly {
   }
 
   async generateContractInterface(
-    request: FireFlyContractGenerate,
-  ): Promise<FireFlyContractInterface> {
-    const response = await this.http.post<FireFlyContractInterface>(
+    request: FireFlyContractGenerateRequest,
+  ): Promise<FireFlyContractInterfaceRequest> {
+    const response = await this.http.post<FireFlyContractInterfaceRequest>(
       '/contracts/interfaces/generate',
       request,
     );
     return response.data;
   }
 
-  async createContractInterface(ffi: FireFlyContractInterface): Promise<FireFlyContractInterface> {
-    const response = await this.http.post<FireFlyContractInterface>('/contracts/interfaces', ffi);
+  async createContractInterface(
+    ffi: FireFlyContractInterfaceRequest,
+  ): Promise<FireFlyContractInterfaceResponse> {
+    const response = await this.http.post<FireFlyContractInterfaceResponse>(
+      '/contracts/interfaces',
+      ffi,
+    );
     return response.data;
   }
 
-  async getContractInterfaces(options?: FireFlyGetOptions): Promise<FireFlyContractInterface[]> {
-    const response = await this.http.get<FireFlyContractInterface[]>(
+  async getContractInterfaces(
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractInterfaceResponse[]> {
+    const response = await this.http.get<FireFlyContractInterfaceResponse[]>(
       '/contracts/interfaces',
       mapConfig(options),
     );
@@ -410,29 +419,32 @@ export default class FireFly {
     id: string,
     fetchchildren?: boolean,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyContractInterface | undefined> {
-    const response = await this.http.get<FireFlyContractInterface>(`/contracts/interfaces/${id}`, {
-      ...mapConfig(options, { fetchchildren }),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
+  ): Promise<FireFlyContractInterfaceResponse | undefined> {
+    const response = await this.http.get<FireFlyContractInterfaceResponse>(
+      `/contracts/interfaces/${id}`,
+      {
+        ...mapConfig(options, { fetchchildren }),
+        validateStatus: (status) => status === 404 || isSuccess(status),
+      },
+    );
     return response.status === 404 ? undefined : response.data;
   }
 
-  async createContractAPI(api: FireFlyContractAPI): Promise<FireFlyContractAPI> {
-    const response = await this.http.post<FireFlyContractAPI>('/apis', api);
+  async createContractAPI(api: FireFlyContractAPIRequest): Promise<FireFlyContractAPIResponse> {
+    const response = await this.http.post<FireFlyContractAPIResponse>('/apis', api);
     return response.data;
   }
 
-  async getContractAPIs(options?: FireFlyGetOptions): Promise<FireFlyContractAPI[]> {
-    const response = await this.http.get<FireFlyContractAPI[]>('/apis', mapConfig(options));
+  async getContractAPIs(options?: FireFlyGetOptions): Promise<FireFlyContractAPIResponse[]> {
+    const response = await this.http.get<FireFlyContractAPIResponse[]>('/apis', mapConfig(options));
     return response.data;
   }
 
   async getContractAPI(
     name: string,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyContractAPI | undefined> {
-    const response = await this.http.get<FireFlyContractAPI>(`/apis/${name}`, {
+  ): Promise<FireFlyContractAPIResponse | undefined> {
+    const response = await this.http.get<FireFlyContractAPIResponse>(`/apis/${name}`, {
       ...mapConfig(options),
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
