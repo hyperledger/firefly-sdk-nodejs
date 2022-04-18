@@ -181,15 +181,15 @@ export default class FireFly {
 
   async getOrCreateDatatype(
     req: FireFlyDatatypeRequest,
-    schema?: any,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyDatatypeResponse> {
     if (req.name === undefined || req.version === undefined) {
       throw new InvalidDatatypeError('Datatype name and version are required');
     }
     const existing = await this.getDatatype(req.name, req.version);
     if (existing !== undefined) {
-      if (isDefined(schema) || isDefined(existing.value)) {
-        if (JSON.stringify(schema) !== JSON.stringify(existing.value)) {
+      if (isDefined(req.value) || isDefined(existing.value)) {
+        if (JSON.stringify(req.value) !== JSON.stringify(existing.value)) {
           throw new InvalidDatatypeError(
             `Datatype for ${req.name}:${req.version} already exists, but schema does not match!`,
           );
@@ -197,7 +197,7 @@ export default class FireFly {
       }
       return existing;
     }
-    const created = await this.createDatatype(req, { confirm: true });
+    const created = await this.createDatatype(req, { ...mapConfig(options), confirm: true });
     return created;
   }
 
@@ -274,8 +274,11 @@ export default class FireFly {
     return response.data;
   }
 
-  async getMessage(id: string): Promise<FireFlyMessageResponse> {
-    const response = await this.http.get<FireFlyMessageResponse>(`/messages/${id}`);
+  async getMessage(id: string, options?: FireFlyGetOptions): Promise<FireFlyMessageResponse> {
+    const response = await this.http.get<FireFlyMessageResponse>(
+      `/messages/${id}`,
+      mapConfig(options),
+    );
     return response.data;
   }
 
@@ -323,8 +326,12 @@ export default class FireFly {
     return response.data;
   }
 
-  async getTokenPool(nameOrId: string): Promise<FireFlyTokenPoolResponse | undefined> {
+  async getTokenPool(
+    nameOrId: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTokenPoolResponse | undefined> {
     const response = await this.http.get<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, {
+      ...mapConfig(options),
       validateStatus: (status) => status === 404 || isSuccess(status),
     });
     return response.status === 404 ? undefined : response.data;
@@ -397,10 +404,12 @@ export default class FireFly {
 
   async createContractInterface(
     ffi: FireFlyContractInterfaceRequest,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractInterfaceResponse> {
     const response = await this.http.post<FireFlyContractInterfaceResponse>(
       '/contracts/interfaces',
       ffi,
+      mapConfig(options),
     );
     return response.data;
   }
@@ -430,8 +439,15 @@ export default class FireFly {
     return response.status === 404 ? undefined : response.data;
   }
 
-  async createContractAPI(api: FireFlyContractAPIRequest): Promise<FireFlyContractAPIResponse> {
-    const response = await this.http.post<FireFlyContractAPIResponse>('/apis', api);
+  async createContractAPI(
+    api: FireFlyContractAPIRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyContractAPIResponse> {
+    const response = await this.http.post<FireFlyContractAPIResponse>(
+      '/apis',
+      api,
+      mapConfig(options),
+    );
     return response.data;
   }
 
@@ -453,10 +469,12 @@ export default class FireFly {
 
   async createContractListener(
     listener: FireFlyContractListenerRequest,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractListenerResponse> {
     const response = await this.http.post<FireFlyContractListenerResponse>(
       '/contracts/listeners',
       listener,
+      mapConfig(options),
     );
     return response.data;
   }
@@ -488,10 +506,12 @@ export default class FireFly {
     apiName: string,
     eventPath: string,
     listener: FireFlyContractListenerRequest,
+    options?: FireFlyCreateOptions,
   ) {
     const response = await this.http.post<FireFlyContractListenerResponse>(
       `/apis/${apiName}/listeners/${eventPath}`,
       listener,
+      mapConfig(options),
     );
     return response.data;
   }
