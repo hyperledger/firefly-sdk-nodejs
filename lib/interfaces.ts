@@ -216,10 +216,93 @@ export type FireFlyTransactionResponse = Required<
 export type FireFlyContractListenerFilter =
   operations['getContractListeners']['parameters']['query'];
 
-export type FireFlyContractGenerateRequest =
-  operations['postGenerateContractInterface']['requestBody']['content']['application/json'];
-export type FireFlyContractInterfaceRequest =
-  operations['postNewContractInterface']['requestBody']['content']['application/json'];
+// Temporarily inlined to fix JSON types
+export type FireFlyContractGenerateRequest = {
+  /** @description The description of the FFI to be generated. Defaults to the description extracted by the blockchain specific converter utility */
+  description?: string;
+  /** @description A blockchain connector specific payload. For example in Ethereum this is a JSON structure containing an 'abi' array, and optionally a 'devdocs' array. */
+  input?: any;
+  /** @description The name of the FFI to generate */
+  name?: string;
+  /** @description The namespace into which the FFI will be generated */
+  namespace?: string;
+  /** @description The version of the FFI to generate */
+  version?: string;
+};
+
+// Temporarily inlined to fix JSON types
+export type FireFlyContractInterfaceRequest = {
+  /** @description A description of the smart contract this FFI represents */
+  description?: string;
+  /** @description An array of smart contract event definitions */
+  events?: {
+    /** @description A description of the smart contract event */
+    description?: string;
+    /**
+     * Format: uuid
+     * @description The UUID of the FFI event definition
+     */
+    id?: string;
+    /**
+     * Format: uuid
+     * @description The UUID of the FFI smart contract definition that this event is part of
+     */
+    interface?: string;
+    /** @description The name of the event */
+    name?: string;
+    /** @description The namespace of the FFI */
+    namespace?: string;
+    /** @description An array of event parameter/argument definitions */
+    params?: {
+      /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+      name?: string;
+      /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+      schema?: any;
+    }[];
+    /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+    pathname?: string;
+  }[];
+  /** @description An array of smart contract method definitions */
+  methods?: {
+    /** @description A description of the smart contract method */
+    description?: string;
+    /**
+     * Format: uuid
+     * @description The UUID of the FFI method definition
+     */
+    id?: string;
+    /**
+     * Format: uuid
+     * @description The UUID of the FFI smart contract definition that this method is part of
+     */
+    interface?: string;
+    /** @description The name of the method */
+    name?: string;
+    /** @description The namespace of the FFI */
+    namespace?: string;
+    /** @description An array of method parameter/argument definitions */
+    params?: {
+      /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+      name?: string;
+      /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+      schema?: any;
+    }[];
+    /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+    pathname?: string;
+    /** @description An array of method return definitions */
+    returns?: {
+      /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+      name?: string;
+      /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+      schema?: any;
+    }[];
+  }[];
+  /** @description The name of the FFI - usually matching the smart contract name */
+  name?: string;
+  /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+  version?: string;
+};
+
 export type FireFlyContractAPIRequest =
   operations['postNewContractAPI']['requestBody']['content']['application/json'];
 export type FireFlyContractListenerRequest =
