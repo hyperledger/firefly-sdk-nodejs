@@ -624,7 +624,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -686,7 +686,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -728,7 +728,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -766,7 +766,7 @@ export interface operations {
             version?: string;
           };
           /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
         };
@@ -810,7 +810,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -877,7 +877,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -915,7 +915,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -924,7 +924,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -978,11 +978,11 @@ export interface operations {
       content: {
         "application/json": {
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
-          input?: { [key: string]: unknown };
+          input?: { [key: string]: any };
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
         };
       };
     };
@@ -1056,7 +1056,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             };
             /**
@@ -1077,7 +1077,7 @@ export interface operations {
               version?: string;
             };
             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /** @description A descriptive name for the listener */
             name?: string;
             /** @description The namespace of the listener, which defines the namespace of all blockchain events detected by this listener */
@@ -1136,7 +1136,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             };
             /**
@@ -1157,7 +1157,7 @@ export interface operations {
               version?: string;
             };
             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /** @description A descriptive name for the listener */
             name?: string;
             /** @description The namespace of the listener, which defines the namespace of all blockchain events detected by this listener */
@@ -1180,7 +1180,7 @@ export interface operations {
       content: {
         "application/json": {
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description A descriptive name for the listener */
           name?: string;
           /** @description Options that control how the listener subscribes to events from the underlying blockchain */
@@ -1223,11 +1223,11 @@ export interface operations {
       content: {
         "application/json": {
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
-          input?: { [key: string]: unknown };
+          input?: { [key: string]: any };
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
         };
       };
     };
@@ -1273,7 +1273,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -1315,7 +1315,7 @@ export interface operations {
               version?: string;
             };
             /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /**
              * Format: uuid
              * @description The UUID of the broadcast message that was used to publish this API to the network
@@ -1353,7 +1353,7 @@ export interface operations {
             version?: string;
           };
           /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
         };
@@ -1447,7 +1447,7 @@ export interface operations {
             /** @description The on-chain signing key used to sign the transaction */
             key?: string;
             /** @description The manifest of the batch */
-            manifest?: string;
+            manifest?: any;
             /** @description The namespace of the batch */
             namespace?: string;
             /**
@@ -1527,7 +1527,7 @@ export interface operations {
             /** @description The on-chain signing key used to sign the transaction */
             key?: string;
             /** @description The manifest of the batch */
-            manifest?: string;
+            manifest?: any;
             /** @description The namespace of the batch */
             namespace?: string;
             /**
@@ -1585,6 +1585,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         timestamp?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "tx.blockchainid"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         "tx.type"?: string;
@@ -1613,7 +1615,7 @@ export interface operations {
              */
             id?: string;
             /** @description Detailed blockchain specific information about the event, as generated by the blockchain connector */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /**
              * Format: uuid
              * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
@@ -1624,7 +1626,7 @@ export interface operations {
             /** @description The namespace of the listener that detected this blockchain event */
             namespace?: string;
             /** @description The data output by the event, parsed to JSON according to the interface of the smart contract */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description An alphanumerically sortable string that represents this event uniquely on the blockchain (convention for plugins is zero-padded values BLOCKNUMBER/TXN_INDEX/EVENT_INDEX) */
             protocolId?: string;
             /** @description The blockchain plugin or token service that detected the event */
@@ -1636,6 +1638,8 @@ export interface operations {
             timestamp?: string;
             /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
             tx?: {
+              /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
+              blockchainId?: string;
               /**
                * Format: uuid
                * @description The UUID of the FireFly transaction
@@ -1675,7 +1679,7 @@ export interface operations {
              */
             id?: string;
             /** @description Detailed blockchain specific information about the event, as generated by the blockchain connector */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /**
              * Format: uuid
              * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
@@ -1686,7 +1690,7 @@ export interface operations {
             /** @description The namespace of the listener that detected this blockchain event */
             namespace?: string;
             /** @description The data output by the event, parsed to JSON according to the interface of the smart contract */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description An alphanumerically sortable string that represents this event uniquely on the blockchain (convention for plugins is zero-padded values BLOCKNUMBER/TXN_INDEX/EVENT_INDEX) */
             protocolId?: string;
             /** @description The blockchain plugin or token service that detected the event */
@@ -1698,6 +1702,8 @@ export interface operations {
             timestamp?: string;
             /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
             tx?: {
+              /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
+              blockchainId?: string;
               /**
                * Format: uuid
                * @description The UUID of the FireFly transaction
@@ -1825,7 +1831,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -1863,7 +1869,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -1872,7 +1878,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -1933,7 +1939,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -1971,7 +1977,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -1980,7 +1986,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -2022,7 +2028,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
             /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
             pathname?: string;
@@ -2050,7 +2056,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
             /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
             pathname?: string;
@@ -2059,7 +2065,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
           }[];
           /** @description The name of the FFI - usually matching the smart contract name */
@@ -2118,7 +2124,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -2156,7 +2162,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -2165,7 +2171,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -2230,7 +2236,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -2268,7 +2274,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -2277,7 +2283,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -2334,7 +2340,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
@@ -2372,7 +2378,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
               /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
               pathname?: string;
@@ -2381,7 +2387,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             }[];
             /** @description The name of the FFI - usually matching the smart contract name */
@@ -2401,7 +2407,7 @@ export interface operations {
           /** @description The description of the FFI to be generated. Defaults to the description extracted by the blockchain specific converter utility */
           description?: string;
           /** @description A blockchain connector specific payload. For example in Ethereum this is a JSON structure containing an 'abi' array, and optionally a 'devdocs' array. */
-          input?: string;
+          input?: any;
           /** @description The name of the FFI to generate */
           name?: string;
           /** @description The namespace into which the FFI will be generated */
@@ -2447,7 +2453,7 @@ export interface operations {
       content: {
         "application/json": {
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
-          input?: { [key: string]: unknown };
+          input?: { [key: string]: any };
           /**
            * Format: uuid
            * @description The UUID of a method within a pre-configured FireFly interface (FFI) definition for a smart contract. Required if the 'method' is omitted. Also see Contract APIs as a way to configure a dedicated API for your FFI, including all methods and an OpenAPI/Swagger interface
@@ -2456,7 +2462,7 @@ export interface operations {
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -2480,7 +2486,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
             /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
             pathname?: string;
@@ -2489,7 +2495,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
           };
           /** @description The pathname of the method on the specified FFI */
@@ -2563,7 +2569,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             };
             /**
@@ -2584,7 +2590,7 @@ export interface operations {
               version?: string;
             };
             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /** @description A descriptive name for the listener */
             name?: string;
             /** @description The namespace of the listener, which defines the namespace of all blockchain events detected by this listener */
@@ -2639,7 +2645,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             };
             /**
@@ -2660,7 +2666,7 @@ export interface operations {
               version?: string;
             };
             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /** @description A descriptive name for the listener */
             name?: string;
             /** @description The namespace of the listener, which defines the namespace of all blockchain events detected by this listener */
@@ -2693,7 +2699,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
           };
           /** @description When creating a listener from an existing FFI, this is the pathname of the event on that FFI to be detected by this listener */
@@ -2711,7 +2717,7 @@ export interface operations {
             version?: string;
           };
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description A descriptive name for the listener */
           name?: string;
           /** @description Options that control how the listener subscribes to events from the underlying blockchain */
@@ -2762,7 +2768,7 @@ export interface operations {
                 /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
                 name?: string;
                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-                schema?: string;
+                schema?: any;
               }[];
             };
             /**
@@ -2783,7 +2789,7 @@ export interface operations {
               version?: string;
             };
             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-            location?: string;
+            location?: any;
             /** @description A descriptive name for the listener */
             name?: string;
             /** @description The namespace of the listener, which defines the namespace of all blockchain events detected by this listener */
@@ -2852,7 +2858,7 @@ export interface operations {
       content: {
         "application/json": {
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
-          input?: { [key: string]: unknown };
+          input?: { [key: string]: any };
           /**
            * Format: uuid
            * @description The UUID of a method within a pre-configured FireFly interface (FFI) definition for a smart contract. Required if the 'method' is omitted. Also see Contract APIs as a way to configure a dedicated API for your FFI, including all methods and an OpenAPI/Swagger interface
@@ -2861,7 +2867,7 @@ export interface operations {
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
-          location?: string;
+          location?: any;
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -2885,7 +2891,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
             /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
             pathname?: string;
@@ -2894,7 +2900,7 @@ export interface operations {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
               name?: string;
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
-              schema?: string;
+              schema?: any;
             }[];
           };
           /** @description The pathname of the method on the specified FFI */
@@ -3002,7 +3008,7 @@ export interface operations {
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
-            value?: string;
+            value?: any;
           }[];
         };
       };
@@ -3070,7 +3076,7 @@ export interface operations {
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
-            value?: string;
+            value?: any;
           };
         };
       };
@@ -3094,7 +3100,7 @@ export interface operations {
           /** @description The data validator type to use for in-line data */
           validator?: string;
           /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-          value?: string;
+          value?: any;
         };
         "multipart/form-data": {
           /** @description Success */
@@ -3176,7 +3182,7 @@ export interface operations {
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
-            value?: string;
+            value?: any;
           };
         };
       };
@@ -3495,7 +3501,7 @@ export interface operations {
              */
             validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
-            value?: string;
+            value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
             version?: string;
           }[];
@@ -3555,7 +3561,7 @@ export interface operations {
              */
             validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
-            value?: string;
+            value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
             version?: string;
           };
@@ -3595,7 +3601,7 @@ export interface operations {
              */
             validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
-            value?: string;
+            value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
             version?: string;
           };
@@ -3614,7 +3620,7 @@ export interface operations {
            */
           validator?: "json" | "none" | "definition";
           /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
-          value?: string;
+          value?: any;
           /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
           version?: string;
         };
@@ -3672,7 +3678,7 @@ export interface operations {
              */
             validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
-            value?: string;
+            value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
             version?: string;
           };
@@ -4104,7 +4110,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -4194,7 +4200,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -4254,7 +4260,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -4282,7 +4288,7 @@ export interface operations {
           /** @description On input the parent can be specified directly as the UUID of and existing identity, or as a DID to resolve to that identity, or an organization name. The parent must already have been registered, and its blockchain signing key must be available to the local node to sign the verification */
           parent?: string;
           /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-          profile?: { [key: string]: unknown };
+          profile?: { [key: string]: any };
           /** @description The type of the identity */
           type?: string;
         };
@@ -4354,7 +4360,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -4853,7 +4859,7 @@ export interface operations {
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
-            value?: string;
+            value?: any;
           }[];
         };
       };
@@ -5249,7 +5255,7 @@ export interface operations {
             /** @description The data validator type to use for in-line data */
             validator?: string;
             /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-            value?: string;
+            value?: any;
           }[];
           /** @description The message header contains all fields that are used to build the message hash */
           header?: {
@@ -5532,7 +5538,7 @@ export interface operations {
             /** @description The data validator type to use for in-line data */
             validator?: string;
             /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-            value?: string;
+            value?: any;
           }[];
           /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
           group?: {
@@ -5741,7 +5747,7 @@ export interface operations {
             /** @description The data validator type to use for in-line data */
             validator?: string;
             /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-            value?: string;
+            value?: any;
           }[];
           /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
           group?: {
@@ -5872,11 +5878,11 @@ export interface operations {
              */
             id?: string;
             /** @description The input to this operation */
-            input?: { [key: string]: unknown };
+            input?: { [key: string]: any };
             /** @description The namespace of the operation */
             namespace?: string;
             /** @description Any output reported back from the plugin for this operation */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description The plugin responsible for performing the operation */
             plugin?: string;
             /**
@@ -5951,11 +5957,11 @@ export interface operations {
              */
             id?: string;
             /** @description The input to this operation */
-            input?: { [key: string]: unknown };
+            input?: { [key: string]: any };
             /** @description The namespace of the operation */
             namespace?: string;
             /** @description Any output reported back from the plugin for this operation */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description The plugin responsible for performing the operation */
             plugin?: string;
             /**
@@ -6030,11 +6036,11 @@ export interface operations {
              */
             id?: string;
             /** @description The input to this operation */
-            input?: { [key: string]: unknown };
+            input?: { [key: string]: any };
             /** @description The namespace of the operation */
             namespace?: string;
             /** @description Any output reported back from the plugin for this operation */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description The plugin responsible for performing the operation */
             plugin?: string;
             /**
@@ -6078,7 +6084,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": unknown;
+        "application/json": any;
       };
     };
   };
@@ -6787,7 +6793,7 @@ export interface operations {
              */
             created?: string;
             /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
             key?: string;
             /**
@@ -6864,7 +6870,7 @@ export interface operations {
              */
             created?: string;
             /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
             key?: string;
             /**
@@ -6921,7 +6927,7 @@ export interface operations {
              */
             created?: string;
             /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
             key?: string;
             /**
@@ -6965,11 +6971,11 @@ export interface operations {
           /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
-          config?: { [key: string]: unknown };
+          config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
           connector?: string;
           /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
-          info?: { [key: string]: unknown };
+          info?: { [key: string]: any };
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description The namespace for the approval, which must match the namespace of the token pool */
@@ -7251,7 +7257,7 @@ export interface operations {
               /** @description The data validator type to use for in-line data */
               validator?: string;
               /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: string;
+              value?: any;
             }[];
             /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
             group?: {
@@ -7531,7 +7537,7 @@ export interface operations {
               /** @description The data validator type to use for in-line data */
               validator?: string;
               /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: string;
+              value?: any;
             }[];
             /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
             group?: {
@@ -7671,7 +7677,7 @@ export interface operations {
              */
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -7749,7 +7755,7 @@ export interface operations {
              */
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -7807,7 +7813,7 @@ export interface operations {
              */
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -7854,7 +7860,7 @@ export interface operations {
       content: {
         "application/json": {
           /** @description Input only field, with token connector specific configuration of the pool, such as an existing Ethereum address and block number to used to index the pool. See your chosen token connector documentation for details */
-          config?: { [key: string]: unknown };
+          config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
           connector?: string;
           /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
@@ -7904,7 +7910,7 @@ export interface operations {
              */
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -8275,7 +8281,7 @@ export interface operations {
               /** @description The data validator type to use for in-line data */
               validator?: string;
               /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: string;
+              value?: any;
             }[];
             /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
             group?: {
@@ -8606,7 +8612,7 @@ export interface operations {
              */
             id?: string;
             /** @description Detailed blockchain specific information about the event, as generated by the blockchain connector */
-            info?: { [key: string]: unknown };
+            info?: { [key: string]: any };
             /**
              * Format: uuid
              * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
@@ -8617,7 +8623,7 @@ export interface operations {
             /** @description The namespace of the listener that detected this blockchain event */
             namespace?: string;
             /** @description The data output by the event, parsed to JSON according to the interface of the smart contract */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description An alphanumerically sortable string that represents this event uniquely on the blockchain (convention for plugins is zero-padded values BLOCKNUMBER/TXN_INDEX/EVENT_INDEX) */
             protocolId?: string;
             /** @description The blockchain plugin or token service that detected the event */
@@ -8629,6 +8635,8 @@ export interface operations {
             timestamp?: string;
             /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
             tx?: {
+              /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
+              blockchainId?: string;
               /**
                * Format: uuid
                * @description The UUID of the FireFly transaction
@@ -8675,11 +8683,11 @@ export interface operations {
              */
             id?: string;
             /** @description The input to this operation */
-            input?: { [key: string]: unknown };
+            input?: { [key: string]: any };
             /** @description The namespace of the operation */
             namespace?: string;
             /** @description Any output reported back from the plugin for this operation */
-            output?: { [key: string]: unknown };
+            output?: { [key: string]: any };
             /** @description The plugin responsible for performing the operation */
             plugin?: string;
             /**
@@ -8751,7 +8759,7 @@ export interface operations {
                */
               id?: string;
               /** @description Output details for this entry */
-              info?: { [key: string]: unknown };
+              info?: { [key: string]: any };
               /** @description The status of the detail record. Cases where an event is required for completion, but has not arrived yet are marked with a 'pending' record */
               status?: string;
               /** @description A sub-type, such as an operation type, or an event type */
@@ -9035,7 +9043,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9125,7 +9133,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9247,7 +9255,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9323,7 +9331,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9399,7 +9407,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9459,7 +9467,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9477,7 +9485,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": unknown;
+        "application/json": any;
       };
     };
   };
@@ -9576,7 +9584,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9652,7 +9660,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9712,7 +9720,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9740,7 +9748,7 @@ export interface operations {
           /** @description On input the parent can be specified directly as the UUID of and existing identity, or as a DID to resolve to that identity, or an organization name. The parent must already have been registered, and its blockchain signing key must be available to the local node to sign the verification */
           parent?: string;
           /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-          profile?: { [key: string]: unknown };
+          profile?: { [key: string]: any };
           /** @description The type of the identity */
           type?: string;
         };
@@ -9806,7 +9814,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9882,7 +9890,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9942,7 +9950,7 @@ export interface operations {
              */
             parent?: string;
             /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
-            profile?: { [key: string]: unknown };
+            profile?: { [key: string]: any };
             /**
              * @description The type of the identity
              * @enum {string}
@@ -9960,7 +9968,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": unknown;
+        "application/json": any;
       };
     };
   };

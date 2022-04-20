@@ -2,8 +2,8 @@
   "name": "@hyperledger/firefly-sdk",
   "version": "0.1.0-alpha.6",
   "description": "Client SDK for Hyperledger FireFly",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc",
@@ -12,7 +12,7 @@
     "lint": "eslint \"lib/*.ts\"",
     "lint:fix": "eslint \"lib/*.ts\" --fix",
     "format": "prettier --write \"lib/*.ts\" \"examples/**/*.ts\"",
-    "schema": "openapi-typescript ../firefly/docs/swagger/swagger.yaml --output lib/schema.ts"
+    "schema": "node scripts/schema.mjs"
   },
   "repository": {
     "type": "git",
