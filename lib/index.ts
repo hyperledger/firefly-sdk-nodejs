@@ -76,6 +76,7 @@ export default class FireFly {
   private rootHttp: AxiosInstance;
   private http: AxiosInstance;
   private queue = Promise.resolve();
+  private errorHandler?: (err: FireFlyError) => void;
 
   constructor(options: FireFlyOptionsInput) {
     this.options = this.setDefaults(options);
@@ -106,7 +107,11 @@ export default class FireFly {
     return response.catch((err) => {
       if (axios.isAxiosError(err)) {
         const errorMessage = err.response?.data?.error;
-        throw new FireFlyError(errorMessage ?? err.message);
+        const ffError = new FireFlyError(errorMessage ?? err.message);
+        if (this.errorHandler !== undefined) {
+          this.errorHandler(ffError);
+        }
+        throw ffError;
       }
       throw err;
     });
@@ -141,6 +146,10 @@ export default class FireFly {
 
   private async deleteOne<T>(url: string) {
     await this.wrapError(this.http.delete<T>(url));
+  }
+
+  onError(handler: (err: FireFlyError) => void) {
+    this.errorHandler = handler;
   }
 
   async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
