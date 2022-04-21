@@ -1,5 +1,5 @@
 import { Stream, Readable } from 'stream';
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as FormData from 'form-data';
 import {
   FireFlyOptions,
@@ -52,10 +52,6 @@ import {
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 
-function isDefined<T>(obj: T | undefined | null): obj is T {
-  return obj !== undefined && obj !== null;
-}
-
 function isSuccess(status: number) {
   return status >= 200 && status < 300;
 }
@@ -73,7 +69,7 @@ function mapConfig(
   };
 }
 
-export class InvalidDatatypeError extends Error {}
+export class FireFlyError extends Error {}
 
 export default class FireFly {
   private options: FireFlyOptions;
@@ -106,33 +102,45 @@ export default class FireFly {
     };
   }
 
+  private async wrapError<T>(response: Promise<AxiosResponse<T>>) {
+    return response.catch((err) => {
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.error;
+        throw new FireFlyError(errorMessage ?? err.message);
+      }
+      throw err;
+    });
+  }
+
   private async getMany<T>(url: string, params?: any, options?: FireFlyGetOptions, root = false) {
     const http = root ? this.rootHttp : this.http;
-    const response = await http.get<T>(url, mapConfig(options, params));
+    const response = await this.wrapError(http.get<T>(url, mapConfig(options, params)));
     return response.data;
   }
 
   private async getOne<T>(url: string, options?: FireFlyGetOptions, params?: any, root = false) {
     const http = root ? this.rootHttp : this.http;
-    const response = await http.get<T>(url, {
-      ...mapConfig(options, params),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
+    const response = await this.wrapError(
+      http.get<T>(url, {
+        ...mapConfig(options, params),
+        validateStatus: (status) => status === 404 || isSuccess(status),
+      }),
+    );
     return response.status === 404 ? undefined : response.data;
   }
 
   private async createOne<T>(url: string, data: any, options?: FireFlyCreateOptions) {
-    const response = await this.http.post<T>(url, data, mapConfig(options));
+    const response = await this.wrapError(this.http.post<T>(url, data, mapConfig(options)));
     return response.data;
   }
 
   private async replaceOne<T>(url: string, data: any) {
-    const response = await this.http.put<T>(url, data);
+    const response = await this.wrapError(this.http.put<T>(url, data));
     return response.data;
   }
 
   private async deleteOne<T>(url: string) {
-    await this.http.delete<T>(url);
+    await this.wrapError(this.http.delete<T>(url));
   }
 
   async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
@@ -195,27 +203,6 @@ export default class FireFly {
     return this.createOne('/datatypes', req, options);
   }
 
-  async getOrCreateDatatype(
-    req: FireFlyDatatypeRequest,
-    options?: FireFlyCreateOptions,
-  ): Promise<FireFlyDatatypeResponse> {
-    if (req.name === undefined || req.version === undefined) {
-      throw new InvalidDatatypeError('Datatype name and version are required');
-    }
-    const existing = await this.getDatatype(req.name, req.version);
-    if (existing !== undefined) {
-      if (isDefined(req.value) || isDefined(existing.value)) {
-        if (JSON.stringify(req.value) !== JSON.stringify(existing.value)) {
-          throw new InvalidDatatypeError(
-            `Datatype for ${req.name}:${req.version} already exists, but schema does not match!`,
-          );
-        }
-      }
-      return existing;
-    }
-    return this.createDatatype(req, { ...mapConfig(options), confirm: true });
-  }
-
   async getSubscriptions(
     filter?: FireFlySubscriptionFilter,
     options?: FireFlyGetOptions,
@@ -236,10 +223,12 @@ export default class FireFly {
   }
 
   async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Stream> {
-    const response = await this.http.get<Stream>(`/data/${id}/blob`, {
-      ...mapConfig(options),
-      responseType: 'stream',
-    });
+    const response = await this.wrapError(
+      this.http.get<Stream>(`/data/${id}/blob`, {
+        ...mapConfig(options),
+        responseType: 'stream',
+      }),
+    );
     return response.data;
   }
 
@@ -250,12 +239,14 @@ export default class FireFly {
     const formData = new FormData();
     formData.append('autometa', 'true');
     formData.append('file', blob, { filename });
-    const response = await this.http.post<FireFlyDataResponse>('/data', formData, {
-      headers: {
-        ...formData.getHeaders(),
-        'Content-Length': formData.getLengthSync(),
-      },
-    });
+    const response = await this.wrapError(
+      this.http.post<FireFlyDataResponse>('/data', formData, {
+        headers: {
+          ...formData.getHeaders(),
+          'Content-Length': formData.getLengthSync(),
+        },
+      }),
+    );
     return response.data;
   }
 
