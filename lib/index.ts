@@ -1,5 +1,5 @@
 import { Stream, Readable } from 'stream';
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as FormData from 'form-data';
 import {
   FireFlyOptions,
@@ -47,12 +47,10 @@ import {
   FireFlyContractGenerateRequest,
   FireFlyContractAPIRequest,
   FireFlyContractAPIResponse,
+  FireFlyContractInterfaceFilter,
+  FireFlyContractAPIFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
-
-function isDefined<T>(obj: T | undefined | null): obj is T {
-  return obj !== undefined && obj !== null;
-}
 
 function isSuccess(status: number) {
   return status >= 200 && status < 300;
@@ -71,13 +69,14 @@ function mapConfig(
   };
 }
 
-export class InvalidDatatypeError extends Error {}
+export class FireFlyError extends Error {}
 
 export default class FireFly {
   private options: FireFlyOptions;
   private rootHttp: AxiosInstance;
   private http: AxiosInstance;
   private queue = Promise.resolve();
+  private errorHandler?: (err: FireFlyError) => void;
 
   constructor(options: FireFlyOptionsInput) {
     this.options = this.setDefaults(options);
@@ -104,6 +103,55 @@ export default class FireFly {
     };
   }
 
+  private async wrapError<T>(response: Promise<AxiosResponse<T>>) {
+    return response.catch((err) => {
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.error;
+        const ffError = new FireFlyError(errorMessage ?? err.message);
+        if (this.errorHandler !== undefined) {
+          this.errorHandler(ffError);
+        }
+        throw ffError;
+      }
+      throw err;
+    });
+  }
+
+  private async getMany<T>(url: string, params?: any, options?: FireFlyGetOptions, root = false) {
+    const http = root ? this.rootHttp : this.http;
+    const response = await this.wrapError(http.get<T>(url, mapConfig(options, params)));
+    return response.data;
+  }
+
+  private async getOne<T>(url: string, options?: FireFlyGetOptions, params?: any, root = false) {
+    const http = root ? this.rootHttp : this.http;
+    const response = await this.wrapError(
+      http.get<T>(url, {
+        ...mapConfig(options, params),
+        validateStatus: (status) => status === 404 || isSuccess(status),
+      }),
+    );
+    return response.status === 404 ? undefined : response.data;
+  }
+
+  private async createOne<T>(url: string, data: any, options?: FireFlyCreateOptions) {
+    const response = await this.wrapError(this.http.post<T>(url, data, mapConfig(options)));
+    return response.data;
+  }
+
+  private async replaceOne<T>(url: string, data: any) {
+    const response = await this.wrapError(this.http.put<T>(url, data));
+    return response.data;
+  }
+
+  private async deleteOne<T>(url: string) {
+    await this.wrapError(this.http.delete<T>(url));
+  }
+
+  onError(handler: (err: FireFlyError) => void) {
+    this.errorHandler = handler;
+  }
+
   async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
     const response = await this.rootHttp.get<FireFlyStatusResponse>('/status', mapConfig(options));
     return response.data;
@@ -113,22 +161,19 @@ export default class FireFly {
     filter?: FireFlyOrganizationFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyOrganizationResponse[]> {
-    const response = await this.rootHttp.get<FireFlyOrganizationResponse[]>(
+    return this.getMany<FireFlyOrganizationResponse[]>(
       '/network/organizations',
-      mapConfig(options, filter),
+      filter,
+      options,
+      true,
     );
-    return response.data;
   }
 
   async getNodes(
     filter?: FireFlyNodeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyNodeResponse[]> {
-    const response = await this.rootHttp.get<FireFlyNodeResponse[]>(
-      '/network/nodes',
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyNodeResponse[]>('/network/nodes', filter, options, true);
   }
 
   async getVerifiers(
@@ -137,22 +182,19 @@ export default class FireFly {
     options?: FireFlyGetOptions,
   ): Promise<FireFlyVerifierResponse[]> {
     namespace = namespace ?? this.options.namespace;
-    const response = await this.rootHttp.get<FireFlyVerifierResponse[]>(
+    return this.getMany<FireFlyVerifierResponse[]>(
       `/namespaces/${namespace}/verifiers`,
-      mapConfig(options, filter),
+      filter,
+      options,
+      true,
     );
-    return response.data;
   }
 
   async getDatatypes(
     filter?: FireFlyDatatypeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyDatatypeResponse[]> {
-    const response = await this.http.get<FireFlyDatatypeResponse[]>(
-      '/datatypes',
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyDatatypeResponse[]>('/datatypes', filter, options);
   }
 
   async getDatatype(
@@ -160,79 +202,42 @@ export default class FireFly {
     version: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyDatatypeResponse | undefined> {
-    const response = await this.http.get<FireFlyDatatypeResponse>(`/datatypes/${name}/${version}`, {
-      ...mapConfig(options),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
-    return response.status === 404 ? undefined : response.data;
+    return this.getOne<FireFlyDatatypeResponse>(`/datatypes/${name}/${version}`, options);
   }
 
   async createDatatype(
     req: FireFlyDatatypeRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyDatatypeResponse> {
-    const response = await this.http.post<FireFlyDatatypeResponse>(
-      '/datatypes',
-      req,
-      mapConfig(options),
-    );
-    return response.data;
-  }
-
-  async getOrCreateDatatype(
-    req: FireFlyDatatypeRequest,
-    options?: FireFlyCreateOptions,
-  ): Promise<FireFlyDatatypeResponse> {
-    if (req.name === undefined || req.version === undefined) {
-      throw new InvalidDatatypeError('Datatype name and version are required');
-    }
-    const existing = await this.getDatatype(req.name, req.version);
-    if (existing !== undefined) {
-      if (isDefined(req.value) || isDefined(existing.value)) {
-        if (JSON.stringify(req.value) !== JSON.stringify(existing.value)) {
-          throw new InvalidDatatypeError(
-            `Datatype for ${req.name}:${req.version} already exists, but schema does not match!`,
-          );
-        }
-      }
-      return existing;
-    }
-    const created = await this.createDatatype(req, { ...mapConfig(options), confirm: true });
-    return created;
+    return this.createOne('/datatypes', req, options);
   }
 
   async getSubscriptions(
     filter?: FireFlySubscriptionFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlySubscriptionResponse[]> {
-    const response = await this.http.get<FireFlySubscriptionResponse[]>(
-      '/subscriptions',
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlySubscriptionResponse[]>('/subscriptions', filter, options);
   }
 
-  async createOrUpdateSubscription(
-    sub: FireFlySubscriptionRequest,
-  ): Promise<FireFlySubscriptionResponse> {
-    const response = await this.http.put<FireFlySubscriptionResponse>('/subscriptions', sub);
-    return response.data;
+  async replaceSubscription(sub: FireFlySubscriptionRequest): Promise<FireFlySubscriptionResponse> {
+    return this.replaceOne<FireFlySubscriptionResponse>('/subscriptions', sub);
   }
 
   async deleteSubscription(subId: string) {
-    await this.http.delete(`/subscriptions/${subId}`);
+    await this.deleteOne(`/subscriptions/${subId}`);
   }
 
-  async getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse> {
-    const response = await this.http.get<FireFlyDataResponse>(`/data/${id}`, mapConfig(options));
-    return response.data;
+  async getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
+    return this.getOne<FireFlyDataResponse>(`/data/${id}`, options);
   }
 
   async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Stream> {
-    const response = await this.http.get<Stream>(`/data/${id}/blob`, {
-      ...mapConfig(options),
-      responseType: 'stream',
-    });
+    const response = await this.wrapError(
+      this.http.get<Stream>(`/data/${id}/blob`, {
+        ...mapConfig(options),
+        responseType: 'stream',
+      }),
+    );
     return response.data;
   }
 
@@ -243,12 +248,14 @@ export default class FireFly {
     const formData = new FormData();
     formData.append('autometa', 'true');
     formData.append('file', blob, { filename });
-    const response = await this.http.post<FireFlyDataResponse>('/data', formData, {
-      headers: {
-        ...formData.getHeaders(),
-        'Content-Length': formData.getLengthSync(),
-      },
-    });
+    const response = await this.wrapError(
+      this.http.post<FireFlyDataResponse>('/data', formData, {
+        headers: {
+          ...formData.getHeaders(),
+          'Content-Length': formData.getLengthSync(),
+        },
+      }),
+    );
     return response.data;
   }
 
@@ -256,42 +263,28 @@ export default class FireFly {
     filter?: FireFlyBatchFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyBatchResponse[]> {
-    const response = await this.http.get<FireFlyBatchResponse[]>(
-      `/batches`,
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyBatchResponse[]>(`/batches`, filter, options);
   }
 
   async getMessages(
     filter?: FireFlyMessageFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyMessageResponse[]> {
-    const response = await this.http.get<FireFlyMessageResponse[]>(
-      `/messages`,
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyMessageResponse[]>(`/messages`, filter, options);
   }
 
-  async getMessage(id: string, options?: FireFlyGetOptions): Promise<FireFlyMessageResponse> {
-    const response = await this.http.get<FireFlyMessageResponse>(
-      `/messages/${id}`,
-      mapConfig(options),
-    );
-    return response.data;
+  async getMessage(
+    id: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyMessageResponse | undefined> {
+    return this.getOne<FireFlyMessageResponse>(`/messages/${id}`, options);
   }
 
   async sendBroadcast(
     message: FireFlyBroadcastMessageRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyMessageResponse> {
-    const response = await this.http.post<FireFlyMessageResponse>(
-      '/messages/broadcast',
-      message,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyMessageResponse>('/messages/broadcast', message, options);
   }
 
   async sendPrivateMessage(
@@ -299,129 +292,87 @@ export default class FireFly {
     options?: FireFlyPrivateSendOptions,
   ): Promise<FireFlyMessageResponse> {
     const url = options?.requestReply ? '/messages/requestreply' : '/messages/private';
-    const response = await this.http.post<FireFlyMessageResponse>(url, message, mapConfig(options));
-    return response.data;
+    return this.createOne<FireFlyMessageResponse>(url, message, options);
   }
 
   async createTokenPool(
     pool: FireFlyTokenPoolRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenPoolResponse> {
-    const response = await this.http.post<FireFlyTokenPoolResponse>(
-      '/tokens/pools',
-      pool,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyTokenPoolResponse>('/tokens/pools', pool, options);
   }
 
   async getTokenPools(
     filter?: FireFlyTokenPoolFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenPoolResponse[]> {
-    const response = await this.http.get<FireFlyTokenPoolResponse[]>(
-      `/tokens/pools`,
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyTokenPoolResponse[]>(`/tokens/pools`, filter, options);
   }
 
   async getTokenPool(
     nameOrId: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenPoolResponse | undefined> {
-    const response = await this.http.get<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, {
-      ...mapConfig(options),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
-    return response.status === 404 ? undefined : response.data;
+    return this.getOne<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, options);
   }
 
   async mintTokens(transfer: FireFlyTokenMintRequest, options?: FireFlyCreateOptions) {
-    const response = await this.http.post<FireFlyTokenTransferResponse>(
-      '/tokens/mint',
-      transfer,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyTokenTransferResponse>('/tokens/mint', transfer, options);
   }
 
   async transferTokens(
     transfer: FireFlyTokenTransferRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
-    const response = await this.http.post<FireFlyTokenTransferResponse>(
-      '/tokens/transfers',
-      transfer,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyTokenTransferResponse>('/tokens/transfers', transfer, options);
   }
 
   async burnTokens(
     transfer: FireFlyTokenBurnRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
-    const response = await this.http.post<FireFlyTokenTransferResponse>(
-      '/tokens/burn',
-      transfer,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
   }
 
   async getTokenTransfer(
     id: string,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyTokenTransferResponse> {
-    const response = await this.http.get<FireFlyTokenTransferResponse>(
-      `/tokens/transfers/${id}`,
-      mapConfig(options),
-    );
-    return response.data;
+  ): Promise<FireFlyTokenTransferResponse | undefined> {
+    return this.getOne<FireFlyTokenTransferResponse>(`/tokens/transfers/${id}`, options);
   }
 
   async getTokenBalances(
     filter?: FireFlyTokenBalanceFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenBalanceResponse> {
-    const response = await this.http.get<FireFlyTokenBalanceResponse>(
-      '/tokens/balances',
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyTokenBalanceResponse>('/tokens/balances', filter, options);
   }
 
   async generateContractInterface(
     request: FireFlyContractGenerateRequest,
   ): Promise<FireFlyContractInterfaceRequest> {
-    const response = await this.http.post<FireFlyContractInterfaceRequest>(
+    return this.createOne<FireFlyContractInterfaceRequest>(
       '/contracts/interfaces/generate',
       request,
     );
-    return response.data;
   }
 
   async createContractInterface(
     ffi: FireFlyContractInterfaceRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractInterfaceResponse> {
-    const response = await this.http.post<FireFlyContractInterfaceResponse>(
-      '/contracts/interfaces',
-      ffi,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyContractInterfaceResponse>('/contracts/interfaces', ffi, options);
   }
 
   async getContractInterfaces(
+    filter?: FireFlyContractInterfaceFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractInterfaceResponse[]> {
-    const response = await this.http.get<FireFlyContractInterfaceResponse[]>(
+    return this.getMany<FireFlyContractInterfaceResponse[]>(
       '/contracts/interfaces',
-      mapConfig(options),
+      filter,
+      options,
     );
-    return response.data;
   }
 
   async getContractInterface(
@@ -429,65 +380,48 @@ export default class FireFly {
     fetchchildren?: boolean,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractInterfaceResponse | undefined> {
-    const response = await this.http.get<FireFlyContractInterfaceResponse>(
-      `/contracts/interfaces/${id}`,
-      {
-        ...mapConfig(options, { fetchchildren }),
-        validateStatus: (status) => status === 404 || isSuccess(status),
-      },
-    );
-    return response.status === 404 ? undefined : response.data;
+    return this.getOne<FireFlyContractInterfaceResponse>(`/contracts/interfaces/${id}`, options, {
+      fetchchildren,
+    });
   }
 
   async createContractAPI(
     api: FireFlyContractAPIRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractAPIResponse> {
-    const response = await this.http.post<FireFlyContractAPIResponse>(
-      '/apis',
-      api,
-      mapConfig(options),
-    );
-    return response.data;
+    return this.createOne<FireFlyContractAPIResponse>('/apis', api, options);
   }
 
-  async getContractAPIs(options?: FireFlyGetOptions): Promise<FireFlyContractAPIResponse[]> {
-    const response = await this.http.get<FireFlyContractAPIResponse[]>('/apis', mapConfig(options));
-    return response.data;
+  async getContractAPIs(
+    filter?: FireFlyContractAPIFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyContractAPIResponse[]> {
+    return this.getMany<FireFlyContractAPIResponse[]>('/apis', filter, options);
   }
 
   async getContractAPI(
     name: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractAPIResponse | undefined> {
-    const response = await this.http.get<FireFlyContractAPIResponse>(`/apis/${name}`, {
-      ...mapConfig(options),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
-    return response.status === 404 ? undefined : response.data;
+    return this.getOne<FireFlyContractAPIResponse>(`/apis/${name}`, options);
   }
 
   async createContractListener(
     listener: FireFlyContractListenerRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractListenerResponse> {
-    const response = await this.http.post<FireFlyContractListenerResponse>(
+    return this.createOne<FireFlyContractListenerResponse>(
       '/contracts/listeners',
       listener,
-      mapConfig(options),
+      options,
     );
-    return response.data;
   }
 
   async getContractListeners(
     filter?: FireFlyContractListenerFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractListenerResponse[]> {
-    const response = await this.http.get<FireFlyContractListenerResponse[]>(
-      '/contracts/listeners',
-      mapConfig(options, filter),
-    );
-    return response.data;
+    return this.getMany<FireFlyContractListenerResponse[]>('/contracts/listeners', filter, options);
   }
 
   async getContractAPIListeners(
@@ -495,11 +429,11 @@ export default class FireFly {
     eventPath: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractListenerResponse[]> {
-    const response = await this.http.get<FireFlyContractListenerResponse[]>(
+    return this.getMany<FireFlyContractListenerResponse[]>(
       `/apis/${apiName}/listeners/${eventPath}`,
-      mapConfig(options),
+      {},
+      options,
     );
-    return response.data;
   }
 
   async createContractAPIListener(
@@ -508,23 +442,18 @@ export default class FireFly {
     listener: FireFlyContractListenerRequest,
     options?: FireFlyCreateOptions,
   ) {
-    const response = await this.http.post<FireFlyContractListenerResponse>(
+    return this.createOne<FireFlyContractListenerResponse>(
       `/apis/${apiName}/listeners/${eventPath}`,
       listener,
-      mapConfig(options),
+      options,
     );
-    return response.data;
   }
 
   async getTransaction(
     id: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTransactionResponse | undefined> {
-    const response = await this.http.get<FireFlyTransactionResponse>(`/transactions/${id}`, {
-      ...mapConfig(options),
-      validateStatus: (status) => status === 404 || isSuccess(status),
-    });
-    return response.status === 404 ? undefined : response.data;
+    return this.getOne<FireFlyTransactionResponse>(`/transactions/${id}`, options);
   }
 
   listen(

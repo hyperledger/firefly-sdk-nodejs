@@ -213,6 +213,9 @@ export type FireFlyTransactionResponse = Required<
 
 // Contracts
 
+export type FireFlyContractInterfaceFilter =
+  operations['getContractInterfaces']['parameters']['query'];
+export type FireFlyContractAPIFilter = operations['getContractAPIs']['parameters']['query'];
 export type FireFlyContractListenerFilter =
   operations['getContractListeners']['parameters']['query'];
 
