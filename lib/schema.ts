@@ -881,6 +881,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -965,10 +967,120 @@ export interface operations {
         content: {
           "application/json": {
             /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
              * Format: uuid
-             * @description The UUID of the operation created to track the transaction submission through to completion
+             * @description The UUID of the operation
              */
             id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
           };
         };
       };
@@ -1835,6 +1947,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -1943,6 +2057,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -2009,20 +2125,8 @@ export interface operations {
           events?: {
             /** @description A description of the smart contract event */
             description?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI event definition
-             */
-            id?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI smart contract definition that this event is part of
-             */
-            interface?: string;
             /** @description The name of the event */
             name?: string;
-            /** @description The namespace of the FFI */
-            namespace?: string;
             /** @description An array of event parameter/argument definitions */
             params?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2030,27 +2134,13 @@ export interface operations {
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
               schema?: any;
             }[];
-            /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
-            pathname?: string;
           }[];
           /** @description An array of smart contract method definitions */
           methods?: {
             /** @description A description of the smart contract method */
             description?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI method definition
-             */
-            id?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI smart contract definition that this method is part of
-             */
-            interface?: string;
             /** @description The name of the method */
             name?: string;
-            /** @description The namespace of the FFI */
-            namespace?: string;
             /** @description An array of method parameter/argument definitions */
             params?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2058,8 +2148,6 @@ export interface operations {
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
               schema?: any;
             }[];
-            /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
-            pathname?: string;
             /** @description An array of method return definitions */
             returns?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2128,6 +2216,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -2240,6 +2330,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -2344,6 +2436,8 @@ export interface operations {
               }[];
               /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
               pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
             }[];
             /**
              * Format: uuid
@@ -2440,10 +2534,120 @@ export interface operations {
         content: {
           "application/json": {
             /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
              * Format: uuid
-             * @description The UUID of the operation created to track the transaction submission through to completion
+             * @description The UUID of the operation
              */
             id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
           };
         };
       };
@@ -2467,20 +2671,8 @@ export interface operations {
           method?: {
             /** @description A description of the smart contract method */
             description?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI method definition
-             */
-            id?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI smart contract definition that this method is part of
-             */
-            interface?: string;
             /** @description The name of the method */
             name?: string;
-            /** @description The namespace of the FFI */
-            namespace?: string;
             /** @description An array of method parameter/argument definitions */
             params?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2488,8 +2680,6 @@ export interface operations {
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
               schema?: any;
             }[];
-            /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
-            pathname?: string;
             /** @description An array of method return definitions */
             returns?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2872,20 +3062,8 @@ export interface operations {
           method?: {
             /** @description A description of the smart contract method */
             description?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI method definition
-             */
-            id?: string;
-            /**
-             * Format: uuid
-             * @description The UUID of the FFI smart contract definition that this method is part of
-             */
-            interface?: string;
             /** @description The name of the method */
             name?: string;
-            /** @description The namespace of the FFI */
-            namespace?: string;
             /** @description An array of method parameter/argument definitions */
             params?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -2893,8 +3071,6 @@ export interface operations {
               /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
               schema?: any;
             }[];
-            /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
-            pathname?: string;
             /** @description An array of method return definitions */
             returns?: {
               /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
@@ -3785,13 +3961,16 @@ export interface operations {
               | "identity_confirmed"
               | "identity_updated"
               | "token_pool_confirmed"
+              | "token_pool_op_failed"
               | "token_transfer_confirmed"
               | "token_transfer_op_failed"
               | "token_approval_confirmed"
               | "token_approval_op_failed"
               | "contract_interface_confirmed"
               | "contract_api_confirmed"
-              | "blockchain_event_received";
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed";
           }[];
         };
       };
@@ -3864,13 +4043,16 @@ export interface operations {
               | "identity_confirmed"
               | "identity_updated"
               | "token_pool_confirmed"
+              | "token_pool_op_failed"
               | "token_transfer_confirmed"
               | "token_transfer_op_failed"
               | "token_approval_confirmed"
               | "token_approval_op_failed"
               | "contract_interface_confirmed"
               | "contract_api_confirmed"
-              | "blockchain_event_received";
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed";
           };
         };
       };
@@ -4964,13 +5146,16 @@ export interface operations {
               | "identity_confirmed"
               | "identity_updated"
               | "token_pool_confirmed"
+              | "token_pool_op_failed"
               | "token_transfer_confirmed"
               | "token_transfer_op_failed"
               | "token_approval_confirmed"
               | "token_approval_op_failed"
               | "contract_interface_confirmed"
               | "contract_api_confirmed"
-              | "blockchain_event_received";
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed";
           }[];
         };
       };
@@ -6972,8 +7157,6 @@ export interface operations {
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
           config?: { [key: string]: any };
-          /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
-          connector?: string;
           /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
           info?: { [key: string]: any };
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -7232,8 +7415,6 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
-          /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
-          connector?: string;
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -7514,8 +7695,6 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
-          /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
-          connector?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -7624,6 +7803,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        decimals?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         locator?: string;
@@ -7671,6 +7852,8 @@ export interface operations {
              * @description The creation time of the pool
              */
             created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
             /**
              * Format: uuid
              * @description The UUID of the token pool
@@ -7749,6 +7932,8 @@ export interface operations {
              * @description The creation time of the pool
              */
             created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
             /**
              * Format: uuid
              * @description The UUID of the token pool
@@ -7807,6 +7992,8 @@ export interface operations {
              * @description The creation time of the pool
              */
             created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
             /**
              * Format: uuid
              * @description The UUID of the token pool
@@ -7904,6 +8091,8 @@ export interface operations {
              * @description The creation time of the pool
              */
             created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
             /**
              * Format: uuid
              * @description The UUID of the token pool
@@ -8256,8 +8445,6 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
-          /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
-          connector?: string;
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
