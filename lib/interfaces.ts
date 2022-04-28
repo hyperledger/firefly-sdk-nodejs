@@ -13,6 +13,8 @@ import { operations } from './schema';
 
 // General
 
+export class FireFlyError extends Error {}
+
 export interface FireFlyGetOptions {
   confirm: undefined;
   requestConfig?: AxiosRequestConfig;
