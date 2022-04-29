@@ -46,6 +46,9 @@ import {
   FireFlyContractAPIResponse,
   FireFlyContractInterfaceFilter,
   FireFlyContractAPIFilter,
+  FireFlyTransactionFilter,
+  FireFlyOperationFilter,
+  FireFlyOperationResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -348,6 +351,27 @@ export default class FireFly extends HttpBase {
       listener,
       options,
     );
+  }
+
+  async getOperations(
+    filter?: FireFlyOperationFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyOperationResponse[]> {
+    return this.getMany<FireFlyOperationResponse[]>('/operations', filter, options);
+  }
+
+  async getOperation(
+    id: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyOperationResponse | undefined> {
+    return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options);
+  }
+
+  async getTransactions(
+    filter?: FireFlyTransactionFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTransactionResponse[]> {
+    return this.getMany<FireFlyTransactionResponse[]>('/transactions', filter, options);
   }
 
   async getTransaction(
