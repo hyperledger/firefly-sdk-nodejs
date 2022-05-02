@@ -13,6 +13,8 @@ import { operations } from './schema';
 
 // General
 
+export class FireFlyError extends Error {}
+
 export interface FireFlyGetOptions {
   confirm: undefined;
   requestConfig?: AxiosRequestConfig;
@@ -203,10 +205,12 @@ export type FireFlyTokenBalanceResponse = Required<
 
 // Operations + Transactions
 
+export type FireFlyOperationFilter = operations['getOps']['parameters']['query'];
+export type FireFlyTransactionFilter = operations['getTxns']['parameters']['query'];
+
 export type FireFlyOperationResponse = Required<
   operations['getOpByID']['responses']['200']['content']['application/json']
 >;
-
 export type FireFlyTransactionResponse = Required<
   operations['getTxnByID']['responses']['200']['content']['application/json']
 >;
