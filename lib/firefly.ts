@@ -400,6 +400,9 @@ export default class FireFly extends HttpBase {
       this.queue = this.queue.finally(() => {
         callback(socket, event);
       });
+      this.queue.finally(() => {
+        socket.ack(event);
+      });
     };
 
     if (Array.isArray(subscriptions)) {
