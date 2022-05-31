@@ -397,8 +397,9 @@ export default class FireFly extends HttpBase {
     };
 
     const handler: FireFlyWebSocketCallback = (socket, event) => {
-      this.queue = this.queue.finally(() => {
-        callback(socket, event);
+      this.queue = this.queue.finally(() => callback(socket, event));
+      this.queue.then(() => {
+        socket.ack(event);
       });
     };
 
