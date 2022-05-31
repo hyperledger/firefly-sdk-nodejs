@@ -19,7 +19,7 @@ function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
 }
 
 export interface FireFlyWebSocketCallback {
-  (socket: FireFlyWebSocket, data: FireFlyEventDelivery): void;
+  (socket: FireFlyWebSocket, data: FireFlyEventDelivery): void | Promise<void>;
 }
 
 export class FireFlyWebSocket {
