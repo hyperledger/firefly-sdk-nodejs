@@ -49,6 +49,7 @@ import {
   FireFlyTransactionFilter,
   FireFlyOperationFilter,
   FireFlyOperationResponse,
+  FireFlyTokenTransferFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -236,6 +237,13 @@ export default class FireFly extends HttpBase {
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
+  }
+
+  async getTokenTransfers(
+    filter?: FireFlyTokenTransferFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTokenTransferResponse[]> {
+    return this.getMany<FireFlyTokenTransferResponse[]>(`/tokens/transfers`, filter, options);
   }
 
   async getTokenTransfer(
