@@ -184,6 +184,8 @@ export type FireFlyTokenPoolResponse = Required<
 
 // Token Transfers
 
+export type FireFlyTokenTransferFilter = operations['getTokenTransfers']['parameters']['query'];
+
 export type FireFlyTokenMintRequest =
   operations['postTokenMint']['requestBody']['content']['application/json'];
 export type FireFlyTokenBurnRequest =
