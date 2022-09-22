@@ -262,8 +262,8 @@ export default class FireFly extends HttpBase {
   async getTokenBalances(
     filter?: FireFlyTokenBalanceFilter,
     options?: FireFlyGetOptions,
-  ): Promise<FireFlyTokenBalanceResponse> {
-    return this.getMany<FireFlyTokenBalanceResponse>('/tokens/balances', filter, options);
+  ): Promise<FireFlyTokenBalanceResponse[]> {
+    return this.getMany<FireFlyTokenBalanceResponse[]>('/tokens/balances', filter, options);
   }
 
   async generateContractInterface(

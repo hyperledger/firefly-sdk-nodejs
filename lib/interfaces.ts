@@ -65,6 +65,9 @@ export type FireFlyOrganizationFilter = operations['getNetworkOrgs']['parameters
 export type FireFlyNodeFilter = operations['getNetworkNodes']['parameters']['query'];
 export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['query'];
 
+export type FireFlyIdentityResponse = Required<
+  operations['getIdentityByID']['responses']['200']['content']['application/json']
+>;
 export type FireFlyOrganizationResponse = Required<
   operations['getNetworkOrg']['responses']['200']['content']['application/json']
 >;
@@ -108,14 +111,13 @@ export interface FireFlyEphemeralSubscription extends FireFlySubscriptionBase {
 }
 
 export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
-  blockchainEvent?: unknown;
-  contractAPI?: unknown;
-  contractInterface?: unknown;
+  blockchainEvent?: FireFlyBlockchainEventResponse;
+  contractAPI?: FireFlyContractAPIResponse;
+  contractInterface?: FireFlyContractInterfaceResponse;
   datatype?: FireFlyDatatypeResponse;
-  identity?: unknown;
+  identity?: FireFlyIdentityResponse;
   message?: FireFlyMessageResponse;
-  namespaceDetails?: unknown;
-  tokenApproval?: unknown;
+  tokenApproval?: FireFlyTokenApprovalResponse;
   tokenPool?: FireFlyTokenPoolResponse;
   tokenTransfer?: FireFlyTokenTransferResponse;
   transaction?: FireFlyTransactionResponse;
@@ -201,9 +203,18 @@ export type FireFlyTokenTransferResponse = Required<
 
 export type FireFlyTokenBalanceFilter = operations['getTokenBalances']['parameters']['query'];
 
-export type FireFlyTokenBalanceResponse = Required<
+type BalancesList = Required<
   operations['getTokenBalances']['responses']['200']['content']['application/json']
 >;
+const balances: BalancesList = [];
+export type FireFlyTokenBalanceResponse = typeof balances[0];
+
+// Token Approvals
+
+type ApprovalsList =
+  operations['getTokenApprovals']['responses']['200']['content']['application/json'];
+const approvals: ApprovalsList = [];
+export type FireFlyTokenApprovalResponse = typeof approvals[0];
 
 // Operations + Transactions
 
@@ -258,4 +269,10 @@ export type FireFlyContractAPIQueryRequest =
   operations['postContractAPIQuery']['requestBody']['content']['application/json'];
 export type FireFlyContractQueryResponse = Required<
   operations['postContractQuery']['responses']['200']['content']['application/json']
+>;
+
+// Blockchain Events
+
+export type FireFlyBlockchainEventResponse = Required<
+  operations['getBlockchainEventByID']['responses']['200']['content']['application/json']
 >;
