@@ -50,6 +50,12 @@ import {
   FireFlyOperationFilter,
   FireFlyOperationResponse,
   FireFlyTokenTransferFilter,
+  FireFlyContractInvokeResponse,
+  FireFlyContractQueryResponse,
+  FireFlyContractAPIInvokeRequest,
+  FireFlyContractAPIQueryRequest,
+  FireFlyContractInvokeRequest,
+  FireFlyContractQueryRequest,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -316,6 +322,46 @@ export default class FireFly extends HttpBase {
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractAPIResponse | undefined> {
     return this.getOne<FireFlyContractAPIResponse>(`/apis/${name}`, options);
+  }
+
+  async invokeContract(
+    request: FireFlyContractInvokeRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyContractInvokeResponse> {
+    return this.createOne<FireFlyContractInvokeResponse>('/contracts/invoke', request, options);
+  }
+
+  async queryContract(
+    request: FireFlyContractQueryRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyContractQueryResponse> {
+    return this.createOne<FireFlyContractQueryResponse>('/contracts/query', request, options);
+  }
+
+  async invokeContractAPI(
+    apiName: string,
+    methodPath: string,
+    request: FireFlyContractAPIInvokeRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyContractInvokeResponse> {
+    return this.createOne<FireFlyContractInvokeResponse>(
+      `/apis/${apiName}/invoke/${methodPath}`,
+      request,
+      options,
+    );
+  }
+
+  async queryContractAPI(
+    apiName: string,
+    methodPath: string,
+    request: FireFlyContractAPIQueryRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyContractQueryResponse> {
+    return this.createOne<FireFlyContractQueryResponse>(
+      `/apis/${apiName}/query/${methodPath}`,
+      request,
+      options,
+    );
   }
 
   async createContractListener(

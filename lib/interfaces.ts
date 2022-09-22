@@ -243,3 +243,19 @@ export type FireFlyContractAPIResponse = Required<
 export type FireFlyContractListenerResponse = Required<
   operations['getContractListenerByNameOrID']['responses']['200']['content']['application/json']
 >;
+
+export type FireFlyContractInvokeRequest =
+  operations['postContractInvoke']['requestBody']['content']['application/json'];
+export type FireFlyContractAPIInvokeRequest =
+  operations['postContractAPIInvoke']['requestBody']['content']['application/json'];
+export type FireFlyContractInvokeResponse = Required<
+  operations['postContractInvoke']['responses']['202']['content']['application/json']
+>;
+
+export type FireFlyContractQueryRequest =
+  operations['postContractQuery']['requestBody']['content']['application/json'];
+export type FireFlyContractAPIQueryRequest =
+  operations['postContractAPIQuery']['requestBody']['content']['application/json'];
+export type FireFlyContractQueryResponse = Required<
+  operations['postContractQuery']['responses']['200']['content']['application/json']
+>;
