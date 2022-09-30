@@ -56,6 +56,7 @@ import {
   FireFlyContractAPIQueryRequest,
   FireFlyContractInvokeRequest,
   FireFlyContractQueryRequest,
+  FireFlyDataRequest,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -150,6 +151,13 @@ export default class FireFly extends HttpBase {
       }),
     );
     return response.data;
+  }
+
+  async uploadData(
+    data: FireFlyDataRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyDataResponse> {
+    return this.createOne<FireFlyDataResponse>('/data', data, options);
   }
 
   async uploadDataBlob(
