@@ -61,12 +61,16 @@ export interface FireFlyWebSocketOptions {
 
 // Network
 
+export type FireFlyIdentityFilter = operations['getIdentities']['parameters']['query'];
 export type FireFlyOrganizationFilter = operations['getNetworkOrgs']['parameters']['query'];
 export type FireFlyNodeFilter = operations['getNetworkNodes']['parameters']['query'];
 export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['query'];
 
 export type FireFlyIdentityResponse = Required<
   operations['getIdentityByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyIdentitiesResponse = Required<
+  operations['getIdentities']['responses']['200']['content']['application/json']
 >;
 export type FireFlyOrganizationResponse = Required<
   operations['getNetworkOrg']['responses']['200']['content']['application/json']
