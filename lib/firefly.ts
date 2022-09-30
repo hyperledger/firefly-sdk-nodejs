@@ -57,6 +57,9 @@ import {
   FireFlyContractInvokeRequest,
   FireFlyContractQueryRequest,
   FireFlyDataRequest,
+  FireFlyIdentityFilter,
+  FireFlyIdentityResponse,
+  FireFlyIdentitiesResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -69,23 +72,32 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
+  async getIdentities(
+    filter?: FireFlyIdentityFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyIdentitiesResponse> {
+    return this.getMany<FireFlyIdentitiesResponse>('/identities', filter, options);
+  }
+
+  async getIdentity(
+    nameOrId: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyIdentityResponse | undefined> {
+    return this.getOne<FireFlyIdentityResponse>(`/identities/${nameOrId}`, options);
+  }
+
   async getOrganizations(
     filter?: FireFlyOrganizationFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyOrganizationResponse[]> {
-    return this.getMany<FireFlyOrganizationResponse[]>(
-      '/network/organizations',
-      filter,
-      options,
-      true,
-    );
+    return this.getMany<FireFlyOrganizationResponse[]>('/network/organizations', filter, options);
   }
 
   async getNodes(
     filter?: FireFlyNodeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyNodeResponse[]> {
-    return this.getMany<FireFlyNodeResponse[]>('/network/nodes', filter, options, true);
+    return this.getMany<FireFlyNodeResponse[]>('/network/nodes', filter, options);
   }
 
   async getVerifiers(
@@ -98,7 +110,6 @@ export default class FireFly extends HttpBase {
       `/namespaces/${namespace}/verifiers`,
       filter,
       options,
-      true,
     );
   }
 
