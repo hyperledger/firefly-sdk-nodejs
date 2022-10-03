@@ -440,6 +440,13 @@ export default class FireFly extends HttpBase {
     return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options);
   }
 
+  async retryOperation(
+    id: string,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyOperationResponse> {
+    return this.createOne<FireFlyOperationResponse>(`/operations/${id}/retry`, {}, options);
+  }
+
   async getTransactions(
     filter?: FireFlyTransactionFilter,
     options?: FireFlyGetOptions,
