@@ -60,6 +60,7 @@ import {
   FireFlyIdentityFilter,
   FireFlyIdentityResponse,
   FireFlyIdentitiesResponse,
+  FireFlyDataFilter,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -152,6 +153,13 @@ export default class FireFly extends HttpBase {
 
   async getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
     return this.getOne<FireFlyDataResponse>(`/data/${id}`, options);
+  }
+
+  async findData(
+    filter?: FireFlyDataFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyDataResponse[]> {
+    return this.getMany<FireFlyDataResponse[]>(`/data`, filter, options);
   }
 
   async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Stream> {
