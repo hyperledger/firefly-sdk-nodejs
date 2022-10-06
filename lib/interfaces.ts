@@ -66,6 +66,9 @@ export type FireFlyOrganizationFilter = operations['getNetworkOrgs']['parameters
 export type FireFlyNodeFilter = operations['getNetworkNodes']['parameters']['query'];
 export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['query'];
 
+export type FireFlyIdentityRequest =
+  operations['postNewIdentity']['requestBody']['content']['application/json'];
+
 export type FireFlyIdentityResponse = Required<
   operations['getIdentityByID']['responses']['200']['content']['application/json']
 >;

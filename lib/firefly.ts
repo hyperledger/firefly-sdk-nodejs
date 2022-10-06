@@ -61,6 +61,7 @@ import {
   FireFlyIdentityResponse,
   FireFlyIdentitiesResponse,
   FireFlyDataFilter,
+  FireFlyIdentityRequest,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -85,6 +86,13 @@ export default class FireFly extends HttpBase {
     options?: FireFlyGetOptions,
   ): Promise<FireFlyIdentityResponse | undefined> {
     return this.getOne<FireFlyIdentityResponse>(`/identities/${nameOrId}`, options);
+  }
+
+  async createIdentity(
+    identity: FireFlyIdentityRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyIdentityResponse> {
+    return this.createOne<FireFlyIdentityResponse>(`/identities`, identity, options);
   }
 
   async getOrganizations(
