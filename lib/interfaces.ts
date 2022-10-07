@@ -175,6 +175,9 @@ export type FireFlyMessageResponse = Required<
 export type FireFlyBatchResponse = Required<
   operations['getBatchByID']['responses']['200']['content']['application/json']
 >;
+export type FireFlyGroupResponse = Required<
+  operations['getGroupByHash']['responses']['200']['content']['application/json']
+>;
 
 export interface FireFlyPrivateSendOptions extends FireFlyCreateOptions {
   requestReply?: boolean;

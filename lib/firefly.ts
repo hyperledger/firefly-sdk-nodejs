@@ -62,6 +62,7 @@ import {
   FireFlyIdentitiesResponse,
   FireFlyDataFilter,
   FireFlyIdentityRequest,
+  FireFlyGroupResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -239,6 +240,13 @@ export default class FireFly extends HttpBase {
   ): Promise<FireFlyMessageResponse> {
     const url = options?.requestReply ? '/messages/requestreply' : '/messages/private';
     return this.createOne<FireFlyMessageResponse>(url, message, options);
+  }
+
+  async getGroup(
+    hash: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyGroupResponse | undefined> {
+    return this.getOne<FireFlyGroupResponse>(`/groups/${hash}`, options);
   }
 
   async createTokenPool(
