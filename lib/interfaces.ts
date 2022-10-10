@@ -132,6 +132,7 @@ export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
   tokenPool?: FireFlyTokenPoolResponse;
   tokenTransfer?: FireFlyTokenTransferResponse;
   transaction?: FireFlyTransactionResponse;
+  operation?: FireFlyOperationResponse;
 }
 
 export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
