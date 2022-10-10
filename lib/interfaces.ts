@@ -287,6 +287,8 @@ export type FireFlyContractQueryResponse = Required<
 
 // Blockchain Events
 
+export type FireFlyBlockchainEventFilter = operations['getBlockchainEvents']['parameters']['query'];
+
 export type FireFlyBlockchainEventResponse = Required<
   operations['getBlockchainEventByID']['responses']['200']['content']['application/json']
 >;

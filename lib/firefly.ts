@@ -63,6 +63,8 @@ import {
   FireFlyDataFilter,
   FireFlyIdentityRequest,
   FireFlyGroupResponse,
+  FireFlyBlockchainEventFilter,
+  FireFlyBlockchainEventResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -75,42 +77,42 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
-  async getIdentities(
+  getIdentities(
     filter?: FireFlyIdentityFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyIdentitiesResponse> {
     return this.getMany<FireFlyIdentitiesResponse>('/identities', filter, options);
   }
 
-  async getIdentity(
+  getIdentity(
     nameOrId: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyIdentityResponse | undefined> {
     return this.getOne<FireFlyIdentityResponse>(`/identities/${nameOrId}`, options);
   }
 
-  async createIdentity(
+  createIdentity(
     identity: FireFlyIdentityRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyIdentityResponse> {
     return this.createOne<FireFlyIdentityResponse>(`/identities`, identity, options);
   }
 
-  async getOrganizations(
+  getOrganizations(
     filter?: FireFlyOrganizationFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyOrganizationResponse[]> {
     return this.getMany<FireFlyOrganizationResponse[]>('/network/organizations', filter, options);
   }
 
-  async getNodes(
+  getNodes(
     filter?: FireFlyNodeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyNodeResponse[]> {
     return this.getMany<FireFlyNodeResponse[]>('/network/nodes', filter, options);
   }
 
-  async getVerifiers(
+  getVerifiers(
     namespace?: string,
     filter?: FireFlyVerifierFilter,
     options?: FireFlyGetOptions,
@@ -123,14 +125,14 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async getDatatypes(
+  getDatatypes(
     filter?: FireFlyDatatypeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyDatatypeResponse[]> {
     return this.getMany<FireFlyDatatypeResponse[]>('/datatypes', filter, options);
   }
 
-  async getDatatype(
+  getDatatype(
     name: string,
     version: string,
     options?: FireFlyGetOptions,
@@ -138,21 +140,21 @@ export default class FireFly extends HttpBase {
     return this.getOne<FireFlyDatatypeResponse>(`/datatypes/${name}/${version}`, options);
   }
 
-  async createDatatype(
+  createDatatype(
     req: FireFlyDatatypeRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyDatatypeResponse> {
     return this.createOne('/datatypes', req, options);
   }
 
-  async getSubscriptions(
+  getSubscriptions(
     filter?: FireFlySubscriptionFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlySubscriptionResponse[]> {
     return this.getMany<FireFlySubscriptionResponse[]>('/subscriptions', filter, options);
   }
 
-  async replaceSubscription(sub: FireFlySubscriptionRequest): Promise<FireFlySubscriptionResponse> {
+  replaceSubscription(sub: FireFlySubscriptionRequest): Promise<FireFlySubscriptionResponse> {
     return this.replaceOne<FireFlySubscriptionResponse>('/subscriptions', sub);
   }
 
@@ -160,11 +162,11 @@ export default class FireFly extends HttpBase {
     await this.deleteOne(`/subscriptions/${subId}`);
   }
 
-  async getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
+  getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
     return this.getOne<FireFlyDataResponse>(`/data/${id}`, options);
   }
 
-  async findData(
+  findData(
     filter?: FireFlyDataFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyDataResponse[]> {
@@ -181,7 +183,7 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
-  async uploadData(
+  uploadData(
     data: FireFlyDataRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyDataResponse> {
@@ -206,35 +208,32 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
-  async getBatches(
+  getBatches(
     filter?: FireFlyBatchFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyBatchResponse[]> {
     return this.getMany<FireFlyBatchResponse[]>(`/batches`, filter, options);
   }
 
-  async getMessages(
+  getMessages(
     filter?: FireFlyMessageFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyMessageResponse[]> {
     return this.getMany<FireFlyMessageResponse[]>(`/messages`, filter, options);
   }
 
-  async getMessage(
-    id: string,
-    options?: FireFlyGetOptions,
-  ): Promise<FireFlyMessageResponse | undefined> {
+  getMessage(id: string, options?: FireFlyGetOptions): Promise<FireFlyMessageResponse | undefined> {
     return this.getOne<FireFlyMessageResponse>(`/messages/${id}`, options);
   }
 
-  async sendBroadcast(
+  sendBroadcast(
     message: FireFlyBroadcastMessageRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyMessageResponse> {
     return this.createOne<FireFlyMessageResponse>('/messages/broadcast', message, options);
   }
 
-  async sendPrivateMessage(
+  sendPrivateMessage(
     message: FireFlyPrivateMessageRequest,
     options?: FireFlyPrivateSendOptions,
   ): Promise<FireFlyMessageResponse> {
@@ -242,74 +241,71 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyMessageResponse>(url, message, options);
   }
 
-  async getGroup(
-    hash: string,
-    options?: FireFlyGetOptions,
-  ): Promise<FireFlyGroupResponse | undefined> {
+  getGroup(hash: string, options?: FireFlyGetOptions): Promise<FireFlyGroupResponse | undefined> {
     return this.getOne<FireFlyGroupResponse>(`/groups/${hash}`, options);
   }
 
-  async createTokenPool(
+  createTokenPool(
     pool: FireFlyTokenPoolRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenPoolResponse> {
     return this.createOne<FireFlyTokenPoolResponse>('/tokens/pools', pool, options);
   }
 
-  async getTokenPools(
+  getTokenPools(
     filter?: FireFlyTokenPoolFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenPoolResponse[]> {
     return this.getMany<FireFlyTokenPoolResponse[]>(`/tokens/pools`, filter, options);
   }
 
-  async getTokenPool(
+  getTokenPool(
     nameOrId: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenPoolResponse | undefined> {
     return this.getOne<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, options);
   }
 
-  async mintTokens(transfer: FireFlyTokenMintRequest, options?: FireFlyCreateOptions) {
+  mintTokens(transfer: FireFlyTokenMintRequest, options?: FireFlyCreateOptions) {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/mint', transfer, options);
   }
 
-  async transferTokens(
+  transferTokens(
     transfer: FireFlyTokenTransferRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/transfers', transfer, options);
   }
 
-  async burnTokens(
+  burnTokens(
     transfer: FireFlyTokenBurnRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
   }
 
-  async getTokenTransfers(
+  getTokenTransfers(
     filter?: FireFlyTokenTransferFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenTransferResponse[]> {
     return this.getMany<FireFlyTokenTransferResponse[]>(`/tokens/transfers`, filter, options);
   }
 
-  async getTokenTransfer(
+  getTokenTransfer(
     id: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenTransferResponse | undefined> {
     return this.getOne<FireFlyTokenTransferResponse>(`/tokens/transfers/${id}`, options);
   }
 
-  async getTokenBalances(
+  getTokenBalances(
     filter?: FireFlyTokenBalanceFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenBalanceResponse[]> {
     return this.getMany<FireFlyTokenBalanceResponse[]>('/tokens/balances', filter, options);
   }
 
-  async generateContractInterface(
+  generateContractInterface(
     request: FireFlyContractGenerateRequest,
   ): Promise<FireFlyContractInterfaceRequest> {
     return this.createOne<FireFlyContractInterfaceRequest>(
@@ -318,14 +314,14 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async createContractInterface(
+  createContractInterface(
     ffi: FireFlyContractInterfaceRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractInterfaceResponse> {
     return this.createOne<FireFlyContractInterfaceResponse>('/contracts/interfaces', ffi, options);
   }
 
-  async getContractInterfaces(
+  getContractInterfaces(
     filter?: FireFlyContractInterfaceFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractInterfaceResponse[]> {
@@ -336,7 +332,7 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async getContractInterface(
+  getContractInterface(
     id: string,
     fetchchildren?: boolean,
     options?: FireFlyGetOptions,
@@ -346,42 +342,42 @@ export default class FireFly extends HttpBase {
     });
   }
 
-  async createContractAPI(
+  createContractAPI(
     api: FireFlyContractAPIRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractAPIResponse> {
     return this.createOne<FireFlyContractAPIResponse>('/apis', api, options);
   }
 
-  async getContractAPIs(
+  getContractAPIs(
     filter?: FireFlyContractAPIFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractAPIResponse[]> {
     return this.getMany<FireFlyContractAPIResponse[]>('/apis', filter, options);
   }
 
-  async getContractAPI(
+  getContractAPI(
     name: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractAPIResponse | undefined> {
     return this.getOne<FireFlyContractAPIResponse>(`/apis/${name}`, options);
   }
 
-  async invokeContract(
+  invokeContract(
     request: FireFlyContractInvokeRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractInvokeResponse> {
     return this.createOne<FireFlyContractInvokeResponse>('/contracts/invoke', request, options);
   }
 
-  async queryContract(
+  queryContract(
     request: FireFlyContractQueryRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractQueryResponse> {
     return this.createOne<FireFlyContractQueryResponse>('/contracts/query', request, options);
   }
 
-  async invokeContractAPI(
+  invokeContractAPI(
     apiName: string,
     methodPath: string,
     request: FireFlyContractAPIInvokeRequest,
@@ -394,7 +390,7 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async queryContractAPI(
+  queryContractAPI(
     apiName: string,
     methodPath: string,
     request: FireFlyContractAPIQueryRequest,
@@ -407,7 +403,7 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async createContractListener(
+  createContractListener(
     listener: FireFlyContractListenerRequest,
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractListenerResponse> {
@@ -418,14 +414,14 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async getContractListeners(
+  getContractListeners(
     filter?: FireFlyContractListenerFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyContractListenerResponse[]> {
     return this.getMany<FireFlyContractListenerResponse[]>('/contracts/listeners', filter, options);
   }
 
-  async getContractAPIListeners(
+  getContractAPIListeners(
     apiName: string,
     eventPath: string,
     options?: FireFlyGetOptions,
@@ -437,7 +433,7 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async createContractAPIListener(
+  createContractAPIListener(
     apiName: string,
     eventPath: string,
     listener: FireFlyContractListenerRequest,
@@ -450,39 +446,50 @@ export default class FireFly extends HttpBase {
     );
   }
 
-  async getOperations(
+  getOperations(
     filter?: FireFlyOperationFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyOperationResponse[]> {
     return this.getMany<FireFlyOperationResponse[]>('/operations', filter, options);
   }
 
-  async getOperation(
+  getOperation(
     id: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyOperationResponse | undefined> {
     return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options);
   }
 
-  async retryOperation(
-    id: string,
-    options?: FireFlyCreateOptions,
-  ): Promise<FireFlyOperationResponse> {
+  retryOperation(id: string, options?: FireFlyCreateOptions): Promise<FireFlyOperationResponse> {
     return this.createOne<FireFlyOperationResponse>(`/operations/${id}/retry`, {}, options);
   }
 
-  async getTransactions(
+  getTransactions(
     filter?: FireFlyTransactionFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTransactionResponse[]> {
     return this.getMany<FireFlyTransactionResponse[]>('/transactions', filter, options);
   }
 
-  async getTransaction(
+  getTransaction(
     id: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTransactionResponse | undefined> {
     return this.getOne<FireFlyTransactionResponse>(`/transactions/${id}`, options);
+  }
+
+  getBlockchainEvents(
+    filter?: FireFlyBlockchainEventFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyBlockchainEventResponse[]> {
+    return this.getMany<FireFlyBlockchainEventResponse[]>('/blockchainevents', filter, options);
+  }
+
+  getBlockchainEvent(
+    id: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyBlockchainEventResponse | undefined> {
+    return this.getOne<FireFlyBlockchainEventResponse>(`/blockchainevents/${id}`, options);
   }
 
   listen(
