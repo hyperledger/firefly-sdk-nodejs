@@ -60,7 +60,7 @@ export default class HttpBase {
     return response.catch((err) => {
       if (axios.isAxiosError(err)) {
         const errorMessage = err.response?.data?.error;
-        const ffError = new FireFlyError(errorMessage ?? err.message);
+        const ffError = new FireFlyError(errorMessage ?? err.message, err, err.request.path);
         if (this.errorHandler !== undefined) {
           this.errorHandler(ffError);
         }

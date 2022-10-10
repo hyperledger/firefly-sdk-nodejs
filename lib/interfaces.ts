@@ -13,7 +13,11 @@ import { operations } from './schema';
 
 // General
 
-export class FireFlyError extends Error {}
+export class FireFlyError extends Error {
+  constructor(message?: string, public originalError?: Error, public path?: string) {
+    super(message);
+  }
+}
 
 export interface FireFlyGetOptions {
   confirm: undefined;
