@@ -13,7 +13,11 @@ import { operations } from './schema';
 
 // General
 
-export class FireFlyError extends Error {}
+export class FireFlyError extends Error {
+  constructor(message?: string, public originalError?: Error, public path?: string) {
+    super(message);
+  }
+}
 
 export interface FireFlyGetOptions {
   confirm: undefined;
@@ -128,6 +132,7 @@ export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
   tokenPool?: FireFlyTokenPoolResponse;
   tokenTransfer?: FireFlyTokenTransferResponse;
   transaction?: FireFlyTransactionResponse;
+  operation?: FireFlyOperationResponse;
 }
 
 export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
@@ -282,6 +287,8 @@ export type FireFlyContractQueryResponse = Required<
 >;
 
 // Blockchain Events
+
+export type FireFlyBlockchainEventFilter = operations['getBlockchainEvents']['parameters']['query'];
 
 export type FireFlyBlockchainEventResponse = Required<
   operations['getBlockchainEventByID']['responses']['200']['content']['application/json']
