@@ -208,6 +208,29 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
+  async uploadDataBlobWithFormData(
+    formData: FormData
+  ): Promise<FireFlyDataResponse> {
+    const response = await this.wrapError(
+      this.http.post<FireFlyDataResponse>('/data', formData, {
+        headers: {
+          ...formData.getHeaders(),
+          'Content-Length': formData.getLengthSync(),
+        },
+      }),
+    );
+    return response.data;
+  }
+
+  async publishDataBlobToSharedStorage(
+    dataid: string
+  ): Promise<FireFlyDataResponse> {
+    const response = await this.wrapError(
+      this.http.post<FireFlyDataResponse>(`/data/${dataid}/blob/publish`, {dataid}),
+    );
+    return response.data;
+  }
+
   getBatches(
     filter?: FireFlyBatchFilter,
     options?: FireFlyGetOptions,
