@@ -190,6 +190,10 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyDataResponse>('/data', data, options);
   }
 
+  publishData(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
+    return this.createOne<FireFlyDataResponse>(`/data/${id}/value/publish`, {}, options);
+  }
+
   async uploadDataBlob(
     blob: string | Buffer | Readable,
     filename: string,
@@ -222,13 +226,8 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
-  async publishDataBlobToSharedStorage(
-    dataid: string
-  ): Promise<FireFlyDataResponse> {
-    const response = await this.wrapError(
-      this.http.post<FireFlyDataResponse>(`/data/${dataid}/blob/publish`, {dataid}),
-    );
-    return response.data;
+  publishDataBlob(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
+    return this.createOne<FireFlyDataResponse>(`/data/${id}/blob/publish`, {}, options);
   }
 
   getBatches(
