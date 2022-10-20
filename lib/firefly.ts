@@ -65,6 +65,8 @@ import {
   FireFlyGroupResponse,
   FireFlyBlockchainEventFilter,
   FireFlyBlockchainEventResponse,
+  FireFlyDataBlobRequest,
+  FireFlyDataBlobRequestDefaults,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -190,13 +192,24 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyDataResponse>('/data', data, options);
   }
 
+  publishData(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
+    return this.createOne<FireFlyDataResponse>(`/data/${id}/value/publish`, {}, options);
+  }
+
   async uploadDataBlob(
     blob: string | Buffer | Readable,
-    filename: string,
+    blobOptions?: FormData.AppendOptions,
+    dataOptions?: FireFlyDataBlobRequest,
   ): Promise<FireFlyDataResponse> {
+    dataOptions = { ...FireFlyDataBlobRequestDefaults, ...dataOptions };
     const formData = new FormData();
-    formData.append('autometa', 'true');
-    formData.append('file', blob, { filename });
+    for (const key in dataOptions) {
+      const val = dataOptions[key as keyof FireFlyDataBlobRequest];
+      if (val !== undefined) {
+        formData.append(key, val);
+      }
+    }
+    formData.append('file', blob, blobOptions);
     const response = await this.wrapError(
       this.http.post<FireFlyDataResponse>('/data', formData, {
         headers: {
@@ -208,27 +221,8 @@ export default class FireFly extends HttpBase {
     return response.data;
   }
 
-  async uploadDataBlobWithFormData(
-    formData: FormData
-  ): Promise<FireFlyDataResponse> {
-    const response = await this.wrapError(
-      this.http.post<FireFlyDataResponse>('/data', formData, {
-        headers: {
-          ...formData.getHeaders(),
-          'Content-Length': formData.getLengthSync(),
-        },
-      }),
-    );
-    return response.data;
-  }
-
-  async publishDataBlobToSharedStorage(
-    dataid: string
-  ): Promise<FireFlyDataResponse> {
-    const response = await this.wrapError(
-      this.http.post<FireFlyDataResponse>(`/data/${dataid}/blob/publish`, {dataid}),
-    );
-    return response.data;
+  publishDataBlob(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
+    return this.createOne<FireFlyDataResponse>(`/data/${id}/blob/publish`, {}, options);
   }
 
   getBatches(
