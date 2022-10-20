@@ -159,10 +159,16 @@ export type FireFlyDataFilter = operations['getData']['parameters']['query'];
 
 export type FireFlyDataRequest =
   operations['postData']['requestBody']['content']['application/json'];
+export type FireFlyDataBlobRequest =
+  operations['postData']['requestBody']['content']['multipart/form-data'];
 
 export type FireFlyDataResponse = Required<
   operations['getDataByID']['responses']['200']['content']['application/json']
 >;
+
+export const FireFlyDataBlobRequestDefaults: FireFlyDataBlobRequest = {
+  autometa: 'true',
+};
 
 // Messages
 
