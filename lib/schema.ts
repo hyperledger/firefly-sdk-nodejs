@@ -108,9 +108,21 @@ export interface paths {
     /** Downloads the original file that was previously uploaded or received */
     get: operations["getDataBlob"];
   };
+  "/data/{dataid}/blob/publish": {
+    /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
+    post: operations["postDataBlobPublish"];
+  };
   "/data/{dataid}/messages": {
     /** Gets a list of the messages associated with a data item */
     get: operations["getDataMsgs"];
+  };
+  "/data/{dataid}/value": {
+    /** Downloads the JSON value of the data resource, without the associated metadata */
+    get: operations["getDataValue"];
+  };
+  "/data/{dataid}/value/publish": {
+    /** Publishes the JSON value from the specified data resource, to shared storage */
+    post: operations["postDataValuePublish"];
   };
   "/datatypes": {
     /** Gets a list of datatypes that have been published */
@@ -306,9 +318,21 @@ export interface paths {
     /** Downloads the original file that was previously uploaded or received */
     get: operations["getDataBlobNamespace"];
   };
+  "/namespaces/{ns}/data/{dataid}/blob/publish": {
+    /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
+    post: operations["postDataBlobPublishNamespace"];
+  };
   "/namespaces/{ns}/data/{dataid}/messages": {
     /** Gets a list of the messages associated with a data item */
     get: operations["getDataMsgsNamespace"];
+  };
+  "/namespaces/{ns}/data/{dataid}/value": {
+    /** Downloads the JSON value of the data resource, without the associated metadata */
+    get: operations["getDataValueNamespace"];
+  };
+  "/namespaces/{ns}/data/{dataid}/value/publish": {
+    /** Publishes the JSON value from the specified data resource, to shared storage */
+    post: operations["postDataValuePublishNamespace"];
   };
   "/namespaces/{ns}/datatypes": {
     /** Gets a list of datatypes that have been published */
@@ -427,7 +451,7 @@ export interface paths {
     post: operations["postNewOrganizationNamespace"];
   };
   "/namespaces/{ns}/network/organizations/{nameOrId}": {
-    /** Gets information about a specifc org in the network */
+    /** Gets information about a specific org in the network */
     get: operations["getNetworkOrgNamespace"];
   };
   "/namespaces/{ns}/network/organizations/self": {
@@ -449,6 +473,10 @@ export interface paths {
   "/namespaces/{ns}/pins": {
     /** Queries the list of pins received from the blockchain */
     get: operations["getPinsNamespace"];
+  };
+  "/namespaces/{ns}/pins/rewind": {
+    /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+    post: operations["postPinsRewindNamespace"];
   };
   "/namespaces/{ns}/status": {
     /** Gets the status of this namespace */
@@ -550,6 +578,10 @@ export interface paths {
     /** Gets a verifier by its hash */
     get: operations["getVerifierByIDNamespace"];
   };
+  "/namespaces/{ns}/verifiers/resolve": {
+    /** Resolves an input key to a signing key */
+    post: operations["postVerifiersResolveNamespace"];
+  };
   "/network/action": {
     /** Notify all nodes in the network of a new governance action */
     post: operations["postNetworkAction"];
@@ -585,7 +617,7 @@ export interface paths {
     post: operations["postNewOrganization"];
   };
   "/network/organizations/{nameOrId}": {
-    /** Gets information about a specifc org in the network */
+    /** Gets information about a specific org in the network */
     get: operations["getNetworkOrg"];
   };
   "/network/organizations/self": {
@@ -607,6 +639,10 @@ export interface paths {
   "/pins": {
     /** Queries the list of pins received from the blockchain */
     get: operations["getPins"];
+  };
+  "/pins/rewind": {
+    /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+    post: operations["postPinsRewind"];
   };
   "/status": {
     /** Gets the status of this namespace */
@@ -707,6 +743,10 @@ export interface paths {
   "/verifiers/{hash}": {
     /** Gets a verifier by its hash */
     get: operations["getVerifierByID"];
+  };
+  "/verifiers/resolve": {
+    /** Resolves an input key to a signing key */
+    post: operations["postVerifiersResolve"];
   };
   "/websockets": {
     /** Gets a list of the current WebSocket connections to this node */
@@ -1146,6 +1186,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -1208,6 +1249,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -2697,6 +2739,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -2759,6 +2802,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -3056,6 +3100,10 @@ export interface operations {
         /** The contract listener name or ID */
         nameOrId: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -3238,6 +3286,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        public?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         validator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         value?: string;
@@ -3269,7 +3319,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -3301,6 +3351,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -3333,7 +3385,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -3365,6 +3417,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -3437,7 +3491,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -3469,6 +3523,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -3545,6 +3601,81 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
+  postDataBlobPublish: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description An optional hash reference to a binary blob attachment */
+            blob?: {
+              /**
+               * Format: byte
+               * @description The hash of the binary blob data
+               */
+              hash?: string;
+              /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+              name?: string;
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              public?: string;
+              /**
+               * Format: int64
+               * @description The size of the binary data
+               */
+              size?: number;
+            };
+            /**
+             * Format: date-time
+             * @description The creation time of the data resource
+             */
+            created?: string;
+            /** @description The optional datatype to use of validation of this data */
+            datatype?: {
+              /** @description The name of the datatype */
+              name?: string;
+              /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+              version?: string;
+            };
+            /**
+             * Format: byte
+             * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
+             */
+            hash?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the data resource
+             */
+            id?: string;
+            /** @description The namespace of the data resource */
+            namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
+            /** @description The data validator type */
+            validator?: string;
+            /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
+            value?: any;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": { [key: string]: unknown };
+      };
     };
   };
   /** Gets a list of the messages associated with a data item */
@@ -3687,7 +3818,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -3719,6 +3851,149 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Downloads the JSON value of the data resource, without the associated metadata */
+  getDataValue: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+      query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        author?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        batch?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        cid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        confirmed?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        created?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        group?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        hash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        key?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        pins?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        sequence?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        state?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        tag?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txtype?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        type?: string;
+        /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
+        sort?: string;
+        /** Ascending sort order (overrides all fields in a multi-field sort) */
+        ascending?: string;
+        /** Descending sort order (overrides all fields in a multi-field sort) */
+        descending?: string;
+        /** The number of records to skip (max: 1,000). Unsuitable for bulk operations */
+        skip?: string;
+        /** The maximum number of records to return (max: 1,000) */
+        limit?: string;
+        /** Return a total count as well as items (adds extra database processing) */
+        count?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": string;
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Publishes the JSON value from the specified data resource, to shared storage */
+  postDataValuePublish: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description An optional hash reference to a binary blob attachment */
+            blob?: {
+              /**
+               * Format: byte
+               * @description The hash of the binary blob data
+               */
+              hash?: string;
+              /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+              name?: string;
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              public?: string;
+              /**
+               * Format: int64
+               * @description The size of the binary data
+               */
+              size?: number;
+            };
+            /**
+             * Format: date-time
+             * @description The creation time of the data resource
+             */
+            created?: string;
+            /** @description The optional datatype to use of validation of this data */
+            datatype?: {
+              /** @description The name of the datatype */
+              name?: string;
+              /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+              version?: string;
+            };
+            /**
+             * Format: byte
+             * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
+             */
+            hash?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the data resource
+             */
+            id?: string;
+            /** @description The namespace of the data resource */
+            namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
+            /** @description The data validator type */
+            validator?: string;
+            /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
+            value?: any;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": { [key: string]: unknown };
+      };
     };
   };
   /** Gets a list of datatypes that have been published */
@@ -3974,8 +4249,10 @@ export interface operations {
   getEvents: {
     parameters: {
       query: {
-        /** When set, the API will return the record that this item references in its 'ref' field */
+        /** When set, the API will return the record that this item references in its 'reference' field */
         fetchreferences?: string;
+        /** When set, the API will return the record that this item references in its 'reference' field */
+        fetchreference?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         correlator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4083,6 +4360,10 @@ export interface operations {
       path: {
         /** The event ID */
         eid: string;
+      };
+      query: {
+        /** When set, the API will return the record that this item references in its 'reference' field */
+        fetchreference?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
@@ -5133,7 +5414,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -5209,7 +5491,7 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
-                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
                  * Format: int64
@@ -5305,7 +5587,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -5365,7 +5648,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -5397,6 +5680,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -5559,7 +5844,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -5655,7 +5941,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -5762,7 +6049,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -5844,7 +6132,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -5955,7 +6244,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -6067,7 +6357,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -6166,7 +6457,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -6217,7 +6509,7 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
-                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
                  * Format: int64
@@ -6313,7 +6605,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -6412,7 +6705,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -6451,8 +6745,8 @@ export interface operations {
             description?: string;
             /** @description The local namespace name */
             name?: string;
-            /** @description The namespace name within the multiparty network */
-            remoteName?: string;
+            /** @description The shared namespace name within the multiparty network */
+            networkName?: string;
           }[];
         };
       };
@@ -6485,8 +6779,8 @@ export interface operations {
             description?: string;
             /** @description The local namespace name */
             name?: string;
-            /** @description The namespace name within the multiparty network */
-            remoteName?: string;
+            /** @description The shared namespace name within the multiparty network */
+            networkName?: string;
           };
         };
       };
@@ -6936,6 +7230,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -6998,6 +7293,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -8617,6 +8913,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -8679,6 +8976,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -8986,6 +9284,10 @@ export interface operations {
         /** The namespace which scopes this request */
         ns: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -9178,6 +9480,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        public?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         validator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         value?: string;
@@ -9209,7 +9513,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -9241,6 +9545,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -9277,7 +9583,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -9309,6 +9615,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -9383,7 +9691,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -9415,6 +9723,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -9493,6 +9803,83 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
+  postDataBlobPublishNamespace: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description An optional hash reference to a binary blob attachment */
+            blob?: {
+              /**
+               * Format: byte
+               * @description The hash of the binary blob data
+               */
+              hash?: string;
+              /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+              name?: string;
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              public?: string;
+              /**
+               * Format: int64
+               * @description The size of the binary data
+               */
+              size?: number;
+            };
+            /**
+             * Format: date-time
+             * @description The creation time of the data resource
+             */
+            created?: string;
+            /** @description The optional datatype to use of validation of this data */
+            datatype?: {
+              /** @description The name of the datatype */
+              name?: string;
+              /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+              version?: string;
+            };
+            /**
+             * Format: byte
+             * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
+             */
+            hash?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the data resource
+             */
+            id?: string;
+            /** @description The namespace of the data resource */
+            namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
+            /** @description The data validator type */
+            validator?: string;
+            /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
+            value?: any;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": { [key: string]: unknown };
+      };
     };
   };
   /** Gets a list of the messages associated with a data item */
@@ -9637,7 +10024,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -9669,6 +10057,153 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Downloads the JSON value of the data resource, without the associated metadata */
+  getDataValueNamespace: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+      query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        author?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        batch?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        cid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        confirmed?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        created?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        group?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        hash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        key?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        pins?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        sequence?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        state?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        tag?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txtype?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        type?: string;
+        /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
+        sort?: string;
+        /** Ascending sort order (overrides all fields in a multi-field sort) */
+        ascending?: string;
+        /** Descending sort order (overrides all fields in a multi-field sort) */
+        descending?: string;
+        /** The number of records to skip (max: 1,000). Unsuitable for bulk operations */
+        skip?: string;
+        /** The maximum number of records to return (max: 1,000) */
+        limit?: string;
+        /** Return a total count as well as items (adds extra database processing) */
+        count?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": string;
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Publishes the JSON value from the specified data resource, to shared storage */
+  postDataValuePublishNamespace: {
+    parameters: {
+      path: {
+        /** The blob ID */
+        dataid: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description An optional hash reference to a binary blob attachment */
+            blob?: {
+              /**
+               * Format: byte
+               * @description The hash of the binary blob data
+               */
+              hash?: string;
+              /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+              name?: string;
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              public?: string;
+              /**
+               * Format: int64
+               * @description The size of the binary data
+               */
+              size?: number;
+            };
+            /**
+             * Format: date-time
+             * @description The creation time of the data resource
+             */
+            created?: string;
+            /** @description The optional datatype to use of validation of this data */
+            datatype?: {
+              /** @description The name of the datatype */
+              name?: string;
+              /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+              version?: string;
+            };
+            /**
+             * Format: byte
+             * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
+             */
+            hash?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the data resource
+             */
+            id?: string;
+            /** @description The namespace of the data resource */
+            namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
+            /** @description The data validator type */
+            validator?: string;
+            /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
+            value?: any;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": { [key: string]: unknown };
+      };
     };
   };
   /** Gets a list of datatypes that have been published */
@@ -9938,8 +10473,10 @@ export interface operations {
         ns: string;
       };
       query: {
-        /** When set, the API will return the record that this item references in its 'ref' field */
+        /** When set, the API will return the record that this item references in its 'reference' field */
         fetchreferences?: string;
+        /** When set, the API will return the record that this item references in its 'reference' field */
+        fetchreference?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         correlator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10049,6 +10586,10 @@ export interface operations {
         eid: string;
         /** The namespace which scopes this request */
         ns: string;
+      };
+      query: {
+        /** When set, the API will return the record that this item references in its 'reference' field */
+        fetchreference?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
@@ -11127,7 +11668,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -11205,7 +11747,7 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
-                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
                  * Format: int64
@@ -11301,7 +11843,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -11363,7 +11906,7 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
-              /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+              /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
                * Format: int64
@@ -11395,6 +11938,8 @@ export interface operations {
             id?: string;
             /** @description The namespace of the data resource */
             namespace?: string;
+            /** @description If the JSON value has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+            public?: string;
             /** @description The data validator type */
             validator?: string;
             /** @description The value for the data, stored in the FireFly core database. Can be any JSON type - object, array, string, number or boolean. Can be combined with a binary blob attachment */
@@ -11561,7 +12106,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -11666,7 +12212,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -11778,7 +12325,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -11877,7 +12425,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -11992,7 +12541,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -12104,7 +12654,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -12203,7 +12754,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -12258,7 +12810,7 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
-                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
                  * Format: int64
@@ -12354,7 +12906,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -12453,7 +13006,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
@@ -13106,7 +13660,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -13382,7 +13936,7 @@ export interface operations {
       };
     };
   };
-  /** Gets information about a specifc org in the network */
+  /** Gets information about a specific org in the network */
   getNetworkOrgNamespace: {
     parameters: {
       path: {
@@ -13601,7 +14155,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -13700,6 +14254,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -13780,6 +14335,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -13860,6 +14416,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -13880,7 +14437,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -13973,6 +14530,55 @@ export interface operations {
       default: unknown;
     };
   };
+  /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+  postPinsRewindNamespace: {
+    parameters: {
+      path: {
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: uuid
+             * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
+             */
+            batch?: string;
+            /**
+             * Format: int64
+             * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
+             */
+            sequence?: number;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * Format: uuid
+           * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
+           */
+          batch?: string;
+          /**
+           * Format: int64
+           * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
+           */
+          sequence?: number;
+        };
+      };
+    };
+  };
   /** Gets the status of this namespace */
   getStatusNamespace: {
     parameters: {
@@ -14045,8 +14651,8 @@ export interface operations {
               description?: string;
               /** @description The local namespace name */
               name?: string;
-              /** @description The namespace name within the multiparty network */
-              remoteName?: string;
+              /** @description The shared namespace name within the multiparty network */
+              networkName?: string;
             };
             /** @description Details of the local node */
             node?: {
@@ -14803,6 +15409,10 @@ export interface operations {
         /** The namespace which scopes this request */
         ns: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -14989,7 +15599,7 @@ export interface operations {
   getTokenAccountPoolsNamespace: {
     parameters: {
       path: {
-        /** The key for the token account. The exact format may vary based on the token connector use. */
+        /** The key for the token account. The exact format may vary based on the token connector use */
         key: string;
         /** The namespace which scopes this request */
         ns: string;
@@ -15601,7 +16211,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -15887,7 +16498,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -16639,7 +17251,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -16818,7 +17431,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           }[];
         };
       };
@@ -16892,7 +17506,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -17024,6 +17639,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -17211,6 +17827,49 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Resolves an input key to a signing key */
+  postVerifiersResolveNamespace: {
+    parameters: {
+      path: {
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * @description The type of the verifier
+             * @enum {string}
+             */
+            type?: "ethereum_address" | "fabric_msp_id" | "dx_peer_id";
+            /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
+            value?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * @description The type of the verifier
+           * @enum {string}
+           */
+          type?: "ethereum_address" | "fabric_msp_id" | "dx_peer_id";
+          /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
+          value?: string;
+        };
+      };
     };
   };
   /** Notify all nodes in the network of a new governance action */
@@ -17827,7 +18486,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -18095,7 +18754,7 @@ export interface operations {
       };
     };
   };
-  /** Gets information about a specifc org in the network */
+  /** Gets information about a specific org in the network */
   getNetworkOrg: {
     parameters: {
       path: {
@@ -18308,7 +18967,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -18403,6 +19062,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -18481,6 +19141,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -18559,6 +19220,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -18579,7 +19241,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": any;
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -18668,6 +19330,51 @@ export interface operations {
       default: unknown;
     };
   };
+  /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+  postPinsRewind: {
+    parameters: {
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: uuid
+             * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
+             */
+            batch?: string;
+            /**
+             * Format: int64
+             * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
+             */
+            sequence?: number;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * Format: uuid
+           * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
+           */
+          batch?: string;
+          /**
+           * Format: int64
+           * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
+           */
+          sequence?: number;
+        };
+      };
+    };
+  };
   /** Gets the status of this namespace */
   getStatus: {
     parameters: {
@@ -18736,8 +19443,8 @@ export interface operations {
               description?: string;
               /** @description The local namespace name */
               name?: string;
-              /** @description The namespace name within the multiparty network */
-              remoteName?: string;
+              /** @description The shared namespace name within the multiparty network */
+              networkName?: string;
             };
             /** @description Details of the local node */
             node?: {
@@ -19476,6 +20183,10 @@ export interface operations {
         /** The subscription ID */
         subid: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -19656,7 +20367,7 @@ export interface operations {
   getTokenAccountPools: {
     parameters: {
       path: {
-        /** The key for the token account. The exact format may vary based on the token connector use. */
+        /** The key for the token account. The exact format may vary based on the token connector use */
         key: string;
       };
       header: {
@@ -20250,7 +20961,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -20524,7 +21236,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -21258,7 +21971,8 @@ export interface operations {
                 | "token_pool"
                 | "token_transfer"
                 | "contract_invoke"
-                | "token_approval";
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
@@ -21431,7 +22145,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           }[];
         };
       };
@@ -21503,7 +22218,8 @@ export interface operations {
               | "token_pool"
               | "token_transfer"
               | "contract_invoke"
-              | "token_approval";
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -21631,6 +22347,7 @@ export interface operations {
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
               | "sharedstorage_download_batch"
               | "sharedstorage_download_blob"
               | "dataexchange_send_batch"
@@ -21810,6 +22527,45 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Resolves an input key to a signing key */
+  postVerifiersResolve: {
+    parameters: {
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * @description The type of the verifier
+             * @enum {string}
+             */
+            type?: "ethereum_address" | "fabric_msp_id" | "dx_peer_id";
+            /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
+            value?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /**
+           * @description The type of the verifier
+           * @enum {string}
+           */
+          type?: "ethereum_address" | "fabric_msp_id" | "dx_peer_id";
+          /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
+          value?: string;
+        };
+      };
     };
   };
   /** Gets a list of the current WebSocket connections to this node */
