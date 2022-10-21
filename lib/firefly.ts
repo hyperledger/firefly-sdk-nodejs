@@ -67,6 +67,8 @@ import {
   FireFlyBlockchainEventResponse,
   FireFlyDataBlobRequest,
   FireFlyDataBlobRequestDefaults,
+  FireFlyVerifierResolveRequest,
+  FireFlyVerifierResolveResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -299,6 +301,11 @@ export default class FireFly extends HttpBase {
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
+  }
+
+  resolveVerifier(input: FireFlyVerifierResolveRequest, namespace?: string): Promise<FireFlyVerifierResolveResponse> {
+    namespace = namespace ?? this.options.namespace;
+    return this.createOne<FireFlyVerifierResolveResponse>(`/namespaces/${namespace}/verifiers/resolve`, input);
   }
 
   getTokenTransfers(

@@ -106,6 +106,15 @@ export type FireFlyEventResponse = Required<
   operations['getEventByID']['responses']['200']['content']['application/json']
 >;
 
+// Verifier
+
+export type FireFlyVerifierResolveRequest = Required<
+  operations['postVerifiersResolveNamespace']['requestBody']['content']['application/json']
+>;
+
+export type FireFlyVerifierResolveResponse = Required<
+  operations['postVerifiersResolveNamespace']['responses']['200']['content']['application/json']
+>;
 export interface FireFlySubscriptionBase {
   filter?: {
     events?: string;
