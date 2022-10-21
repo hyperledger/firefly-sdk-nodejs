@@ -304,8 +304,7 @@ export default class FireFly extends HttpBase {
   }
 
   resolveVerifier(input: FireFlyVerifierResolveRequest, namespace?: string): Promise<FireFlyVerifierResolveResponse> {
-    namespace = namespace ?? this.options.namespace;
-    return this.createOne<FireFlyVerifierResolveResponse>(`/namespaces/${namespace}/verifiers/resolve`, input);
+    return this.createOne<FireFlyVerifierResolveResponse>(`/verifiers/resolve`, input);
   }
 
   getTokenTransfers(
