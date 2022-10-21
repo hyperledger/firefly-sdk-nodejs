@@ -67,6 +67,8 @@ import {
   FireFlyBlockchainEventResponse,
   FireFlyDataBlobRequest,
   FireFlyDataBlobRequestDefaults,
+  FireFlyVerifierResolveRequest,
+  FireFlyVerifierResolveResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -301,6 +303,11 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
   }
 
+  resolveVerifier(input: FireFlyVerifierResolveRequest, namespace?: string): Promise<FireFlyVerifierResolveResponse> {
+    namespace = namespace ?? this.options.namespace;
+    return this.createOne<FireFlyVerifierResolveResponse>(`/namespaces/${namespace}/verifiers/resolve`, input);
+  }
+
   getTokenTransfers(
     filter?: FireFlyTokenTransferFilter,
     options?: FireFlyGetOptions,
@@ -504,10 +511,11 @@ export default class FireFly extends HttpBase {
 
   getBlockchainEvent(
     id: string,
-    options?: FireFlyGetOptions,
   ): Promise<FireFlyBlockchainEventResponse | undefined> {
     return this.getOne<FireFlyBlockchainEventResponse>(`/blockchainevents/${id}`, options);
   }
+
+
 
   listen(
     subscriptions: string | string[] | FireFlySubscriptionBase,
