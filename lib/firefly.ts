@@ -511,11 +511,10 @@ export default class FireFly extends HttpBase {
 
   getBlockchainEvent(
     id: string,
+    options?: FireFlyGetOptions,
   ): Promise<FireFlyBlockchainEventResponse | undefined> {
     return this.getOne<FireFlyBlockchainEventResponse>(`/blockchainevents/${id}`, options);
   }
-
-
 
   listen(
     subscriptions: string | string[] | FireFlySubscriptionBase,
