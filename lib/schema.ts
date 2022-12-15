@@ -16471,97 +16471,14 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The blockchain identity that is granted the approval */
-          operator?: string;
           /**
            * Format: uuid
-           * @description The UUID the token pool this approval applies to
+           * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
            */
+          message?: string;
+          /** @description The blockchain identity that is granted the approval */
+          operator?: string;
+          /** @description The name or UUID of a token pool. Required if more than one pool exists. */
           pool?: string;
         };
       };
@@ -16812,92 +16729,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -17106,92 +16946,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -17868,92 +17631,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -21387,97 +21073,14 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The blockchain identity that is granted the approval */
-          operator?: string;
           /**
            * Format: uuid
-           * @description The UUID the token pool this approval applies to
+           * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
            */
+          message?: string;
+          /** @description The blockchain identity that is granted the approval */
+          operator?: string;
+          /** @description The name or UUID of a token pool. Required if more than one pool exists. */
           pool?: string;
         };
       };
@@ -21720,92 +21323,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The index of the token within the pool that this transfer applies to */
           tokenIndex?: string;
@@ -22002,92 +21528,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -22746,92 +22195,15 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
-          message?: {
-            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
-            data?: {
-              /** @description The optional datatype to use for validation of the in-line data */
-              datatype?: {
-                /** @description The name of the datatype */
-                name?: string;
-                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
-                version?: string;
-              };
-              /**
-               * Format: uuid
-               * @description The UUID of the referenced data resource
-               */
-              id?: string;
-              /** @description The data validator type to use for in-line data */
-              validator?: string;
-              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
-              value?: any;
-            }[];
-            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
-            group?: {
-              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
-              members?: {
-                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
-                identity?: string;
-                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
-                node?: string;
-              }[];
-              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
-              name?: string;
-            };
-            /** @description The message header contains all fields that are used to build the message hash */
-            header?: {
-              /** @description The DID of identity of the submitter */
-              author?: string;
-              /**
-               * Format: uuid
-               * @description The correlation ID of the message. Set this when a message is a response to another message
-               */
-              cid?: string;
-              /**
-               * Format: byte
-               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
-               */
-              group?: string;
-              /** @description The on-chain signing key used to sign the transaction */
-              key?: string;
-              /** @description The message tag indicates the purpose of the message to the applications that process it */
-              tag?: string;
-              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
-              topics?: string[];
-              /**
-               * @description The type of transaction used to order/deliver this message
-               * @enum {string}
-               */
-              txtype?:
-                | "none"
-                | "unpinned"
-                | "batch_pin"
-                | "network_action"
-                | "token_pool"
-                | "token_transfer"
-                | "contract_deploy"
-                | "contract_invoke"
-                | "token_approval"
-                | "data_publish";
-              /**
-               * @description The type of the message
-               * @enum {string}
-               */
-              type?:
-                | "definition"
-                | "broadcast"
-                | "private"
-                | "groupinit"
-                | "transfer_broadcast"
-                | "transfer_private"
-                | "approval_broadcast"
-                | "approval_private";
-            };
-            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
-            idempotencyKey?: string;
-          };
-          /** @description The name or UUID of a token pool */
+          /**
+           * Format: uuid
+           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
+           */
+          message?: string;
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this transfer applies to
+           */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
