@@ -69,6 +69,7 @@ import {
   FireFlyDataBlobRequestDefaults,
   FireFlyVerifierResolveRequest,
   FireFlyVerifierResolveResponse,
+  FireFlyTokenApprovalRequest,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -296,6 +297,13 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/transfers', transfer, options);
   }
 
+  approveTokens(
+    approval: FireFlyTokenApprovalRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyTokenTransferResponse> {
+    return this.createOne<FireFlyTokenTransferResponse>('/tokens/approvals', approval, options);
+  }
+
   burnTokens(
     transfer: FireFlyTokenBurnRequest,
     options?: FireFlyCreateOptions,
@@ -303,7 +311,10 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/burn', transfer, options);
   }
 
-  resolveVerifier(input: FireFlyVerifierResolveRequest, namespace?: string): Promise<FireFlyVerifierResolveResponse> {
+  resolveVerifier(
+    input: FireFlyVerifierResolveRequest,
+    namespace?: string,
+  ): Promise<FireFlyVerifierResolveResponse> {
     return this.createOne<FireFlyVerifierResolveResponse>(`/verifiers/resolve`, input);
   }
 

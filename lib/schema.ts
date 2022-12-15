@@ -56,6 +56,10 @@ export interface paths {
     /** Gets a JSON object containing statistics data that can be used to build a graphical representation of recent activity in a given database collection */
     get: operations["getChartHistogram"];
   };
+  "/contracts/deploy": {
+    /** Deploy a new smart contract */
+    post: operations["postContractDeploy"];
+  };
   "/contracts/interfaces": {
     /** Gets a list of contract interfaces that have been published */
     get: operations["getContractInterfaces"];
@@ -265,6 +269,10 @@ export interface paths {
   "/namespaces/{ns}/charts/histogram/{collection}": {
     /** Gets a JSON object containing statistics data that can be used to build a graphical representation of recent activity in a given database collection */
     get: operations["getChartHistogramNamespace"];
+  };
+  "/namespaces/{ns}/contracts/deploy": {
+    /** Deploy a new smart contract */
+    post: operations["postContractDeployNamespace"];
   };
   "/namespaces/{ns}/contracts/interfaces": {
     /** Gets a list of contract interfaces that have been published */
@@ -1183,6 +1191,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -1246,6 +1255,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -1271,6 +1281,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
@@ -1307,6 +1319,8 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         location?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         signature?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -1518,6 +1532,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /** @description The blockchain signing key that will sign the invocation. Defaults to the first signing key of the organization that operates the node */
@@ -2039,6 +2055,168 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Deploy a new smart contract */
+  postContractDeploy: {
+    parameters: {
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description The smart contract to deploy. This should be pre-compiled if required by the blockchain connector */
+          contract?: any;
+          /** @description The definition of the smart contract */
+          definition?: any;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+          /** @description An optional array of inputs passed to the smart contract's constructor, if applicable */
+          input?: any[];
+          /** @description The blockchain signing key that will be used to deploy the contract. Defaults to the first signing key of the organization that operates the node */
+          key?: string;
+          /** @description A map of named inputs that will be passed through to the blockchain connector */
+          options?: { [key: string]: any };
+        };
+      };
     };
   };
   /** Gets a list of contract interfaces that have been published */
@@ -2736,6 +2914,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -2799,6 +2978,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -2824,6 +3004,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -2884,6 +3066,8 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         location?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         signature?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3217,6 +3401,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -3558,11 +3744,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3674,7 +3864,10 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": { [key: string]: unknown };
+        "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+        };
       };
     };
   };
@@ -3701,11 +3894,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3817,6 +4014,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -3830,8 +4028,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -3876,11 +4078,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3992,7 +4198,10 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": { [key: string]: unknown };
+        "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+        };
       };
     };
   };
@@ -4347,7 +4556,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -4430,7 +4641,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           };
         };
       };
@@ -5293,11 +5506,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -5413,6 +5630,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -5426,8 +5644,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -5586,6 +5808,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -5599,8 +5822,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -5794,7 +6021,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -5830,6 +6059,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -5843,6 +6074,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -5940,6 +6172,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -5953,8 +6186,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -6048,6 +6285,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -6061,8 +6299,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -6131,6 +6373,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -6144,8 +6387,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -6243,6 +6490,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -6256,8 +6504,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -6356,6 +6608,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -6369,8 +6622,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -6456,6 +6713,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -6469,8 +6727,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -6604,6 +6866,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -6617,8 +6880,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -6704,6 +6971,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -6717,8 +6985,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -7227,6 +7499,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -7290,6 +7563,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -7315,6 +7589,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -7383,6 +7659,8 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         location?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         signature?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -7626,6 +7904,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -8193,6 +8473,172 @@ export interface operations {
         };
       };
       default: unknown;
+    };
+  };
+  /** Deploy a new smart contract */
+  postContractDeployNamespace: {
+    parameters: {
+      path: {
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /**
+             * Format: date-time
+             * @description The time the operation was created
+             */
+            created?: string;
+            /** @description Any error reported back from the plugin for this operation */
+            error?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the operation
+             */
+            id?: string;
+            /** @description The input to this operation */
+            input?: { [key: string]: any };
+            /** @description The namespace of the operation */
+            namespace?: string;
+            /** @description Any output reported back from the plugin for this operation */
+            output?: { [key: string]: any };
+            /** @description The plugin responsible for performing the operation */
+            plugin?: string;
+            /**
+             * Format: uuid
+             * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
+             */
+            retry?: string;
+            /** @description The current status of the operation */
+            status?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly transaction the operation is part of
+             */
+            tx?: string;
+            /**
+             * @description The type of the operation
+             * @enum {string}
+             */
+            type?:
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
+            /**
+             * Format: date-time
+             * @description The last update time of the operation
+             */
+            updated?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description The smart contract to deploy. This should be pre-compiled if required by the blockchain connector */
+          contract?: any;
+          /** @description The definition of the smart contract */
+          definition?: any;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+          /** @description An optional array of inputs passed to the smart contract's constructor, if applicable */
+          input?: any[];
+          /** @description The blockchain signing key that will be used to deploy the contract. Defaults to the first signing key of the organization that operates the node */
+          key?: string;
+          /** @description A map of named inputs that will be passed through to the blockchain connector */
+          options?: { [key: string]: any };
+        };
+      };
     };
   };
   /** Gets a list of contract interfaces that have been published */
@@ -8910,6 +9356,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -8973,6 +9420,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -8998,6 +9446,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -9062,6 +9512,8 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         location?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         signature?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -9407,6 +9859,8 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
           input?: { [key: string]: any };
           /**
@@ -9760,11 +10214,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -9878,7 +10336,10 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": { [key: string]: unknown };
+        "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+        };
       };
     };
   };
@@ -9907,11 +10368,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10023,6 +10488,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -10036,8 +10502,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -10084,11 +10554,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10202,7 +10676,10 @@ export interface operations {
     };
     requestBody: {
       content: {
-        "application/json": { [key: string]: unknown };
+        "application/json": {
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
+        };
       };
     };
   };
@@ -10571,7 +11048,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -10656,7 +11135,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           };
         };
       };
@@ -11547,11 +12028,15 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        datahash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         group?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         key?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11667,6 +12152,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -11680,8 +12166,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -11842,6 +12332,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -11855,8 +12346,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -12054,7 +12549,9 @@ export interface operations {
               | "contract_api_confirmed"
               | "blockchain_event_received"
               | "blockchain_invoke_op_succeeded"
-              | "blockchain_invoke_op_failed";
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -12092,6 +12589,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -12105,6 +12604,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -12211,6 +12711,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -12224,8 +12725,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -12324,6 +12829,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -12337,8 +12843,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -12424,6 +12934,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -12437,8 +12948,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -12540,6 +13055,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -12553,8 +13069,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -12653,6 +13173,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -12666,8 +13187,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -12753,6 +13278,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -12766,8 +13292,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -12905,6 +13435,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -12918,8 +13449,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
             /** @description The local namespace of the message */
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
@@ -13005,6 +13540,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -13018,8 +13554,12 @@ export interface operations {
               | "private"
               | "groupinit"
               | "transfer_broadcast"
-              | "transfer_private";
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
+          /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+          idempotencyKey?: string;
         };
       };
     };
@@ -14251,6 +14791,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -14332,6 +14873,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -14413,6 +14955,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -15670,6 +16213,10 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         localid?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        message?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        messagehash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         operator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pool?: string;
@@ -15725,6 +16272,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -15800,6 +16357,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -15855,6 +16422,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -15890,8 +16467,95 @@ export interface operations {
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
           config?: { [key: string]: any };
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
+          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description The blockchain identity that is granted the approval */
           operator?: string;
           /**
@@ -16144,6 +16808,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -16210,6 +16876,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -16223,8 +16890,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -16431,6 +17102,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -16497,6 +17170,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -16510,8 +17184,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -16787,6 +17465,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
           connector?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -17184,6 +17864,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -17250,6 +17932,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -17263,8 +17946,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -17385,6 +18072,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
@@ -17417,6 +18106,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -17430,6 +18121,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -17460,6 +18152,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
@@ -17492,6 +18186,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -17505,6 +18201,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -17636,6 +18333,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -19059,6 +19757,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -19138,6 +19837,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -19217,6 +19917,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
@@ -20432,6 +21133,10 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         localid?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        message?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        messagehash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         operator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pool?: string;
@@ -20487,6 +21192,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -20558,6 +21273,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -20613,6 +21338,16 @@ export interface operations {
              * @description The UUID of this token approval, in the local FireFly node
              */
             localId?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            message?: string;
+            /**
+             * Format: byte
+             * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
+             */
+            messageHash?: string;
             /** @description The namespace for the approval, which must match the namespace of the token pool */
             namespace?: string;
             /** @description The blockchain identity that is granted the approval */
@@ -20648,8 +21383,95 @@ export interface operations {
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
           config?: { [key: string]: any };
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
+          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description The blockchain identity that is granted the approval */
           operator?: string;
           /**
@@ -20894,6 +21716,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -20960,6 +21784,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -20973,8 +21798,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -21169,6 +21998,8 @@ export interface operations {
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
           config?: { [key: string]: any };
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -21235,6 +22066,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -21248,8 +22080,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -21517,6 +22353,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
           connector?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -21904,6 +22742,8 @@ export interface operations {
           config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
+          /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
+          idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -21970,6 +22810,7 @@ export interface operations {
                 | "network_action"
                 | "token_pool"
                 | "token_transfer"
+                | "contract_deploy"
                 | "contract_invoke"
                 | "token_approval"
                 | "data_publish";
@@ -21983,8 +22824,12 @@ export interface operations {
                 | "private"
                 | "groupinit"
                 | "transfer_broadcast"
-                | "transfer_private";
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
           };
           /** @description The name or UUID of a token pool */
           pool?: string;
@@ -22099,6 +22944,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
@@ -22131,6 +22978,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -22144,6 +22993,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -22172,6 +23022,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        idempotencykey?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
@@ -22204,6 +23056,8 @@ export interface operations {
              * @description The UUID of the FireFly transaction
              */
             id?: string;
+            /** @description An optional unique identifier for a transaction. Cannot be duplicated within a namespace, thus allowing idempotent submission of transactions to the API */
+            idempotencyKey?: string;
             /** @description The namespace of the FireFly transaction */
             namespace?: string;
             /**
@@ -22217,6 +23071,7 @@ export interface operations {
               | "network_action"
               | "token_pool"
               | "token_transfer"
+              | "contract_deploy"
               | "contract_invoke"
               | "token_approval"
               | "data_publish";
@@ -22344,6 +23199,7 @@ export interface operations {
             type?:
               | "blockchain_pin_batch"
               | "blockchain_network_action"
+              | "blockchain_deploy"
               | "blockchain_invoke"
               | "sharedstorage_upload_batch"
               | "sharedstorage_upload_blob"
