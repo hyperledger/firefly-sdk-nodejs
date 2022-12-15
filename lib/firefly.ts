@@ -77,7 +77,7 @@ export default class FireFly extends HttpBase {
   private queue = Promise.resolve();
 
   async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
-    const response = await this.rootHttp.get<FireFlyStatusResponse>('/status', mapConfig(options));
+    const response = await this.http.get<FireFlyStatusResponse>('/status', mapConfig(options));
     return response.data;
   }
 
