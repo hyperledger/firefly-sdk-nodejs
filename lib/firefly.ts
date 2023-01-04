@@ -203,6 +203,7 @@ export default class FireFly extends HttpBase {
     blob: string | Buffer | Readable,
     blobOptions?: FormData.AppendOptions,
     dataOptions?: FireFlyDataBlobRequest,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyDataResponse> {
     dataOptions = { ...FireFlyDataBlobRequestDefaults, ...dataOptions };
     const formData = new FormData();
@@ -213,9 +214,12 @@ export default class FireFly extends HttpBase {
       }
     }
     formData.append('file', blob, blobOptions);
+    const requestOptions = mapConfig(options);
     const response = await this.wrapError(
       this.http.post<FireFlyDataResponse>('/data', formData, {
+        ...requestOptions,
         headers: {
+          ...requestOptions.headers,
           ...formData.getHeaders(),
           'Content-Length': formData.getLengthSync(),
         },
@@ -341,10 +345,12 @@ export default class FireFly extends HttpBase {
 
   generateContractInterface(
     request: FireFlyContractGenerateRequest,
+    options?: FireFlyCreateOptions,
   ): Promise<FireFlyContractInterfaceRequest> {
     return this.createOne<FireFlyContractInterfaceRequest>(
       '/contracts/interfaces/generate',
       request,
+      options,
     );
   }
 
