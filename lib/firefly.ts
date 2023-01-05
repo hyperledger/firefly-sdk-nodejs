@@ -71,7 +71,6 @@ import {
   FireFlyVerifierResolveResponse,
   FireFlyTokenApprovalRequest,
   FireFlyNamespaceResponse,
-  FireFlyNamespacesResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -139,8 +138,8 @@ export default class FireFly extends HttpBase {
     return this.getOne<FireFlyNamespaceResponse>(`/namespaces/${name}`, undefined, options, true);
   }
 
-  getNamespaces(options?: FireFlyGetOptions): Promise<FireFlyNamespacesResponse[]> {
-    return this.getMany<FireFlyNamespacesResponse[]>('/namespaces', undefined, options, true);
+  getNamespaces(options?: FireFlyGetOptions): Promise<FireFlyNamespaceResponse[]> {
+    return this.getMany<FireFlyNamespaceResponse[]>('/namespaces', undefined, options, true);
   }
 
   getDatatypes(

@@ -68,9 +68,6 @@ export type FireFlyNamespaceResponse = Required<
   operations['getNamespace']['responses']['200']['content']['application/json']
 >;
 
-export type FireFlyNamespacesResponse = Required<
-operations['getNamespaces']['responses']['200']['content']['application/json']
->;
 // Network
 
 export type FireFlyIdentityFilter = operations['getIdentities']['parameters']['query'];
