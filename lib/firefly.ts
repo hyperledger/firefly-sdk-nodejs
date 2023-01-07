@@ -78,7 +78,11 @@ import HttpBase, { mapConfig } from './http';
 export default class FireFly extends HttpBase {
   private queue = Promise.resolve();
 
-  async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
+  async getStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse | undefined> {
+    return this.getOne<FireFlyStatusResponse>(`/status`, options);
+  }
+
+  async getDefaultNamespaceStatus(options?: FireFlyGetOptions): Promise<FireFlyStatusResponse> {
     const response = await this.http.get<FireFlyStatusResponse>('/status', mapConfig(options));
     return response.data;
   }
