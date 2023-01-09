@@ -123,12 +123,14 @@ export default class FireFly extends HttpBase {
     filter?: FireFlyVerifierFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyVerifierResponse[]> {
-    namespace = namespace ?? this.options.namespace;
-    return this.getMany<FireFlyVerifierResponse[]>(
-      `/namespaces/${namespace}/verifiers`,
-      filter,
-      options,
-    );
+    return namespace
+      ? this.getMany<FireFlyVerifierResponse[]>(
+          `/namespaces/${namespace}/verifiers`,
+          filter,
+          options,
+          true,
+        )
+      : this.getMany<FireFlyVerifierResponse[]>(`/verifiers`, filter, options);
   }
 
   getNamespace(
