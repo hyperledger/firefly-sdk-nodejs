@@ -549,6 +549,7 @@ export default class FireFly extends HttpBase {
   listen(
     subscriptions: string | string[] | FireFlySubscriptionBase,
     callback: FireFlyWebSocketCallback,
+    headers?: Record<string, string>,
   ): FireFlyWebSocket {
     const options: FireFlyWebSocketOptions = {
       host: this.options.websocket.host,
@@ -559,6 +560,7 @@ export default class FireFly extends HttpBase {
       autoack: false,
       reconnectDelay: this.options.websocket.reconnectDelay,
       heartbeatInterval: this.options.websocket.heartbeatInterval,
+      headers: headers,
     };
 
     const handler: FireFlyWebSocketCallback = (socket, event) => {

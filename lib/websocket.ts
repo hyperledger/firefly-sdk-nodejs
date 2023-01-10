@@ -59,6 +59,7 @@ export class FireFlyWebSocket {
     const socket = (this.socket = new WebSocket(url, {
       auth,
       handshakeTimeout: this.options.heartbeatInterval,
+      headers: this.options.headers,
     }));
     this.closed = false;
 

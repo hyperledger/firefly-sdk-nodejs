@@ -61,6 +61,7 @@ export interface FireFlyWebSocketOptions {
   autoack: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
+  headers?: Record<string, string>;
 }
 
 // Namespace
