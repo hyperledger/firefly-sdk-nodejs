@@ -1,4 +1,6 @@
+import * as http from 'http';
 import { AxiosRequestConfig } from 'axios';
+import * as WebSocket from 'ws';
 import { operations } from './schema';
 
 /**
@@ -61,6 +63,7 @@ export interface FireFlyWebSocketOptions {
   autoack: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
+  socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs;
 }
 
 // Namespace

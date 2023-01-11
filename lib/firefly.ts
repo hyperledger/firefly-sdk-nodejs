@@ -1,5 +1,7 @@
 import { Stream, Readable } from 'stream';
+import * as http from 'http';
 import * as FormData from 'form-data';
+import * as WebSocket from 'ws';
 import {
   FireFlyStatusResponse,
   FireFlyPrivateSendOptions,
@@ -549,6 +551,7 @@ export default class FireFly extends HttpBase {
   listen(
     subscriptions: string | string[] | FireFlySubscriptionBase,
     callback: FireFlyWebSocketCallback,
+    socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs,
   ): FireFlyWebSocket {
     const options: FireFlyWebSocketOptions = {
       host: this.options.websocket.host,
@@ -559,6 +562,7 @@ export default class FireFly extends HttpBase {
       autoack: false,
       reconnectDelay: this.options.websocket.reconnectDelay,
       heartbeatInterval: this.options.websocket.heartbeatInterval,
+      socketOptions: socketOptions,
     };
 
     const handler: FireFlyWebSocketCallback = (socket, event) => {

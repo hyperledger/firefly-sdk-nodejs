@@ -57,6 +57,7 @@ export class FireFlyWebSocket {
         ? `${this.options.username}:${this.options.password}`
         : undefined;
     const socket = (this.socket = new WebSocket(url, {
+      ...this.options.socketOptions,
       auth,
       handshakeTimeout: this.options.heartbeatInterval,
     }));
