@@ -21,14 +21,16 @@ export class FireFlyError extends Error {
   }
 }
 
-export interface FireFlyGetOptions {
-  confirm: undefined;
+interface FireFlyBaseHttpOptions {
   requestConfig?: AxiosRequestConfig;
 }
 
-export interface FireFlyCreateOptions {
+export interface FireFlyGetOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyUpdateOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyReplaceOptions extends FireFlyBaseHttpOptions {}
+
+export interface FireFlyCreateOptions extends FireFlyBaseHttpOptions {
   confirm?: boolean;
-  requestConfig?: AxiosRequestConfig;
 }
 
 export interface FireFlyOptionsInput {
@@ -80,6 +82,8 @@ export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['qu
 
 export type FireFlyIdentityRequest =
   operations['postNewIdentity']['requestBody']['content']['application/json'];
+export type FireFlyUpdateIdentityRequest =
+  operations['patchUpdateIdentity']['requestBody']['content']['application/json'];
 
 export type FireFlyIdentityResponse = Required<
   operations['getIdentityByID']['responses']['200']['content']['application/json']

@@ -5,6 +5,8 @@ import {
   FireFlyCreateOptions,
   FireFlyGetOptions,
   FireFlyError,
+  FireFlyReplaceOptions,
+  FireFlyUpdateOptions,
 } from './interfaces';
 
 function isSuccess(status: number) {
@@ -12,16 +14,27 @@ function isSuccess(status: number) {
 }
 
 export function mapConfig(
-  options: FireFlyGetOptions | FireFlyCreateOptions | undefined,
+  options:
+    | FireFlyGetOptions
+    | FireFlyUpdateOptions
+    | FireFlyReplaceOptions
+    | FireFlyCreateOptions
+    | undefined,
   params?: any,
 ): AxiosRequestConfig {
-  return {
+  const config: AxiosRequestConfig = {
     ...options?.requestConfig,
-    params: {
-      ...params,
-      confirm: options?.confirm,
-    },
+    params,
   };
+  if (options !== undefined) {
+    if ('confirm' in options) {
+      config.params = {
+        ...config.params,
+        confirm: options.confirm,
+      };
+    }
+  }
+  return config;
 }
 
 export default class HttpBase {
@@ -92,8 +105,13 @@ export default class HttpBase {
     return response.data;
   }
 
-  protected async replaceOne<T>(url: string, data: any) {
-    const response = await this.wrapError(this.http.put<T>(url, data));
+  protected async updateOne<T>(url: string, data: any, options?: FireFlyUpdateOptions) {
+    const response = await this.wrapError(this.http.patch<T>(url, data, mapConfig(options)));
+    return response.data;
+  }
+
+  protected async replaceOne<T>(url: string, data: any, options?: FireFlyReplaceOptions) {
+    const response = await this.wrapError(this.http.put<T>(url, data, mapConfig(options)));
     return response.data;
   }
 
