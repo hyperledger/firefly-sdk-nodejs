@@ -107,6 +107,8 @@ export interface paths {
   "/data/{dataid}": {
     /** Gets a data item by its ID, including metadata about this item */
     get: operations["getDataByID"];
+    /** Deletes a data item by its ID, including metadata about this item */
+    delete: operations["deleteData"];
   };
   "/data/{dataid}/blob": {
     /** Downloads the original file that was previously uploaded or received */
@@ -321,6 +323,8 @@ export interface paths {
   "/namespaces/{ns}/data/{dataid}": {
     /** Gets a data item by its ID, including metadata about this item */
     get: operations["getDataByIDNamespace"];
+    /** Deletes a data item by its ID, including metadata about this item */
+    delete: operations["deleteDataNamespace"];
   };
   "/namespaces/{ns}/data/{dataid}/blob": {
     /** Downloads the original file that was previously uploaded or received */
@@ -1038,6 +1042,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -2254,6 +2288,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -2364,6 +2428,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -2459,6 +2553,20 @@ export interface operations {
         "application/json": {
           /** @description A description of the smart contract this FFI represents */
           description?: string;
+          /** @description An array of smart contract error definitions */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An array of smart contract event definitions */
           events?: {
             /** @description A description of the smart contract event */
@@ -2529,6 +2637,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -2645,6 +2783,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -2751,6 +2919,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -3004,6 +3202,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -3401,6 +3613,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -3721,11 +3947,33 @@ export interface operations {
       default: unknown;
     };
   };
+  /** Deletes a data item by its ID, including metadata about this item */
+  deleteData: {
+    parameters: {
+      path: {
+        /** The data item ID */
+        dataid: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
+        };
+      };
+      default: unknown;
+    };
+  };
   /** Downloads the original file that was previously uploaded or received */
   getDataBlob: {
     parameters: {
       path: {
-        /** The blob ID */
+        /** The data item ID */
         dataid: string;
       };
       header: {
@@ -7344,6 +7592,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -7589,6 +7867,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -7904,6 +8196,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -8680,6 +8986,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -8794,6 +9130,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -8889,6 +9255,20 @@ export interface operations {
         "application/json": {
           /** @description A description of the smart contract this FFI represents */
           description?: string;
+          /** @description An array of smart contract error definitions */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An array of smart contract event definitions */
           events?: {
             /** @description A description of the smart contract event */
@@ -8961,6 +9341,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -9079,6 +9489,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -9189,6 +9629,36 @@ export interface operations {
           "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
             /** @description An array of smart contract event definitions */
             events?: {
               /** @description A description of the smart contract event */
@@ -9446,6 +9916,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -9859,6 +10343,20 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": {
+          /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
+          errors?: {
+            /** @description A description of the smart contract error */
+            description?: string;
+            /** @description The name of the error */
+            name?: string;
+            /** @description An array of error parameter/argument definitions */
+            params?: {
+              /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+              name?: string;
+              /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+              schema?: any;
+            }[];
+          }[];
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -10189,11 +10687,35 @@ export interface operations {
       default: unknown;
     };
   };
+  /** Deletes a data item by its ID, including metadata about this item */
+  deleteDataNamespace: {
+    parameters: {
+      path: {
+        /** The data item ID */
+        dataid: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
+        };
+      };
+      default: unknown;
+    };
+  };
   /** Downloads the original file that was previously uploaded or received */
   getDataBlobNamespace: {
     parameters: {
       path: {
-        /** The blob ID */
+        /** The data item ID */
         dataid: string;
         /** The namespace which scopes this request */
         ns: string;
@@ -14824,6 +15346,10 @@ export interface operations {
         /** The namespace which scopes this request */
         ns: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -16987,6 +17513,10 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        interface?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        interfaceformat?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         locator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         message?: string;
@@ -17039,6 +17569,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -17048,6 +17595,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -17058,7 +17607,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17119,6 +17668,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -17128,6 +17694,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -17138,7 +17706,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17179,6 +17747,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -17188,6 +17773,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -17198,7 +17785,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17230,6 +17817,18 @@ export interface operations {
           connector?: string;
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
+          /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+          interface?: {
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface
+             */
+            id?: string;
+            /** @description The name of the FireFly interface */
+            name?: string;
+            /** @description The version of the FireFly interface */
+            version?: string;
+          };
           /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -17280,6 +17879,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -17289,6 +17905,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -17299,7 +17917,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -19474,6 +20092,10 @@ export interface operations {
         /** The operation ID key to get */
         opid: string;
       };
+      query: {
+        /** When set, the API will return additional status information if available */
+        fetchstatus?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
         "Request-Timeout"?: string;
@@ -21565,6 +22187,10 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        interface?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        interfaceformat?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         locator?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         message?: string;
@@ -21617,6 +22243,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -21626,6 +22269,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -21636,7 +22281,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -21693,6 +22338,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -21702,6 +22364,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -21712,7 +22376,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -21753,6 +22417,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -21762,6 +22443,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -21772,7 +22455,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -21804,6 +22487,18 @@ export interface operations {
           connector?: string;
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
+          /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+          interface?: {
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface
+             */
+            id?: string;
+            /** @description The name of the FireFly interface */
+            name?: string;
+            /** @description The version of the FireFly interface */
+            version?: string;
+          };
           /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -21852,6 +22547,23 @@ export interface operations {
             id?: string;
             /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
             info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
@@ -21861,6 +22573,8 @@ export interface operations {
              * @description The UUID of the broadcast message used to inform the network to index this pool
              */
             message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
             /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
             name?: string;
             /** @description The namespace for the token pool */
@@ -21871,7 +22585,7 @@ export interface operations {
              * @description The current state of the token pool
              * @enum {string}
              */
-            state?: "unknown" | "pending" | "confirmed";
+            state?: "pending" | "confirmed";
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */

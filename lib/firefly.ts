@@ -73,6 +73,10 @@ import {
   FireFlyVerifierResolveResponse,
   FireFlyTokenApprovalRequest,
   FireFlyNamespaceResponse,
+  FireFlyUpdateIdentityRequest,
+  FireFlyReplaceOptions,
+  FireFlyUpdateOptions,
+  FireFlyDeleteOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -93,10 +97,10 @@ export default class FireFly extends HttpBase {
   }
 
   getIdentity(
-    nameOrId: string,
+    id: string,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyIdentityResponse | undefined> {
-    return this.getOne<FireFlyIdentityResponse>(`/identities/${nameOrId}`, options);
+    return this.getOne<FireFlyIdentityResponse>(`/identities/${id}`, options);
   }
 
   createIdentity(
@@ -106,6 +110,14 @@ export default class FireFly extends HttpBase {
     return this.createOne<FireFlyIdentityResponse>(`/identities`, identity, options);
   }
 
+  updateIdentity(
+    id: string,
+    update: FireFlyUpdateIdentityRequest,
+    options?: FireFlyUpdateOptions,
+  ): Promise<FireFlyIdentityResponse> {
+    return this.updateOne<FireFlyIdentityResponse>(`/identities/${id}`, update, options);
+  }
+
   getOrganizations(
     filter?: FireFlyOrganizationFilter,
     options?: FireFlyGetOptions,
@@ -113,11 +125,25 @@ export default class FireFly extends HttpBase {
     return this.getMany<FireFlyOrganizationResponse[]>('/network/organizations', filter, options);
   }
 
+  getOrganization(
+    nameOrId: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyIdentityResponse | undefined> {
+    return this.getOne<FireFlyIdentityResponse>(`/network/organizations/${nameOrId}`, options);
+  }
+
   getNodes(
     filter?: FireFlyNodeFilter,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyNodeResponse[]> {
     return this.getMany<FireFlyNodeResponse[]>('/network/nodes', filter, options);
+  }
+
+  getNode(
+    nameOrId: string,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyIdentityResponse | undefined> {
+    return this.getOne<FireFlyIdentityResponse>(`/network/nodes/${nameOrId}`, options);
   }
 
   getVerifiers(
@@ -175,12 +201,15 @@ export default class FireFly extends HttpBase {
     return this.getMany<FireFlySubscriptionResponse[]>('/subscriptions', filter, options);
   }
 
-  replaceSubscription(sub: FireFlySubscriptionRequest): Promise<FireFlySubscriptionResponse> {
-    return this.replaceOne<FireFlySubscriptionResponse>('/subscriptions', sub);
+  replaceSubscription(
+    sub: FireFlySubscriptionRequest,
+    options?: FireFlyReplaceOptions,
+  ): Promise<FireFlySubscriptionResponse> {
+    return this.replaceOne<FireFlySubscriptionResponse>('/subscriptions', sub, options);
   }
 
-  async deleteSubscription(subId: string) {
-    await this.deleteOne(`/subscriptions/${subId}`);
+  async deleteSubscription(subId: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/subscriptions/${subId}`, options);
   }
 
   getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
@@ -246,6 +275,10 @@ export default class FireFly extends HttpBase {
 
   publishDataBlob(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
     return this.createOne<FireFlyDataResponse>(`/data/${id}/blob/publish`, {}, options);
+  }
+
+  async deleteData(id: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/data/${id}`, options);
   }
 
   getBatches(
