@@ -28,6 +28,7 @@ interface FireFlyBaseHttpOptions {
 export interface FireFlyGetOptions extends FireFlyBaseHttpOptions {}
 export interface FireFlyUpdateOptions extends FireFlyBaseHttpOptions {}
 export interface FireFlyReplaceOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyDeleteOptions extends FireFlyBaseHttpOptions {}
 
 export interface FireFlyCreateOptions extends FireFlyBaseHttpOptions {
   confirm?: boolean;

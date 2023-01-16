@@ -7,6 +7,7 @@ import {
   FireFlyError,
   FireFlyReplaceOptions,
   FireFlyUpdateOptions,
+  FireFlyDeleteOptions,
 } from './interfaces';
 
 function isSuccess(status: number) {
@@ -19,6 +20,7 @@ export function mapConfig(
     | FireFlyUpdateOptions
     | FireFlyReplaceOptions
     | FireFlyCreateOptions
+    | FireFlyDeleteOptions
     | undefined,
   params?: any,
 ): AxiosRequestConfig {
@@ -115,8 +117,8 @@ export default class HttpBase {
     return response.data;
   }
 
-  protected async deleteOne<T>(url: string) {
-    await this.wrapError(this.http.delete<T>(url));
+  protected async deleteOne<T>(url: string, options?: FireFlyDeleteOptions) {
+    await this.wrapError(this.http.delete<T>(url, mapConfig(options)));
   }
 
   onError(handler: (err: FireFlyError) => void) {

@@ -76,6 +76,7 @@ import {
   FireFlyUpdateIdentityRequest,
   FireFlyReplaceOptions,
   FireFlyUpdateOptions,
+  FireFlyDeleteOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -207,8 +208,8 @@ export default class FireFly extends HttpBase {
     return this.replaceOne<FireFlySubscriptionResponse>('/subscriptions', sub, options);
   }
 
-  async deleteSubscription(subId: string) {
-    await this.deleteOne(`/subscriptions/${subId}`);
+  async deleteSubscription(subId: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/subscriptions/${subId}`, options);
   }
 
   getData(id: string, options?: FireFlyGetOptions): Promise<FireFlyDataResponse | undefined> {
@@ -274,6 +275,10 @@ export default class FireFly extends HttpBase {
 
   publishDataBlob(id: string, options?: FireFlyCreateOptions): Promise<FireFlyDataResponse> {
     return this.createOne<FireFlyDataResponse>(`/data/${id}/blob/publish`, {}, options);
+  }
+
+  async deleteData(id: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/data/${id}`, options);
   }
 
   getBatches(
