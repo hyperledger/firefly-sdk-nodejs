@@ -148,7 +148,11 @@ export class FireFlyWebSocket {
     if (!this.reconnectTimer) {
       this.close();
       this.logger.error(`Websocket closed: ${msg}`);
-      this.reconnectTimer = setTimeout(() => this.connect(), this.options.reconnectDelay);
+      if (this.options.reconnectDelay === -1) {
+        // do not attempt to reconnect
+      } else {
+        this.reconnectTimer = setTimeout(() => this.connect(), this.options.reconnectDelay);
+      }
     }
   }
 
