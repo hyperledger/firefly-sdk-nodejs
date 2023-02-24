@@ -510,6 +510,10 @@ export default class FireFly extends HttpBase {
     return this.getMany<FireFlyContractListenerResponse[]>('/contracts/listeners', filter, options);
   }
 
+  async deleteContractListener(id: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/contracts/listeners/${id}`, options);
+  }
+
   getContractAPIListeners(
     apiName: string,
     eventPath: string,

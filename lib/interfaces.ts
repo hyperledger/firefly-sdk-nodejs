@@ -21,6 +21,8 @@ export class FireFlyError extends Error {
   }
 }
 
+export class FireFlyIdempotencyError extends FireFlyError {}
+
 interface FireFlyBaseHttpOptions {
   requestConfig?: AxiosRequestConfig;
 }
