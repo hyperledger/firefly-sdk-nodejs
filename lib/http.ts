@@ -8,6 +8,7 @@ import {
   FireFlyReplaceOptions,
   FireFlyUpdateOptions,
   FireFlyDeleteOptions,
+  FireFlyIdempotencyError,
 } from './interfaces';
 
 function isSuccess(status: number) {
@@ -74,8 +75,12 @@ export default class HttpBase {
   protected async wrapError<T>(response: Promise<AxiosResponse<T>>) {
     return response.catch((err) => {
       if (axios.isAxiosError(err)) {
-        const errorMessage = err.response?.data?.error;
-        const ffError = new FireFlyError(errorMessage ?? err.message, err, err.request.path);
+        const errorMessage = err.response?.data?.error ?? err.message;
+        const errorClass =
+          errorMessage?.includes('FF10430') || errorMessage?.includes('FF10431')
+            ? FireFlyIdempotencyError
+            : FireFlyError;
+        const ffError = new errorClass(errorMessage, err, err.request.path);
         if (this.errorHandler !== undefined) {
           this.errorHandler(ffError);
         }
