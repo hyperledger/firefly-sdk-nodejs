@@ -18,11 +18,23 @@ npm install @hyperledger/firefly-sdk
 ```typescript
 import FireFly from '@hyperledger/firefly-sdk';
 
-const firefly = new FireFly({ host: 'http://localhost:5000' });
-await firefly.sendBroadcast({
-  data: [{ value: 'test-message' }],
-});
+async function main() {
+  const firefly = new FireFly({ host: 'http://localhost:5000' });
+  await firefly.sendBroadcast({
+    data: [
+      {
+        value: 'test-message',
+      },
+    ],
+  });
+}
+
+if (require.main === module) {
+  main().catch((err) => console.error(`Error: ${err}`));
+}
 ```
+
+(This example was taken from the [examples](examples) folder where you will find some other basic samples)
 
 ## Generated schemas
 
@@ -47,7 +59,7 @@ that may be helpful to reference:
 
 Interested in contributing to the community?
 
-Check out our [Contributor Guide](https://hyperledger.github.io/firefly/contributors/contributors.html), and welcome!
+Check out our [Contributor Guide](https://hyperledger.github.io/firefly/contributors/index.html), and welcome!
 
 Please adhere to this project's [Code of Conduct](CODE_OF_CONDUCT.md).
 
