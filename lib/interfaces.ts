@@ -253,10 +253,14 @@ const balances: BalancesList = [];
 export type FireFlyTokenBalanceResponse = typeof balances[0];
 
 // Token Approvals
+
+export type FireFlyTokenApprovalFilter = operations['getTokenApprovals']['parameters']['query'];
+
 export type FireFlyTokenApprovalRequest =
   operations['postTokenApproval']['requestBody']['content']['application/json'];
 type ApprovalsList =
   operations['getTokenApprovals']['responses']['200']['content']['application/json'];
+
 const approvals: ApprovalsList = [];
 export type FireFlyTokenApprovalResponse = typeof approvals[0];
 
