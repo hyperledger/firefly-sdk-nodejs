@@ -77,6 +77,8 @@ import {
   FireFlyReplaceOptions,
   FireFlyUpdateOptions,
   FireFlyDeleteOptions,
+  FireFlyTokenApprovalFilter,
+  FireFlyTokenApprovalResponse,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -355,6 +357,13 @@ export default class FireFly extends HttpBase {
     options?: FireFlyCreateOptions,
   ): Promise<FireFlyTokenTransferResponse> {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/approvals', approval, options);
+  }
+
+  getTokenApprovals(
+    filter?: FireFlyTokenApprovalFilter,
+    options?: FireFlyGetOptions,
+  ): Promise<FireFlyTokenApprovalResponse[]> {
+    return this.getMany<FireFlyTokenApprovalResponse[]>(`/tokens/approvals`, filter, options);
   }
 
   burnTokens(
