@@ -1,4 +1,4 @@
-import { Stream, Readable } from 'stream';
+import { Readable } from 'stream';
 import * as http from 'http';
 import * as FormData from 'form-data';
 import * as WebSocket from 'ws';
@@ -225,9 +225,9 @@ export default class FireFly extends HttpBase {
     return this.getMany<FireFlyDataResponse[]>(`/data`, filter, options);
   }
 
-  async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Stream> {
+  async getDataBlob(id: string, options?: FireFlyGetOptions): Promise<Readable> {
     const response = await this.wrapError(
-      this.http.get<Stream>(`/data/${id}/blob`, {
+      this.http.get<Readable>(`/data/${id}/blob`, {
         ...mapConfig(options),
         responseType: 'stream',
       }),
