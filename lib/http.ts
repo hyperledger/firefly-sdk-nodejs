@@ -36,6 +36,12 @@ export function mapConfig(
         confirm: options.confirm,
       };
     }
+    if ('publish' in options) {
+      config.params = {
+        ...config.params,
+        publish: options.publish,
+      };
+    }
   }
   return config;
 }

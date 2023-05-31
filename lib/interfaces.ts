@@ -34,6 +34,7 @@ export interface FireFlyDeleteOptions extends FireFlyBaseHttpOptions {}
 
 export interface FireFlyCreateOptions extends FireFlyBaseHttpOptions {
   confirm?: boolean;
+  publish?: boolean;
 }
 
 export interface FireFlyOptionsInput {
