@@ -57,11 +57,12 @@ export default class HttpBase {
     this.options = this.setDefaults(options);
     this.rootHttp = axios.create({
       ...options.requestConfig,
-      baseURL: `${options.host}/api/v1`,
+      baseURL: options.baseUrl ?? `${options.host}/api/v1`,
     });
     this.http = axios.create({
       ...options.requestConfig,
-      baseURL: `${options.host}/api/v1/namespaces/${this.options.namespace}`,
+      baseURL:
+        options.namespaceBaseURL ?? `${options.host}/api/v1/namespaces/${this.options.namespace}`,
     });
   }
 
