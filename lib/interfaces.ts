@@ -42,6 +42,8 @@ export interface FireFlyOptionsInput {
   namespace?: string;
   username?: string;
   password?: string;
+  baseURL?: string;
+  namespaceBaseURL?: string;
   websocket?: {
     host?: string;
     reconnectDelay?: number;
