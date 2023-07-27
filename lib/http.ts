@@ -57,18 +57,26 @@ export default class HttpBase {
     this.options = this.setDefaults(options);
     this.rootHttp = axios.create({
       ...options.requestConfig,
-      baseURL: options.baseUrl ?? `${options.host}/api/v1`,
+      baseURL: options.baseURL,
     });
     this.http = axios.create({
       ...options.requestConfig,
-      baseURL:
-        options.namespaceBaseURL ?? `${options.host}/api/v1/namespaces/${this.options.namespace}`,
+      baseURL: options.namespaceBaseURL,
     });
   }
 
   private setDefaults(options: FireFlyOptionsInput): FireFlyOptions {
+    const baseURLSet = (options.baseURL ?? '') !== '' && (options.namespaceBaseURL ?? '' !== '');
+    if (!baseURLSet && (options.host ?? '') === '') {
+      throw new Error('Invalid options. Option host, or baseURL and namespaceBaseURL must be set.');
+    }
+
     return {
       ...options,
+      baseURL: baseURLSet ? options.baseURL : `${options.host}/api/v1`,
+      namespaceBaseURL: baseURLSet
+        ? options.namespaceBaseURL
+        : `${options.host}/api/v1/namespaces/${options.namespace}`,
       namespace: options.namespace ?? 'default',
       websocket: {
         ...options.websocket,

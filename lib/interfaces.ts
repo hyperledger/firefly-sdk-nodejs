@@ -42,7 +42,7 @@ export interface FireFlyOptionsInput {
   namespace?: string;
   username?: string;
   password?: string;
-  baseUrl?: string;
+  baseURL?: string;
   namespaceBaseURL?: string;
   websocket?: {
     host?: string;
