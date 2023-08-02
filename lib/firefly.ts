@@ -344,6 +344,10 @@ export default class FireFly extends HttpBase {
     return this.getOne<FireFlyTokenPoolResponse>(`/tokens/pools/${nameOrId}`, options);
   }
 
+  async deleteTokenPool(nameOrId: string, options?: FireFlyDeleteOptions) {
+    await this.deleteOne(`/tokens/pools/${nameOrId}`, options);
+  }
+
   mintTokens(transfer: FireFlyTokenMintRequest, options?: FireFlyCreateOptions) {
     return this.createOne<FireFlyTokenTransferResponse>('/tokens/mint', transfer, options);
   }
