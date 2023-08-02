@@ -148,27 +148,63 @@ export interface FireFlyEphemeralSubscription extends FireFlySubscriptionBase {
   namespace: string;
 }
 
-export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
-  blockchainEvent?: FireFlyBlockchainEventResponse;
-  contractAPI?: FireFlyContractAPIResponse;
-  contractInterface?: FireFlyContractInterfaceResponse;
-  datatype?: FireFlyDatatypeResponse;
-  identity?: FireFlyIdentityResponse;
-  message?: FireFlyMessageResponse;
-  tokenApproval?: FireFlyTokenApprovalResponse;
-  tokenPool?: FireFlyTokenPoolResponse;
-  tokenTransfer?: FireFlyTokenTransferResponse;
-  transaction?: FireFlyTransactionResponse;
-  operation?: FireFlyOperationResponse;
-}
+export type FireFlyEnrichedEvent = FireFlyEventResponse &
+  (
+    | {
+        type: 'transaction_submitted';
+        transaction: FireFlyTransactionResponse;
+      }
+    | {
+        type: 'message_confirmed' | 'message_rejected';
+        message: FireFlyMessageResponse;
+      }
+    | {
+        type: 'identity_confirmed' | 'identity_updated';
+        identity: FireFlyIdentityResponse;
+      }
+    | {
+        type: 'token_pool_confirmed';
+        tokenPool: FireFlyTokenPoolResponse;
+      }
+    | {
+        type: 'token_transfer_confirmed';
+        tokenTransfer: FireFlyTokenTransferResponse;
+      }
+    | {
+        type: 'token_approval_confirmed';
+        tokenApproval: FireFlyTokenApprovalResponse;
+      }
+    | {
+        type: 'contract_interface_confirmed';
+        contractInterface: FireFlyContractInterfaceResponse;
+      }
+    | {
+        type: 'contract_api_confirmed';
+        contractAPI: FireFlyContractAPIResponse;
+      }
+    | {
+        type: 'blockchain_event_received';
+        blockchainEvent: FireFlyBlockchainEventResponse;
+      }
+    | {
+        type:
+          | 'token_pool_op_failed'
+          | 'token_approval_op_failed'
+          | 'blockchain_invoke_op_succeeded'
+          | 'blockchain_invoke_op_failed'
+          | 'blockchain_contract_deploy_op_succeeded'
+          | 'blockchain_contract_deploy_op_failed';
+        operation: FireFlyOperationResponse;
+      }
+  );
 
-export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
+export type FireFlyEventDelivery = FireFlyEnrichedEvent & {
   subscription: {
     id: string;
     name: string;
     namespace: string;
   };
-}
+};
 
 // Datatypes
 
