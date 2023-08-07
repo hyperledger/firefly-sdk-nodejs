@@ -57,11 +57,11 @@ export default class HttpBase {
     this.options = this.setDefaults(options);
     this.rootHttp = axios.create({
       ...options.requestConfig,
-      baseURL: options.baseURL,
+      baseURL: this.options.baseURL,
     });
     this.http = axios.create({
       ...options.requestConfig,
-      baseURL: options.namespaceBaseURL,
+      baseURL: this.options.namespaceBaseURL,
     });
   }
 
@@ -70,7 +70,9 @@ export default class HttpBase {
     if (!baseURLSet && (options.host ?? '') === '') {
       throw new Error('Invalid options. Option host, or baseURL and namespaceBaseURL must be set.');
     }
-
+    if ((options.host ?? '') === '' && (options.websocket?.host ?? '') === '') {
+      throw new Error('Invalid options. Option host, or websocket.host must be set.');
+    }
     return {
       ...options,
       baseURL: baseURLSet ? options.baseURL : `${options.host}/api/v1`,
