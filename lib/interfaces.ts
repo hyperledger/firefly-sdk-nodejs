@@ -61,6 +61,14 @@ export interface FireFlyOptions extends FireFlyOptionsInput {
   };
 }
 
+export interface FireFlyWebSocketSender {
+  send: (json: JSON) => void;
+}
+
+export interface FireFlyWebSocketConnectCallback {
+  (sender: FireFlyWebSocketSender): void | Promise<void>;
+}
+
 export interface FireFlyWebSocketOptions {
   host: string;
   namespace: string;
@@ -72,6 +80,7 @@ export interface FireFlyWebSocketOptions {
   reconnectDelay: number;
   heartbeatInterval: number;
   socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs;
+  afterConnect?: FireFlyWebSocketConnectCallback;
 }
 
 // Namespace

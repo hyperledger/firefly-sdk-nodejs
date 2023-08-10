@@ -79,6 +79,7 @@ import {
   FireFlyDeleteOptions,
   FireFlyTokenApprovalFilter,
   FireFlyTokenApprovalResponse,
+  FireFlyWebSocketConnectCallback,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -598,6 +599,7 @@ export default class FireFly extends HttpBase {
     subscriptions: string | string[] | FireFlySubscriptionBase,
     callback: FireFlyWebSocketCallback,
     socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs,
+    afterConnect?: FireFlyWebSocketConnectCallback,
   ): FireFlyWebSocket {
     const options: FireFlyWebSocketOptions = {
       host: this.options.websocket.host,
@@ -609,6 +611,7 @@ export default class FireFly extends HttpBase {
       reconnectDelay: this.options.websocket.reconnectDelay,
       heartbeatInterval: this.options.websocket.heartbeatInterval,
       socketOptions: socketOptions,
+      afterConnect: afterConnect,
     };
 
     const handler: FireFlyWebSocketCallback = (socket, event) => {

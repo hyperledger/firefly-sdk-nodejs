@@ -83,6 +83,9 @@ export class FireFlyWebSocket {
           );
           this.logger.log(`Started listening on subscription ${this.options.namespace}:${name}`);
         }
+        if (this.options?.afterConnect !== undefined) {
+          this.options.afterConnect(this);
+        }
       })
       .on('error', (err) => {
         this.logger.error('Error', err.stack);
@@ -153,6 +156,12 @@ export class FireFlyWebSocket {
       } else {
         this.reconnectTimer = setTimeout(() => this.connect(), this.options.reconnectDelay);
       }
+    }
+  }
+
+  send(json: JSON) {
+    if (this.socket !== undefined) {
+      this.socket.send(JSON.stringify(json));
     }
   }
 
