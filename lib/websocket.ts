@@ -26,7 +26,7 @@ export class FireFlyWebSocket {
   private readonly logger = new Logger(FireFlyWebSocket.name);
 
   private socket?: WebSocket;
-  private closed = false;
+  private closed? = () => {};
   private pingTimer?: NodeJS.Timeout;
   private disconnectTimer?: NodeJS.Timeout;
   private reconnectTimer?: NodeJS.Timeout;
@@ -61,7 +61,7 @@ export class FireFlyWebSocket {
       auth,
       handshakeTimeout: this.options.heartbeatInterval,
     }));
-    this.closed = false;
+    this.closed = undefined;
 
     socket
       .on('open', () => {
@@ -177,8 +177,10 @@ export class FireFlyWebSocket {
     }
   }
 
-  close() {
-    this.closed = true;
+  async close(wait?: boolean): Promise<void> {
+    const closedPromise = new Promise<void>(resolve => {
+      this.closed = resolve;
+    });
     this.clearPingTimers();
     if (this.socket) {
       try {
@@ -186,6 +188,7 @@ export class FireFlyWebSocket {
       } catch (e: any) {
         this.logger.warn(`Failed to clean up websocket: ${e.message}`);
       }
+      if (wait) await closedPromise;
       this.socket = undefined;
     }
   }
