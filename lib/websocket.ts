@@ -93,6 +93,7 @@ export class FireFlyWebSocket {
       .on('close', () => {
         if (this.closed) {
           this.logger.log('Closed');
+          this.closed(); // do this after all logging
         } else {
           this.disconnectDetected = true;
           this.reconnect('Closed by peer');
