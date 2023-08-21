@@ -26,7 +26,7 @@ export class FireFlyWebSocket {
   private readonly logger = new Logger(FireFlyWebSocket.name);
 
   private socket?: WebSocket;
-  private closed = false;
+  private closed? = () => {};
   private pingTimer?: NodeJS.Timeout;
   private disconnectTimer?: NodeJS.Timeout;
   private reconnectTimer?: NodeJS.Timeout;
@@ -61,7 +61,7 @@ export class FireFlyWebSocket {
       auth,
       handshakeTimeout: this.options.heartbeatInterval,
     }));
-    this.closed = false;
+    this.closed = undefined;
 
     socket
       .on('open', () => {
@@ -83,6 +83,9 @@ export class FireFlyWebSocket {
           );
           this.logger.log(`Started listening on subscription ${this.options.namespace}:${name}`);
         }
+        if (this.options?.afterConnect !== undefined) {
+          this.options.afterConnect(this);
+        }
       })
       .on('error', (err) => {
         this.logger.error('Error', err.stack);
@@ -90,6 +93,7 @@ export class FireFlyWebSocket {
       .on('close', () => {
         if (this.closed) {
           this.logger.log('Closed');
+          this.closed(); // do this after all logging
         } else {
           this.disconnectDetected = true;
           this.reconnect('Closed by peer');
@@ -156,6 +160,12 @@ export class FireFlyWebSocket {
     }
   }
 
+  send(json: JSON) {
+    if (this.socket !== undefined) {
+      this.socket.send(JSON.stringify(json));
+    }
+  }
+
   ack(event: FireFlyEventDelivery) {
     if (this.socket !== undefined && event.id !== undefined) {
       this.socket.send(
@@ -168,8 +178,10 @@ export class FireFlyWebSocket {
     }
   }
 
-  close() {
-    this.closed = true;
+  async close(wait?: boolean): Promise<void> {
+    const closedPromise = new Promise<void>(resolve => {
+      this.closed = resolve;
+    });
     this.clearPingTimers();
     if (this.socket) {
       try {
@@ -177,6 +189,7 @@ export class FireFlyWebSocket {
       } catch (e: any) {
         this.logger.warn(`Failed to clean up websocket: ${e.message}`);
       }
+      if (wait) await closedPromise;
       this.socket = undefined;
     }
   }
