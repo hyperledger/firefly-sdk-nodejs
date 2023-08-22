@@ -298,6 +298,8 @@ export type FireFlyContractAPIFilter = operations['getContractAPIs']['parameters
 export type FireFlyContractListenerFilter =
   operations['getContractListeners']['parameters']['query'];
 
+export type FireFlyDeployContractRequest =
+  operations['postContractDeploy']['requestBody']['content']['application/json'];
 export type FireFlyContractGenerateRequest =
   operations['postGenerateContractInterface']['requestBody']['content']['application/json'];
 export type FireFlyContractInterfaceRequest =
@@ -307,6 +309,9 @@ export type FireFlyContractAPIRequest =
 export type FireFlyContractListenerRequest =
   operations['postNewContractListener']['requestBody']['content']['application/json'];
 
+export type FireFlyDeployContractResponse = Required<
+  operations['postContractDeploy']['responses']['200']['content']['application/json']
+>;
 export type FireFlyContractInterfaceResponse = Required<
   operations['getContractInterface']['responses']['200']['content']['application/json']
 >;
