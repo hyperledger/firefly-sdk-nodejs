@@ -79,6 +79,8 @@ import {
   FireFlyDeleteOptions,
   FireFlyTokenApprovalFilter,
   FireFlyTokenApprovalResponse,
+  FireFlyDeployContractRequest,
+  FireFlyDeployContractResponse,
   FireFlyWebSocketConnectCallback,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
@@ -400,6 +402,13 @@ export default class FireFly extends HttpBase {
     options?: FireFlyGetOptions,
   ): Promise<FireFlyTokenBalanceResponse[]> {
     return this.getMany<FireFlyTokenBalanceResponse[]>('/tokens/balances', filter, options);
+  }
+
+  deployContract(
+    request: FireFlyDeployContractRequest,
+    options?: FireFlyCreateOptions,
+  ): Promise<FireFlyDeployContractResponse> {
+    return this.createOne<FireFlyDeployContractResponse>('/contracts/deploy', request, options);
   }
 
   generateContractInterface(
