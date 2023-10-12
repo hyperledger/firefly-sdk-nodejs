@@ -548,26 +548,34 @@ export default class FireFly extends HttpBase {
     subscriptions: string | string[] | FireFlySubscriptionBase,
     callback: FireFlyWebSocketCallback,
     socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs,
-    afterConnect?: FireFlyWebSocketConnectCallback,
+    fireflySocketOptions?: Partial<FireFlyWebSocketOptions> | FireFlyWebSocketConnectCallback,
   ): FireFlyWebSocket {
+    if (typeof fireflySocketOptions === 'function') {
+      // Legacy compatibility (afterConnect callback passed as 4th arg)
+      fireflySocketOptions = <FireFlyWebSocketOptions>{
+        afterConnect: fireflySocketOptions,
+      };
+    }
     const options: FireFlyWebSocketOptions = {
       host: this.options.websocket.host,
       namespace: this.options.namespace,
       username: this.options.username,
       password: this.options.password,
-      subscriptions: [],
-      autoack: false,
       reconnectDelay: this.options.websocket.reconnectDelay,
       heartbeatInterval: this.options.websocket.heartbeatInterval,
-      socketOptions: socketOptions,
-      afterConnect: afterConnect,
+      autoack: false,
+      ...fireflySocketOptions,
+      socketOptions,
+      subscriptions: [],
     };
 
     const handler: FireFlyWebSocketCallback = (socket, event) => {
       this.queue = this.queue.finally(() => callback(socket, event));
-      this.queue.then(() => {
-        socket.ack(event);
-      });
+      if (!options.noack) {
+        this.queue.then(() => {
+          socket.ack(event);
+        });
+      }
     };
 
     if (Array.isArray(subscriptions)) {

@@ -76,7 +76,8 @@ export interface FireFlyWebSocketOptions {
   username?: string;
   password?: string;
   ephemeral?: FireFlyEphemeralSubscription;
-  autoack: boolean;
+  autoack?: boolean;
+  noack?: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
   socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs;
