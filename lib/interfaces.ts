@@ -76,7 +76,8 @@ export interface FireFlyWebSocketOptions {
   username?: string;
   password?: string;
   ephemeral?: FireFlyEphemeralSubscription;
-  autoack: boolean;
+  autoack?: boolean;
+  noack?: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
   socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs;
@@ -171,7 +172,8 @@ export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
   operation?: FireFlyOperationResponse;
 }
 
-export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
+export interface FireFlyEventDelivery extends Omit<FireFlyEnrichedEvent, 'type'> {
+  type: FireFlyEnrichedEvent['type'] | 'protocol_error';
   subscription: {
     id: string;
     name: string;
