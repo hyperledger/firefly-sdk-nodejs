@@ -5,6 +5,10 @@ import {
   FireFlyCreateOptions,
   FireFlyGetOptions,
   FireFlyError,
+  FireFlyReplaceOptions,
+  FireFlyUpdateOptions,
+  FireFlyDeleteOptions,
+  FireFlyIdempotencyError,
 } from './interfaces';
 
 function isSuccess(status: number) {
@@ -12,16 +16,34 @@ function isSuccess(status: number) {
 }
 
 export function mapConfig(
-  options: FireFlyGetOptions | FireFlyCreateOptions | undefined,
+  options:
+    | FireFlyGetOptions
+    | FireFlyUpdateOptions
+    | FireFlyReplaceOptions
+    | FireFlyCreateOptions
+    | FireFlyDeleteOptions
+    | undefined,
   params?: any,
 ): AxiosRequestConfig {
-  return {
+  const config: AxiosRequestConfig = {
     ...options?.requestConfig,
-    params: {
-      ...params,
-      confirm: options?.confirm,
-    },
+    params,
   };
+  if (options !== undefined) {
+    if ('confirm' in options) {
+      config.params = {
+        ...config.params,
+        confirm: options.confirm,
+      };
+    }
+    if ('publish' in options) {
+      config.params = {
+        ...config.params,
+        publish: options.publish,
+      };
+    }
+  }
+  return config;
 }
 
 export default class HttpBase {
@@ -35,17 +57,28 @@ export default class HttpBase {
     this.options = this.setDefaults(options);
     this.rootHttp = axios.create({
       ...options.requestConfig,
-      baseURL: `${options.host}/api/v1`,
+      baseURL: this.options.baseURL,
     });
     this.http = axios.create({
       ...options.requestConfig,
-      baseURL: `${options.host}/api/v1/namespaces/${this.options.namespace}`,
+      baseURL: this.options.namespaceBaseURL,
     });
   }
 
   private setDefaults(options: FireFlyOptionsInput): FireFlyOptions {
+    const baseURLSet = (options.baseURL ?? '') !== '' && (options.namespaceBaseURL ?? '' !== '');
+    if (!baseURLSet && (options.host ?? '') === '') {
+      throw new Error('Invalid options. Option host, or baseURL and namespaceBaseURL must be set.');
+    }
+    if ((options.host ?? '') === '' && (options.websocket?.host ?? '') === '') {
+      throw new Error('Invalid options. Option host, or websocket.host must be set.');
+    }
     return {
       ...options,
+      baseURL: baseURLSet ? options.baseURL : `${options.host}/api/v1`,
+      namespaceBaseURL: baseURLSet
+        ? options.namespaceBaseURL
+        : `${options.host}/api/v1/namespaces/${options.namespace}`,
       namespace: options.namespace ?? 'default',
       websocket: {
         ...options.websocket,
@@ -59,8 +92,12 @@ export default class HttpBase {
   protected async wrapError<T>(response: Promise<AxiosResponse<T>>) {
     return response.catch((err) => {
       if (axios.isAxiosError(err)) {
-        const errorMessage = err.response?.data?.error;
-        const ffError = new FireFlyError(errorMessage ?? err.message);
+        const errorMessage = err.response?.data?.error ?? err.message;
+        const errorClass =
+          errorMessage?.includes('FF10430') || errorMessage?.includes('FF10431')
+            ? FireFlyIdempotencyError
+            : FireFlyError;
+        const ffError = new errorClass(errorMessage, err, err.request.path);
         if (this.errorHandler !== undefined) {
           this.errorHandler(ffError);
         }
@@ -92,13 +129,18 @@ export default class HttpBase {
     return response.data;
   }
 
-  protected async replaceOne<T>(url: string, data: any) {
-    const response = await this.wrapError(this.http.put<T>(url, data));
+  protected async updateOne<T>(url: string, data: any, options?: FireFlyUpdateOptions) {
+    const response = await this.wrapError(this.http.patch<T>(url, data, mapConfig(options)));
     return response.data;
   }
 
-  protected async deleteOne<T>(url: string) {
-    await this.wrapError(this.http.delete<T>(url));
+  protected async replaceOne<T>(url: string, data: any, options?: FireFlyReplaceOptions) {
+    const response = await this.wrapError(this.http.put<T>(url, data, mapConfig(options)));
+    return response.data;
+  }
+
+  protected async deleteOne<T>(url: string, options?: FireFlyDeleteOptions) {
+    await this.wrapError(this.http.delete<T>(url, mapConfig(options)));
   }
 
   onError(handler: (err: FireFlyError) => void) {

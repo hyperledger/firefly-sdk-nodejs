@@ -4878,8 +4878,32 @@ export interface operations {
              * @description The timestamp of when the message was confirmed/rejected
              */
             confirmed?: string;
-            /** @description The list of data elements attached to the message */
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
             data?: {
+              /** @description An optional in-line hash reference to a previously uploaded binary data blob */
+              blob?: {
+                /**
+                 * Format: byte
+                 * @description The hash of the binary blob data
+                 */
+                hash?: string;
+                /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+                name?: string;
+                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                public?: string;
+                /**
+                 * Format: int64
+                 * @description The size of the binary data
+                 */
+                size?: number;
+              };
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
               /**
                * Format: byte
                * @description The hash of the referenced data
@@ -4890,6 +4914,10 @@ export interface operations {
                * @description The UUID of the referenced data resource
                */
               id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
             }[];
             /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
             group?: {
@@ -5813,8 +5841,32 @@ export interface operations {
              * @description The timestamp of when the message was confirmed/rejected
              */
             confirmed?: string;
-            /** @description The list of data elements attached to the message */
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
             data?: {
+              /** @description An optional in-line hash reference to a previously uploaded binary data blob */
+              blob?: {
+                /**
+                 * Format: byte
+                 * @description The hash of the binary blob data
+                 */
+                hash?: string;
+                /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
+                name?: string;
+                /** @description If this data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
+                public?: string;
+                /**
+                 * Format: int64
+                 * @description The size of the binary data
+                 */
+                size?: number;
+              };
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
               /**
                * Format: byte
                * @description The hash of the referenced data
@@ -5825,6 +5877,10 @@ export interface operations {
                * @description The UUID of the referenced data resource
                */
               id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
             }[];
             /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
             group?: {
@@ -6999,8 +7055,6 @@ export interface operations {
             protocolId?: string;
             /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
             subject?: string;
-            /** @description The index of the token within the pool that this approval applies to */
-            tokenIndex?: string;
             /** @description If submitted via FireFly, this will reference the UUID of the FireFly transaction (if the token connector in use supports attaching data) */
             tx?: {
               /**
@@ -7076,8 +7130,6 @@ export interface operations {
             protocolId?: string;
             /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
             subject?: string;
-            /** @description The index of the token within the pool that this approval applies to */
-            tokenIndex?: string;
             /** @description If submitted via FireFly, this will reference the UUID of the FireFly transaction (if the token connector in use supports attaching data) */
             tx?: {
               /**
@@ -7133,8 +7185,6 @@ export interface operations {
             protocolId?: string;
             /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
             subject?: string;
-            /** @description The index of the token within the pool that this approval applies to */
-            tokenIndex?: string;
             /** @description If submitted via FireFly, this will reference the UUID of the FireFly transaction (if the token connector in use supports attaching data) */
             tx?: {
               /**
@@ -7157,12 +7207,8 @@ export interface operations {
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
           config?: { [key: string]: any };
-          /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
-          info?: { [key: string]: any };
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /** @description The namespace for the approval, which must match the namespace of the token pool */
-          namespace?: string;
           /** @description The blockchain identity that is granted the approval */
           operator?: string;
           /**
@@ -7170,8 +7216,6 @@ export interface operations {
            * @description The UUID the token pool this approval applies to
            */
           pool?: string;
-          /** @description The index of the token within the pool that this approval applies to */
-          tokenIndex?: string;
         };
       };
     };
@@ -7415,6 +7459,8 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
+          /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
+          config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -7502,6 +7548,8 @@ export interface operations {
           pool?: string;
           /** @description The index of the token within the pool that this transfer applies to */
           tokenIndex?: string;
+          /** @description The URI of the token this transfer applies to */
+          uri?: string;
         };
       };
     };
@@ -7695,6 +7743,8 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
+          /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
+          config?: { [key: string]: any };
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
           /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
@@ -7782,6 +7832,8 @@ export interface operations {
           to?: string;
           /** @description The index of the token within the pool that this transfer applies to */
           tokenIndex?: string;
+          /** @description The URI of the token this transfer applies to */
+          uri?: string;
         };
       };
     };
@@ -8445,6 +8497,8 @@ export interface operations {
         "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
+          /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
+          config?: { [key: string]: any };
           /** @description The source account for the transfer. On input defaults to the value of 'key' */
           from?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -8534,6 +8588,8 @@ export interface operations {
           to?: string;
           /** @description The index of the token within the pool that this transfer applies to */
           tokenIndex?: string;
+          /** @description The URI of the token this transfer applies to */
+          uri?: string;
         };
       };
     };

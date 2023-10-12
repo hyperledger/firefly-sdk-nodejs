@@ -1,4 +1,6 @@
+import * as http from 'http';
 import { AxiosRequestConfig } from 'axios';
+import * as WebSocket from 'ws';
 import { operations } from './schema';
 
 /**
@@ -13,16 +15,26 @@ import { operations } from './schema';
 
 // General
 
-export class FireFlyError extends Error {}
+export class FireFlyError extends Error {
+  constructor(message?: string, public originalError?: Error, public path?: string) {
+    super(message);
+  }
+}
 
-export interface FireFlyGetOptions {
-  confirm: undefined;
+export class FireFlyIdempotencyError extends FireFlyError {}
+
+interface FireFlyBaseHttpOptions {
   requestConfig?: AxiosRequestConfig;
 }
 
-export interface FireFlyCreateOptions {
+export interface FireFlyGetOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyUpdateOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyReplaceOptions extends FireFlyBaseHttpOptions {}
+export interface FireFlyDeleteOptions extends FireFlyBaseHttpOptions {}
+
+export interface FireFlyCreateOptions extends FireFlyBaseHttpOptions {
   confirm?: boolean;
-  requestConfig?: AxiosRequestConfig;
+  publish?: boolean;
 }
 
 export interface FireFlyOptionsInput {
@@ -30,6 +42,8 @@ export interface FireFlyOptionsInput {
   namespace?: string;
   username?: string;
   password?: string;
+  baseURL?: string;
+  namespaceBaseURL?: string;
   websocket?: {
     host?: string;
     reconnectDelay?: number;
@@ -47,6 +61,14 @@ export interface FireFlyOptions extends FireFlyOptionsInput {
   };
 }
 
+export interface FireFlyWebSocketSender {
+  send: (json: JSON) => void;
+}
+
+export interface FireFlyWebSocketConnectCallback {
+  (sender: FireFlyWebSocketSender): void | Promise<void>;
+}
+
 export interface FireFlyWebSocketOptions {
   host: string;
   namespace: string;
@@ -54,17 +76,35 @@ export interface FireFlyWebSocketOptions {
   username?: string;
   password?: string;
   ephemeral?: FireFlyEphemeralSubscription;
-  autoack: boolean;
+  autoack?: boolean;
+  noack?: boolean;
   reconnectDelay: number;
   heartbeatInterval: number;
+  socketOptions?: WebSocket.ClientOptions | http.ClientRequestArgs;
+  afterConnect?: FireFlyWebSocketConnectCallback;
 }
+
+// Namespace
+export type FireFlyNamespaceResponse = Required<
+  operations['getNamespace']['responses']['200']['content']['application/json']
+>;
 
 // Network
 
+export type FireFlyIdentityFilter = operations['getIdentities']['parameters']['query'];
 export type FireFlyOrganizationFilter = operations['getNetworkOrgs']['parameters']['query'];
 export type FireFlyNodeFilter = operations['getNetworkNodes']['parameters']['query'];
 export type FireFlyVerifierFilter = operations['getVerifiers']['parameters']['query'];
 
+export type FireFlyIdentityRequest =
+  operations['postNewIdentity']['requestBody']['content']['application/json'];
+
+export type FireFlyIdentityResponse = Required<
+  operations['getIdentityByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyIdentitiesResponse = Required<
+  operations['getIdentities']['responses']['200']['content']['application/json']
+>;
 export type FireFlyOrganizationResponse = Required<
   operations['getNetworkOrg']['responses']['200']['content']['application/json']
 >;
@@ -108,20 +148,21 @@ export interface FireFlyEphemeralSubscription extends FireFlySubscriptionBase {
 }
 
 export interface FireFlyEnrichedEvent extends FireFlyEventResponse {
-  blockchainEvent?: unknown;
-  contractAPI?: unknown;
-  contractInterface?: unknown;
+  blockchainEvent?: FireFlyBlockchainEventResponse;
+  contractAPI?: FireFlyContractAPIResponse;
+  contractInterface?: FireFlyContractInterfaceResponse;
   datatype?: FireFlyDatatypeResponse;
-  identity?: unknown;
+  identity?: FireFlyIdentityResponse;
   message?: FireFlyMessageResponse;
-  namespaceDetails?: unknown;
-  tokenApproval?: unknown;
+  tokenApproval?: FireFlyTokenApprovalResponse;
   tokenPool?: FireFlyTokenPoolResponse;
   tokenTransfer?: FireFlyTokenTransferResponse;
   transaction?: FireFlyTransactionResponse;
+  operation?: FireFlyOperationResponse;
 }
 
-export interface FireFlyEventDelivery extends FireFlyEnrichedEvent {
+export interface FireFlyEventDelivery extends Omit<FireFlyEnrichedEvent, 'type'> {
+  type: FireFlyEnrichedEvent['type'] | 'protocol_error';
   subscription: {
     id: string;
     name: string;
@@ -145,10 +186,16 @@ export type FireFlyDataFilter = operations['getData']['parameters']['query'];
 
 export type FireFlyDataRequest =
   operations['postData']['requestBody']['content']['application/json'];
+export type FireFlyDataBlobRequest =
+  operations['postData']['requestBody']['content']['multipart/form-data'];
 
 export type FireFlyDataResponse = Required<
   operations['getDataByID']['responses']['200']['content']['application/json']
 >;
+
+export const FireFlyDataBlobRequestDefaults: FireFlyDataBlobRequest = {
+  autometa: 'true',
+};
 
 // Messages
 
@@ -165,6 +212,9 @@ export type FireFlyMessageResponse = Required<
 >;
 export type FireFlyBatchResponse = Required<
   operations['getBatchByID']['responses']['200']['content']['application/json']
+>;
+export type FireFlyGroupResponse = Required<
+  operations['getGroupByHash']['responses']['200']['content']['application/json']
 >;
 
 export interface FireFlyPrivateSendOptions extends FireFlyCreateOptions {
@@ -184,6 +234,8 @@ export type FireFlyTokenPoolResponse = Required<
 
 // Token Transfers
 
+export type FireFlyTokenTransferFilter = operations['getTokenTransfers']['parameters']['query'];
+
 export type FireFlyTokenMintRequest =
   operations['postTokenMint']['requestBody']['content']['application/json'];
 export type FireFlyTokenBurnRequest =
@@ -199,9 +251,23 @@ export type FireFlyTokenTransferResponse = Required<
 
 export type FireFlyTokenBalanceFilter = operations['getTokenBalances']['parameters']['query'];
 
-export type FireFlyTokenBalanceResponse = Required<
+type BalancesList = Required<
   operations['getTokenBalances']['responses']['200']['content']['application/json']
 >;
+const balances: BalancesList = [];
+export type FireFlyTokenBalanceResponse = typeof balances[0];
+
+// Token Approvals
+
+export type FireFlyTokenApprovalFilter = operations['getTokenApprovals']['parameters']['query'];
+
+export type FireFlyTokenApprovalRequest =
+  operations['postTokenApproval']['requestBody']['content']['application/json'];
+type ApprovalsList =
+  operations['getTokenApprovals']['responses']['200']['content']['application/json'];
+
+const approvals: ApprovalsList = [];
+export type FireFlyTokenApprovalResponse = typeof approvals[0];
 
 // Operations + Transactions
 
@@ -240,4 +306,28 @@ export type FireFlyContractAPIResponse = Required<
 >;
 export type FireFlyContractListenerResponse = Required<
   operations['getContractListenerByNameOrID']['responses']['200']['content']['application/json']
+>;
+
+export type FireFlyContractInvokeRequest =
+  operations['postContractInvoke']['requestBody']['content']['application/json'];
+export type FireFlyContractAPIInvokeRequest =
+  operations['postContractAPIInvoke']['requestBody']['content']['application/json'];
+export type FireFlyContractInvokeResponse = Required<
+  operations['postContractInvoke']['responses']['202']['content']['application/json']
+>;
+
+export type FireFlyContractQueryRequest =
+  operations['postContractQuery']['requestBody']['content']['application/json'];
+export type FireFlyContractAPIQueryRequest =
+  operations['postContractAPIQuery']['requestBody']['content']['application/json'];
+export type FireFlyContractQueryResponse = Required<
+  operations['postContractQuery']['responses']['200']['content']['application/json']
+>;
+
+// Blockchain Events
+
+export type FireFlyBlockchainEventFilter = operations['getBlockchainEvents']['parameters']['query'];
+
+export type FireFlyBlockchainEventResponse = Required<
+  operations['getBlockchainEventByID']['responses']['200']['content']['application/json']
 >;
