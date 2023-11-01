@@ -289,10 +289,9 @@ export interface FireFlyGetOperationOptions extends FireFlyGetOptions {
 export type FireFlyOperationFilter = operations['getOps']['parameters']['query'];
 export type FireFlyTransactionFilter = operations['getTxns']['parameters']['query'];
 
-export interface FireFlyOperationResponse
-  extends Required<operations['getOpByID']['responses']['200']['content']['application/json']> {
-  detail?: any;
-}
+export type FireFlyOperationResponse = Required<
+  operations['getOpByID']['responses']['200']['content']['application/json']
+>;
 
 export type FireFlyTransactionResponse = Required<
   operations['getTxnByID']['responses']['200']['content']['application/json']
