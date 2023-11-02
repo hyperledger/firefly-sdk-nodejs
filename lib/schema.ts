@@ -4,765 +4,817 @@
  */
 
 export interface paths {
-  '/apis': {
+  "/apis": {
     /** Gets a list of contract APIs that have been published */
-    get: operations['getContractAPIs'];
+    get: operations["getContractAPIs"];
     /** Creates and broadcasts a new custom smart contract API */
-    post: operations['postNewContractAPI'];
+    post: operations["postNewContractAPI"];
   };
-  '/apis/{apiName}': {
+  "/apis/{apiName}": {
     /** Gets information about a contract API, including the URLs for the OpenAPI Spec and Swagger UI for the API */
-    get: operations['getContractAPIByName'];
+    get: operations["getContractAPIByName"];
+    /** Delete a contract API */
+    delete: operations["deleteContractAPI"];
   };
-  '/apis/{apiName}/interface': {
+  "/apis/{apiName}/interface": {
     /** Gets a contract interface for a contract API */
-    get: operations['getContractAPIInterface'];
+    get: operations["getContractAPIInterface"];
   };
-  '/apis/{apiName}/invoke/{methodPath}': {
+  "/apis/{apiName}/invoke/{methodPath}": {
     /** Invokes a method on a smart contract API. Performs a blockchain transaction. */
-    post: operations['postContractAPIInvoke'];
+    post: operations["postContractAPIInvoke"];
   };
-  '/apis/{apiName}/listeners/{eventPath}': {
+  "/apis/{apiName}/listeners/{eventPath}": {
     /** Gets a list of contract listeners */
-    get: operations['getContractAPIListeners'];
+    get: operations["getContractAPIListeners"];
     /** Creates a new blockchain listener for events emitted by custom smart contracts */
-    post: operations['postContractAPIListeners'];
+    post: operations["postContractAPIListeners"];
   };
-  '/apis/{apiName}/query/{methodPath}': {
+  "/apis/{apiName}/publish": {
+    /** Publish a contract API to all other members of the multiparty network */
+    post: operations["postContractAPIPublish"];
+  };
+  "/apis/{apiName}/query/{methodPath}": {
     /** Queries a method on a smart contract API. Performs a read-only query. */
-    post: operations['postContractAPIQuery'];
+    post: operations["postContractAPIQuery"];
   };
-  '/apis/{id}': {
+  "/apis/{id}": {
     /** The ID of the contract API */
-    put: operations['putContractAPI'];
+    put: operations["putContractAPI"];
   };
-  '/batches': {
+  "/batches": {
     /** Gets a list of message batches */
-    get: operations['getBatches'];
+    get: operations["getBatches"];
   };
-  '/batches/{batchid}': {
+  "/batches/{batchid}": {
     /** Gets a message batch */
-    get: operations['getBatchByID'];
+    get: operations["getBatchByID"];
   };
-  '/blockchainevents': {
+  "/blockchainevents": {
     /** Gets a list of blockchain events */
-    get: operations['getBlockchainEvents'];
+    get: operations["getBlockchainEvents"];
   };
-  '/blockchainevents/{id}': {
+  "/blockchainevents/{id}": {
     /** Gets a blockchain event */
-    get: operations['getBlockchainEventByID'];
+    get: operations["getBlockchainEventByID"];
   };
-  '/charts/histogram/{collection}': {
+  "/charts/histogram/{collection}": {
     /** Gets a JSON object containing statistics data that can be used to build a graphical representation of recent activity in a given database collection */
-    get: operations['getChartHistogram'];
+    get: operations["getChartHistogram"];
   };
-  '/contracts/deploy': {
+  "/contracts/deploy": {
     /** Deploy a new smart contract */
-    post: operations['postContractDeploy'];
+    post: operations["postContractDeploy"];
   };
-  '/contracts/interfaces': {
+  "/contracts/interfaces": {
     /** Gets a list of contract interfaces that have been published */
-    get: operations['getContractInterfaces'];
+    get: operations["getContractInterfaces"];
     /** Creates and broadcasts a new custom smart contract interface */
-    post: operations['postNewContractInterface'];
+    post: operations["postNewContractInterface"];
   };
-  '/contracts/interfaces/{interfaceId}': {
+  "/contracts/interfaces/{interfaceId}": {
     /** Gets a contract interface by its ID */
-    get: operations['getContractInterface'];
+    get: operations["getContractInterface"];
+    /** Delete a contract interface */
+    delete: operations["deleteContractInterface"];
   };
-  '/contracts/interfaces/{name}/{version}': {
+  "/contracts/interfaces/{name}/{version}": {
     /** Gets a contract interface by its name and version */
-    get: operations['getContractInterfaceByNameAndVersion'];
+    get: operations["getContractInterfaceByNameAndVersion"];
   };
-  '/contracts/interfaces/generate': {
+  "/contracts/interfaces/{name}/{version}/publish": {
+    /** Publish a contract interface to all other members of the multiparty network */
+    post: operations["postContractInterfacePublish"];
+  };
+  "/contracts/interfaces/generate": {
     /** A convenience method to convert a blockchain specific smart contract format into a FireFly Interface format. The specific blockchain plugin in use must support this functionality. */
-    post: operations['postGenerateContractInterface'];
+    post: operations["postGenerateContractInterface"];
   };
-  '/contracts/invoke': {
+  "/contracts/invoke": {
     /** Invokes a method on a smart contract. Performs a blockchain transaction. */
-    post: operations['postContractInvoke'];
+    post: operations["postContractInvoke"];
   };
-  '/contracts/listeners': {
+  "/contracts/listeners": {
     /** Gets a list of contract listeners */
-    get: operations['getContractListeners'];
+    get: operations["getContractListeners"];
     /** Creates a new blockchain listener for events emitted by custom smart contracts */
-    post: operations['postNewContractListener'];
+    post: operations["postNewContractListener"];
   };
-  '/contracts/listeners/{nameOrId}': {
+  "/contracts/listeners/{nameOrId}": {
     /** Gets a contract listener by its name or ID */
-    get: operations['getContractListenerByNameOrID'];
+    get: operations["getContractListenerByNameOrID"];
     /** Deletes a contract listener referenced by its name or its ID */
-    delete: operations['deleteContractListener'];
+    delete: operations["deleteContractListener"];
   };
-  '/contracts/query': {
+  "/contracts/query": {
     /** Queries a method on a smart contract. Performs a read-only query. */
-    post: operations['postContractQuery'];
+    post: operations["postContractQuery"];
   };
-  '/data': {
+  "/data": {
     /** Gets a list of data items */
-    get: operations['getData'];
+    get: operations["getData"];
     /** Creates a new data item in this FireFly node */
-    post: operations['postData'];
+    post: operations["postData"];
   };
-  '/data/{dataid}': {
+  "/data/{dataid}": {
     /** Gets a data item by its ID, including metadata about this item */
-    get: operations['getDataByID'];
+    get: operations["getDataByID"];
     /** Deletes a data item by its ID, including metadata about this item */
-    delete: operations['deleteData'];
+    delete: operations["deleteData"];
   };
-  '/data/{dataid}/blob': {
+  "/data/{dataid}/blob": {
     /** Downloads the original file that was previously uploaded or received */
-    get: operations['getDataBlob'];
+    get: operations["getDataBlob"];
   };
-  '/data/{dataid}/blob/publish': {
+  "/data/{dataid}/blob/publish": {
     /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
-    post: operations['postDataBlobPublish'];
+    post: operations["postDataBlobPublish"];
   };
-  '/data/{dataid}/messages': {
+  "/data/{dataid}/messages": {
     /** Gets a list of the messages associated with a data item */
-    get: operations['getDataMsgs'];
+    get: operations["getDataMsgs"];
   };
-  '/data/{dataid}/value': {
+  "/data/{dataid}/value": {
     /** Downloads the JSON value of the data resource, without the associated metadata */
-    get: operations['getDataValue'];
+    get: operations["getDataValue"];
   };
-  '/data/{dataid}/value/publish': {
+  "/data/{dataid}/value/publish": {
     /** Publishes the JSON value from the specified data resource, to shared storage */
-    post: operations['postDataValuePublish'];
+    post: operations["postDataValuePublish"];
   };
-  '/datatypes': {
+  "/datasubpaths/{parent}": {
+    /** Gets a list of path names of named blob data, underneath a given parent path ('/' path prefixes are automatically pre-prepended) */
+    get: operations["getDataSubPaths"];
+  };
+  "/datatypes": {
     /** Gets a list of datatypes that have been published */
-    get: operations['getDatatypes'];
+    get: operations["getDatatypes"];
     /** Creates and broadcasts a new datatype */
-    post: operations['postNewDatatype'];
+    post: operations["postNewDatatype"];
   };
-  '/datatypes/{name}/{version}': {
+  "/datatypes/{name}/{version}": {
     /** Gets a datatype by its name and version */
-    get: operations['getDatatypeByName'];
+    get: operations["getDatatypeByName"];
   };
-  '/events': {
+  "/events": {
     /** Gets a list of events */
-    get: operations['getEvents'];
+    get: operations["getEvents"];
   };
-  '/events/{eid}': {
+  "/events/{eid}": {
     /** Gets an event by its ID */
-    get: operations['getEventByID'];
+    get: operations["getEventByID"];
   };
-  '/groups': {
+  "/groups": {
     /** Gets a list of groups */
-    get: operations['getGroups'];
+    get: operations["getGroups"];
   };
-  '/groups/{hash}': {
+  "/groups/{hash}": {
     /** Gets a group by its ID (hash) */
-    get: operations['getGroupByHash'];
+    get: operations["getGroupByHash"];
   };
-  '/identities': {
+  "/identities": {
     /** Gets a list of all identities that have been registered in the namespace */
-    get: operations['getIdentities'];
+    get: operations["getIdentities"];
     /** Registers a new identity in the network */
-    post: operations['postNewIdentity'];
+    post: operations["postNewIdentity"];
   };
-  '/identities/{did}': {
+  "/identities/{did}": {
     /** Gets an identity by its DID */
-    get: operations['getIdentityByDID'];
+    get: operations["getIdentityByDID"];
   };
-  '/identities/{iid}': {
+  "/identities/{iid}": {
     /** Gets an identity by its ID */
-    get: operations['getIdentityByID'];
+    get: operations["getIdentityByID"];
     /** Updates an identity */
-    patch: operations['patchUpdateIdentity'];
+    patch: operations["patchUpdateIdentity"];
   };
-  '/identities/{iid}/did': {
+  "/identities/{iid}/did": {
     /** Gets the DID for an identity based on its ID */
-    get: operations['getIdentityDID'];
+    get: operations["getIdentityDID"];
   };
-  '/identities/{iid}/verifiers': {
+  "/identities/{iid}/verifiers": {
     /** Gets the verifiers for an identity */
-    get: operations['getIdentityVerifiers'];
+    get: operations["getIdentityVerifiers"];
   };
-  '/messages': {
+  "/messages": {
     /** Gets a list of messages */
-    get: operations['getMsgs'];
+    get: operations["getMsgs"];
   };
-  '/messages/{msgid}': {
+  "/messages/{msgid}": {
     /** Gets a message by its ID */
-    get: operations['getMsgByID'];
+    get: operations["getMsgByID"];
   };
-  '/messages/{msgid}/data': {
+  "/messages/{msgid}/data": {
     /** Gets the list of data items that are attached to a message */
-    get: operations['getMsgData'];
+    get: operations["getMsgData"];
   };
-  '/messages/{msgid}/events': {
+  "/messages/{msgid}/events": {
     /** Gets the list of events for a message */
-    get: operations['getMsgEvents'];
+    get: operations["getMsgEvents"];
   };
-  '/messages/{msgid}/transaction': {
+  "/messages/{msgid}/transaction": {
     /** Gets the transaction for a message */
-    get: operations['getMsgTxn'];
+    get: operations["getMsgTxn"];
   };
-  '/messages/broadcast': {
+  "/messages/broadcast": {
     /** Broadcasts a message to all members in the network */
-    post: operations['postNewMessageBroadcast'];
+    post: operations["postNewMessageBroadcast"];
   };
-  '/messages/private': {
+  "/messages/private": {
     /** Privately sends a message to one or more members in the network */
-    post: operations['postNewMessagePrivate'];
+    post: operations["postNewMessagePrivate"];
   };
-  '/messages/requestreply': {
+  "/messages/requestreply": {
     /** Sends a message with a blocking HTTP request, waits for a reply to that message, then sends the reply as the HTTP response. */
-    post: operations['postNewMessageRequestReply'];
+    post: operations["postNewMessageRequestReply"];
   };
-  '/namespaces': {
+  "/namespaces": {
     /** Gets a list of namespaces */
-    get: operations['getNamespaces'];
+    get: operations["getNamespaces"];
   };
-  '/namespaces/{ns}': {
+  "/namespaces/{ns}": {
     /** Gets a namespace */
-    get: operations['getNamespace'];
+    get: operations["getNamespace"];
   };
-  '/namespaces/{ns}/apis': {
+  "/namespaces/{ns}/apis": {
     /** Gets a list of contract APIs that have been published */
-    get: operations['getContractAPIsNamespace'];
+    get: operations["getContractAPIsNamespace"];
     /** Creates and broadcasts a new custom smart contract API */
-    post: operations['postNewContractAPINamespace'];
+    post: operations["postNewContractAPINamespace"];
   };
-  '/namespaces/{ns}/apis/{apiName}': {
+  "/namespaces/{ns}/apis/{apiName}": {
     /** Gets information about a contract API, including the URLs for the OpenAPI Spec and Swagger UI for the API */
-    get: operations['getContractAPIByNameNamespace'];
+    get: operations["getContractAPIByNameNamespace"];
+    /** Delete a contract API */
+    delete: operations["deleteContractAPINamespace"];
   };
-  '/namespaces/{ns}/apis/{apiName}/interface': {
+  "/namespaces/{ns}/apis/{apiName}/interface": {
     /** Gets a contract interface for a contract API */
-    get: operations['getContractAPIInterfaceNamespace'];
+    get: operations["getContractAPIInterfaceNamespace"];
   };
-  '/namespaces/{ns}/apis/{apiName}/invoke/{methodPath}': {
+  "/namespaces/{ns}/apis/{apiName}/invoke/{methodPath}": {
     /** Invokes a method on a smart contract API. Performs a blockchain transaction. */
-    post: operations['postContractAPIInvokeNamespace'];
+    post: operations["postContractAPIInvokeNamespace"];
   };
-  '/namespaces/{ns}/apis/{apiName}/listeners/{eventPath}': {
+  "/namespaces/{ns}/apis/{apiName}/listeners/{eventPath}": {
     /** Gets a list of contract listeners */
-    get: operations['getContractAPIListenersNamespace'];
+    get: operations["getContractAPIListenersNamespace"];
     /** Creates a new blockchain listener for events emitted by custom smart contracts */
-    post: operations['postContractAPIListenersNamespace'];
+    post: operations["postContractAPIListenersNamespace"];
   };
-  '/namespaces/{ns}/apis/{apiName}/query/{methodPath}': {
+  "/namespaces/{ns}/apis/{apiName}/publish": {
+    /** Publish a contract API to all other members of the multiparty network */
+    post: operations["postContractAPIPublishNamespace"];
+  };
+  "/namespaces/{ns}/apis/{apiName}/query/{methodPath}": {
     /** Queries a method on a smart contract API. Performs a read-only query. */
-    post: operations['postContractAPIQueryNamespace'];
+    post: operations["postContractAPIQueryNamespace"];
   };
-  '/namespaces/{ns}/apis/{id}': {
+  "/namespaces/{ns}/apis/{id}": {
     /** The ID of the contract API */
-    put: operations['putContractAPINamespace'];
+    put: operations["putContractAPINamespace"];
   };
-  '/namespaces/{ns}/batches': {
+  "/namespaces/{ns}/batches": {
     /** Gets a list of message batches */
-    get: operations['getBatchesNamespace'];
+    get: operations["getBatchesNamespace"];
   };
-  '/namespaces/{ns}/batches/{batchid}': {
+  "/namespaces/{ns}/batches/{batchid}": {
     /** Gets a message batch */
-    get: operations['getBatchByIDNamespace'];
+    get: operations["getBatchByIDNamespace"];
   };
-  '/namespaces/{ns}/blockchainevents': {
+  "/namespaces/{ns}/blockchainevents": {
     /** Gets a list of blockchain events */
-    get: operations['getBlockchainEventsNamespace'];
+    get: operations["getBlockchainEventsNamespace"];
   };
-  '/namespaces/{ns}/blockchainevents/{id}': {
+  "/namespaces/{ns}/blockchainevents/{id}": {
     /** Gets a blockchain event */
-    get: operations['getBlockchainEventByIDNamespace'];
+    get: operations["getBlockchainEventByIDNamespace"];
   };
-  '/namespaces/{ns}/charts/histogram/{collection}': {
+  "/namespaces/{ns}/charts/histogram/{collection}": {
     /** Gets a JSON object containing statistics data that can be used to build a graphical representation of recent activity in a given database collection */
-    get: operations['getChartHistogramNamespace'];
+    get: operations["getChartHistogramNamespace"];
   };
-  '/namespaces/{ns}/contracts/deploy': {
+  "/namespaces/{ns}/contracts/deploy": {
     /** Deploy a new smart contract */
-    post: operations['postContractDeployNamespace'];
+    post: operations["postContractDeployNamespace"];
   };
-  '/namespaces/{ns}/contracts/interfaces': {
+  "/namespaces/{ns}/contracts/interfaces": {
     /** Gets a list of contract interfaces that have been published */
-    get: operations['getContractInterfacesNamespace'];
+    get: operations["getContractInterfacesNamespace"];
     /** Creates and broadcasts a new custom smart contract interface */
-    post: operations['postNewContractInterfaceNamespace'];
+    post: operations["postNewContractInterfaceNamespace"];
   };
-  '/namespaces/{ns}/contracts/interfaces/{interfaceId}': {
+  "/namespaces/{ns}/contracts/interfaces/{interfaceId}": {
     /** Gets a contract interface by its ID */
-    get: operations['getContractInterfaceNamespace'];
+    get: operations["getContractInterfaceNamespace"];
+    /** Delete a contract interface */
+    delete: operations["deleteContractInterfaceNamespace"];
   };
-  '/namespaces/{ns}/contracts/interfaces/{name}/{version}': {
+  "/namespaces/{ns}/contracts/interfaces/{name}/{version}": {
     /** Gets a contract interface by its name and version */
-    get: operations['getContractInterfaceByNameAndVersionNamespace'];
+    get: operations["getContractInterfaceByNameAndVersionNamespace"];
   };
-  '/namespaces/{ns}/contracts/interfaces/generate': {
+  "/namespaces/{ns}/contracts/interfaces/{name}/{version}/publish": {
+    /** Publish a contract interface to all other members of the multiparty network */
+    post: operations["postContractInterfacePublishNamespace"];
+  };
+  "/namespaces/{ns}/contracts/interfaces/generate": {
     /** A convenience method to convert a blockchain specific smart contract format into a FireFly Interface format. The specific blockchain plugin in use must support this functionality. */
-    post: operations['postGenerateContractInterfaceNamespace'];
+    post: operations["postGenerateContractInterfaceNamespace"];
   };
-  '/namespaces/{ns}/contracts/invoke': {
+  "/namespaces/{ns}/contracts/invoke": {
     /** Invokes a method on a smart contract. Performs a blockchain transaction. */
-    post: operations['postContractInvokeNamespace'];
+    post: operations["postContractInvokeNamespace"];
   };
-  '/namespaces/{ns}/contracts/listeners': {
+  "/namespaces/{ns}/contracts/listeners": {
     /** Gets a list of contract listeners */
-    get: operations['getContractListenersNamespace'];
+    get: operations["getContractListenersNamespace"];
     /** Creates a new blockchain listener for events emitted by custom smart contracts */
-    post: operations['postNewContractListenerNamespace'];
+    post: operations["postNewContractListenerNamespace"];
   };
-  '/namespaces/{ns}/contracts/listeners/{nameOrId}': {
+  "/namespaces/{ns}/contracts/listeners/{nameOrId}": {
     /** Gets a contract listener by its name or ID */
-    get: operations['getContractListenerByNameOrIDNamespace'];
+    get: operations["getContractListenerByNameOrIDNamespace"];
     /** Deletes a contract listener referenced by its name or its ID */
-    delete: operations['deleteContractListenerNamespace'];
+    delete: operations["deleteContractListenerNamespace"];
   };
-  '/namespaces/{ns}/contracts/query': {
+  "/namespaces/{ns}/contracts/query": {
     /** Queries a method on a smart contract. Performs a read-only query. */
-    post: operations['postContractQueryNamespace'];
+    post: operations["postContractQueryNamespace"];
   };
-  '/namespaces/{ns}/data': {
+  "/namespaces/{ns}/data": {
     /** Gets a list of data items */
-    get: operations['getDataNamespace'];
+    get: operations["getDataNamespace"];
     /** Creates a new data item in this FireFly node */
-    post: operations['postDataNamespace'];
+    post: operations["postDataNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}': {
+  "/namespaces/{ns}/data/{dataid}": {
     /** Gets a data item by its ID, including metadata about this item */
-    get: operations['getDataByIDNamespace'];
+    get: operations["getDataByIDNamespace"];
     /** Deletes a data item by its ID, including metadata about this item */
-    delete: operations['deleteDataNamespace'];
+    delete: operations["deleteDataNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}/blob': {
+  "/namespaces/{ns}/data/{dataid}/blob": {
     /** Downloads the original file that was previously uploaded or received */
-    get: operations['getDataBlobNamespace'];
+    get: operations["getDataBlobNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}/blob/publish': {
+  "/namespaces/{ns}/data/{dataid}/blob/publish": {
     /** Publishes the binary blob attachment stored in your local data exchange, to shared storage */
-    post: operations['postDataBlobPublishNamespace'];
+    post: operations["postDataBlobPublishNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}/messages': {
+  "/namespaces/{ns}/data/{dataid}/messages": {
     /** Gets a list of the messages associated with a data item */
-    get: operations['getDataMsgsNamespace'];
+    get: operations["getDataMsgsNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}/value': {
+  "/namespaces/{ns}/data/{dataid}/value": {
     /** Downloads the JSON value of the data resource, without the associated metadata */
-    get: operations['getDataValueNamespace'];
+    get: operations["getDataValueNamespace"];
   };
-  '/namespaces/{ns}/data/{dataid}/value/publish': {
+  "/namespaces/{ns}/data/{dataid}/value/publish": {
     /** Publishes the JSON value from the specified data resource, to shared storage */
-    post: operations['postDataValuePublishNamespace'];
+    post: operations["postDataValuePublishNamespace"];
   };
-  '/namespaces/{ns}/datatypes': {
+  "/namespaces/{ns}/datasubpaths/{parent}": {
+    /** Gets a list of path names of named blob data, underneath a given parent path ('/' path prefixes are automatically pre-prepended) */
+    get: operations["getDataSubPathsNamespace"];
+  };
+  "/namespaces/{ns}/datatypes": {
     /** Gets a list of datatypes that have been published */
-    get: operations['getDatatypesNamespace'];
+    get: operations["getDatatypesNamespace"];
     /** Creates and broadcasts a new datatype */
-    post: operations['postNewDatatypeNamespace'];
+    post: operations["postNewDatatypeNamespace"];
   };
-  '/namespaces/{ns}/datatypes/{name}/{version}': {
+  "/namespaces/{ns}/datatypes/{name}/{version}": {
     /** Gets a datatype by its name and version */
-    get: operations['getDatatypeByNameNamespace'];
+    get: operations["getDatatypeByNameNamespace"];
   };
-  '/namespaces/{ns}/events': {
+  "/namespaces/{ns}/events": {
     /** Gets a list of events */
-    get: operations['getEventsNamespace'];
+    get: operations["getEventsNamespace"];
   };
-  '/namespaces/{ns}/events/{eid}': {
+  "/namespaces/{ns}/events/{eid}": {
     /** Gets an event by its ID */
-    get: operations['getEventByIDNamespace'];
+    get: operations["getEventByIDNamespace"];
   };
-  '/namespaces/{ns}/groups': {
+  "/namespaces/{ns}/groups": {
     /** Gets a list of groups */
-    get: operations['getGroupsNamespace'];
+    get: operations["getGroupsNamespace"];
   };
-  '/namespaces/{ns}/groups/{hash}': {
+  "/namespaces/{ns}/groups/{hash}": {
     /** Gets a group by its ID (hash) */
-    get: operations['getGroupByHashNamespace'];
+    get: operations["getGroupByHashNamespace"];
   };
-  '/namespaces/{ns}/identities': {
+  "/namespaces/{ns}/identities": {
     /** Gets a list of all identities that have been registered in the namespace */
-    get: operations['getIdentitiesNamespace'];
+    get: operations["getIdentitiesNamespace"];
     /** Registers a new identity in the network */
-    post: operations['postNewIdentityNamespace'];
+    post: operations["postNewIdentityNamespace"];
   };
-  '/namespaces/{ns}/identities/{did}': {
+  "/namespaces/{ns}/identities/{did}": {
     /** Gets an identity by its DID */
-    get: operations['getIdentityByDIDNamespace'];
+    get: operations["getIdentityByDIDNamespace"];
   };
-  '/namespaces/{ns}/identities/{iid}': {
+  "/namespaces/{ns}/identities/{iid}": {
     /** Gets an identity by its ID */
-    get: operations['getIdentityByIDNamespace'];
+    get: operations["getIdentityByIDNamespace"];
     /** Updates an identity */
-    patch: operations['patchUpdateIdentityNamespace'];
+    patch: operations["patchUpdateIdentityNamespace"];
   };
-  '/namespaces/{ns}/identities/{iid}/did': {
+  "/namespaces/{ns}/identities/{iid}/did": {
     /** Gets the DID for an identity based on its ID */
-    get: operations['getIdentityDIDNamespace'];
+    get: operations["getIdentityDIDNamespace"];
   };
-  '/namespaces/{ns}/identities/{iid}/verifiers': {
+  "/namespaces/{ns}/identities/{iid}/verifiers": {
     /** Gets the verifiers for an identity */
-    get: operations['getIdentityVerifiersNamespace'];
+    get: operations["getIdentityVerifiersNamespace"];
   };
-  '/namespaces/{ns}/messages': {
+  "/namespaces/{ns}/messages": {
     /** Gets a list of messages */
-    get: operations['getMsgsNamespace'];
+    get: operations["getMsgsNamespace"];
   };
-  '/namespaces/{ns}/messages/{msgid}': {
+  "/namespaces/{ns}/messages/{msgid}": {
     /** Gets a message by its ID */
-    get: operations['getMsgByIDNamespace'];
+    get: operations["getMsgByIDNamespace"];
   };
-  '/namespaces/{ns}/messages/{msgid}/data': {
+  "/namespaces/{ns}/messages/{msgid}/data": {
     /** Gets the list of data items that are attached to a message */
-    get: operations['getMsgDataNamespace'];
+    get: operations["getMsgDataNamespace"];
   };
-  '/namespaces/{ns}/messages/{msgid}/events': {
+  "/namespaces/{ns}/messages/{msgid}/events": {
     /** Gets the list of events for a message */
-    get: operations['getMsgEventsNamespace'];
+    get: operations["getMsgEventsNamespace"];
   };
-  '/namespaces/{ns}/messages/{msgid}/transaction': {
+  "/namespaces/{ns}/messages/{msgid}/transaction": {
     /** Gets the transaction for a message */
-    get: operations['getMsgTxnNamespace'];
+    get: operations["getMsgTxnNamespace"];
   };
-  '/namespaces/{ns}/messages/broadcast': {
+  "/namespaces/{ns}/messages/broadcast": {
     /** Broadcasts a message to all members in the network */
-    post: operations['postNewMessageBroadcastNamespace'];
+    post: operations["postNewMessageBroadcastNamespace"];
   };
-  '/namespaces/{ns}/messages/private': {
+  "/namespaces/{ns}/messages/private": {
     /** Privately sends a message to one or more members in the network */
-    post: operations['postNewMessagePrivateNamespace'];
+    post: operations["postNewMessagePrivateNamespace"];
   };
-  '/namespaces/{ns}/messages/requestreply': {
+  "/namespaces/{ns}/messages/requestreply": {
     /** Sends a message with a blocking HTTP request, waits for a reply to that message, then sends the reply as the HTTP response. */
-    post: operations['postNewMessageRequestReplyNamespace'];
+    post: operations["postNewMessageRequestReplyNamespace"];
   };
-  '/namespaces/{ns}/network/action': {
+  "/namespaces/{ns}/network/action": {
     /** Notify all nodes in the network of a new governance action */
-    post: operations['postNetworkActionNamespace'];
+    post: operations["postNetworkActionNamespace"];
   };
-  '/namespaces/{ns}/network/diddocs/{did}': {
+  "/namespaces/{ns}/network/diddocs/{did}": {
     /** Gets a DID document by its DID */
-    get: operations['getNetworkDIDDocByDIDNamespace'];
+    get: operations["getNetworkDIDDocByDIDNamespace"];
   };
-  '/namespaces/{ns}/network/identities': {
+  "/namespaces/{ns}/network/identities": {
     /** Gets the list of identities in the network (deprecated - use /identities instead of /network/identities */
-    get: operations['getNetworkIdentitiesNamespace'];
+    get: operations["getNetworkIdentitiesNamespace"];
   };
-  '/namespaces/{ns}/network/identities/{did}': {
+  "/namespaces/{ns}/network/identities/{did}": {
     /** Gets an identity by its DID */
-    get: operations['getNetworkIdentityByDIDNamespace'];
+    get: operations["getNetworkIdentityByDIDNamespace"];
   };
-  '/namespaces/{ns}/network/nodes': {
+  "/namespaces/{ns}/network/nodes": {
     /** Gets a list of nodes in the network */
-    get: operations['getNetworkNodesNamespace'];
+    get: operations["getNetworkNodesNamespace"];
   };
-  '/namespaces/{ns}/network/nodes/{nameOrId}': {
+  "/namespaces/{ns}/network/nodes/{nameOrId}": {
     /** Gets information about a specific node in the network */
-    get: operations['getNetworkNodeNamespace'];
+    get: operations["getNetworkNodeNamespace"];
   };
-  '/namespaces/{ns}/network/nodes/self': {
+  "/namespaces/{ns}/network/nodes/self": {
     /** Instructs this FireFly node to register itself on the network */
-    post: operations['postNodesSelfNamespace'];
+    post: operations["postNodesSelfNamespace"];
   };
-  '/namespaces/{ns}/network/organizations': {
+  "/namespaces/{ns}/network/organizations": {
     /** Gets a list of orgs in the network */
-    get: operations['getNetworkOrgsNamespace'];
+    get: operations["getNetworkOrgsNamespace"];
     /** Registers a new org in the network */
-    post: operations['postNewOrganizationNamespace'];
+    post: operations["postNewOrganizationNamespace"];
   };
-  '/namespaces/{ns}/network/organizations/{nameOrId}': {
+  "/namespaces/{ns}/network/organizations/{nameOrId}": {
     /** Gets information about a specific org in the network */
-    get: operations['getNetworkOrgNamespace'];
+    get: operations["getNetworkOrgNamespace"];
   };
-  '/namespaces/{ns}/network/organizations/self': {
+  "/namespaces/{ns}/network/organizations/self": {
     /** Instructs this FireFly node to register its org on the network */
-    post: operations['postNewOrganizationSelfNamespace'];
+    post: operations["postNewOrganizationSelfNamespace"];
   };
-  '/namespaces/{ns}/operations': {
+  "/namespaces/{ns}/nextpins": {
+    /** Queries the list of next-pins that determine the next masked message sequence for each member of a privacy group, on each context/topic */
+    get: operations["getNextPinsNamespace"];
+  };
+  "/namespaces/{ns}/operations": {
     /** Gets a a list of operations */
-    get: operations['getOpsNamespace'];
+    get: operations["getOpsNamespace"];
   };
-  '/namespaces/{ns}/operations/{opid}': {
+  "/namespaces/{ns}/operations/{opid}": {
     /** Gets an operation by ID */
-    get: operations['getOpByIDNamespace'];
+    get: operations["getOpByIDNamespace"];
   };
-  '/namespaces/{ns}/operations/{opid}/retry': {
+  "/namespaces/{ns}/operations/{opid}/retry": {
     /** Retries a failed operation */
-    post: operations['postOpRetryNamespace'];
+    post: operations["postOpRetryNamespace"];
   };
-  '/namespaces/{ns}/pins': {
+  "/namespaces/{ns}/pins": {
     /** Queries the list of pins received from the blockchain */
-    get: operations['getPinsNamespace'];
+    get: operations["getPinsNamespace"];
   };
-  '/namespaces/{ns}/pins/rewind': {
-    /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
-    post: operations['postPinsRewindNamespace'];
+  "/namespaces/{ns}/pins/rewind": {
+    /** Force a rewind of the event aggregator to a previous position, to re-evaluate (and possibly dispatch) that pin and others after it. Only accepts a sequence or batch ID for a currently undispatched pin */
+    post: operations["postPinsRewindNamespace"];
   };
-  '/namespaces/{ns}/status': {
+  "/namespaces/{ns}/status": {
     /** Gets the status of this namespace */
-    get: operations['getStatusNamespace'];
+    get: operations["getStatusNamespace"];
   };
-  '/namespaces/{ns}/status/batchmanager': {
+  "/namespaces/{ns}/status/batchmanager": {
     /** Gets the status of the batch manager */
-    get: operations['getStatusBatchManagerNamespace'];
+    get: operations["getStatusBatchManagerNamespace"];
   };
-  '/namespaces/{ns}/subscriptions': {
+  "/namespaces/{ns}/subscriptions": {
     /** Gets a list of subscriptions */
-    get: operations['getSubscriptionsNamespace'];
+    get: operations["getSubscriptionsNamespace"];
     /** Update an existing subscription */
-    put: operations['putSubscriptionNamespace'];
+    put: operations["putSubscriptionNamespace"];
     /** Creates a new subscription for an application to receive events from FireFly */
-    post: operations['postNewSubscriptionNamespace'];
+    post: operations["postNewSubscriptionNamespace"];
   };
-  '/namespaces/{ns}/subscriptions/{subid}': {
+  "/namespaces/{ns}/subscriptions/{subid}": {
     /** Gets a subscription by its ID */
-    get: operations['getSubscriptionByIDNamespace'];
+    get: operations["getSubscriptionByIDNamespace"];
     /** Deletes a subscription */
-    delete: operations['deleteSubscriptionNamespace'];
+    delete: operations["deleteSubscriptionNamespace"];
   };
-  '/namespaces/{ns}/tokens/accounts': {
+  "/namespaces/{ns}/tokens/accounts": {
     /** Gets a list of token accounts */
-    get: operations['getTokenAccountsNamespace'];
+    get: operations["getTokenAccountsNamespace"];
   };
-  '/namespaces/{ns}/tokens/accounts/{key}/pools': {
+  "/namespaces/{ns}/tokens/accounts/{key}/pools": {
     /** Gets a list of token pools that contain a given token account key */
-    get: operations['getTokenAccountPoolsNamespace'];
+    get: operations["getTokenAccountPoolsNamespace"];
   };
-  '/namespaces/{ns}/tokens/approvals': {
+  "/namespaces/{ns}/tokens/approvals": {
     /** Gets a list of token approvals */
-    get: operations['getTokenApprovalsNamespace'];
+    get: operations["getTokenApprovalsNamespace"];
     /** Creates a token approval */
-    post: operations['postTokenApprovalNamespace'];
+    post: operations["postTokenApprovalNamespace"];
   };
-  '/namespaces/{ns}/tokens/balances': {
+  "/namespaces/{ns}/tokens/balances": {
     /** Gets a list of token balances */
-    get: operations['getTokenBalancesNamespace'];
+    get: operations["getTokenBalancesNamespace"];
   };
-  '/namespaces/{ns}/tokens/burn': {
+  "/namespaces/{ns}/tokens/burn": {
     /** Burns some tokens */
-    post: operations['postTokenBurnNamespace'];
+    post: operations["postTokenBurnNamespace"];
   };
-  '/namespaces/{ns}/tokens/connectors': {
+  "/namespaces/{ns}/tokens/connectors": {
     /** Gets the list of token connectors currently in use */
-    get: operations['getTokenConnectorsNamespace'];
+    get: operations["getTokenConnectorsNamespace"];
   };
-  '/namespaces/{ns}/tokens/mint': {
+  "/namespaces/{ns}/tokens/mint": {
     /** Mints some tokens */
-    post: operations['postTokenMintNamespace'];
+    post: operations["postTokenMintNamespace"];
   };
-  '/namespaces/{ns}/tokens/pools': {
+  "/namespaces/{ns}/tokens/pools": {
     /** Gets a list of token pools */
-    get: operations['getTokenPoolsNamespace'];
+    get: operations["getTokenPoolsNamespace"];
     /** Creates a new token pool */
-    post: operations['postTokenPoolNamespace'];
+    post: operations["postTokenPoolNamespace"];
   };
-  '/namespaces/{ns}/tokens/pools/{nameOrId}': {
+  "/namespaces/{ns}/tokens/pools/{nameOrId}": {
     /** Gets a token pool by its name or its ID */
-    get: operations['getTokenPoolByNameOrIDNamespace'];
+    get: operations["getTokenPoolByNameOrIDNamespace"];
+    /** Delete a token pool */
+    delete: operations["deleteTokenPoolNamespace"];
   };
-  '/namespaces/{ns}/tokens/transfers': {
+  "/namespaces/{ns}/tokens/pools/{nameOrId}/publish": {
+    /** Publish a token pool to all other members of the multiparty network */
+    post: operations["postTokenPoolPublishNamespace"];
+  };
+  "/namespaces/{ns}/tokens/transfers": {
     /** Gets a list of token transfers */
-    get: operations['getTokenTransfersNamespace'];
+    get: operations["getTokenTransfersNamespace"];
     /** Transfers some tokens */
-    post: operations['postTokenTransferNamespace'];
+    post: operations["postTokenTransferNamespace"];
   };
-  '/namespaces/{ns}/tokens/transfers/{transferId}': {
+  "/namespaces/{ns}/tokens/transfers/{transferId}": {
     /** Gets a token transfer by its ID */
-    get: operations['getTokenTransferByIDNamespace'];
+    get: operations["getTokenTransferByIDNamespace"];
   };
-  '/namespaces/{ns}/transactions': {
+  "/namespaces/{ns}/transactions": {
     /** Gets a list of transactions */
-    get: operations['getTxnsNamespace'];
+    get: operations["getTxnsNamespace"];
   };
-  '/namespaces/{ns}/transactions/{txnid}': {
+  "/namespaces/{ns}/transactions/{txnid}": {
     /** Gets a transaction by its ID */
-    get: operations['getTxnByIDNamespace'];
+    get: operations["getTxnByIDNamespace"];
   };
-  '/namespaces/{ns}/transactions/{txnid}/blockchainevents': {
+  "/namespaces/{ns}/transactions/{txnid}/blockchainevents": {
     /** Gets a list blockchain events for a specific transaction */
-    get: operations['getTxnBlockchainEventsNamespace'];
+    get: operations["getTxnBlockchainEventsNamespace"];
   };
-  '/namespaces/{ns}/transactions/{txnid}/operations': {
+  "/namespaces/{ns}/transactions/{txnid}/operations": {
     /** Gets a list of operations in a specific transaction */
-    get: operations['getTxnOpsNamespace'];
+    get: operations["getTxnOpsNamespace"];
   };
-  '/namespaces/{ns}/transactions/{txnid}/status': {
+  "/namespaces/{ns}/transactions/{txnid}/status": {
     /** Gets the status of a transaction */
-    get: operations['getTxnStatusNamespace'];
+    get: operations["getTxnStatusNamespace"];
   };
-  '/namespaces/{ns}/verifiers': {
+  "/namespaces/{ns}/verifiers": {
     /** Gets a list of verifiers */
-    get: operations['getVerifiersNamespace'];
+    get: operations["getVerifiersNamespace"];
   };
-  '/namespaces/{ns}/verifiers/{hash}': {
+  "/namespaces/{ns}/verifiers/{hash}": {
     /** Gets a verifier by its hash */
-    get: operations['getVerifierByIDNamespace'];
+    get: operations["getVerifierByIDNamespace"];
   };
-  '/namespaces/{ns}/verifiers/resolve': {
+  "/namespaces/{ns}/verifiers/resolve": {
     /** Resolves an input key to a signing key */
-    post: operations['postVerifiersResolveNamespace'];
+    post: operations["postVerifiersResolveNamespace"];
   };
-  '/network/action': {
+  "/network/action": {
     /** Notify all nodes in the network of a new governance action */
-    post: operations['postNetworkAction'];
+    post: operations["postNetworkAction"];
   };
-  '/network/diddocs/{did}': {
+  "/network/diddocs/{did}": {
     /** Gets a DID document by its DID */
-    get: operations['getNetworkDIDDocByDID'];
+    get: operations["getNetworkDIDDocByDID"];
   };
-  '/network/identities': {
+  "/network/identities": {
     /** Gets the list of identities in the network (deprecated - use /identities instead of /network/identities */
-    get: operations['getNetworkIdentities'];
+    get: operations["getNetworkIdentities"];
   };
-  '/network/identities/{did}': {
+  "/network/identities/{did}": {
     /** Gets an identity by its DID */
-    get: operations['getNetworkIdentityByDID'];
+    get: operations["getNetworkIdentityByDID"];
   };
-  '/network/nodes': {
+  "/network/nodes": {
     /** Gets a list of nodes in the network */
-    get: operations['getNetworkNodes'];
+    get: operations["getNetworkNodes"];
   };
-  '/network/nodes/{nameOrId}': {
+  "/network/nodes/{nameOrId}": {
     /** Gets information about a specific node in the network */
-    get: operations['getNetworkNode'];
+    get: operations["getNetworkNode"];
   };
-  '/network/nodes/self': {
+  "/network/nodes/self": {
     /** Instructs this FireFly node to register itself on the network */
-    post: operations['postNodesSelf'];
+    post: operations["postNodesSelf"];
   };
-  '/network/organizations': {
+  "/network/organizations": {
     /** Gets a list of orgs in the network */
-    get: operations['getNetworkOrgs'];
+    get: operations["getNetworkOrgs"];
     /** Registers a new org in the network */
-    post: operations['postNewOrganization'];
+    post: operations["postNewOrganization"];
   };
-  '/network/organizations/{nameOrId}': {
+  "/network/organizations/{nameOrId}": {
     /** Gets information about a specific org in the network */
-    get: operations['getNetworkOrg'];
+    get: operations["getNetworkOrg"];
   };
-  '/network/organizations/self': {
+  "/network/organizations/self": {
     /** Instructs this FireFly node to register its org on the network */
-    post: operations['postNewOrganizationSelf'];
+    post: operations["postNewOrganizationSelf"];
   };
-  '/operations': {
+  "/nextpins": {
+    /** Queries the list of next-pins that determine the next masked message sequence for each member of a privacy group, on each context/topic */
+    get: operations["getNextPins"];
+  };
+  "/operations": {
     /** Gets a a list of operations */
-    get: operations['getOps'];
+    get: operations["getOps"];
   };
-  '/operations/{opid}': {
+  "/operations/{opid}": {
     /** Gets an operation by ID */
-    get: operations['getOpByID'];
+    get: operations["getOpByID"];
   };
-  '/operations/{opid}/retry': {
+  "/operations/{opid}/retry": {
     /** Retries a failed operation */
-    post: operations['postOpRetry'];
+    post: operations["postOpRetry"];
   };
-  '/pins': {
+  "/pins": {
     /** Queries the list of pins received from the blockchain */
-    get: operations['getPins'];
+    get: operations["getPins"];
   };
-  '/pins/rewind': {
-    /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
-    post: operations['postPinsRewind'];
+  "/pins/rewind": {
+    /** Force a rewind of the event aggregator to a previous position, to re-evaluate (and possibly dispatch) that pin and others after it. Only accepts a sequence or batch ID for a currently undispatched pin */
+    post: operations["postPinsRewind"];
   };
-  '/status': {
+  "/status": {
     /** Gets the status of this namespace */
-    get: operations['getStatus'];
+    get: operations["getStatus"];
   };
-  '/status/batchmanager': {
+  "/status/batchmanager": {
     /** Gets the status of the batch manager */
-    get: operations['getStatusBatchManager'];
+    get: operations["getStatusBatchManager"];
   };
-  '/subscriptions': {
+  "/subscriptions": {
     /** Gets a list of subscriptions */
-    get: operations['getSubscriptions'];
+    get: operations["getSubscriptions"];
     /** Update an existing subscription */
-    put: operations['putSubscription'];
+    put: operations["putSubscription"];
     /** Creates a new subscription for an application to receive events from FireFly */
-    post: operations['postNewSubscription'];
+    post: operations["postNewSubscription"];
   };
-  '/subscriptions/{subid}': {
+  "/subscriptions/{subid}": {
     /** Gets a subscription by its ID */
-    get: operations['getSubscriptionByID'];
+    get: operations["getSubscriptionByID"];
     /** Deletes a subscription */
-    delete: operations['deleteSubscription'];
+    delete: operations["deleteSubscription"];
   };
-  '/tokens/accounts': {
+  "/tokens/accounts": {
     /** Gets a list of token accounts */
-    get: operations['getTokenAccounts'];
+    get: operations["getTokenAccounts"];
   };
-  '/tokens/accounts/{key}/pools': {
+  "/tokens/accounts/{key}/pools": {
     /** Gets a list of token pools that contain a given token account key */
-    get: operations['getTokenAccountPools'];
+    get: operations["getTokenAccountPools"];
   };
-  '/tokens/approvals': {
+  "/tokens/approvals": {
     /** Gets a list of token approvals */
-    get: operations['getTokenApprovals'];
+    get: operations["getTokenApprovals"];
     /** Creates a token approval */
-    post: operations['postTokenApproval'];
+    post: operations["postTokenApproval"];
   };
-  '/tokens/balances': {
+  "/tokens/balances": {
     /** Gets a list of token balances */
-    get: operations['getTokenBalances'];
+    get: operations["getTokenBalances"];
   };
-  '/tokens/burn': {
+  "/tokens/burn": {
     /** Burns some tokens */
-    post: operations['postTokenBurn'];
+    post: operations["postTokenBurn"];
   };
-  '/tokens/connectors': {
+  "/tokens/connectors": {
     /** Gets the list of token connectors currently in use */
-    get: operations['getTokenConnectors'];
+    get: operations["getTokenConnectors"];
   };
-  '/tokens/mint': {
+  "/tokens/mint": {
     /** Mints some tokens */
-    post: operations['postTokenMint'];
+    post: operations["postTokenMint"];
   };
-  '/tokens/pools': {
+  "/tokens/pools": {
     /** Gets a list of token pools */
-    get: operations['getTokenPools'];
+    get: operations["getTokenPools"];
     /** Creates a new token pool */
-    post: operations['postTokenPool'];
+    post: operations["postTokenPool"];
   };
-  '/tokens/pools/{nameOrId}': {
+  "/tokens/pools/{nameOrId}": {
     /** Gets a token pool by its name or its ID */
-    get: operations['getTokenPoolByNameOrID'];
+    get: operations["getTokenPoolByNameOrID"];
+    /** Delete a token pool */
+    delete: operations["deleteTokenPool"];
   };
-  '/tokens/transfers': {
+  "/tokens/pools/{nameOrId}/publish": {
+    /** Publish a token pool to all other members of the multiparty network */
+    post: operations["postTokenPoolPublish"];
+  };
+  "/tokens/transfers": {
     /** Gets a list of token transfers */
-    get: operations['getTokenTransfers'];
+    get: operations["getTokenTransfers"];
     /** Transfers some tokens */
-    post: operations['postTokenTransfer'];
+    post: operations["postTokenTransfer"];
   };
-  '/tokens/transfers/{transferId}': {
+  "/tokens/transfers/{transferId}": {
     /** Gets a token transfer by its ID */
-    get: operations['getTokenTransferByID'];
+    get: operations["getTokenTransferByID"];
   };
-  '/transactions': {
+  "/transactions": {
     /** Gets a list of transactions */
-    get: operations['getTxns'];
+    get: operations["getTxns"];
   };
-  '/transactions/{txnid}': {
+  "/transactions/{txnid}": {
     /** Gets a transaction by its ID */
-    get: operations['getTxnByID'];
+    get: operations["getTxnByID"];
   };
-  '/transactions/{txnid}/blockchainevents': {
+  "/transactions/{txnid}/blockchainevents": {
     /** Gets a list blockchain events for a specific transaction */
-    get: operations['getTxnBlockchainEvents'];
+    get: operations["getTxnBlockchainEvents"];
   };
-  '/transactions/{txnid}/operations': {
+  "/transactions/{txnid}/operations": {
     /** Gets a list of operations in a specific transaction */
-    get: operations['getTxnOps'];
+    get: operations["getTxnOps"];
   };
-  '/transactions/{txnid}/status': {
+  "/transactions/{txnid}/status": {
     /** Gets the status of a transaction */
-    get: operations['getTxnStatus'];
+    get: operations["getTxnStatus"];
   };
-  '/verifiers': {
+  "/verifiers": {
     /** Gets a list of verifiers */
-    get: operations['getVerifiers'];
+    get: operations["getVerifiers"];
   };
-  '/verifiers/{hash}': {
+  "/verifiers/{hash}": {
     /** Gets a verifier by its hash */
-    get: operations['getVerifierByID'];
+    get: operations["getVerifierByID"];
   };
-  '/verifiers/resolve': {
+  "/verifiers/resolve": {
     /** Resolves an input key to a signing key */
-    post: operations['postVerifiersResolve'];
+    post: operations["postVerifiersResolve"];
   };
-  '/websockets': {
+  "/websockets": {
     /** Gets a list of the current WebSocket connections to this node */
-    get: operations['getWebSockets'];
+    get: operations["getWebSockets"];
   };
 }
 
@@ -774,7 +826,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -783,6 +835,10 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        networkname?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        published?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -801,7 +857,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -830,6 +886,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -849,19 +909,19 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new contract API will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -890,6 +950,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -903,7 +967,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -932,6 +996,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -946,7 +1014,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Reference to the FireFly Interface definition associated with the contract API */
           interface?: {
             /**
@@ -963,6 +1031,8 @@ export interface operations {
           location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
+          /** @description The published name of the API within the multiparty network */
+          networkName?: string;
         };
       };
     };
@@ -976,14 +1046,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -1012,6 +1082,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -1020,6 +1094,28 @@ export interface operations {
               ui?: string;
             };
           };
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Delete a contract API */
+  deleteContractAPI: {
+    parameters: {
+      path: {
+        /** The name of the contract API */
+        apiName: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -1034,14 +1130,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -1157,6 +1253,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -1180,14 +1280,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -1225,21 +1325,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -1251,7 +1351,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -1289,21 +1389,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -1316,7 +1416,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -1325,6 +1425,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description A map of named inputs that will be passed through to the blockchain connector */
           options?: { [key: string]: any };
         };
@@ -1342,7 +1528,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -1383,7 +1569,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -1456,14 +1642,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -1526,7 +1712,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
           /** @description A descriptive name for the listener */
@@ -1542,6 +1728,290 @@ export interface operations {
       };
     };
   };
+  /** Publish a contract API to all other members of the multiparty network */
+  postContractAPIPublish: {
+    parameters: {
+      path: {
+        /** The name of the contract API */
+        apiName: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
+    };
+  };
   /** Queries a method on a smart contract API. Performs a read-only query. */
   postContractAPIQuery: {
     parameters: {
@@ -1553,21 +2023,21 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': { [key: string]: unknown };
+          "application/json": { [key: string]: unknown };
         };
       };
       default: unknown;
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
           /** @description A map of named inputs. The name and type of each input must be compatible with the FFI description of the method, so that FireFly knows how to serialize it to the blockchain via the connector */
@@ -1595,14 +2065,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -1631,6 +2101,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -1644,7 +2118,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -1673,6 +2147,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -1687,7 +2165,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Reference to the FireFly Interface definition associated with the contract API */
           interface?: {
             /**
@@ -1704,6 +2182,8 @@ export interface operations {
           location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
+          /** @description The published name of the API within the multiparty network */
+          networkName?: string;
         };
       };
     };
@@ -1713,7 +2193,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -1735,9 +2215,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         payloadref?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -1758,7 +2238,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The DID of identity of the submitter */
             author?: string;
             /**
@@ -1811,7 +2291,7 @@ export interface operations {
              * @description The type of the batch
              * @enum {string}
              */
-            type?: 'broadcast' | 'private';
+            type?: "broadcast" | "private";
           }[];
         };
       };
@@ -1827,14 +2307,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The DID of identity of the submitter */
             author?: string;
             /**
@@ -1887,7 +2367,7 @@ export interface operations {
              * @description The type of the batch
              * @enum {string}
              */
-            type?: 'broadcast' | 'private';
+            type?: "broadcast" | "private";
           };
         };
       };
@@ -1899,7 +2379,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -1915,11 +2395,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         timestamp?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.blockchainid'?: string;
+        "tx.blockchainid"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -1938,7 +2418,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -1993,14 +2473,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -2063,14 +2543,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Total count of entries in this time bucket within the histogram */
             count?: string;
             /** @description Indicates whether there are more results in this bucket that are not being displayed */
@@ -2102,14 +2582,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -2147,21 +2627,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -2173,7 +2653,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -2211,21 +2691,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -2238,7 +2718,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The smart contract to deploy. This should be pre-compiled if required by the blockchain connector */
           contract?: any;
           /** @description The definition of the smart contract */
@@ -2260,13 +2740,17 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        networkname?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        published?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         version?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -2287,7 +2771,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -2403,6 +2887,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           }[];
@@ -2417,19 +2905,19 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new contract interface will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -2545,6 +3033,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -2554,7 +3046,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the smart contract this FFI represents */
           description?: string;
           /** @description An array of smart contract error definitions */
@@ -2612,6 +3104,8 @@ export interface operations {
           }[];
           /** @description The name of the FFI - usually matching the smart contract name */
           name?: string;
+          /** @description The published name of the FFI within the multiparty network */
+          networkName?: string;
           /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
           version?: string;
         };
@@ -2631,14 +3125,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -2754,9 +3248,35 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Delete a contract interface */
+  deleteContractInterface: {
+    parameters: {
+      path: {
+        /** The ID of the contract interface */
+        interfaceId: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -2777,14 +3297,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -2900,6 +3420,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -2908,19 +3432,29 @@ export interface operations {
       default: unknown;
     };
   };
-  /** A convenience method to convert a blockchain specific smart contract format into a FireFly Interface format. The specific blockchain plugin in use must support this functionality. */
-  postGenerateContractInterface: {
+  /** Publish a contract interface to all other members of the multiparty network */
+  postContractInterfacePublish: {
     parameters: {
+      path: {
+        /** The name of the contract interface */
+        name: string;
+        /** The version of the contract interface */
+        version: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -3036,6 +3570,138 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -3045,7 +3711,155 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
+    };
+  };
+  /** A convenience method to convert a blockchain specific smart contract format into a FireFly Interface format. The specific blockchain plugin in use must support this functionality. */
+  postGenerateContractInterface: {
+    parameters: {
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
           /** @description The description of the FFI to be generated. Defaults to the description extracted by the blockchain specific converter utility */
           description?: string;
           /** @description A blockchain connector specific payload. For example in Ethereum this is a JSON structure containing an 'abi' array, and optionally a 'devdocs' array. */
@@ -3069,14 +3883,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -3114,21 +3928,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -3140,7 +3954,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -3178,21 +3992,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -3205,7 +4019,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -3233,6 +4047,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -3269,7 +4169,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3310,7 +4210,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -3377,14 +4277,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -3447,7 +4347,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI */
           event?: {
             /** @description A description of the smart contract event */
@@ -3506,14 +4406,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -3584,14 +4484,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -3602,21 +4502,21 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': { [key: string]: unknown };
+          "application/json": { [key: string]: unknown };
         };
       };
       default: unknown;
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -3680,23 +4580,25 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.hash'?: string;
+        "blob.hash"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.name'?: string;
+        "blob.name"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.public'?: string;
+        "blob.path"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.size'?: string;
+        "blob.public"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "blob.size"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'datatype.name'?: string;
+        "datatype.name"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'datatype.version'?: string;
+        "datatype.version"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -3725,7 +4627,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -3735,6 +4637,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -3784,14 +4688,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       201: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -3801,6 +4705,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -3846,7 +4752,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The optional datatype to use for validation of the in-line data */
           datatype?: {
             /** @description The name of the datatype */
@@ -3864,15 +4770,15 @@ export interface operations {
           /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
           value?: any;
         };
-        'multipart/form-data': {
+        "multipart/form-data": {
           /** @description Success */
           autometa?: string;
           /** @description Success */
-          'datatype.name'?: string;
+          "datatype.name"?: string;
           /** @description Success */
-          'datatype.version'?: string;
+          "datatype.version"?: string;
           /** Format: binary */
-          'filename.ext'?: string;
+          "filename.ext"?: string;
           /** @description Success */
           metadata?: string;
           /** @description Success */
@@ -3890,14 +4796,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -3907,6 +4813,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -3960,14 +4868,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -3982,7 +4890,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4010,6 +4918,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -4017,6 +4927,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4039,7 +4955,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': string;
+          "application/json": string;
         };
       };
       default: unknown;
@@ -4054,14 +4970,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -4071,6 +4987,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -4116,7 +5034,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
         };
@@ -4132,7 +5050,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4160,6 +5078,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -4167,6 +5087,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4189,7 +5115,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -4255,34 +5181,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -4290,11 +5227,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -4310,7 +5260,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4338,6 +5288,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -4345,6 +5297,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4367,7 +5325,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': string;
+          "application/json": string;
         };
       };
       default: unknown;
@@ -4382,14 +5340,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -4399,6 +5357,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -4444,11 +5404,33 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
         };
       };
+    };
+  };
+  /** Gets a list of path names of named blob data, underneath a given parent path ('/' path prefixes are automatically pre-prepended) */
+  getDataSubPaths: {
+    parameters: {
+      path: {
+        /** The parent path to query */
+        parent: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": string[];
+        };
+      };
+      default: unknown;
     };
   };
   /** Gets a list of datatypes that have been published */
@@ -4456,7 +5438,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4489,7 +5471,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -4518,7 +5500,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -4538,14 +5520,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -4574,7 +5556,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -4585,7 +5567,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -4614,7 +5596,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -4626,14 +5608,14 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The name of the datatype */
           name?: string;
           /**
            * @description The validator that should be used to verify this datatype
            * @enum {string}
            */
-          validator?: 'json' | 'none' | 'definition';
+          validator?: "json" | "none" | "definition";
           /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
           value?: any;
           /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -4653,14 +5635,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -4689,7 +5671,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -4739,14 +5721,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -4786,25 +5768,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -4824,14 +5806,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -4871,25 +5853,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           };
         };
       };
@@ -4901,7 +5883,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -4932,7 +5914,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time when the group was first used to send a message in the network
@@ -4979,14 +5961,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time when the group was first used to send a message in the network
@@ -5039,11 +6021,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -5069,14 +6051,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5124,7 +6106,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5136,7 +6118,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -5155,14 +6141,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5210,7 +6196,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5222,7 +6208,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5270,7 +6256,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5283,7 +6269,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description The blockchain signing key to use to make the claim to the identity. Must be available to the local node to sign the identity claim. Will become a verifier on the established identity */
@@ -5313,14 +6299,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5368,7 +6354,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5380,7 +6366,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -5403,14 +6393,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5458,7 +6448,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5483,14 +6473,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5538,7 +6528,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5550,7 +6540,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -5598,7 +6588,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -5611,7 +6601,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
@@ -5629,16 +6619,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description See https://www.w3.org/TR/did-core/#json-ld */
-            '@context'?: string[];
+            "@context"?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
             authentication?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
@@ -5673,7 +6663,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -5704,7 +6694,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -5726,7 +6716,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           }[];
@@ -5766,6 +6760,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -5773,6 +6769,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -5792,14 +6794,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -5865,34 +6867,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -5900,11 +6913,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           }[];
         };
       };
@@ -5924,14 +6950,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -5953,6 +6979,8 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
+                /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+                path?: string;
                 /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
@@ -6037,34 +7065,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -6072,11 +7111,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -6092,14 +7144,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -6109,6 +7161,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -6162,7 +7216,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -6199,7 +7253,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -6239,25 +7293,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -6273,14 +7327,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -6302,16 +7356,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -6327,14 +7382,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -6395,34 +7450,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -6430,18 +7496,31 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -6502,34 +7581,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -6537,11 +7627,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -6549,7 +7652,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -6589,29 +7692,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -6628,14 +7732,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -6701,34 +7805,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -6736,18 +7851,31 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -6813,34 +7941,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -6848,11 +7987,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -6860,7 +8012,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -6917,29 +8069,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -6952,14 +8105,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -6981,6 +8134,8 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
+                /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+                path?: string;
                 /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
@@ -7065,34 +8220,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -7100,11 +8266,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -7112,7 +8291,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -7169,29 +8348,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -7202,16 +8382,20 @@ export interface operations {
   /** Gets a list of namespaces */
   getNamespaces: {
     parameters: {
+      query: {
+        /** When set, the API will return namespaces even if they are not yet initialized, including in error cases where an initializationError is included */
+        includeinitializing?: string;
+      };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the namespace was created
@@ -7219,6 +8403,10 @@ export interface operations {
             created?: string;
             /** @description A description of the namespace */
             description?: string;
+            /** @description Set to a non-empty string in the case that the namespace is currently failing to initialize */
+            initializationError?: string;
+            /** @description Set to true if the namespace is still initializing */
+            initializing?: boolean;
             /** @description The local namespace name */
             name?: string;
             /** @description The shared namespace name within the multiparty network */
@@ -7238,14 +8426,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the namespace was created
@@ -7272,7 +8460,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -7281,6 +8469,10 @@ export interface operations {
         interface?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        networkname?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        published?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -7299,7 +8491,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -7328,6 +8520,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -7351,19 +8547,19 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new contract API will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -7392,6 +8588,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -7405,7 +8605,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -7434,6 +8634,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -7448,7 +8652,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Reference to the FireFly Interface definition associated with the contract API */
           interface?: {
             /**
@@ -7465,6 +8669,8 @@ export interface operations {
           location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
+          /** @description The published name of the API within the multiparty network */
+          networkName?: string;
         };
       };
     };
@@ -7480,14 +8686,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -7516,6 +8722,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -7524,6 +8734,30 @@ export interface operations {
               ui?: string;
             };
           };
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Delete a contract API */
+  deleteContractAPINamespace: {
+    parameters: {
+      path: {
+        /** The name of the contract API */
+        apiName: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -7540,14 +8774,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -7663,6 +8897,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -7688,14 +8926,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -7733,21 +8971,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -7759,7 +8997,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -7797,21 +9035,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -7824,7 +9062,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -7852,6 +9090,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -7896,7 +9220,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -7937,7 +9261,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -8012,14 +9336,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -8082,7 +9406,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI */
           event?: {
             /** @description A description of the smart contract event */
@@ -8126,6 +9450,292 @@ export interface operations {
       };
     };
   };
+  /** Publish a contract API to all other members of the multiparty network */
+  postContractAPIPublishNamespace: {
+    parameters: {
+      path: {
+        /** The name of the contract API */
+        apiName: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
+    };
+  };
   /** Queries a method on a smart contract API. Performs a read-only query. */
   postContractAPIQueryNamespace: {
     parameters: {
@@ -8139,21 +9749,21 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': { [key: string]: unknown };
+          "application/json": { [key: string]: unknown };
         };
       };
       default: unknown;
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -8181,6 +9791,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -8227,14 +9923,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -8263,6 +9959,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -8276,7 +9976,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the contract API
@@ -8305,6 +10005,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the contract API */
             namespace?: string;
+            /** @description The published name of the API within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the API is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The URLs to use to access the API */
             urls?: {
               /** @description The URL to download the OpenAPI v3 (Swagger) description for the API generated in JSON or YAML format */
@@ -8319,7 +10023,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Reference to the FireFly Interface definition associated with the contract API */
           interface?: {
             /**
@@ -8336,6 +10040,8 @@ export interface operations {
           location?: any;
           /** @description The name that is used in the URL to access the API */
           name?: string;
+          /** @description The published name of the API within the multiparty network */
+          networkName?: string;
         };
       };
     };
@@ -8349,7 +10055,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -8371,9 +10077,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         payloadref?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -8394,7 +10100,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The DID of identity of the submitter */
             author?: string;
             /**
@@ -8447,7 +10153,7 @@ export interface operations {
              * @description The type of the batch
              * @enum {string}
              */
-            type?: 'broadcast' | 'private';
+            type?: "broadcast" | "private";
           }[];
         };
       };
@@ -8465,14 +10171,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The DID of identity of the submitter */
             author?: string;
             /**
@@ -8525,7 +10231,7 @@ export interface operations {
              * @description The type of the batch
              * @enum {string}
              */
-            type?: 'broadcast' | 'private';
+            type?: "broadcast" | "private";
           };
         };
       };
@@ -8541,7 +10247,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -8557,11 +10263,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         timestamp?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.blockchainid'?: string;
+        "tx.blockchainid"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -8580,7 +10286,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -8637,14 +10343,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -8709,14 +10415,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Total count of entries in this time bucket within the histogram */
             count?: string;
             /** @description Indicates whether there are more results in this bucket that are not being displayed */
@@ -8752,14 +10458,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -8797,21 +10503,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -8823,7 +10529,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -8861,21 +10567,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -8888,7 +10594,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The smart contract to deploy. This should be pre-compiled if required by the blockchain connector */
           contract?: any;
           /** @description The definition of the smart contract */
@@ -8914,13 +10620,17 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        networkname?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        published?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         version?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -8941,7 +10651,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -9057,6 +10767,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           }[];
@@ -9075,19 +10789,19 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new contract interface will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -9203,6 +10917,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -9212,7 +10930,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the smart contract this FFI represents */
           description?: string;
           /** @description An array of smart contract error definitions */
@@ -9270,6 +10988,8 @@ export interface operations {
           }[];
           /** @description The name of the FFI - usually matching the smart contract name */
           name?: string;
+          /** @description The published name of the FFI within the multiparty network */
+          networkName?: string;
           /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
           version?: string;
         };
@@ -9291,14 +11011,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -9414,9 +11134,37 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Delete a contract interface */
+  deleteContractInterfaceNamespace: {
+    parameters: {
+      path: {
+        /** The ID of the contract interface */
+        interfaceId: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -9439,14 +11187,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -9562,12 +11310,304 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
         };
       };
       default: unknown;
+    };
+  };
+  /** Publish a contract interface to all other members of the multiparty network */
+  postContractInterfacePublishNamespace: {
+    parameters: {
+      path: {
+        /** The name of the contract interface */
+        name: string;
+        /** The version of the contract interface */
+        version: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description A description of the smart contract this FFI represents */
+            description?: string;
+            /** @description An array of smart contract error definitions */
+            errors?: {
+              /** @description A description of the smart contract error */
+              description?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI error definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this error is part of
+               */
+              interface?: string;
+              /** @description The name of the error */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of error parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this error within the FFI for use on URL paths */
+              pathname?: string;
+              /** @description The stringified signature of the error, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /** @description An array of smart contract event definitions */
+            events?: {
+              /** @description A description of the smart contract event */
+              description?: string;
+              /** @description Additional blockchain specific fields about this event from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI event definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this event is part of
+               */
+              interface?: string;
+              /** @description The name of the event */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of event parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this event within the FFI for use on URL paths. Supports contracts that have multiple event overrides with the same name */
+              pathname?: string;
+              /** @description The stringified signature of the event, as computed by the blockchain plugin */
+              signature?: string;
+            }[];
+            /**
+             * Format: uuid
+             * @description The UUID of the FireFly interface (FFI) smart contract definition
+             */
+            id?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message that was used to publish this FFI to the network
+             */
+            message?: string;
+            /** @description An array of smart contract method definitions */
+            methods?: {
+              /** @description A description of the smart contract method */
+              description?: string;
+              /** @description Additional blockchain specific fields about this method from the original smart contract. Used by the blockchain plugin and for documentation generation. */
+              details?: { [key: string]: any };
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI method definition
+               */
+              id?: string;
+              /**
+               * Format: uuid
+               * @description The UUID of the FFI smart contract definition that this method is part of
+               */
+              interface?: string;
+              /** @description The name of the method */
+              name?: string;
+              /** @description The namespace of the FFI */
+              namespace?: string;
+              /** @description An array of method parameter/argument definitions */
+              params?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+              /** @description The unique name allocated to this method within the FFI for use on URL paths. Supports contracts that have multiple method overrides with the same name */
+              pathname?: string;
+              /** @description An array of method return definitions */
+              returns?: {
+                /** @description The name of the parameter. Note that parameters must be ordered correctly on the FFI, according to the order in the blockchain smart contract */
+                name?: string;
+                /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
+                schema?: any;
+              }[];
+            }[];
+            /** @description The name of the FFI - usually matching the smart contract name */
+            name?: string;
+            /** @description The namespace of the FFI */
+            namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
+            version?: string;
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
     };
   };
   /** A convenience method to convert a blockchain specific smart contract format into a FireFly Interface format. The specific blockchain plugin in use must support this functionality. */
@@ -9579,14 +11619,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A description of the smart contract this FFI represents */
             description?: string;
             /** @description An array of smart contract error definitions */
@@ -9702,6 +11742,10 @@ export interface operations {
             name?: string;
             /** @description The namespace of the FFI */
             namespace?: string;
+            /** @description The published name of the FFI within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the FFI is published to other members of the multiparty network */
+            published?: boolean;
             /** @description A version for the FFI - use of semantic versioning such as 'v1.0.1' is encouraged */
             version?: string;
           };
@@ -9711,7 +11755,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The description of the FFI to be generated. Defaults to the description extracted by the blockchain specific converter utility */
           description?: string;
           /** @description A blockchain connector specific payload. For example in Ethereum this is a JSON structure containing an 'abi' array, and optionally a 'devdocs' array. */
@@ -9739,14 +11783,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -9784,21 +11828,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -9810,7 +11854,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -9848,21 +11892,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -9875,7 +11919,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -9903,6 +11947,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -9943,7 +12073,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -9984,7 +12114,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -10055,14 +12185,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -10125,7 +12255,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI */
           event?: {
             /** @description A description of the smart contract event */
@@ -10186,14 +12316,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An ID assigned by the blockchain connector to this listener */
             backendId?: string;
             /**
@@ -10266,14 +12396,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -10288,21 +12418,21 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': { [key: string]: unknown };
+          "application/json": { [key: string]: unknown };
         };
       };
       default: unknown;
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An in-line FFI errors definition for the method to invoke. Alternative to specifying FFI */
           errors?: {
             /** @description A description of the smart contract error */
@@ -10330,6 +12460,92 @@ export interface operations {
           key?: string;
           /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
           location?: any;
+          /** @description You can specify a message to correlate with the invocation, which can be of type broadcast or private. Your specified method must support on-chain/off-chain correlation by taking a data input on the call */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description An in-line FFI method definition for the method to invoke. Required when FFI is not specified */
           method?: {
             /** @description A description of the smart contract method */
@@ -10370,23 +12586,25 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.hash'?: string;
+        "blob.hash"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.name'?: string;
+        "blob.name"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.public'?: string;
+        "blob.path"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'blob.size'?: string;
+        "blob.public"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "blob.size"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         created?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'datatype.name'?: string;
+        "datatype.name"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'datatype.version'?: string;
+        "datatype.version"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         hash?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10415,7 +12633,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -10425,6 +12643,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -10478,14 +12698,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       201: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -10495,6 +12715,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -10540,7 +12762,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The optional datatype to use for validation of the in-line data */
           datatype?: {
             /** @description The name of the datatype */
@@ -10558,15 +12780,15 @@ export interface operations {
           /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
           value?: any;
         };
-        'multipart/form-data': {
+        "multipart/form-data": {
           /** @description Success */
           autometa?: string;
           /** @description Success */
-          'datatype.name'?: string;
+          "datatype.name"?: string;
           /** @description Success */
-          'datatype.version'?: string;
+          "datatype.version"?: string;
           /** Format: binary */
-          'filename.ext'?: string;
+          "filename.ext"?: string;
           /** @description Success */
           metadata?: string;
           /** @description Success */
@@ -10586,14 +12808,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -10603,6 +12825,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -10658,14 +12882,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -10682,7 +12906,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10710,6 +12934,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -10717,6 +12943,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10739,7 +12971,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': string;
+          "application/json": string;
         };
       };
       default: unknown;
@@ -10756,14 +12988,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -10773,6 +13005,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -10818,7 +13052,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
         };
@@ -10836,7 +13070,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10864,6 +13098,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -10871,6 +13107,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -10893,7 +13135,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -10959,34 +13201,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -10994,11 +13247,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -11016,7 +13282,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11044,6 +13310,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -11051,6 +13319,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11073,7 +13347,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': string;
+          "application/json": string;
         };
       };
       default: unknown;
@@ -11090,14 +13364,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -11107,6 +13381,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -11152,11 +13428,35 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description An optional identifier to allow idempotent submission of requests. Stored on the transaction uniquely within a namespace */
           idempotencyKey?: string;
         };
       };
+    };
+  };
+  /** Gets a list of path names of named blob data, underneath a given parent path ('/' path prefixes are automatically pre-prepended) */
+  getDataSubPathsNamespace: {
+    parameters: {
+      path: {
+        /** The parent path to query */
+        parent: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": string[];
+        };
+      };
+      default: unknown;
     };
   };
   /** Gets a list of datatypes that have been published */
@@ -11168,7 +13468,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11201,7 +13501,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -11230,7 +13530,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -11254,14 +13554,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -11290,7 +13590,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -11301,7 +13601,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -11330,7 +13630,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -11342,14 +13642,14 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The name of the datatype */
           name?: string;
           /**
            * @description The validator that should be used to verify this datatype
            * @enum {string}
            */
-          validator?: 'json' | 'none' | 'definition';
+          validator?: "json" | "none" | "definition";
           /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
           value?: any;
           /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -11371,14 +13671,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the datatype was created
@@ -11407,7 +13707,7 @@ export interface operations {
              * @description The validator that should be used to verify this datatype
              * @enum {string}
              */
-            validator?: 'json' | 'none' | 'definition';
+            validator?: "json" | "none" | "definition";
             /** @description The definition of the datatype, in the syntax supported by the validator (such as a JSON Schema definition) */
             value?: any;
             /** @description The version of the datatype. Multiple versions can exist with the same name. Use of semantic versioning is encourages, such as v1.0.1 */
@@ -11461,14 +13761,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -11508,25 +13808,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -11548,14 +13848,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -11595,25 +13895,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           };
         };
       };
@@ -11629,7 +13929,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11660,7 +13960,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time when the group was first used to send a message in the network
@@ -11709,14 +14009,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time when the group was first used to send a message in the network
@@ -11773,11 +14073,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -11803,14 +14103,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -11858,7 +14158,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -11870,7 +14170,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -11893,14 +14197,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -11948,7 +14252,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -11960,7 +14264,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -12008,7 +14312,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -12021,7 +14325,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description The blockchain signing key to use to make the claim to the identity. Must be available to the local node to sign the identity claim. Will become a verifier on the established identity */
@@ -12053,14 +14357,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -12108,7 +14412,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -12120,7 +14424,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -12145,14 +14453,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -12200,7 +14508,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -12227,14 +14535,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -12282,7 +14590,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -12294,7 +14602,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -12342,7 +14650,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -12355,7 +14663,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
@@ -12375,16 +14683,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description See https://www.w3.org/TR/did-core/#json-ld */
-            '@context'?: string[];
+            "@context"?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
             authentication?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
@@ -12421,7 +14729,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -12452,7 +14760,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -12474,7 +14782,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           }[];
@@ -12518,6 +14830,8 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         pins?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        rejectreason?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         sequence?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         state?: string;
@@ -12525,6 +14839,12 @@ export interface operations {
         tag?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         topics?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        txid?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.id"?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        "txparent.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         txtype?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -12544,14 +14864,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -12617,34 +14937,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -12652,11 +14983,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           }[];
         };
       };
@@ -12678,14 +15022,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -12707,6 +15051,8 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
+                /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+                path?: string;
                 /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
@@ -12791,34 +15137,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -12826,11 +15183,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -12848,14 +15218,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An optional hash reference to a binary blob attachment */
             blob?: {
               /**
@@ -12865,6 +15235,8 @@ export interface operations {
               hash?: string;
               /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
               name?: string;
+              /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+              path?: string;
               /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
               public?: string;
               /**
@@ -12920,7 +15292,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -12957,7 +15329,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
@@ -12997,25 +15369,25 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'transaction_submitted'
-              | 'message_confirmed'
-              | 'message_rejected'
-              | 'datatype_confirmed'
-              | 'identity_confirmed'
-              | 'identity_updated'
-              | 'token_pool_confirmed'
-              | 'token_pool_op_failed'
-              | 'token_transfer_confirmed'
-              | 'token_transfer_op_failed'
-              | 'token_approval_confirmed'
-              | 'token_approval_op_failed'
-              | 'contract_interface_confirmed'
-              | 'contract_api_confirmed'
-              | 'blockchain_event_received'
-              | 'blockchain_invoke_op_succeeded'
-              | 'blockchain_invoke_op_failed'
-              | 'blockchain_contract_deploy_op_succeeded'
-              | 'blockchain_contract_deploy_op_failed';
+              | "transaction_submitted"
+              | "message_confirmed"
+              | "message_rejected"
+              | "datatype_confirmed"
+              | "identity_confirmed"
+              | "identity_updated"
+              | "token_pool_confirmed"
+              | "token_pool_op_failed"
+              | "token_transfer_confirmed"
+              | "token_transfer_op_failed"
+              | "token_approval_confirmed"
+              | "token_approval_op_failed"
+              | "contract_interface_confirmed"
+              | "contract_api_confirmed"
+              | "blockchain_event_received"
+              | "blockchain_invoke_op_succeeded"
+              | "blockchain_invoke_op_failed"
+              | "blockchain_contract_deploy_op_succeeded"
+              | "blockchain_contract_deploy_op_failed";
           }[];
         };
       };
@@ -13033,14 +15405,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -13062,16 +15434,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -13091,14 +15464,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -13164,34 +15537,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -13199,18 +15583,31 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -13276,34 +15673,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -13311,11 +15719,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -13323,7 +15744,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -13380,29 +15801,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -13423,14 +15845,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -13496,34 +15918,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -13531,18 +15964,31 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -13608,34 +16054,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -13643,11 +16100,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -13655,7 +16125,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -13712,29 +16182,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -13751,14 +16222,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch in which the message was pinned/transferred
@@ -13780,6 +16251,8 @@ export interface operations {
                 hash?: string;
                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                 name?: string;
+                /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
+                path?: string;
                 /** @description If the blob data has been published to shared storage, this field is the id of the data in the shared storage plugin (IPFS hash etc.) */
                 public?: string;
                 /**
@@ -13864,34 +16337,45 @@ export interface operations {
               tag?: string;
               /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
               topics?: string[];
+              /** @description The parent transaction that originally triggered this message */
+              txparent?: {
+                /**
+                 * Format: uuid
+                 * @description The UUID of the FireFly transaction
+                 */
+                id?: string;
+                /** @description The type of the FireFly transaction */
+                type?: string;
+              };
               /**
                * @description The type of transaction used to order/deliver this message
                * @enum {string}
                */
               txtype?:
-                | 'none'
-                | 'unpinned'
-                | 'batch_pin'
-                | 'network_action'
-                | 'token_pool'
-                | 'token_transfer'
-                | 'contract_deploy'
-                | 'contract_invoke'
-                | 'token_approval'
-                | 'data_publish';
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
               /**
                * @description The type of the message
                * @enum {string}
                */
               type?:
-                | 'definition'
-                | 'broadcast'
-                | 'private'
-                | 'groupinit'
-                | 'transfer_broadcast'
-                | 'transfer_private'
-                | 'approval_broadcast'
-                | 'approval_private';
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
             };
             /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
             idempotencyKey?: string;
@@ -13899,11 +16383,24 @@ export interface operations {
             localNamespace?: string;
             /** @description For private messages, a unique pin hash:nonce is assigned for each topic */
             pins?: string[];
+            /** @description If a message was rejected, provides details on the rejection reason */
+            rejectReason?: string;
             /**
              * @description The current state of the message
              * @enum {string}
              */
-            state?: 'staged' | 'ready' | 'sent' | 'pending' | 'confirmed' | 'rejected';
+            state?:
+              | "staged"
+              | "ready"
+              | "sent"
+              | "pending"
+              | "confirmed"
+              | "rejected";
+            /**
+             * Format: uuid
+             * @description The ID of the transaction used to order/deliver this message
+             */
+            txid?: string;
           };
         };
       };
@@ -13911,7 +16408,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
           data?: {
             /** @description The optional datatype to use for validation of the in-line data */
@@ -13968,29 +16465,30 @@ export interface operations {
              * @enum {string}
              */
             txtype?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
             /**
              * @description The type of the message
              * @enum {string}
              */
             type?:
-              | 'definition'
-              | 'broadcast'
-              | 'private'
-              | 'groupinit'
-              | 'transfer_broadcast'
-              | 'transfer_private'
-              | 'approval_broadcast'
-              | 'approval_private';
+              | "definition"
+              | "broadcast"
+              | "private"
+              | "groupinit"
+              | "transfer_broadcast"
+              | "transfer_private"
+              | "approval_broadcast"
+              | "approval_private";
           };
           /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
           idempotencyKey?: string;
@@ -14007,19 +16505,19 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * @description The action to be performed
              * @enum {string}
              */
-            type?: 'terminate';
+            type?: "terminate";
           };
         };
       };
@@ -14027,12 +16525,12 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * @description The action to be performed
            * @enum {string}
            */
-          type?: 'terminate';
+          type?: "terminate";
         };
       };
     };
@@ -14048,16 +16546,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description See https://www.w3.org/TR/did-core/#json-ld */
-            '@context'?: string[];
+            "@context"?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
             authentication?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
@@ -14102,11 +16600,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -14132,14 +16630,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14187,7 +16685,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14199,7 +16697,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -14224,14 +16726,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14279,7 +16781,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14291,7 +16793,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -14310,7 +16816,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -14322,11 +16828,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -14355,7 +16861,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14403,7 +16909,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14426,14 +16932,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14481,7 +16987,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14506,14 +17012,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14561,7 +17067,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14573,7 +17079,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14621,7 +17127,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14634,7 +17140,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -14647,7 +17153,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -14659,11 +17165,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -14692,7 +17198,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14740,7 +17246,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14765,14 +17271,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14820,7 +17326,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14832,7 +17338,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14880,7 +17386,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -14893,7 +17399,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description The blockchain signing key to use to make the claim to the identity. Must be available to the local node to sign the identity claim. Will become a verifier on the established identity */
@@ -14921,14 +17427,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -14976,7 +17482,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -15001,14 +17507,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -15056,7 +17562,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -15068,7 +17574,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -15116,7 +17622,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -15129,8 +17635,72 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
+    };
+  };
+  /** Queries the list of next-pins that determine the next masked message sequence for each member of a privacy group, on each context/topic */
+  getNextPinsNamespace: {
+    parameters: {
+      path: {
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+      query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        context?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        hash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        identity?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        nonce?: string;
+        /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
+        sort?: string;
+        /** Ascending sort order (overrides all fields in a multi-field sort) */
+        ascending?: string;
+        /** Descending sort order (overrides all fields in a multi-field sort) */
+        descending?: string;
+        /** The number of records to skip (max: 1,000). Unsuitable for bulk operations */
+        skip?: string;
+        /** The maximum number of records to return (max: 1,000) */
+        limit?: string;
+        /** Return a total count as well as items (adds extra database processing) */
+        count?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: byte
+             * @description The context the next-pin applies to - the hash of the privacy group-hash + topic. The group-hash is only known to the participants (can itself contain a salt in the group-name). This context is combined with the member and nonce to determine the final hash that is written on-chain
+             */
+            context?: string;
+            /**
+             * Format: byte
+             * @description The unique masked pin string
+             */
+            hash?: string;
+            /** @description The member of the privacy group the next-pin applies to */
+            identity?: string;
+            /** @description The namespace of the next-pin */
+            namespace?: string;
+            /**
+             * Format: int64
+             * @description The numeric index - which is monotonically increasing for each member of the privacy group
+             */
+            nonce?: number;
+          }[];
+        };
+      };
+      default: unknown;
     };
   };
   /** Gets a a list of operations */
@@ -15142,7 +17712,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -15185,7 +17755,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -15223,21 +17793,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -15264,19 +17834,21 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
              */
             created?: string;
+            /** @description Additional detailed information about an operation provided by the connector */
+            detail?: any;
             /** @description Any error reported back from the plugin for this operation */
             error?: string;
             /**
@@ -15309,21 +17881,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -15346,14 +17918,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -15391,21 +17963,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -15418,7 +17990,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -15431,7 +18003,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -15466,7 +18038,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch of messages this pin is part of
@@ -15511,7 +18083,7 @@ export interface operations {
       default: unknown;
     };
   };
-  /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+  /** Force a rewind of the event aggregator to a previous position, to re-evaluate (and possibly dispatch) that pin and others after it. Only accepts a sequence or batch ID for a currently undispatched pin */
   postPinsRewindNamespace: {
     parameters: {
       path: {
@@ -15520,14 +18092,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -15545,7 +18117,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * Format: uuid
            * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -15569,14 +18141,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Information about the multi-party system configured on this namespace */
             multiparty?: {
               /** @description Information about the multi-party smart contract configured for this namespace */
@@ -15666,7 +18238,11 @@ export interface operations {
                  * @description The type of the verifier
                  * @enum {string}
                  */
-                type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+                type?:
+                  | "ethereum_address"
+                  | "tezos_address"
+                  | "fabric_msp_id"
+                  | "dx_peer_id";
                 /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
                 value?: string;
               }[];
@@ -15738,14 +18314,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An array of currently active batch processors */
             processors?: {
               /** @description The type of dispatcher for this processor */
@@ -15820,7 +18396,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -15855,7 +18431,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -15910,12 +18486,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -15943,6 +18540,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -15970,14 +18580,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -16032,12 +18642,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -16065,6 +18696,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -16084,7 +18728,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Server-side filter to apply to events */
           filter?: {
             /** @description Deprecated: Please use 'message.author' instead */
@@ -16127,12 +18771,33 @@ export interface operations {
           namespace?: string;
           /** @description Subscription options */
           options?: {
+            /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+            batch?: boolean;
+            /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+            batchTimeout?: string;
             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
             fastack?: boolean;
-            /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+            /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
             firstEvent?: string;
             /** @description Webhooks only: Static headers to set on the webhook request */
             headers?: { [key: string]: string };
+            /** @description Webhooks only: a set of options for HTTP */
+            httpOptions?: {
+              /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+              connectionTimeout?: string;
+              /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+              expectContinueTimeout?: string;
+              /** @description The max duration to hold a HTTP keepalive connection between calls */
+              idleTimeout?: string;
+              /** @description The max number of idle connections to hold pooled */
+              maxIdleConns?: number;
+              /** @description HTTP proxy URL to use for outbound requests to the webhook */
+              proxyURL?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              requestTimeout?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              tlsHandshakeTimeout?: string;
+            };
             /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
             input?: {
               /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -16160,6 +18825,19 @@ export interface operations {
             replytag?: string;
             /** @description Webhooks only: The transaction type to set on the reply message */
             replytx?: string;
+            /** @description Webhooks only: a set of options for retrying the webhook call */
+            retry?: {
+              /** @description Number of times to retry the webhook call in case of failure */
+              count?: number;
+              /** @description Enables retry on HTTP calls, defaults to false */
+              enabled?: boolean;
+              /** @description Initial delay between retries when we retry the webhook call */
+              initialDelay?: string;
+              /** @description Max delay between retries when we retry the webhookcall */
+              maxDelay?: string;
+            };
+            /** @description The name of an existing TLS configuration associated to the namespace to use */
+            tlsConfigName?: string;
             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
             url?: string;
             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -16180,14 +18858,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       201: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -16242,12 +18920,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -16275,6 +18974,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -16294,7 +19006,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Server-side filter to apply to events */
           filter?: {
             /** @description Deprecated: Please use 'message.author' instead */
@@ -16337,12 +19049,33 @@ export interface operations {
           namespace?: string;
           /** @description Subscription options */
           options?: {
+            /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+            batch?: boolean;
+            /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+            batchTimeout?: string;
             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
             fastack?: boolean;
-            /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+            /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
             firstEvent?: string;
             /** @description Webhooks only: Static headers to set on the webhook request */
             headers?: { [key: string]: string };
+            /** @description Webhooks only: a set of options for HTTP */
+            httpOptions?: {
+              /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+              connectionTimeout?: string;
+              /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+              expectContinueTimeout?: string;
+              /** @description The max duration to hold a HTTP keepalive connection between calls */
+              idleTimeout?: string;
+              /** @description The max number of idle connections to hold pooled */
+              maxIdleConns?: number;
+              /** @description HTTP proxy URL to use for outbound requests to the webhook */
+              proxyURL?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              requestTimeout?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              tlsHandshakeTimeout?: string;
+            };
             /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
             input?: {
               /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -16370,6 +19103,19 @@ export interface operations {
             replytag?: string;
             /** @description Webhooks only: The transaction type to set on the reply message */
             replytx?: string;
+            /** @description Webhooks only: a set of options for retrying the webhook call */
+            retry?: {
+              /** @description Number of times to retry the webhook call in case of failure */
+              count?: number;
+              /** @description Enables retry on HTTP calls, defaults to false */
+              enabled?: boolean;
+              /** @description Initial delay between retries when we retry the webhook call */
+              initialDelay?: string;
+              /** @description Max delay between retries when we retry the webhookcall */
+              maxDelay?: string;
+            };
+            /** @description The name of an existing TLS configuration associated to the namespace to use */
+            tlsConfigName?: string;
             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
             url?: string;
             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -16396,14 +19142,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -16458,12 +19204,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -16491,6 +19258,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -16520,14 +19300,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -16542,7 +19322,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -16567,7 +19347,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain signing identity this balance applies to */
             key?: string;
           }[];
@@ -16587,7 +19367,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -16612,7 +19392,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID the token pool this balance entry applies to
@@ -16633,7 +19413,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -16663,9 +19443,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         subject?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -16684,7 +19464,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -16762,14 +19542,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -16834,7 +19614,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -16900,7 +19680,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
@@ -16909,14 +19689,98 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
-           */
-          message?: string;
+          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description The blockchain identity that is granted the approval */
           operator?: string;
-          /** @description The name or UUID of a token pool. Required if more than one pool exists. */
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this approval applies to
+           */
           pool?: string;
         };
       };
@@ -16931,7 +19795,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -16966,7 +19830,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The numeric balance. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when interpreting the balance. For example, with 18 decimals a fractional balance of 10.234 will be returned as 10,234,000,000,000,000,000 */
             balance?: string;
             /** @description The token connector that is responsible for the token pool of this balance entry */
@@ -17008,14 +19872,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -17076,7 +19940,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -17085,7 +19949,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -17146,7 +20010,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -17156,7 +20020,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -17167,15 +20031,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -17196,14 +20138,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The name of the token connector, as configured in the FireFly core configuration file */
             name?: string;
           }[];
@@ -17225,14 +20167,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -17293,7 +20235,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -17302,7 +20244,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -17363,7 +20305,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -17373,7 +20315,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -17384,15 +20326,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -17413,9 +20433,11 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        active?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         connector?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -17435,15 +20457,17 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        standard?: string;
+        networkname?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        state?: string;
+        published?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        standard?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         symbol?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -17464,7 +20488,9 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -17497,14 +20523,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -17513,13 +20539,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17536,7 +20561,7 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           }[];
         };
       };
@@ -17553,19 +20578,21 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new token pool will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -17598,14 +20625,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -17614,13 +20641,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17637,14 +20663,16 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -17677,14 +20705,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -17693,13 +20721,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17716,7 +20743,7 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
@@ -17724,7 +20751,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Input only field, with token connector specific configuration of the pool, such as an existing Ethereum address and block number to used to index the pool. See your chosen token connector documentation for details */
           config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
@@ -17747,13 +20774,15 @@ export interface operations {
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
           name?: string;
+          /** @description The published name of the token pool within the multiparty network */
+          networkName?: string;
           /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
           symbol?: string;
           /**
            * @description The type of token the pool contains, such as fungible/non-fungible
            * @enum {string}
            */
-          type?: 'fungible' | 'nonfungible';
+          type?: "fungible" | "nonfungible";
         };
       };
     };
@@ -17769,14 +20798,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -17809,14 +20840,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -17825,13 +20856,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -17848,11 +20878,225 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
       default: unknown;
+    };
+  };
+  /** Delete a token pool */
+  deleteTokenPoolNamespace: {
+    parameters: {
+      path: {
+        /** The token pool name or ID */
+        nameOrId: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Publish a token pool to all other members of the multiparty network */
+  postTokenPoolPublishNamespace: {
+    parameters: {
+      path: {
+        /** The token pool name or ID */
+        nameOrId: string;
+        /** The namespace which scopes this request */
+        ns: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
+            /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
+            connector?: string;
+            /**
+             * Format: date-time
+             * @description The creation time of the pool
+             */
+            created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
+            /**
+             * Format: uuid
+             * @description The UUID of the token pool
+             */
+            id?: string;
+            /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
+            info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
+            /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
+            key?: string;
+            /** @description A unique identifier for the pool, as provided by the token connector */
+            locator?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message used to inform the network about this pool
+             */
+            message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
+            /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
+            name?: string;
+            /** @description The namespace for the token pool */
+            namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description The ERC standard the token pool conforms to, as reported by the token connector */
+            standard?: string;
+            /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
+            symbol?: string;
+            /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
+            tx?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly transaction
+               */
+              id?: string;
+              /** @description The type of the FireFly transaction */
+              type?: string;
+            };
+            /**
+             * @description The type of token the pool contains, such as fungible/non-fungible
+             * @enum {string}
+             */
+            type?: "fungible" | "nonfungible";
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
+            /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
+            connector?: string;
+            /**
+             * Format: date-time
+             * @description The creation time of the pool
+             */
+            created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
+            /**
+             * Format: uuid
+             * @description The UUID of the token pool
+             */
+            id?: string;
+            /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
+            info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
+            /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
+            key?: string;
+            /** @description A unique identifier for the pool, as provided by the token connector */
+            locator?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message used to inform the network about this pool
+             */
+            message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
+            /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
+            name?: string;
+            /** @description The namespace for the token pool */
+            namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description The ERC standard the token pool conforms to, as reported by the token connector */
+            standard?: string;
+            /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
+            symbol?: string;
+            /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
+            tx?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly transaction
+               */
+              id?: string;
+              /** @description The type of the FireFly transaction */
+              type?: string;
+            };
+            /**
+             * @description The type of token the pool contains, such as fungible/non-fungible
+             * @enum {string}
+             */
+            type?: "fungible" | "nonfungible";
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
     };
   };
   /** Gets a list of token transfers */
@@ -17892,9 +21136,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         tokenindex?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -17914,14 +21158,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -17982,7 +21226,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           }[];
@@ -18004,14 +21248,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -18072,7 +21316,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -18081,7 +21325,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -18142,7 +21386,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -18152,7 +21396,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -18163,15 +21407,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -18194,14 +21516,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -18262,7 +21584,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -18280,7 +21602,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -18311,7 +21633,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -18333,16 +21655,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           }[];
         };
       };
@@ -18360,7 +21683,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -18391,7 +21714,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -18413,16 +21736,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -18440,14 +21764,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -18504,14 +21828,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -18549,21 +21873,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -18586,14 +21910,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A set of records describing the activities within the transaction known by the local FireFly node */
             details?: {
               /** @description If an error occurred related to the detail entry, it is included here */
@@ -18634,7 +21958,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -18665,7 +21989,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -18687,7 +22011,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           }[];
@@ -18707,14 +22035,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -18736,7 +22064,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           };
@@ -18754,19 +22086,23 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           };
@@ -18776,12 +22112,16 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * @description The type of the verifier
            * @enum {string}
            */
-          type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+          type?:
+            | "ethereum_address"
+            | "tezos_address"
+            | "fabric_msp_id"
+            | "dx_peer_id";
           /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
           value?: string;
         };
@@ -18793,19 +22133,19 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * @description The action to be performed
              * @enum {string}
              */
-            type?: 'terminate';
+            type?: "terminate";
           };
         };
       };
@@ -18813,12 +22153,12 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * @description The action to be performed
            * @enum {string}
            */
-          type?: 'terminate';
+          type?: "terminate";
         };
       };
     };
@@ -18832,16 +22172,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description See https://www.w3.org/TR/did-core/#json-ld */
-            '@context'?: string[];
+            "@context"?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
             authentication?: string[];
             /** @description See https://www.w3.org/TR/did-core/#did-document-properties */
@@ -18882,11 +22222,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -18912,14 +22252,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -18967,7 +22307,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -18979,7 +22319,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -19002,14 +22346,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19057,7 +22401,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19069,7 +22413,11 @@ export interface operations {
                * @description The type of the verifier
                * @enum {string}
                */
-              type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+              type?:
+                | "ethereum_address"
+                | "tezos_address"
+                | "fabric_msp_id"
+                | "dx_peer_id";
               /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
               value?: string;
             }[];
@@ -19084,7 +22432,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -19096,11 +22444,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -19129,7 +22477,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19177,7 +22525,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19198,14 +22546,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19253,7 +22601,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19274,14 +22622,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19329,7 +22677,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19341,7 +22689,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19389,7 +22737,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19402,7 +22750,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -19411,7 +22759,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -19423,11 +22771,11 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         id?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.claim'?: string;
+        "messages.claim"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.update'?: string;
+        "messages.update"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'messages.verification'?: string;
+        "messages.verification"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -19456,7 +22804,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19504,7 +22852,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19525,14 +22873,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19580,7 +22928,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19592,7 +22940,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19640,7 +22988,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19653,7 +23001,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description A description of the identity. Part of the updatable profile information of an identity */
           description?: string;
           /** @description The blockchain signing key to use to make the claim to the identity. Must be available to the local node to sign the identity claim. Will become a verifier on the established identity */
@@ -19679,14 +23027,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19734,7 +23082,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19755,14 +23103,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19810,7 +23158,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19822,7 +23170,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The creation time of the identity
@@ -19870,7 +23218,7 @@ export interface operations {
              * @description The type of the identity
              * @enum {string}
              */
-            type?: 'org' | 'node' | 'custom';
+            type?: "org" | "node" | "custom";
             /**
              * Format: date-time
              * @description The last update time of the identity profile
@@ -19883,8 +23231,68 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
+    };
+  };
+  /** Queries the list of next-pins that determine the next masked message sequence for each member of a privacy group, on each context/topic */
+  getNextPins: {
+    parameters: {
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+      query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        context?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        hash?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        identity?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        nonce?: string;
+        /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
+        sort?: string;
+        /** Ascending sort order (overrides all fields in a multi-field sort) */
+        ascending?: string;
+        /** Descending sort order (overrides all fields in a multi-field sort) */
+        descending?: string;
+        /** The number of records to skip (max: 1,000). Unsuitable for bulk operations */
+        skip?: string;
+        /** The maximum number of records to return (max: 1,000) */
+        limit?: string;
+        /** Return a total count as well as items (adds extra database processing) */
+        count?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /**
+             * Format: byte
+             * @description The context the next-pin applies to - the hash of the privacy group-hash + topic. The group-hash is only known to the participants (can itself contain a salt in the group-name). This context is combined with the member and nonce to determine the final hash that is written on-chain
+             */
+            context?: string;
+            /**
+             * Format: byte
+             * @description The unique masked pin string
+             */
+            hash?: string;
+            /** @description The member of the privacy group the next-pin applies to */
+            identity?: string;
+            /** @description The namespace of the next-pin */
+            namespace?: string;
+            /**
+             * Format: int64
+             * @description The numeric index - which is monotonically increasing for each member of the privacy group
+             */
+            nonce?: number;
+          }[];
+        };
+      };
+      default: unknown;
     };
   };
   /** Gets a a list of operations */
@@ -19892,7 +23300,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -19935,7 +23343,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -19973,21 +23381,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -20012,19 +23420,21 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
              */
             created?: string;
+            /** @description Additional detailed information about an operation provided by the connector */
+            detail?: any;
             /** @description Any error reported back from the plugin for this operation */
             error?: string;
             /**
@@ -20057,21 +23467,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -20092,14 +23502,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -20137,21 +23547,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -20164,7 +23574,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': { [key: string]: unknown };
+        "application/json": { [key: string]: unknown };
       };
     };
   };
@@ -20173,7 +23583,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -20208,7 +23618,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID of the batch of messages this pin is part of
@@ -20253,19 +23663,19 @@ export interface operations {
       default: unknown;
     };
   };
-  /** Force a rewind of the event aggregator to a previous position, to re-evaluate all unconfirmed pins since that point */
+  /** Force a rewind of the event aggregator to a previous position, to re-evaluate (and possibly dispatch) that pin and others after it. Only accepts a sequence or batch ID for a currently undispatched pin */
   postPinsRewind: {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -20283,7 +23693,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * Format: uuid
            * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -20303,14 +23713,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Information about the multi-party system configured on this namespace */
             multiparty?: {
               /** @description Information about the multi-party smart contract configured for this namespace */
@@ -20400,7 +23810,11 @@ export interface operations {
                  * @description The type of the verifier
                  * @enum {string}
                  */
-                type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+                type?:
+                  | "ethereum_address"
+                  | "tezos_address"
+                  | "fabric_msp_id"
+                  | "dx_peer_id";
                 /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
                 value?: string;
               }[];
@@ -20468,14 +23882,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description An array of currently active batch processors */
             processors?: {
               /** @description The type of dispatcher for this processor */
@@ -20546,7 +23960,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -20581,7 +23995,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -20636,12 +24050,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -20669,6 +24104,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -20692,14 +24140,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -20754,12 +24202,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -20787,6 +24256,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -20806,7 +24288,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Server-side filter to apply to events */
           filter?: {
             /** @description Deprecated: Please use 'message.author' instead */
@@ -20849,12 +24331,33 @@ export interface operations {
           namespace?: string;
           /** @description Subscription options */
           options?: {
+            /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+            batch?: boolean;
+            /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+            batchTimeout?: string;
             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
             fastack?: boolean;
-            /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+            /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
             firstEvent?: string;
             /** @description Webhooks only: Static headers to set on the webhook request */
             headers?: { [key: string]: string };
+            /** @description Webhooks only: a set of options for HTTP */
+            httpOptions?: {
+              /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+              connectionTimeout?: string;
+              /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+              expectContinueTimeout?: string;
+              /** @description The max duration to hold a HTTP keepalive connection between calls */
+              idleTimeout?: string;
+              /** @description The max number of idle connections to hold pooled */
+              maxIdleConns?: number;
+              /** @description HTTP proxy URL to use for outbound requests to the webhook */
+              proxyURL?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              requestTimeout?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              tlsHandshakeTimeout?: string;
+            };
             /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
             input?: {
               /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -20882,6 +24385,19 @@ export interface operations {
             replytag?: string;
             /** @description Webhooks only: The transaction type to set on the reply message */
             replytx?: string;
+            /** @description Webhooks only: a set of options for retrying the webhook call */
+            retry?: {
+              /** @description Number of times to retry the webhook call in case of failure */
+              count?: number;
+              /** @description Enables retry on HTTP calls, defaults to false */
+              enabled?: boolean;
+              /** @description Initial delay between retries when we retry the webhook call */
+              initialDelay?: string;
+              /** @description Max delay between retries when we retry the webhookcall */
+              maxDelay?: string;
+            };
+            /** @description The name of an existing TLS configuration associated to the namespace to use */
+            tlsConfigName?: string;
             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
             url?: string;
             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -20898,14 +24414,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       201: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -20960,12 +24476,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -20993,6 +24530,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -21012,7 +24562,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Server-side filter to apply to events */
           filter?: {
             /** @description Deprecated: Please use 'message.author' instead */
@@ -21055,12 +24605,33 @@ export interface operations {
           namespace?: string;
           /** @description Subscription options */
           options?: {
+            /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+            batch?: boolean;
+            /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+            batchTimeout?: string;
             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
             fastack?: boolean;
-            /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+            /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
             firstEvent?: string;
             /** @description Webhooks only: Static headers to set on the webhook request */
             headers?: { [key: string]: string };
+            /** @description Webhooks only: a set of options for HTTP */
+            httpOptions?: {
+              /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+              connectionTimeout?: string;
+              /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+              expectContinueTimeout?: string;
+              /** @description The max duration to hold a HTTP keepalive connection between calls */
+              idleTimeout?: string;
+              /** @description The max number of idle connections to hold pooled */
+              maxIdleConns?: number;
+              /** @description HTTP proxy URL to use for outbound requests to the webhook */
+              proxyURL?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              requestTimeout?: string;
+              /** @description The max duration to hold a TLS handshake alive */
+              tlsHandshakeTimeout?: string;
+            };
             /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
             input?: {
               /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -21088,6 +24659,19 @@ export interface operations {
             replytag?: string;
             /** @description Webhooks only: The transaction type to set on the reply message */
             replytx?: string;
+            /** @description Webhooks only: a set of options for retrying the webhook call */
+            retry?: {
+              /** @description Number of times to retry the webhook call in case of failure */
+              count?: number;
+              /** @description Enables retry on HTTP calls, defaults to false */
+              enabled?: boolean;
+              /** @description Initial delay between retries when we retry the webhook call */
+              initialDelay?: string;
+              /** @description Max delay between retries when we retry the webhookcall */
+              maxDelay?: string;
+            };
+            /** @description The name of an existing TLS configuration associated to the namespace to use */
+            tlsConfigName?: string;
             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
             url?: string;
             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -21112,14 +24696,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description Creation time of the subscription
@@ -21174,12 +24758,33 @@ export interface operations {
             namespace?: string;
             /** @description Subscription options */
             options?: {
+              /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch. Commonly used with Webhooks to allow events to be delivered and acknowledged in batches. */
+              batch?: boolean;
+              /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
+              batchTimeout?: string;
               /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
               fastack?: boolean;
-              /** @description Whether your appplication would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
+              /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
               firstEvent?: string;
               /** @description Webhooks only: Static headers to set on the webhook request */
               headers?: { [key: string]: string };
+              /** @description Webhooks only: a set of options for HTTP */
+              httpOptions?: {
+                /** @description The maximum amount of time that a connection is allowed to remain with no data transmitted. */
+                connectionTimeout?: string;
+                /** @description See [ExpectContinueTimeout in the Go docs](https://pkg.go.dev/net/http#Transport) */
+                expectContinueTimeout?: string;
+                /** @description The max duration to hold a HTTP keepalive connection between calls */
+                idleTimeout?: string;
+                /** @description The max number of idle connections to hold pooled */
+                maxIdleConns?: number;
+                /** @description HTTP proxy URL to use for outbound requests to the webhook */
+                proxyURL?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                requestTimeout?: string;
+                /** @description The max duration to hold a TLS handshake alive */
+                tlsHandshakeTimeout?: string;
+              };
               /** @description Webhooks only: A set of options to extract data from the first JSON input data in the incoming message. Only applies if withData=true */
               input?: {
                 /** @description A top-level property of the first data input, to use for the request body. Default is the whole first body */
@@ -21207,6 +24812,19 @@ export interface operations {
               replytag?: string;
               /** @description Webhooks only: The transaction type to set on the reply message */
               replytx?: string;
+              /** @description Webhooks only: a set of options for retrying the webhook call */
+              retry?: {
+                /** @description Number of times to retry the webhook call in case of failure */
+                count?: number;
+                /** @description Enables retry on HTTP calls, defaults to false */
+                enabled?: boolean;
+                /** @description Initial delay between retries when we retry the webhook call */
+                initialDelay?: string;
+                /** @description Max delay between retries when we retry the webhookcall */
+                maxDelay?: string;
+              };
+              /** @description The name of an existing TLS configuration associated to the namespace to use */
+              tlsConfigName?: string;
               /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
               url?: string;
               /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
@@ -21234,14 +24852,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       204: {
         content: {
-          'application/json': unknown;
+          "application/json": unknown;
         };
       };
       default: unknown;
@@ -21252,7 +24870,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -21277,7 +24895,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain signing identity this balance applies to */
             key?: string;
           }[];
@@ -21295,7 +24913,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -21320,7 +24938,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID the token pool this balance entry applies to
@@ -21337,7 +24955,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -21367,9 +24985,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         subject?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
         sort?: string;
         /** Ascending sort order (overrides all fields in a multi-field sort) */
@@ -21388,7 +25006,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -21462,14 +25080,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -21534,7 +25152,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description Indicates if this approval is currently active (only one approval can be active per subject) */
             active?: boolean;
             /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
@@ -21600,7 +25218,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Whether this record grants permission for an operator to perform actions on the token balance (true), or revokes permission (false) */
           approved?: boolean;
           /** @description Input only field, with token connector specific configuration of the approval.  See your chosen token connector documentation for details */
@@ -21609,14 +25227,98 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
-           */
-          message?: string;
+          /** @description You can specify a message to correlate with the approval, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the approval */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
           /** @description The blockchain identity that is granted the approval */
           operator?: string;
-          /** @description The name or UUID of a token pool. Required if more than one pool exists. */
+          /**
+           * Format: uuid
+           * @description The UUID the token pool this approval applies to
+           */
           pool?: string;
         };
       };
@@ -21627,7 +25329,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -21662,7 +25364,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The numeric balance. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when interpreting the balance. For example, with 18 decimals a fractional balance of 10.234 will be returned as 10,234,000,000,000,000,000 */
             balance?: string;
             /** @description The token connector that is responsible for the token pool of this balance entry */
@@ -21700,14 +25402,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -21768,7 +25470,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -21777,7 +25479,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -21838,7 +25540,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -21848,7 +25550,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -21859,15 +25561,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The index of the token within the pool that this transfer applies to */
           tokenIndex?: string;
@@ -21882,14 +25662,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The name of the token connector, as configured in the FireFly core configuration file */
             name?: string;
           }[];
@@ -21907,14 +25687,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -21975,7 +25755,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -21984,7 +25764,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -22045,7 +25825,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -22055,7 +25835,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -22064,15 +25844,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -22089,9 +25947,11 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        active?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         connector?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -22111,15 +25971,17 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         name?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        standard?: string;
+        networkname?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        state?: string;
+        published?: string;
+        /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
+        standard?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         symbol?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Sort field. For multi-field sort use comma separated values (or multiple query values) with '-' prefix for descending */
@@ -22140,7 +26002,9 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -22173,14 +26037,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -22189,13 +26053,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -22212,7 +26075,7 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           }[];
         };
       };
@@ -22225,19 +26088,21 @@ export interface operations {
       query: {
         /** When true the HTTP request blocks until the message is confirmed */
         confirm?: string;
-        /** When true the new contract API will be published to the network. Unsupported for single party namespaces. */
+        /** When true the definition will be published to all other members of the multiparty network */
         publish?: string;
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -22270,14 +26135,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -22286,13 +26151,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -22309,14 +26173,16 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -22349,14 +26215,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -22365,13 +26231,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -22388,7 +26253,7 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
@@ -22396,7 +26261,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description Input only field, with token connector specific configuration of the pool, such as an existing Ethereum address and block number to used to index the pool. See your chosen token connector documentation for details */
           config?: { [key: string]: any };
           /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
@@ -22419,13 +26284,15 @@ export interface operations {
           key?: string;
           /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
           name?: string;
+          /** @description The published name of the token pool within the multiparty network */
+          networkName?: string;
           /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
           symbol?: string;
           /**
            * @description The type of token the pool contains, such as fungible/non-fungible
            * @enum {string}
            */
-          type?: 'fungible' | 'nonfungible';
+          type?: "fungible" | "nonfungible";
         };
       };
     };
@@ -22439,14 +26306,16 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
             /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
             connector?: string;
             /**
@@ -22479,14 +26348,14 @@ export interface operations {
              * @description The interface encoding format supported by the connector for this token pool
              * @enum {string}
              */
-            interfaceFormat?: 'abi' | 'ffi';
+            interfaceFormat?: "abi" | "ffi";
             /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
             key?: string;
             /** @description A unique identifier for the pool, as provided by the token connector */
             locator?: string;
             /**
              * Format: uuid
-             * @description The UUID of the broadcast message used to inform the network to index this pool
+             * @description The UUID of the broadcast message used to inform the network about this pool
              */
             message?: string;
             /** @description The method definitions resolved by the token connector to be used by each token operation */
@@ -22495,13 +26364,12 @@ export interface operations {
             name?: string;
             /** @description The namespace for the token pool */
             namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
             /** @description The ERC standard the token pool conforms to, as reported by the token connector */
             standard?: string;
-            /**
-             * @description The current state of the token pool
-             * @enum {string}
-             */
-            state?: 'pending' | 'confirmed';
             /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
             symbol?: string;
             /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
@@ -22518,11 +26386,221 @@ export interface operations {
              * @description The type of token the pool contains, such as fungible/non-fungible
              * @enum {string}
              */
-            type?: 'fungible' | 'nonfungible';
+            type?: "fungible" | "nonfungible";
           };
         };
       };
       default: unknown;
+    };
+  };
+  /** Delete a token pool */
+  deleteTokenPool: {
+    parameters: {
+      path: {
+        /** The token pool name or ID */
+        nameOrId: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      204: {
+        content: {
+          "application/json": unknown;
+        };
+      };
+      default: unknown;
+    };
+  };
+  /** Publish a token pool to all other members of the multiparty network */
+  postTokenPoolPublish: {
+    parameters: {
+      path: {
+        /** The token pool name or ID */
+        nameOrId: string;
+      };
+      query: {
+        /** When true the HTTP request blocks until the message is confirmed */
+        confirm?: string;
+      };
+      header: {
+        /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
+        "Request-Timeout"?: string;
+      };
+    };
+    responses: {
+      /** Success */
+      200: {
+        content: {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
+            /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
+            connector?: string;
+            /**
+             * Format: date-time
+             * @description The creation time of the pool
+             */
+            created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
+            /**
+             * Format: uuid
+             * @description The UUID of the token pool
+             */
+            id?: string;
+            /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
+            info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
+            /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
+            key?: string;
+            /** @description A unique identifier for the pool, as provided by the token connector */
+            locator?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message used to inform the network about this pool
+             */
+            message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
+            /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
+            name?: string;
+            /** @description The namespace for the token pool */
+            namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description The ERC standard the token pool conforms to, as reported by the token connector */
+            standard?: string;
+            /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
+            symbol?: string;
+            /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
+            tx?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly transaction
+               */
+              id?: string;
+              /** @description The type of the FireFly transaction */
+              type?: string;
+            };
+            /**
+             * @description The type of token the pool contains, such as fungible/non-fungible
+             * @enum {string}
+             */
+            type?: "fungible" | "nonfungible";
+          };
+        };
+      };
+      /** Success */
+      202: {
+        content: {
+          "application/json": {
+            /** @description Indicates whether the pool has been successfully activated with the token connector */
+            active?: boolean;
+            /** @description The name of the token connector, as specified in the FireFly core configuration file that is responsible for the token pool. Required on input when multiple token connectors are configured */
+            connector?: string;
+            /**
+             * Format: date-time
+             * @description The creation time of the pool
+             */
+            created?: string;
+            /** @description Number of decimal places that this token has */
+            decimals?: number;
+            /**
+             * Format: uuid
+             * @description The UUID of the token pool
+             */
+            id?: string;
+            /** @description Token connector specific information about the pool. See your chosen token connector documentation for details */
+            info?: { [key: string]: any };
+            /** @description A reference to an existing FFI, containing pre-registered type information for the token contract */
+            interface?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly interface
+               */
+              id?: string;
+              /** @description The name of the FireFly interface */
+              name?: string;
+              /** @description The version of the FireFly interface */
+              version?: string;
+            };
+            /**
+             * @description The interface encoding format supported by the connector for this token pool
+             * @enum {string}
+             */
+            interfaceFormat?: "abi" | "ffi";
+            /** @description The signing key used to create the token pool. On input for token connectors that support on-chain deployment of new tokens (vs. only index existing ones) this determines the signing key used to create the token on-chain */
+            key?: string;
+            /** @description A unique identifier for the pool, as provided by the token connector */
+            locator?: string;
+            /**
+             * Format: uuid
+             * @description The UUID of the broadcast message used to inform the network about this pool
+             */
+            message?: string;
+            /** @description The method definitions resolved by the token connector to be used by each token operation */
+            methods?: any;
+            /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
+            name?: string;
+            /** @description The namespace for the token pool */
+            namespace?: string;
+            /** @description The published name of the token pool within the multiparty network */
+            networkName?: string;
+            /** @description Indicates if the token pool is published to other members of the multiparty network */
+            published?: boolean;
+            /** @description The ERC standard the token pool conforms to, as reported by the token connector */
+            standard?: string;
+            /** @description The token symbol. If supplied on input for an existing on-chain token, this must match the on-chain information */
+            symbol?: string;
+            /** @description Reference to the FireFly transaction used to create and broadcast this pool to the network */
+            tx?: {
+              /**
+               * Format: uuid
+               * @description The UUID of the FireFly transaction
+               */
+              id?: string;
+              /** @description The type of the FireFly transaction */
+              type?: string;
+            };
+            /**
+             * @description The type of token the pool contains, such as fungible/non-fungible
+             * @enum {string}
+             */
+            type?: "fungible" | "nonfungible";
+          };
+        };
+      };
+      default: unknown;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** @description An optional name to be used for publishing this definition to the multiparty network, which may differ from the local name */
+          networkName?: string;
+        };
+      };
     };
   };
   /** Gets a list of token transfers */
@@ -22558,9 +26636,9 @@ export interface operations {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         tokenindex?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.id'?: string;
+        "tx.id"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
-        'tx.type'?: string;
+        "tx.type"?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
         type?: string;
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -22580,14 +26658,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -22648,7 +26726,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           }[];
@@ -22666,14 +26744,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -22734,7 +26812,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -22743,7 +26821,7 @@ export interface operations {
       /** Success */
       202: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -22804,7 +26882,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -22814,7 +26892,7 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
           amount?: string;
           /** @description Input only field, with token connector specific configuration of the transfer. See your chosen token connector documentation for details */
@@ -22825,15 +26903,93 @@ export interface operations {
           idempotencyKey?: string;
           /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
           key?: string;
-          /**
-           * Format: uuid
-           * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
-           */
-          message?: string;
-          /**
-           * Format: uuid
-           * @description The UUID the token pool this transfer applies to
-           */
+          /** @description You can specify a message to correlate with the transfer, which can be of type broadcast or private. Your chosen token connector and on-chain smart contract must support on-chain/off-chain correlation by taking a `data` input on the transfer */
+          message?: {
+            /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
+            data?: {
+              /** @description The optional datatype to use for validation of the in-line data */
+              datatype?: {
+                /** @description The name of the datatype */
+                name?: string;
+                /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
+                version?: string;
+              };
+              /**
+               * Format: uuid
+               * @description The UUID of the referenced data resource
+               */
+              id?: string;
+              /** @description The data validator type to use for in-line data */
+              validator?: string;
+              /** @description The in-line value for the data. Can be any JSON type - object, array, string, number or boolean */
+              value?: any;
+            }[];
+            /** @description Allows you to specify details of the private group of recipients in-line in the message. Alternative to using the header.group to specify the hash of a group that has been previously resolved */
+            group?: {
+              /** @description An array of members of the group. If no identities local to the sending node are included, then the organization owner of the local node is added automatically */
+              members?: {
+                /** @description The DID of the group member. On input can be a UUID or org name, and will be resolved to a DID */
+                identity?: string;
+                /** @description The UUID of the node that will receive a copy of the off-chain message for the identity. The first applicable node for the identity will be picked automatically on input if not specified */
+                node?: string;
+              }[];
+              /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
+              name?: string;
+            };
+            /** @description The message header contains all fields that are used to build the message hash */
+            header?: {
+              /** @description The DID of identity of the submitter */
+              author?: string;
+              /**
+               * Format: uuid
+               * @description The correlation ID of the message. Set this when a message is a response to another message
+               */
+              cid?: string;
+              /**
+               * Format: byte
+               * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
+               */
+              group?: string;
+              /** @description The on-chain signing key used to sign the transaction */
+              key?: string;
+              /** @description The message tag indicates the purpose of the message to the applications that process it */
+              tag?: string;
+              /** @description A message topic associates this message with an ordered stream of data. A custom topic should be assigned - using the default topic is discouraged */
+              topics?: string[];
+              /**
+               * @description The type of transaction used to order/deliver this message
+               * @enum {string}
+               */
+              txtype?:
+                | "none"
+                | "unpinned"
+                | "batch_pin"
+                | "network_action"
+                | "token_pool"
+                | "token_transfer"
+                | "contract_deploy"
+                | "contract_invoke"
+                | "contract_invoke_pin"
+                | "token_approval"
+                | "data_publish";
+              /**
+               * @description The type of the message
+               * @enum {string}
+               */
+              type?:
+                | "definition"
+                | "broadcast"
+                | "private"
+                | "groupinit"
+                | "transfer_broadcast"
+                | "transfer_private"
+                | "approval_broadcast"
+                | "approval_private";
+            };
+            /** @description An optional unique identifier for a message. Cannot be duplicated within a namespace, thus allowing idempotent submission of messages to the API. Local only - not transferred when the message is sent to other members of the network */
+            idempotencyKey?: string;
+          };
+          /** @description The name or UUID of a token pool */
           pool?: string;
           /** @description The target account for the transfer. On input defaults to the value of 'key' */
           to?: string;
@@ -22854,14 +27010,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The amount for the transfer. For non-fungible tokens will always be 1. For fungible tokens, the number of decimals for the token pool should be considered when inputting the amount. For example, with 18 decimals a fractional balance of 10.234 will be specified as 10,234,000,000,000,000,000 */
             amount?: string;
             /**
@@ -22922,7 +27078,7 @@ export interface operations {
              * @description The type of transfer such as mint/burn/transfer
              * @enum {string}
              */
-            type?: 'mint' | 'burn' | 'transfer';
+            type?: "mint" | "burn" | "transfer";
             /** @description The URI of the token this transfer applies to */
             uri?: string;
           };
@@ -22936,7 +27092,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -22967,7 +27123,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -22989,16 +27145,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           }[];
         };
       };
@@ -23014,7 +27171,7 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -23045,7 +27202,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain. FireFly transactions are extensible to support multiple blockchain transactions */
             blockchainIds?: string[];
             /**
@@ -23067,16 +27224,17 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'none'
-              | 'unpinned'
-              | 'batch_pin'
-              | 'network_action'
-              | 'token_pool'
-              | 'token_transfer'
-              | 'contract_deploy'
-              | 'contract_invoke'
-              | 'token_approval'
-              | 'data_publish';
+              | "none"
+              | "unpinned"
+              | "batch_pin"
+              | "network_action"
+              | "token_pool"
+              | "token_transfer"
+              | "contract_deploy"
+              | "contract_invoke"
+              | "contract_invoke_pin"
+              | "token_approval"
+              | "data_publish";
           };
         };
       };
@@ -23092,14 +27250,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: uuid
              * @description The UUID assigned to the event by FireFly
@@ -23154,14 +27312,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time the operation was created
@@ -23199,21 +27357,21 @@ export interface operations {
              * @enum {string}
              */
             type?:
-              | 'blockchain_pin_batch'
-              | 'blockchain_network_action'
-              | 'blockchain_deploy'
-              | 'blockchain_invoke'
-              | 'sharedstorage_upload_batch'
-              | 'sharedstorage_upload_blob'
-              | 'sharedstorage_upload_value'
-              | 'sharedstorage_download_batch'
-              | 'sharedstorage_download_blob'
-              | 'dataexchange_send_batch'
-              | 'dataexchange_send_blob'
-              | 'token_create_pool'
-              | 'token_activate_pool'
-              | 'token_transfer'
-              | 'token_approval';
+              | "blockchain_pin_batch"
+              | "blockchain_network_action"
+              | "blockchain_deploy"
+              | "blockchain_invoke"
+              | "sharedstorage_upload_batch"
+              | "sharedstorage_upload_blob"
+              | "sharedstorage_upload_value"
+              | "sharedstorage_download_batch"
+              | "sharedstorage_download_blob"
+              | "dataexchange_send_batch"
+              | "dataexchange_send_blob"
+              | "token_create_pool"
+              | "token_activate_pool"
+              | "token_transfer"
+              | "token_approval";
             /**
              * Format: date-time
              * @description The last update time of the operation
@@ -23234,14 +27392,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description A set of records describing the activities within the transaction known by the local FireFly node */
             details?: {
               /** @description If an error occurred related to the detail entry, it is included here */
@@ -23278,7 +27436,7 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
       query: {
         /** Data filter field. Prefixes supported: > >= < <= @ ^ ! !@ !^ */
@@ -23309,7 +27467,7 @@ export interface operations {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -23331,7 +27489,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           }[];
@@ -23349,14 +27511,14 @@ export interface operations {
       };
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * Format: date-time
              * @description The time this verifier was created on this node
@@ -23378,7 +27540,11 @@ export interface operations {
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           };
@@ -23392,19 +27558,23 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /**
              * @description The type of the verifier
              * @enum {string}
              */
-            type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+            type?:
+              | "ethereum_address"
+              | "tezos_address"
+              | "fabric_msp_id"
+              | "dx_peer_id";
             /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
             value?: string;
           };
@@ -23414,12 +27584,16 @@ export interface operations {
     };
     requestBody: {
       content: {
-        'application/json': {
+        "application/json": {
           /**
            * @description The type of the verifier
            * @enum {string}
            */
-          type?: 'ethereum_address' | 'fabric_msp_id' | 'dx_peer_id';
+          type?:
+            | "ethereum_address"
+            | "tezos_address"
+            | "fabric_msp_id"
+            | "dx_peer_id";
           /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
           value?: string;
         };
@@ -23431,14 +27605,14 @@ export interface operations {
     parameters: {
       header: {
         /** Server-side request timeout (milliseconds, or set a custom suffix like 10s) */
-        'Request-Timeout'?: string;
+        "Request-Timeout"?: string;
       };
     };
     responses: {
       /** Success */
       200: {
         content: {
-          'application/json': {
+          "application/json": {
             /** @description List of currently active websocket client connections */
             connections?: {
               /** @description The unique ID assigned to this client connection */
@@ -23449,10 +27623,51 @@ export interface operations {
               subscriptions?: {
                 /** @description Indicates whether the subscription is ephemeral (vs durable) */
                 ephemeral?: boolean;
+                /** @description The subscription filter specification */
+                filter?: {
+                  /** @description Deprecated: Please use 'message.author' instead */
+                  author?: string;
+                  /** @description Filters specific to blockchain events. If an event is not a blockchain event, these filters are ignored */
+                  blockchainevent?: {
+                    /** @description Regular expression to apply to the blockchain event 'listener' field, which is the UUID of the event listener. So you can restrict your subscription to certain blockchain listeners. Alternatively to avoid your application need to know listener UUIDs you can set the 'topic' field of blockchain event listeners, and use a topic filter on your subscriptions */
+                    listener?: string;
+                    /** @description Regular expression to apply to the blockchain event 'name' field, which is the name of the event in the underlying blockchain smart contract */
+                    name?: string;
+                  };
+                  /** @description Regular expression to apply to the event type, to subscribe to a subset of event types */
+                  events?: string;
+                  /** @description Deprecated: Please use 'message.group' instead */
+                  group?: string;
+                  /** @description Filters specific to message events. If an event is not a message event, these filters are ignored */
+                  message?: {
+                    /** @description Regular expression to apply to the message 'header.author' field */
+                    author?: string;
+                    /** @description Regular expression to apply to the message 'header.group' field */
+                    group?: string;
+                    /** @description Regular expression to apply to the message 'header.tag' field */
+                    tag?: string;
+                  };
+                  /** @description Deprecated: Please use 'message.tag' instead */
+                  tag?: string;
+                  /** @description Regular expression to apply to the topic of the event, to subscribe to a subset of topics. Note for messages sent with multiple topics, a separate event is emitted for each topic */
+                  topic?: string;
+                  /** @description Deprecated: Please use 'topic' instead */
+                  topics?: string;
+                  /** @description Filters specific to events with a transaction. If an event is not associated with a transaction, this filter is ignored */
+                  transaction?: {
+                    /** @description Regular expression to apply to the transaction 'type' field */
+                    type?: string;
+                  };
+                };
                 /** @description The subscription name (for durable subscriptions only) */
                 name?: string;
                 /** @description The subscription namespace */
                 namespace?: string;
+                /**
+                 * Format: date-time
+                 * @description The time the subscription started (reset on dynamic namespace reload)
+                 */
+                startTime?: string;
               }[];
               /** @description The user agent of the connected client (if available) */
               userAgent?: string;

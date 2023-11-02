@@ -82,6 +82,7 @@ import {
   FireFlyDeployContractRequest,
   FireFlyDeployContractResponse,
   FireFlyWebSocketConnectCallback,
+  FireFlyGetOperationOptions,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -571,9 +572,10 @@ export default class FireFly extends HttpBase {
 
   getOperation(
     id: string,
-    options?: FireFlyGetOptions,
+    options?: FireFlyGetOperationOptions,
   ): Promise<FireFlyOperationResponse | undefined> {
-    return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options);
+    const params = { fetchstatus: options?.fetchstatus };
+    return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options, params);
   }
 
   retryOperation(id: string, options?: FireFlyCreateOptions): Promise<FireFlyOperationResponse> {

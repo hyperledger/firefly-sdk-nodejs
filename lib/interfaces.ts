@@ -282,12 +282,17 @@ export type FireFlyTokenApprovalResponse = typeof approvals[0];
 
 // Operations + Transactions
 
+export interface FireFlyGetOperationOptions extends FireFlyGetOptions {
+  fetchstatus?: string;
+}
+
 export type FireFlyOperationFilter = operations['getOps']['parameters']['query'];
 export type FireFlyTransactionFilter = operations['getTxns']['parameters']['query'];
 
 export type FireFlyOperationResponse = Required<
   operations['getOpByID']['responses']['200']['content']['application/json']
 >;
+
 export type FireFlyTransactionResponse = Required<
   operations['getTxnByID']['responses']['200']['content']['application/json']
 >;
