@@ -230,7 +230,7 @@ export default class FireFly extends HttpBase {
   }
 
   findData(
-    filter?: FireFlyDataFilter,
+    filter?: FireFlyDataFilter | URLSearchParams,
     options?: FireFlyGetOptions,
   ): Promise<FireFlyDataResponse[]> {
     return this.getMany<FireFlyDataResponse[]>(`/data`, filter, options);
