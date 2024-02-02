@@ -185,6 +185,17 @@ export interface FireFlyEventDelivery extends Omit<FireFlyEnrichedEvent, 'type'>
   };
 }
 
+export interface FireFlyEventBatchDelivery {
+  type: 'event_batch';
+  id: string;
+  subscription: {
+    id: string;
+    name: string;
+    namespace: string;
+  };
+  events: FireFlyEventDelivery[];
+}
+
 // Datatypes
 
 export type FireFlyDatatypeFilter = operations['getDatatypes']['parameters']['query'];
