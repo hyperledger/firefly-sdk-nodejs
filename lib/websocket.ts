@@ -5,6 +5,7 @@ import {
   FireFlyEphemeralSubscription,
   FireFlyWebSocketOptions,
   FireFlyEventDelivery,
+  FireFlyEventBatchDelivery,
 } from './interfaces';
 import Logger from './logger';
 
@@ -19,7 +20,10 @@ function buildEphemeralQueryParams(sub: FireFlyEphemeralSubscription) {
 }
 
 export interface FireFlyWebSocketCallback {
-  (socket: FireFlyWebSocket, data: FireFlyEventDelivery): void | Promise<void>;
+  (
+    socket: FireFlyWebSocket,
+    data: FireFlyEventDelivery | FireFlyEventBatchDelivery,
+  ): void | Promise<void>;
 }
 
 export class FireFlyWebSocket {
@@ -166,7 +170,7 @@ export class FireFlyWebSocket {
     }
   }
 
-  ack(event: FireFlyEventDelivery) {
+  ack(event: FireFlyEventDelivery | FireFlyEventBatchDelivery) {
     if (this.socket !== undefined && event.id !== undefined) {
       this.socket.send(
         JSON.stringify({
@@ -179,7 +183,7 @@ export class FireFlyWebSocket {
   }
 
   async close(wait?: boolean): Promise<void> {
-    const closedPromise = new Promise<void>(resolve => {
+    const closedPromise = new Promise<void>((resolve) => {
       this.closed = resolve;
     });
     this.clearPingTimers();

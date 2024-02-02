@@ -37,6 +37,10 @@ export interface FireFlyCreateOptions extends FireFlyBaseHttpOptions {
   publish?: boolean;
 }
 
+export interface FireFlyGetWithStatus extends FireFlyGetOptions {
+  fetchstatus?: string;
+}
+
 export interface FireFlyOptionsInput {
   host: string;
   namespace?: string;
@@ -129,7 +133,7 @@ export type FireFlySubscriptionRequest =
 
 export type FireFlySubscriptionResponse = Required<
   operations['getSubscriptionByID']['responses']['200']['content']['application/json']
->;
+> & { status?: any };
 export type FireFlyEventResponse = Required<
   operations['getEventByID']['responses']['200']['content']['application/json']
 >;
@@ -179,6 +183,17 @@ export interface FireFlyEventDelivery extends Omit<FireFlyEnrichedEvent, 'type'>
     name: string;
     namespace: string;
   };
+}
+
+export interface FireFlyEventBatchDelivery {
+  type: 'event_batch';
+  id: string;
+  subscription: {
+    id: string;
+    name: string;
+    namespace: string;
+  };
+  events: FireFlyEventDelivery[];
 }
 
 // Datatypes
@@ -281,10 +296,6 @@ const approvals: ApprovalsList = [];
 export type FireFlyTokenApprovalResponse = typeof approvals[0];
 
 // Operations + Transactions
-
-export interface FireFlyGetOperationOptions extends FireFlyGetOptions {
-  fetchstatus?: string;
-}
 
 export type FireFlyOperationFilter = operations['getOps']['parameters']['query'];
 export type FireFlyTransactionFilter = operations['getTxns']['parameters']['query'];
