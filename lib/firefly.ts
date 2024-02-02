@@ -82,7 +82,7 @@ import {
   FireFlyDeployContractRequest,
   FireFlyDeployContractResponse,
   FireFlyWebSocketConnectCallback,
-  FireFlyGetOperationOptions,
+  FireFlyGetWithStatus,
 } from './interfaces';
 import { FireFlyWebSocket, FireFlyWebSocketCallback } from './websocket';
 import HttpBase, { mapConfig } from './http';
@@ -205,6 +205,13 @@ export default class FireFly extends HttpBase {
     options?: FireFlyGetOptions,
   ): Promise<FireFlySubscriptionResponse[]> {
     return this.getMany<FireFlySubscriptionResponse[]>('/subscriptions', filter, options);
+  }
+
+  getSubscription(
+    id: string,
+    options?: FireFlyGetWithStatus,
+  ): Promise<FireFlySubscriptionResponse | undefined> {
+    return this.getOne<FireFlySubscriptionResponse>(`/subscriptions/${id}`, options);
   }
 
   replaceSubscription(
@@ -572,7 +579,7 @@ export default class FireFly extends HttpBase {
 
   getOperation(
     id: string,
-    options?: FireFlyGetOperationOptions,
+    options?: FireFlyGetWithStatus,
   ): Promise<FireFlyOperationResponse | undefined> {
     const params = { fetchstatus: options?.fetchstatus };
     return this.getOne<FireFlyOperationResponse>(`/operations/${id}`, options, params);

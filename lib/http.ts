@@ -9,6 +9,7 @@ import {
   FireFlyUpdateOptions,
   FireFlyDeleteOptions,
   FireFlyIdempotencyError,
+  FireFlyGetWithStatus,
 } from './interfaces';
 
 function isSuccess(status: number) {
@@ -18,6 +19,7 @@ function isSuccess(status: number) {
 export function mapConfig(
   options:
     | FireFlyGetOptions
+    | FireFlyGetWithStatus
     | FireFlyUpdateOptions
     | FireFlyReplaceOptions
     | FireFlyCreateOptions
@@ -29,6 +31,7 @@ export function mapConfig(
     ...options?.requestConfig,
     params,
   };
+
   if (options !== undefined) {
     if ('confirm' in options) {
       config.params = {
@@ -40,6 +43,12 @@ export function mapConfig(
       config.params = {
         ...config.params,
         publish: options.publish,
+      };
+    }
+    if ('fetchstatus' in options) {
+      config.params = {
+        ...config.params,
+        fetchstatus: options.fetchstatus,
       };
     }
   }
