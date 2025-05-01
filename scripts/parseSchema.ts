@@ -16,17 +16,14 @@ async function run() {
         return ANY;
       }
 
-      if (
-        schemaObject.type === 'string' &&
-        schemaObject.format === 'uuid' &&
-        schemaObject.nullable &&
-        options.path &&
-        options.path.indexOf('/responses/') >= 0 &&
-        options.path.endsWith('/id')
-      ) {
-        // For IDs in a response body, override to be non-nullable
+      if (schemaObject.type === undefined) {
+        // For objects with undefined type, use "any" instead of "unknown"
+        return ANY;
+      }
+
+      if (options.path && options.path.indexOf('/responses/') >= 0 && schemaObject.nullable) {
+        // Override all response fields to be non-nullable (but allow undefined)
         schemaObject.nullable = false;
-        return STRING;
       }
     },
   });

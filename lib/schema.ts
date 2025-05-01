@@ -3302,14 +3302,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3401,14 +3401,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3452,14 +3452,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3526,14 +3526,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3626,14 +3626,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3677,14 +3677,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -3782,7 +3782,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -3814,7 +3814,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -3840,7 +3840,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -3856,7 +3856,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4012,7 +4012,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -4032,14 +4032,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -4049,7 +4049,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -4064,7 +4064,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -4084,14 +4084,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -4101,7 +4101,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -4178,7 +4178,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -4194,7 +4194,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -4212,7 +4212,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -4224,7 +4224,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -4246,7 +4246,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -4257,7 +4257,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -4335,7 +4335,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -4351,7 +4351,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -4369,7 +4369,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -4381,7 +4381,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -4403,7 +4403,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -4414,7 +4414,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -4477,7 +4477,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4509,7 +4509,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4535,7 +4535,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -4551,7 +4551,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4608,7 +4608,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4640,7 +4640,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4666,7 +4666,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -4682,7 +4682,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -4836,22 +4836,22 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the batch was confirmed
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /**
                          * Format: date-time
                          * @description The time the batch was sealed
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The privacy group the batch is sent to, for private batches
                          */
-                        group?: string | null;
+                        group?: string;
                         /**
                          * Format: byte
                          * @description The hash of the manifest of the batch
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the batch
@@ -4867,7 +4867,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the node that generated the batch
                          */
-                        node?: string | null;
+                        node?: string;
                         /** @description The FireFly transaction associated with this batch */
                         tx?: {
                             /**
@@ -4922,22 +4922,22 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the batch was confirmed
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /**
                          * Format: date-time
                          * @description The time the batch was sealed
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The privacy group the batch is sent to, for private batches
                          */
-                        group?: string | null;
+                        group?: string;
                         /**
                          * Format: byte
                          * @description The hash of the manifest of the batch
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the batch
@@ -4953,7 +4953,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the node that generated the batch
                          */
-                        node?: string | null;
+                        node?: string;
                         /** @description The FireFly transaction associated with this batch */
                         tx?: {
                             /**
@@ -5077,7 +5077,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -5092,7 +5092,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -5149,7 +5149,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -5164,7 +5164,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -5225,7 +5225,7 @@ export interface operations {
                          * Format: date-time
                          * @description Starting timestamp for the bucket
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description Array of separate counts for individual types of record within the bucket */
                         types?: {
                             /** @description Count of entries of a given type within a bucket */
@@ -5287,7 +5287,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -5307,14 +5307,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -5324,7 +5324,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -5339,7 +5339,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -5359,14 +5359,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -5376,7 +5376,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -5445,7 +5445,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5477,7 +5477,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5503,7 +5503,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -5519,7 +5519,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5667,7 +5667,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5699,7 +5699,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5725,7 +5725,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -5741,7 +5741,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5824,7 +5824,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5856,7 +5856,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -5882,7 +5882,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -5898,7 +5898,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6015,7 +6015,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6047,7 +6047,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6073,7 +6073,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -6089,7 +6089,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6181,7 +6181,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6213,7 +6213,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6239,7 +6239,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -6255,7 +6255,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6312,7 +6312,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6344,7 +6344,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6370,7 +6370,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -6386,7 +6386,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6478,7 +6478,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6510,7 +6510,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6536,7 +6536,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -6552,7 +6552,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -6747,7 +6747,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -6767,14 +6767,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -6784,7 +6784,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -6799,7 +6799,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -6819,14 +6819,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -6836,7 +6836,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -6908,7 +6908,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -6924,7 +6924,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -6942,7 +6942,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -6954,7 +6954,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -6976,7 +6976,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -6987,7 +6987,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -7109,7 +7109,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -7125,7 +7125,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -7143,7 +7143,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -7155,7 +7155,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -7177,7 +7177,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -7188,7 +7188,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -7235,7 +7235,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -7251,7 +7251,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -7269,7 +7269,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -7281,7 +7281,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -7303,7 +7303,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -7314,7 +7314,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -7627,7 +7627,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -7639,24 +7639,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -7741,7 +7741,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -7753,24 +7753,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -7823,7 +7823,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -7835,24 +7835,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -8033,7 +8033,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -8045,24 +8045,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -8170,19 +8170,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -8193,7 +8193,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -8202,22 +8202,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -8240,7 +8240,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -8269,7 +8269,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -8405,7 +8405,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -8417,24 +8417,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -8539,12 +8539,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -8554,7 +8554,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -8621,12 +8621,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -8636,7 +8636,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -8664,12 +8664,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -8679,7 +8679,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -8732,12 +8732,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -8747,7 +8747,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -8828,12 +8828,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -8845,7 +8845,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -8857,7 +8857,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -8903,12 +8903,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -8920,7 +8920,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -8932,7 +8932,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -8995,12 +8995,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the group was first used to send a message in the network
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The identifier hash of this group. Derived from the name and group members
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The local namespace of the group */
                         localNamespace?: string;
                         /** @description The list of members in this privacy group */
@@ -9011,13 +9011,13 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the node that receives a copy of the off-chain message for the identity
                              */
-                            node?: string | null;
+                            node?: string;
                         }[];
                         /**
                          * Format: uuid
                          * @description The message used to broadcast this group privately to the members
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The optional name of the group, allowing multiple unique groups to exist with the same list of recipients */
                         name?: string;
                         /** @description The namespace of the group within the multiparty network */
@@ -9059,12 +9059,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the group was first used to send a message in the network
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The identifier hash of this group. Derived from the name and group members
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The local namespace of the group */
                         localNamespace?: string;
                         /** @description The list of members in this privacy group */
@@ -9075,13 +9075,13 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the node that receives a copy of the off-chain message for the identity
                              */
-                            node?: string | null;
+                            node?: string;
                         }[];
                         /**
                          * Format: uuid
                          * @description The message used to broadcast this group privately to the members
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The optional name of the group, allowing multiple unique groups to exist with the same list of recipients */
                         name?: string;
                         /** @description The namespace of the group within the multiparty network */
@@ -9159,7 +9159,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9175,17 +9175,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9195,7 +9195,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9207,7 +9207,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -9272,7 +9272,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9288,17 +9288,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9308,7 +9308,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9320,7 +9320,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -9335,7 +9335,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9351,17 +9351,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9371,7 +9371,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9383,7 +9383,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -9424,7 +9424,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9440,17 +9440,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9460,7 +9460,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9472,7 +9472,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -9522,7 +9522,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9538,17 +9538,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9558,7 +9558,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9570,7 +9570,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -9585,7 +9585,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -9601,17 +9601,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -9621,7 +9621,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -9633,7 +9633,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -9748,17 +9748,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -9861,19 +9861,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -9884,7 +9884,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -9893,22 +9893,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -9931,7 +9931,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -9960,7 +9960,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     }[];
                 };
             };
@@ -10001,12 +10001,12 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
                         data?: {
                             /** @description An optional in-line hash reference to a previously uploaded binary data blob */
@@ -10015,7 +10015,7 @@ export interface operations {
                                  * Format: byte
                                  * @description The hash of the binary blob data
                                  */
-                                hash?: string | null;
+                                hash?: string;
                                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                                 name?: string;
                                 /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -10027,19 +10027,19 @@ export interface operations {
                                  * @description The size of the binary data
                                  */
                                 size?: number;
-                            } | null;
+                            };
                             /** @description The optional datatype to use for validation of the in-line data */
                             datatype?: {
                                 /** @description The name of the datatype */
                                 name?: string;
                                 /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                                 version?: string;
-                            } | null;
+                            };
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -10061,12 +10061,12 @@ export interface operations {
                             }[];
                             /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
                             name?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -10075,22 +10075,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -10113,7 +10113,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -10142,7 +10142,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -10182,7 +10182,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -10194,24 +10194,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -10291,12 +10291,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -10308,7 +10308,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -10320,7 +10320,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -10365,7 +10365,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -10469,19 +10469,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -10492,7 +10492,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -10501,17 +10501,17 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -10534,7 +10534,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -10563,7 +10563,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -10578,19 +10578,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -10601,7 +10601,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -10610,17 +10610,17 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -10643,7 +10643,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -10672,7 +10672,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -10779,19 +10779,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -10802,7 +10802,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -10811,22 +10811,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -10849,7 +10849,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -10878,7 +10878,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -10893,19 +10893,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -10916,7 +10916,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -10925,22 +10925,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -10963,7 +10963,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -10992,7 +10992,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -11096,12 +11096,12 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
                         data?: {
                             /** @description An optional in-line hash reference to a previously uploaded binary data blob */
@@ -11110,7 +11110,7 @@ export interface operations {
                                  * Format: byte
                                  * @description The hash of the binary blob data
                                  */
-                                hash?: string | null;
+                                hash?: string;
                                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                                 name?: string;
                                 /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -11122,19 +11122,19 @@ export interface operations {
                                  * @description The size of the binary data
                                  */
                                 size?: number;
-                            } | null;
+                            };
                             /** @description The optional datatype to use for validation of the in-line data */
                             datatype?: {
                                 /** @description The name of the datatype */
                                 name?: string;
                                 /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                                 version?: string;
-                            } | null;
+                            };
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -11156,12 +11156,12 @@ export interface operations {
                             }[];
                             /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
                             name?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -11170,22 +11170,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -11208,7 +11208,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -11237,7 +11237,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -11275,7 +11275,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the namespace was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the namespace */
                         description?: string;
                         /** @description Set to a non-empty string in the case that the namespace is currently failing to initialize */
@@ -11323,7 +11323,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the namespace was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the namespace */
                         description?: string;
                         /** @description The local namespace name */
@@ -11402,14 +11402,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11504,14 +11504,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11555,14 +11555,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11631,14 +11631,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11733,14 +11733,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11784,14 +11784,14 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description If this API is tied to an individual instance of a smart contract, this field can include a blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                         location?: any;
                         /**
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this API to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name that is used in the URL to access the API */
                         name?: string;
                         /** @description The namespace of the contract API */
@@ -11893,7 +11893,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -11925,7 +11925,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -11951,7 +11951,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -11967,7 +11967,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12169,7 +12169,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -12189,14 +12189,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -12206,7 +12206,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -12221,7 +12221,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -12241,14 +12241,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -12258,7 +12258,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -12337,7 +12337,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -12353,7 +12353,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -12371,7 +12371,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -12383,7 +12383,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -12405,7 +12405,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -12416,7 +12416,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -12541,7 +12541,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -12557,7 +12557,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -12575,7 +12575,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -12587,7 +12587,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -12609,7 +12609,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -12620,7 +12620,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -12685,7 +12685,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12717,7 +12717,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12743,7 +12743,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -12759,7 +12759,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12816,7 +12816,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12848,7 +12848,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -12874,7 +12874,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -12890,7 +12890,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -13160,22 +13160,22 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the batch was confirmed
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /**
                          * Format: date-time
                          * @description The time the batch was sealed
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The privacy group the batch is sent to, for private batches
                          */
-                        group?: string | null;
+                        group?: string;
                         /**
                          * Format: byte
                          * @description The hash of the manifest of the batch
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the batch
@@ -13191,7 +13191,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the node that generated the batch
                          */
-                        node?: string | null;
+                        node?: string;
                         /** @description The FireFly transaction associated with this batch */
                         tx?: {
                             /**
@@ -13248,22 +13248,22 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the batch was confirmed
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /**
                          * Format: date-time
                          * @description The time the batch was sealed
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The privacy group the batch is sent to, for private batches
                          */
-                        group?: string | null;
+                        group?: string;
                         /**
                          * Format: byte
                          * @description The hash of the manifest of the batch
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the batch
@@ -13279,7 +13279,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the node that generated the batch
                          */
-                        node?: string | null;
+                        node?: string;
                         /** @description The FireFly transaction associated with this batch */
                         tx?: {
                             /**
@@ -13408,7 +13408,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -13423,7 +13423,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -13482,7 +13482,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -13497,7 +13497,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -13560,7 +13560,7 @@ export interface operations {
                          * Format: date-time
                          * @description Starting timestamp for the bucket
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description Array of separate counts for individual types of record within the bucket */
                         types?: {
                             /** @description Count of entries of a given type within a bucket */
@@ -13625,7 +13625,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -13645,14 +13645,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -13662,7 +13662,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -13677,7 +13677,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -13697,14 +13697,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -13714,7 +13714,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -13786,7 +13786,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -13818,7 +13818,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -13844,7 +13844,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -13860,7 +13860,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14011,7 +14011,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14043,7 +14043,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14069,7 +14069,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14085,7 +14085,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14170,7 +14170,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14202,7 +14202,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14228,7 +14228,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14244,7 +14244,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14365,7 +14365,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14397,7 +14397,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14423,7 +14423,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14439,7 +14439,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14533,7 +14533,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14565,7 +14565,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14591,7 +14591,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14607,7 +14607,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14664,7 +14664,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14696,7 +14696,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14722,7 +14722,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14738,7 +14738,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14833,7 +14833,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this error is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the error */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14865,7 +14865,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this event is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the event */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -14891,7 +14891,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this FFI to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description An array of smart contract method definitions */
                         methods?: {
                             /** @description A description of the smart contract method */
@@ -14907,7 +14907,7 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the FFI smart contract definition that this method is part of
                              */
-                            interface?: string | null;
+                            interface?: string;
                             /** @description The name of the method */
                             name?: string;
                             /** @description The namespace of the FFI */
@@ -15105,7 +15105,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -15125,14 +15125,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -15142,7 +15142,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -15157,7 +15157,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -15177,14 +15177,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -15194,7 +15194,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -15269,7 +15269,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -15285,7 +15285,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -15303,7 +15303,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -15315,7 +15315,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -15337,7 +15337,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -15348,7 +15348,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -15473,7 +15473,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -15489,7 +15489,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -15507,7 +15507,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -15519,7 +15519,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -15541,7 +15541,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -15552,7 +15552,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -15601,7 +15601,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the listener
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Deprecated: Please use 'event' in the array of 'filters' instead */
                         event?: {
                             /** @description A description of the smart contract event */
@@ -15617,7 +15617,7 @@ export interface operations {
                                 /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                 schema?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description A list of filters for the contract listener. Each filter is made up of an Event and an optional Location. Events matching these filters will always be emitted in the order determined by the blockchain. */
                         filters?: {
                             /** @description The definition of the event, either provided in-line when creating the listener, or extracted from the referenced FFI when supplied */
@@ -15635,7 +15635,7 @@ export interface operations {
                                     /** @description FireFly uses an extended subset of JSON Schema to describe parameters, similar to OpenAPI/Swagger. Converters are available for native blockchain interface definitions / type systems - such as an Ethereum ABI. See the documentation for more detail */
                                     schema?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description A reference to an existing FFI, containing pre-registered type information for the event, used in combination with eventPath */
                             interface?: {
                                 /**
@@ -15647,7 +15647,7 @@ export interface operations {
                                 name?: string;
                                 /** @description The version of the FireFly interface */
                                 version?: string;
-                            } | null;
+                            };
                             /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                             location?: any;
                             /** @description The stringified signature of the event and location, as computed by the blockchain plugin */
@@ -15669,7 +15669,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /** @description Deprecated: Please use 'location' in the array of 'filters' instead */
                         location?: any;
                         /** @description A descriptive name for the listener */
@@ -15680,7 +15680,7 @@ export interface operations {
                         options?: {
                             /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors. Default is 'newest' */
                             firstEvent?: string;
-                        } | null;
+                        };
                         /** @description A concatenation of all the stringified signature of the event and location, as computed by the blockchain plugin */
                         signature?: string;
                         /** @description A topic to set on the FireFly event that is emitted each time a blockchain event is detected from the blockchain. Setting this topic on a number of listeners allows applications to easily subscribe to all events they need */
@@ -16071,7 +16071,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -16083,24 +16083,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -16188,7 +16188,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -16200,24 +16200,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -16272,7 +16272,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -16284,24 +16284,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -16488,7 +16488,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -16500,24 +16500,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -16627,19 +16627,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -16650,7 +16650,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -16659,22 +16659,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -16697,7 +16697,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -16726,7 +16726,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -16866,7 +16866,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -16878,24 +16878,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -17005,12 +17005,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -17020,7 +17020,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -17090,12 +17090,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -17105,7 +17105,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -17133,12 +17133,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -17148,7 +17148,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -17203,12 +17203,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time the datatype was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The hash of the value, such as the JSON schema. Allows all parties to be confident they have the exact same rules for verifying data created against a datatype
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the datatype
@@ -17218,7 +17218,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message that was used to publish this datatype to the network
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The name of the datatype */
                         name?: string;
                         /** @description The namespace of the datatype. Data resources can only be created referencing datatypes in the same namespace */
@@ -17302,12 +17302,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -17319,7 +17319,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -17331,7 +17331,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -17379,12 +17379,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -17396,7 +17396,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -17408,7 +17408,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -17474,12 +17474,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the group was first used to send a message in the network
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The identifier hash of this group. Derived from the name and group members
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The local namespace of the group */
                         localNamespace?: string;
                         /** @description The list of members in this privacy group */
@@ -17490,13 +17490,13 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the node that receives a copy of the off-chain message for the identity
                              */
-                            node?: string | null;
+                            node?: string;
                         }[];
                         /**
                          * Format: uuid
                          * @description The message used to broadcast this group privately to the members
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The optional name of the group, allowing multiple unique groups to exist with the same list of recipients */
                         name?: string;
                         /** @description The namespace of the group within the multiparty network */
@@ -17540,12 +17540,12 @@ export interface operations {
                          * Format: date-time
                          * @description The time when the group was first used to send a message in the network
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description The identifier hash of this group. Derived from the name and group members
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The local namespace of the group */
                         localNamespace?: string;
                         /** @description The list of members in this privacy group */
@@ -17556,13 +17556,13 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of the node that receives a copy of the off-chain message for the identity
                              */
-                            node?: string | null;
+                            node?: string;
                         }[];
                         /**
                          * Format: uuid
                          * @description The message used to broadcast this group privately to the members
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The optional name of the group, allowing multiple unique groups to exist with the same list of recipients */
                         name?: string;
                         /** @description The namespace of the group within the multiparty network */
@@ -17643,7 +17643,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -17659,17 +17659,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -17679,7 +17679,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -17691,7 +17691,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -17759,7 +17759,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -17775,17 +17775,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -17795,7 +17795,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -17807,7 +17807,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -17822,7 +17822,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -17838,17 +17838,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -17858,7 +17858,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -17870,7 +17870,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -17913,7 +17913,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -17929,17 +17929,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -17949,7 +17949,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -17961,7 +17961,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -18013,7 +18013,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -18029,17 +18029,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -18049,7 +18049,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -18061,7 +18061,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -18076,7 +18076,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -18092,17 +18092,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -18112,7 +18112,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -18124,7 +18124,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -18243,17 +18243,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -18359,19 +18359,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -18382,7 +18382,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -18391,22 +18391,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -18429,7 +18429,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -18458,7 +18458,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     }[];
                 };
             };
@@ -18501,12 +18501,12 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
                         data?: {
                             /** @description An optional in-line hash reference to a previously uploaded binary data blob */
@@ -18515,7 +18515,7 @@ export interface operations {
                                  * Format: byte
                                  * @description The hash of the binary blob data
                                  */
-                                hash?: string | null;
+                                hash?: string;
                                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                                 name?: string;
                                 /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -18527,19 +18527,19 @@ export interface operations {
                                  * @description The size of the binary data
                                  */
                                 size?: number;
-                            } | null;
+                            };
                             /** @description The optional datatype to use for validation of the in-line data */
                             datatype?: {
                                 /** @description The name of the datatype */
                                 name?: string;
                                 /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                                 version?: string;
-                            } | null;
+                            };
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -18561,12 +18561,12 @@ export interface operations {
                             }[];
                             /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
                             name?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -18575,22 +18575,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -18613,7 +18613,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -18642,7 +18642,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -18684,7 +18684,7 @@ export interface operations {
                              * Format: byte
                              * @description The hash of the binary blob data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                             name?: string;
                             /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -18696,24 +18696,24 @@ export interface operations {
                              * @description The size of the binary data
                              */
                             size?: number;
-                        } | null;
+                        };
                         /**
                          * Format: date-time
                          * @description The creation time of the data resource
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The optional datatype to use of validation of this data */
                         datatype?: {
                             /** @description The name of the datatype */
                             name?: string;
                             /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the data resource. Derived from the value and the hash of any binary blob attachment
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the data resource
@@ -18795,12 +18795,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -18812,7 +18812,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -18824,7 +18824,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -18871,7 +18871,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -18995,19 +18995,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -19018,7 +19018,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -19027,22 +19027,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -19065,7 +19065,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -19094,7 +19094,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -19109,19 +19109,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -19132,7 +19132,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -19141,22 +19141,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -19179,7 +19179,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -19208,7 +19208,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -19318,19 +19318,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -19341,7 +19341,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -19350,22 +19350,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -19388,7 +19388,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -19417,7 +19417,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -19432,19 +19432,19 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description The list of data elements attached to the message */
                         data?: {
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -19455,7 +19455,7 @@ export interface operations {
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -19464,22 +19464,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -19502,7 +19502,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -19531,7 +19531,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -19638,12 +19638,12 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch in which the message was pinned/transferred
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: date-time
                          * @description The timestamp of when the message was confirmed/rejected
                          */
-                        confirmed?: string | null;
+                        confirmed?: string;
                         /** @description For input allows you to specify data in-line in the message, that will be turned into data attachments. For output when fetchdata is used on API calls, includes the in-line data payloads of all data attachments */
                         data?: {
                             /** @description An optional in-line hash reference to a previously uploaded binary data blob */
@@ -19652,7 +19652,7 @@ export interface operations {
                                  * Format: byte
                                  * @description The hash of the binary blob data
                                  */
-                                hash?: string | null;
+                                hash?: string;
                                 /** @description The name field from the metadata attached to the blob, commonly used as a path/filename, and indexed for search */
                                 name?: string;
                                 /** @description If a name is specified, this field stores the '/' prefixed and separated path extracted from the full name */
@@ -19664,19 +19664,19 @@ export interface operations {
                                  * @description The size of the binary data
                                  */
                                 size?: number;
-                            } | null;
+                            };
                             /** @description The optional datatype to use for validation of the in-line data */
                             datatype?: {
                                 /** @description The name of the datatype */
                                 name?: string;
                                 /** @description The version of the datatype. Semantic versioning is encouraged, such as v1.0.1 */
                                 version?: string;
-                            } | null;
+                            };
                             /**
                              * Format: byte
                              * @description The hash of the referenced data
                              */
-                            hash?: string | null;
+                            hash?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the referenced data resource
@@ -19698,12 +19698,12 @@ export interface operations {
                             }[];
                             /** @description Optional name for the group. Allows you to have multiple separate groups with the same list of participants */
                             name?: string;
-                        } | null;
+                        };
                         /**
                          * Format: byte
                          * @description The hash of the message. Derived from the header, which includes the data hash
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The message header contains all fields that are used to build the message hash */
                         header?: {
                             /** @description The DID of identity of the submitter */
@@ -19712,22 +19712,22 @@ export interface operations {
                              * Format: uuid
                              * @description The correlation ID of the message. Set this when a message is a response to another message
                              */
-                            cid?: string | null;
+                            cid?: string;
                             /**
                              * Format: date-time
                              * @description The creation time of the message
                              */
-                            created?: string | null;
+                            created?: string;
                             /**
                              * Format: byte
                              * @description A single hash representing all data in the message. Derived from the array of data ids+hashes attached to this message
                              */
-                            datahash?: string | null;
+                            datahash?: string;
                             /**
                              * Format: byte
                              * @description Private messages only - the identifier hash of the privacy group. Derived from the name and member list of the group
                              */
-                            group?: string | null;
+                            group?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the message. Unique to each message
@@ -19750,7 +19750,7 @@ export interface operations {
                                 id?: string;
                                 /** @description The type of the FireFly transaction */
                                 type?: string;
-                            } | null;
+                            };
                             /**
                              * @description The type of transaction used to order/deliver this message
                              * @enum {string}
@@ -19779,7 +19779,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the transaction used to order/deliver this message
                          */
-                        txid?: string | null;
+                        txid?: string;
                     };
                 };
             };
@@ -19960,7 +19960,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -19976,17 +19976,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -19996,7 +19996,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20008,7 +20008,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -20061,7 +20061,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20077,17 +20077,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20097,7 +20097,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20109,7 +20109,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -20194,7 +20194,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20210,17 +20210,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20230,7 +20230,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20242,7 +20242,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -20282,7 +20282,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20298,17 +20298,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20318,7 +20318,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20330,7 +20330,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20375,7 +20375,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20391,17 +20391,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20411,7 +20411,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20423,7 +20423,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20438,7 +20438,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20454,17 +20454,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20474,7 +20474,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20486,7 +20486,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20561,7 +20561,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20577,17 +20577,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20597,7 +20597,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20609,7 +20609,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -20667,7 +20667,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20683,17 +20683,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20703,7 +20703,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20715,7 +20715,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20730,7 +20730,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20746,17 +20746,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20766,7 +20766,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20778,7 +20778,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20818,7 +20818,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20834,17 +20834,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20854,7 +20854,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20866,7 +20866,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20911,7 +20911,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20927,17 +20927,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -20947,7 +20947,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -20959,7 +20959,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -20974,7 +20974,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -20990,17 +20990,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -21010,7 +21010,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -21022,7 +21022,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -21081,12 +21081,12 @@ export interface operations {
                          * Format: byte
                          * @description The context the next-pin applies to - the hash of the privacy group-hash + topic. The group-hash is only known to the participants (can itself contain a salt in the group-name). This context is combined with the member and nonce to determine the final hash that is written on-chain
                          */
-                        context?: string | null;
+                        context?: string;
                         /**
                          * Format: byte
                          * @description The unique masked pin string
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The member of the privacy group the next-pin applies to */
                         identity?: string;
                         /** @description The namespace of the next-pin */
@@ -21168,7 +21168,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -21188,14 +21188,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -21205,7 +21205,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -21248,9 +21248,9 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Additional detailed information about an operation provided by the connector */
-                        detail?: unknown;
+                        detail?: any;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -21270,14 +21270,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -21287,7 +21287,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -21331,7 +21331,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -21351,14 +21351,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -21368,7 +21368,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -21433,24 +21433,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch of messages this pin is part of
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: byte
                          * @description The manifest hash batch of messages this pin is part of
                          */
-                        batchHash?: string | null;
+                        batchHash?: string;
                         /**
                          * Format: date-time
                          * @description The time the FireFly node created the pin
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Once true, this pin has been processed and will not be processed again */
                         dispatched?: boolean;
                         /**
                          * Format: byte
                          * @description The hash represents a topic within a message in the batch. If a message has multiple topics, then multiple pins are created. If the message is private, the hash is masked for privacy
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: int64
                          * @description The index of this pin within the batch. One pin is created for each topic, of each message in the batch
@@ -21519,7 +21519,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: int64
                          * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -21579,7 +21579,7 @@ export interface operations {
                                     };
                                     /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                     location?: any;
-                                } | null;
+                                };
                                 /** @description Previously-terminated FireFly smart contracts */
                                 terminated?: {
                                     /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors */
@@ -21598,7 +21598,7 @@ export interface operations {
                                     /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                     location?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description Whether multi-party mode is enabled for this namespace */
                             enabled?: boolean;
                         };
@@ -21608,14 +21608,14 @@ export interface operations {
                              * Format: date-time
                              * @description The time the namespace was created
                              */
-                            created?: string | null;
+                            created?: string;
                             /** @description A description of the namespace */
                             description?: string;
                             /** @description The local namespace name */
                             name?: string;
                             /** @description The shared namespace name within the multiparty network */
                             networkName?: string;
-                        } | null;
+                        };
                         /** @description Details of the local node */
                         node?: {
                             /**
@@ -21627,7 +21627,7 @@ export interface operations {
                             name?: string;
                             /** @description Whether the node has been successfully registered */
                             registered?: boolean;
-                        } | null;
+                        };
                         /** @description Details of the root organization identity registered for this namespace on the local node */
                         org?: {
                             /** @description The DID of the organization identity, if registered */
@@ -21651,7 +21651,7 @@ export interface operations {
                                 /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
                                 value?: string;
                             }[];
-                        } | null;
+                        };
                         /** @description Information about plugins configured on this namespace */
                         plugins?: {
                             /** @description The blockchain plugins on this namespace */
@@ -21773,19 +21773,19 @@ export interface operations {
                                  * Format: uuid
                                  * @description If a flush is in progress, this is the UUID of the batch being flushed
                                  */
-                                flushing?: string | null;
+                                flushing?: string;
                                 /** @description The last error received by this batch processor while flushing */
                                 lastFlushError?: string;
                                 /**
                                  * Format: date-time
                                  * @description The time of the last flush
                                  */
-                                lastFlushErrorTime?: string | null;
+                                lastFlushErrorTime?: string;
                                 /**
                                  * Format: date-time
                                  * @description The last time a flush was performed
                                  */
-                                lastFlushStartTime?: string | null;
+                                lastFlushStartTime?: string;
                                 /**
                                  * Format: int64
                                  * @description The total count of batches flushed by this processor since it started
@@ -21852,7 +21852,7 @@ export interface operations {
                                 location?: any;
                                 /** @description The status of the contract listener. One of 'syncing', 'synced', or 'unknown' */
                                 status?: string;
-                            } | null;
+                            };
                             /** @description Previously-terminated FireFly smart contracts */
                             terminated?: {
                                 /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors */
@@ -21871,7 +21871,7 @@ export interface operations {
                                 /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                 location?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description Whether multi-party mode is enabled for this namespace */
                         enabled?: boolean;
                         /** @description Details of the local node */
@@ -21880,7 +21880,7 @@ export interface operations {
                              * Format: uuid
                              * @description The ID of the pending message that broadcast the identity claim to the network
                              */
-                            pendingRegistrationMessageId?: string | null;
+                            pendingRegistrationMessageId?: string;
                             /** @description The status of the node registration, one of 'unregistered', 'registering', 'registered', and 'unknown' */
                             status?: string;
                         };
@@ -21890,7 +21890,7 @@ export interface operations {
                              * Format: uuid
                              * @description The ID of the pending message that broadcast the identity claim to the network
                              */
-                            pendingRegistrationMessageId?: string | null;
+                            pendingRegistrationMessageId?: string;
                             /** @description The status of the organization registration, one of 'unregistered', 'registering', 'registered', and 'unknown' */
                             status?: string;
                         };
@@ -21958,7 +21958,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -22009,13 +22009,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -22029,7 +22029,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -22055,7 +22055,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -22078,7 +22078,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -22086,7 +22086,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -22245,7 +22245,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -22296,13 +22296,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -22316,7 +22316,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -22342,7 +22342,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -22365,7 +22365,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -22373,7 +22373,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -22532,7 +22532,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -22583,13 +22583,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -22603,7 +22603,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -22629,7 +22629,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -22652,7 +22652,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -22660,7 +22660,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -22703,7 +22703,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -22754,13 +22754,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -22774,7 +22774,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -22800,7 +22800,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -22823,7 +22823,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -22831,7 +22831,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -22938,12 +22938,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -22955,7 +22955,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -22967,7 +22967,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -23081,7 +23081,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this balance entry applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                     }[];
                 };
             };
@@ -23166,14 +23166,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -23182,17 +23182,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -23201,7 +23201,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -23347,14 +23347,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -23363,17 +23363,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -23382,7 +23382,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -23415,14 +23415,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -23431,17 +23431,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -23450,7 +23450,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -23537,14 +23537,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this balance entry applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description The index of the token within the pool that this balance applies to */
                         tokenIndex?: string;
                         /**
                          * Format: date-time
                          * @description The last time the balance was updated by applying a transfer event
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The URI of the token this balance entry applies to */
                         uri?: string;
                     }[];
@@ -23679,14 +23679,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -23695,24 +23695,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -23752,14 +23752,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -23768,24 +23768,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -23976,14 +23976,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -23992,24 +23992,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -24049,14 +24049,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -24065,24 +24065,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -24194,7 +24194,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24215,7 +24215,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24229,7 +24229,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24341,7 +24341,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24362,7 +24362,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24376,7 +24376,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24424,7 +24424,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24445,7 +24445,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24459,7 +24459,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24532,7 +24532,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24553,7 +24553,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24567,7 +24567,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24684,7 +24684,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24705,7 +24705,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24719,7 +24719,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24767,7 +24767,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -24788,7 +24788,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -24802,7 +24802,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -24920,14 +24920,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -24936,24 +24936,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -25109,14 +25109,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -25125,24 +25125,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -25182,14 +25182,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -25198,24 +25198,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -25280,14 +25280,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -25296,24 +25296,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -25399,7 +25399,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -25478,7 +25478,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -25539,7 +25539,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -25554,7 +25554,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -25606,7 +25606,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -25626,14 +25626,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -25643,7 +25643,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -25698,7 +25698,7 @@ export interface operations {
                              * Format: date-time
                              * @description The time relevant to when the record was updated, such as the time an event was created, or the last update time of an operation
                              */
-                            timestamp?: string | null;
+                            timestamp?: string;
                             /** @description The type of the transaction status detail record */
                             type?: string;
                         }[];
@@ -25764,17 +25764,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -25823,17 +25823,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -26067,7 +26067,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26083,17 +26083,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26103,7 +26103,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26115,7 +26115,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -26166,7 +26166,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26182,17 +26182,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26202,7 +26202,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26214,7 +26214,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The verifiers, such as blockchain signing keys, that have been bound to this identity and can be used to prove data orignates from that identity */
                         verifiers?: {
                             /**
@@ -26296,7 +26296,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26312,17 +26312,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26332,7 +26332,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26344,7 +26344,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -26382,7 +26382,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26398,17 +26398,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26418,7 +26418,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26430,7 +26430,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26472,7 +26472,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26488,17 +26488,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26508,7 +26508,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26520,7 +26520,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26535,7 +26535,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26551,17 +26551,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26571,7 +26571,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26583,7 +26583,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26655,7 +26655,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26671,17 +26671,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26691,7 +26691,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26703,7 +26703,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -26758,7 +26758,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26774,17 +26774,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26794,7 +26794,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26806,7 +26806,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26821,7 +26821,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26837,17 +26837,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26857,7 +26857,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26869,7 +26869,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26907,7 +26907,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -26923,17 +26923,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -26943,7 +26943,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -26955,7 +26955,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -26997,7 +26997,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -27013,17 +27013,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -27033,7 +27033,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -27045,7 +27045,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -27060,7 +27060,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the identity
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description A description of the identity. Part of the updatable profile information of an identity */
                         description?: string;
                         /** @description The DID of the identity. Unique across namespaces within a FireFly network */
@@ -27076,17 +27076,17 @@ export interface operations {
                              * Format: uuid
                              * @description The UUID of claim message
                              */
-                            claim?: string | null;
+                            claim?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of the most recently applied update message. Unset if no updates have been confirmed
                              */
-                            update?: string | null;
+                            update?: string;
                             /**
                              * Format: uuid
                              * @description The UUID of claim message. Unset for root organization identities
                              */
-                            verification?: string | null;
+                            verification?: string;
                         };
                         /** @description The name of the identity. The name must be unique within the type and namespace */
                         name?: string;
@@ -27096,7 +27096,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the parent identity. Unset for root organization identities
                          */
-                        parent?: string | null;
+                        parent?: string;
                         /** @description A set of metadata for the identity. Part of the updatable profile information of an identity */
                         profile?: any;
                         /**
@@ -27108,7 +27108,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the identity profile
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -27164,12 +27164,12 @@ export interface operations {
                          * Format: byte
                          * @description The context the next-pin applies to - the hash of the privacy group-hash + topic. The group-hash is only known to the participants (can itself contain a salt in the group-name). This context is combined with the member and nonce to determine the final hash that is written on-chain
                          */
-                        context?: string | null;
+                        context?: string;
                         /**
                          * Format: byte
                          * @description The unique masked pin string
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /** @description The member of the privacy group the next-pin applies to */
                         identity?: string;
                         /** @description The namespace of the next-pin */
@@ -27248,7 +27248,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -27268,14 +27268,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -27285,7 +27285,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -27326,9 +27326,9 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Additional detailed information about an operation provided by the connector */
-                        detail?: unknown;
+                        detail?: any;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -27348,14 +27348,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -27365,7 +27365,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -27407,7 +27407,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -27427,14 +27427,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -27444,7 +27444,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -27506,24 +27506,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the batch of messages this pin is part of
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: byte
                          * @description The manifest hash batch of messages this pin is part of
                          */
-                        batchHash?: string | null;
+                        batchHash?: string;
                         /**
                          * Format: date-time
                          * @description The time the FireFly node created the pin
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Once true, this pin has been processed and will not be processed again */
                         dispatched?: boolean;
                         /**
                          * Format: byte
                          * @description The hash represents a topic within a message in the batch. If a message has multiple topics, then multiple pins are created. If the message is private, the hash is masked for privacy
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: int64
                          * @description The index of this pin within the batch. One pin is created for each topic, of each message in the batch
@@ -27589,7 +27589,7 @@ export interface operations {
                          * Format: uuid
                          * @description The ID of the batch to which the event aggregator should rewind. Either sequence or batch must be specified
                          */
-                        batch?: string | null;
+                        batch?: string;
                         /**
                          * Format: int64
                          * @description The sequence of the pin to which the event aggregator should rewind. Either sequence or batch must be specified
@@ -27646,7 +27646,7 @@ export interface operations {
                                     };
                                     /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                     location?: any;
-                                } | null;
+                                };
                                 /** @description Previously-terminated FireFly smart contracts */
                                 terminated?: {
                                     /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors */
@@ -27665,7 +27665,7 @@ export interface operations {
                                     /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                     location?: any;
                                 }[];
-                            } | null;
+                            };
                             /** @description Whether multi-party mode is enabled for this namespace */
                             enabled?: boolean;
                         };
@@ -27675,14 +27675,14 @@ export interface operations {
                              * Format: date-time
                              * @description The time the namespace was created
                              */
-                            created?: string | null;
+                            created?: string;
                             /** @description A description of the namespace */
                             description?: string;
                             /** @description The local namespace name */
                             name?: string;
                             /** @description The shared namespace name within the multiparty network */
                             networkName?: string;
-                        } | null;
+                        };
                         /** @description Details of the local node */
                         node?: {
                             /**
@@ -27694,7 +27694,7 @@ export interface operations {
                             name?: string;
                             /** @description Whether the node has been successfully registered */
                             registered?: boolean;
-                        } | null;
+                        };
                         /** @description Details of the root organization identity registered for this namespace on the local node */
                         org?: {
                             /** @description The DID of the organization identity, if registered */
@@ -27718,7 +27718,7 @@ export interface operations {
                                 /** @description The verifier string, such as an Ethereum address, or Fabric MSP identifier */
                                 value?: string;
                             }[];
-                        } | null;
+                        };
                         /** @description Information about plugins configured on this namespace */
                         plugins?: {
                             /** @description The blockchain plugins on this namespace */
@@ -27837,19 +27837,19 @@ export interface operations {
                                  * Format: uuid
                                  * @description If a flush is in progress, this is the UUID of the batch being flushed
                                  */
-                                flushing?: string | null;
+                                flushing?: string;
                                 /** @description The last error received by this batch processor while flushing */
                                 lastFlushError?: string;
                                 /**
                                  * Format: date-time
                                  * @description The time of the last flush
                                  */
-                                lastFlushErrorTime?: string | null;
+                                lastFlushErrorTime?: string;
                                 /**
                                  * Format: date-time
                                  * @description The last time a flush was performed
                                  */
-                                lastFlushStartTime?: string | null;
+                                lastFlushStartTime?: string;
                                 /**
                                  * Format: int64
                                  * @description The total count of batches flushed by this processor since it started
@@ -27913,7 +27913,7 @@ export interface operations {
                                 location?: any;
                                 /** @description The status of the contract listener. One of 'syncing', 'synced', or 'unknown' */
                                 status?: string;
-                            } | null;
+                            };
                             /** @description Previously-terminated FireFly smart contracts */
                             terminated?: {
                                 /** @description A blockchain specific string, such as a block number, to start listening from. The special strings 'oldest' and 'newest' are supported by all blockchain connectors */
@@ -27932,7 +27932,7 @@ export interface operations {
                                 /** @description A blockchain specific contract identifier. For example an Ethereum contract address, or a Fabric chaincode name and channel */
                                 location?: any;
                             }[];
-                        } | null;
+                        };
                         /** @description Whether multi-party mode is enabled for this namespace */
                         enabled?: boolean;
                         /** @description Details of the local node */
@@ -27941,7 +27941,7 @@ export interface operations {
                              * Format: uuid
                              * @description The ID of the pending message that broadcast the identity claim to the network
                              */
-                            pendingRegistrationMessageId?: string | null;
+                            pendingRegistrationMessageId?: string;
                             /** @description The status of the node registration, one of 'unregistered', 'registering', 'registered', and 'unknown' */
                             status?: string;
                         };
@@ -27951,7 +27951,7 @@ export interface operations {
                              * Format: uuid
                              * @description The ID of the pending message that broadcast the identity claim to the network
                              */
-                            pendingRegistrationMessageId?: string | null;
+                            pendingRegistrationMessageId?: string;
                             /** @description The status of the organization registration, one of 'unregistered', 'registering', 'registered', and 'unknown' */
                             status?: string;
                         };
@@ -28016,7 +28016,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -28067,13 +28067,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -28087,7 +28087,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -28113,7 +28113,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -28136,7 +28136,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -28144,7 +28144,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -28300,7 +28300,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -28351,13 +28351,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -28371,7 +28371,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -28397,7 +28397,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -28420,7 +28420,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -28428,7 +28428,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -28584,7 +28584,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -28635,13 +28635,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -28655,7 +28655,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -28681,7 +28681,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -28704,7 +28704,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -28712,7 +28712,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -28753,7 +28753,7 @@ export interface operations {
                          * Format: date-time
                          * @description Creation time of the subscription
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Ephemeral subscriptions only exist as long as the application is connected, and as such will miss events that occur while the application is disconnected, and cannot be created administratively. You can create one over over a connected WebSocket connection */
                         ephemeral?: boolean;
                         /** @description Server-side filter to apply to events */
@@ -28804,13 +28804,13 @@ export interface operations {
                         /** @description Subscription options */
                         options?: {
                             /** @description Events are delivered in batches in an ordered array. The batch size is capped to the readAhead limit. The event payload is always an array even if there is a single event in the batch, allowing client-side optimizations when processing the events in a group. Available for both Webhooks and WebSockets. */
-                            batch?: boolean | null;
+                            batch?: boolean;
                             /** @description When batching is enabled, the optional timeout to send events even when the batch hasn't filled. */
-                            batchTimeout?: string | null;
+                            batchTimeout?: string;
                             /** @description Webhooks only: When true the event will be acknowledged before the webhook is invoked, allowing parallel invocations */
                             fastack?: boolean;
                             /** @description Whether your application would like to receive events from the 'oldest' event emitted by your FireFly node (from the beginning of time), or the 'newest' event (from now), or a specific event sequence. Default is 'newest' */
-                            firstEvent?: string | null;
+                            firstEvent?: string;
                             /** @description Webhooks only: Static headers to set on the webhook request */
                             headers?: any;
                             /** @description Webhooks only: a set of options for HTTP */
@@ -28824,7 +28824,7 @@ export interface operations {
                                 /** @description The max number of idle connections to hold pooled */
                                 maxIdleConns?: number;
                                 /** @description HTTP proxy URL to use for outbound requests to the webhook */
-                                proxyURL?: string | null;
+                                proxyURL?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
                                 requestTimeout?: string;
                                 /** @description The max duration to hold a TLS handshake alive */
@@ -28850,7 +28850,7 @@ export interface operations {
                             /** @description Webhooks only: Static query params to set on the webhook request */
                             query?: any;
                             /** @description The number of events to stream ahead to your application, while waiting for confirmation of consumption of those events. At least once delivery semantics are used in FireFly, so if your application crashes/reconnects this is the maximum number of events you would expect to be redelivered after it restarts */
-                            readAhead?: number | null;
+                            readAhead?: number;
                             /** @description Webhooks only: Whether to automatically send a reply event, using the body returned by the webhook */
                             reply?: boolean;
                             /** @description Webhooks only: The tag to set on the reply message */
@@ -28873,7 +28873,7 @@ export interface operations {
                             /** @description Webhooks only: HTTP url to invoke. Can be relative if a base URL is set in the webhook plugin config */
                             url?: string;
                             /** @description Whether message events delivered over the subscription, should be packaged with the full data of those messages in-line as part of the event JSON payload. Or if the application should make separate REST calls to download that data. May not be supported on some transports. */
-                            withData?: boolean | null;
+                            withData?: boolean;
                         };
                         /** @description The transport plugin responsible for event delivery (WebSockets, Webhooks, JMS, NATS etc.) */
                         transport?: string;
@@ -28881,7 +28881,7 @@ export interface operations {
                          * Format: date-time
                          * @description Last time the subscription was updated
                          */
-                        updated?: string | null;
+                        updated?: string;
                     };
                 };
             };
@@ -28984,12 +28984,12 @@ export interface operations {
                          * Format: uuid
                          * @description For message events, this is the 'header.cid' field from the referenced message. For certain other event types, a secondary object is referenced such as a token pool
                          */
-                        correlator?: string | null;
+                        correlator?: string;
                         /**
                          * Format: date-time
                          * @description The time the event was emitted. Not guaranteed to be unique, or to increase between events in the same order as the final sequence events are delivered to your application. As such, the 'sequence' field should be used instead of the 'created' field for querying events in the exact order they are delivered to applications
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID assigned to this event by your local FireFly node
@@ -29001,7 +29001,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of an resource that is the subject of this event. The event type determines what type of resource is referenced, and whether this field might be unset
                          */
-                        reference?: string | null;
+                        reference?: string;
                         /**
                          * Format: int64
                          * @description A sequence indicating the order in which events are delivered to your application. Assure to be unique per event in your local FireFly database (unlike the created timestamp)
@@ -29013,7 +29013,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of a transaction that is event is part of. Not all events are part of a transaction
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description All interesting activity in FireFly is emitted as a FireFly event, of a given type. The 'type' combined with the 'reference' can be used to determine how to process the event within your application
                          * @enum {string}
@@ -29122,7 +29122,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this balance entry applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                     }[];
                 };
             };
@@ -29204,14 +29204,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -29220,17 +29220,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -29239,7 +29239,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -29382,14 +29382,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -29398,17 +29398,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -29417,7 +29417,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -29450,14 +29450,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the token approval
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Token connector specific information about the approval operation, such as whether it applied to a limited balance of a fungible token. See your chosen token connector documentation for details */
                         info?: any;
                         /** @description The blockchain signing key for the approval request. On input defaults to the first signing key of the organization that operates the node */
@@ -29466,17 +29466,17 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token approval, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this approval using the data field of the approval in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the approval, which must match the namespace of the token pool */
                         namespace?: string;
                         /** @description The blockchain identity that is granted the approval */
@@ -29485,7 +29485,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this approval applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description A string identifying the parties and entities in the scope of this approval, as provided by the token connector */
@@ -29569,14 +29569,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID the token pool this balance entry applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description The index of the token within the pool that this balance applies to */
                         tokenIndex?: string;
                         /**
                          * Format: date-time
                          * @description The last time the balance was updated by applying a transfer event
                          */
-                        updated?: string | null;
+                        updated?: string;
                         /** @description The URI of the token this balance entry applies to */
                         uri?: string;
                     }[];
@@ -29706,14 +29706,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -29722,24 +29722,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -29779,14 +29779,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -29795,24 +29795,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -29995,14 +29995,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -30011,24 +30011,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -30068,14 +30068,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -30084,24 +30084,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -30210,7 +30210,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30231,7 +30231,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30245,7 +30245,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30354,7 +30354,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30375,7 +30375,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30389,7 +30389,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30437,7 +30437,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30458,7 +30458,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30472,7 +30472,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30543,7 +30543,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30564,7 +30564,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30578,7 +30578,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30691,7 +30691,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30712,7 +30712,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30726,7 +30726,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30774,7 +30774,7 @@ export interface operations {
                          * Format: date-time
                          * @description The creation time of the pool
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Number of decimal places that this token has */
                         decimals?: number;
                         /**
@@ -30795,7 +30795,7 @@ export interface operations {
                             name?: string;
                             /** @description The version of the FireFly interface */
                             version?: string;
-                        } | null;
+                        };
                         /**
                          * @description The interface encoding format supported by the connector for this token pool
                          * @enum {string}
@@ -30809,7 +30809,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the broadcast message used to inform the network about this pool
                          */
-                        message?: string | null;
+                        message?: string;
                         /** @description The method definitions resolved by the token connector to be used by each token operation */
                         methods?: any;
                         /** @description The name of the token pool. Note the name is not validated against the description of the token on the blockchain */
@@ -30924,14 +30924,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -30940,24 +30940,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -31110,14 +31110,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -31126,24 +31126,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -31183,14 +31183,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -31199,24 +31199,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -31279,14 +31279,14 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the blockchain event
                          */
-                        blockchainEvent?: string | null;
+                        blockchainEvent?: string;
                         /** @description The name of the token connector, as specified in the FireFly core configuration file. Required on input when there are more than one token connectors configured */
                         connector?: string;
                         /**
                          * Format: date-time
                          * @description The creation time of the transfer
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description The source account for the transfer. On input defaults to the value of 'key' */
                         from?: string;
                         /** @description The blockchain signing key for the transfer. On input defaults to the first signing key of the organization that operates the node */
@@ -31295,24 +31295,24 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of this token transfer, in the local FireFly node
                          */
-                        localId?: string | null;
+                        localId?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        message?: string | null;
+                        message?: string;
                         /**
                          * Format: byte
                          * @description The hash of a message that has been correlated with this transfer using the data field of the transfer in a compatible token connector
                          */
-                        messageHash?: string | null;
+                        messageHash?: string;
                         /** @description The namespace for the transfer, which must match the namespace of the token pool */
                         namespace?: string;
                         /**
                          * Format: uuid
                          * @description The UUID the token pool this transfer applies to
                          */
-                        pool?: string | null;
+                        pool?: string;
                         /** @description An alphanumerically sortable string that represents this event uniquely with respect to the blockchain */
                         protocolId?: string;
                         /** @description The target account for the transfer. On input defaults to the value of 'key' */
@@ -31395,7 +31395,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -31472,7 +31472,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the transaction was created on this node. Note the transaction is individually created with the same UUID on each participant in the FireFly transaction
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction
@@ -31531,7 +31531,7 @@ export interface operations {
                          * Format: uuid
                          * @description The UUID of the listener that detected this event, or nil for built-in events in the system namespace
                          */
-                        listener?: string | null;
+                        listener?: string;
                         /** @description The name of the event in the blockchain smart contract */
                         name?: string;
                         /** @description The namespace of the listener that detected this blockchain event */
@@ -31546,7 +31546,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time allocated to this event by the blockchain. This is the block timestamp for most blockchain connectors
                          */
-                        timestamp?: string | null;
+                        timestamp?: string;
                         /** @description If this blockchain event is coorelated to FireFly transaction such as a FireFly submitted token transfer, this field is set to the UUID of the FireFly transaction */
                         tx?: {
                             /** @description The blockchain transaction ID, in the format specific to the blockchain involved in the transaction. Not all FireFly transactions include a blockchain */
@@ -31596,7 +31596,7 @@ export interface operations {
                          * Format: date-time
                          * @description The time the operation was created
                          */
-                        created?: string | null;
+                        created?: string;
                         /** @description Any error reported back from the plugin for this operation */
                         error?: string;
                         /**
@@ -31616,14 +31616,14 @@ export interface operations {
                          * Format: uuid
                          * @description If this operation was initiated as a retry to a previous operation, this field points to the UUID of the operation being retried
                          */
-                        retry?: string | null;
+                        retry?: string;
                         /** @description The current status of the operation */
                         status?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the FireFly transaction the operation is part of
                          */
-                        tx?: string | null;
+                        tx?: string;
                         /**
                          * @description The type of the operation
                          * @enum {string}
@@ -31633,7 +31633,7 @@ export interface operations {
                          * Format: date-time
                          * @description The last update time of the operation
                          */
-                        updated?: string | null;
+                        updated?: string;
                     }[];
                 };
             };
@@ -31686,7 +31686,7 @@ export interface operations {
                              * Format: date-time
                              * @description The time relevant to when the record was updated, such as the time an event was created, or the last update time of an operation
                              */
-                            timestamp?: string | null;
+                            timestamp?: string;
                             /** @description The type of the transaction status detail record */
                             type?: string;
                         }[];
@@ -31749,17 +31749,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -31806,17 +31806,17 @@ export interface operations {
                          * Format: date-time
                          * @description The time this verifier was created on this node
                          */
-                        created?: string | null;
+                        created?: string;
                         /**
                          * Format: byte
                          * @description Hash used as a globally consistent identifier for this namespace + type + value combination on every node in the network
                          */
-                        hash?: string | null;
+                        hash?: string;
                         /**
                          * Format: uuid
                          * @description The UUID of the parent identity that has claimed this verifier
                          */
-                        identity?: string | null;
+                        identity?: string;
                         /** @description The namespace of the verifier */
                         namespace?: string;
                         /**
@@ -31959,7 +31959,7 @@ export interface operations {
                                  * Format: date-time
                                  * @description The time the subscription started (reset on dynamic namespace reload)
                                  */
-                                startTime?: string | null;
+                                startTime?: string;
                             }[];
                             /** @description The user agent of the connected client (if available) */
                             userAgent?: string;
