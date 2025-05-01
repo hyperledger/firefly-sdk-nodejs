@@ -12,7 +12,7 @@
     "lint": "eslint \"lib/*.ts\"",
     "lint:fix": "eslint \"lib/*.ts\" --fix",
     "format": "prettier --write \"lib/*.ts\" \"examples/**/*.ts\"",
-    "schema": "ts-node scripts/schema.ts"
+    "schema": "ts-node scripts/parseSchema.ts"
   },
   "repository": {
     "type": "git",
